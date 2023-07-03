@@ -1,4 +1,6 @@
-﻿namespace Test_App
+﻿using Microsoft.Maui.Graphics.Text;
+
+namespace Test_App
 {
     public partial class MainPage : ContentPage
     {
@@ -24,10 +26,36 @@
 
         private void CounterBts_Clicked(object sender, EventArgs e)
         {
-        
+
+            StackLayout stackLayout = new StackLayout();
+            Grid grid = new Grid();
+
+            {
+            
+                Entry entry = new Entry
+                {
+                    Placeholder = "Введите Техт",
+                    //  FontFamily = "Helvetica",
+                    FontSize = 15,
+                    MaxLength = 20,
+                    Margin = 100,
+                    Background = Brush.Default,
+                    BackgroundColor = Colors.White,
+                    CursorPosition = 50,
+                    //   IsTextPredictionEnabled = true,
+                    //      SelectionLength = 10,
+                    //   MaximumHeightRequest = 20,
+                    HeightRequest = 20,
+                    WidthRequest = 500,
+                };
           
-            CounterBts.Text = "Привет";
-            CounterBts.BorderColor.IsDefault();
+                grid.Children.Add(entry);
+                Content = grid;
+                  //     stackLayout.Children.Add(entry);
+         //       grid;
+
+
+            }
         }
     }
 }
