@@ -53,7 +53,6 @@ namespace Server_Test_Users
 
         public void CreateTable_Test()
         {
-
             try
             {
                 switch (TypeSQL)
@@ -87,7 +86,6 @@ namespace Server_Test_Users
 
         public void CreateTable_Friends()
         {
-
             try
             {
                 switch (TypeSQL)
@@ -123,7 +121,6 @@ namespace Server_Test_Users
 
         public void CreateTable_Users()
         {
-
             try
             {
                 switch (TypeSQL)

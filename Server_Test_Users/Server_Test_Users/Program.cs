@@ -120,24 +120,7 @@ namespace Server_Test_Users
 #pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 using (TcpClient client = client_obj as TcpClient)
                     {
-                        /*
-                        //byte[] bytes = new byte[99999999];
-                       //    string data;
-                       // StringBuilder data;
-                       // /*
-                        //int i;
-                        //while ((i = await stream.ReadAsync(bytes, 0, bytes.Length)) != 0)
-                        //{
-                        //    data = Encoding.Default.GetString(bytes, 0, i);
-                        //    string comand = data.Substring(0, 3);
-                        //    string json = data.Substring(3, data.Length - 3);
-                        //    byte[] msg = Encoding.Default.GetBytes(json);
-
-                        //    //Заменяет работу switch (comand)
-                        //    HandleCommand(comand, msg, globalClass, stream);
-
-
-                        //}                */
+                        
 
                         GlobalClass globalClass = new GlobalClass();
 #pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
@@ -155,12 +138,9 @@ namespace Server_Test_Users
                             completeMessage.AppendFormat("{0}", Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
                         }
                         while (stream.DataAvailable);
-
                         responseData = completeMessage.ToString();
-
                         string comand = responseData.Substring(0, 3);
                         string json = responseData.Substring(3, responseData.Length - 3);
-
                         data_ = json;
                         byte[] msg = Encoding.Default.GetBytes(json);
                         HandleCommand(comand, msg, globalClass, stream);
@@ -174,9 +154,6 @@ namespace Server_Test_Users
                     Console.WriteLine(e.Message);
                 }
             }
-       
-
-
 
             /// <summary>
             /// Загружаеться Ip_address и port
@@ -252,3 +229,21 @@ Console.WriteLine(a);
    Console.WriteLine($"Ip-адрес: {localAddr}");            
    //127.0.0.1 System.Net.Sockets.AddressFamily family   */
 //Console.WriteLine("\nСервер запушен")
+/*
+                        //byte[] bytes = new byte[99999999];
+                       //    string data;
+                       // StringBuilder data;
+                       // /*
+                        //int i;
+                        //while ((i = await stream.ReadAsync(bytes, 0, bytes.Length)) != 0)
+                        //{
+                        //    data = Encoding.Default.GetString(bytes, 0, i);
+                        //    string comand = data.Substring(0, 3);
+                        //    string json = data.Substring(3, data.Length - 3);
+                        //    byte[] msg = Encoding.Default.GetBytes(json);
+
+                        //    //Заменяет работу switch (comand)
+                        //    HandleCommand(comand, msg, globalClass, stream);
+
+
+                        //}                */
