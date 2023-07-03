@@ -2,6 +2,7 @@
 {
     public partial class MainPage : ContentPage
     {
+
         int count = 0;
 
         public MainPage()
@@ -19,6 +20,14 @@
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
+        }
+
+        private void CounterBts_Clicked(object sender, EventArgs e)
+        {
+        
+          
+            CounterBts.Text = "Привет";
+            CounterBts.BorderColor.IsDefault();
         }
     }
 }

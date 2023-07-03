@@ -34,6 +34,21 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
+            <Label
+                Text="Привет!"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            <Button
+                x:Name="CounterBts"
+                Text="Click me"
+                Clicked="CounterBts_Clicked"
+                TextColor="White"
+                VerticalOptions="Start" WidthRequest="90" HeightRequest="30"
+                Margin="50"
+                Padding="50"
+                HorizontalOptions="CenterAndExpand" />
 
         </VerticalStackLayout>
     </ScrollView>

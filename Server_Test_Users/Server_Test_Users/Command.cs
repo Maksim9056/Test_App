@@ -7,6 +7,7 @@ namespace Server_Test_Users
 
         public void Checks_User_and_password(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+
            
         }
 

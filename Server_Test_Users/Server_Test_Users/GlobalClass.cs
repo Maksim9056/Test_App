@@ -26,6 +26,7 @@ namespace Server_Test_Users
                     //Postgres
                     //IF NOT EXISTS
                     case 1:
+                        string sql = "SELECT datname FROM pg_catalog.pg_database WHERE datname = 'mydatabase'";
                         string Sql = "CREATE DATABASE  Test;";
 
                         using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(_connectionStringPostGreSQl))
@@ -33,6 +34,9 @@ namespace Server_Test_Users
                             npgsqlConnection.Open();        
                             NpgsqlCommand command = new NpgsqlCommand();
                             command.Connection = npgsqlConnection;
+                            command.CommandText = sql;
+                            command.ExecuteNonQuery();
+
                             command.CommandText = Sql;
                             command.ExecuteNonQuery();
                         }
@@ -58,13 +62,14 @@ namespace Server_Test_Users
                 {
                    //Postgres
                     case 1:
-                        string Sql = "Create table Test (Id_test Serial not null CONSTRAINT PK_Id_test PRIMARY KEY," +
-                            "Name_Test  varchar not null);";
+                        string Sql = "Create table IF NOT EXISTS  Test (Id_test Serial not null CONSTRAINT PK_Id_Test PRIMARY KEY," +
+                            "Name_Test  varchar ;";
                         using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionStringPostGreSQL))
                         {
                             npgsqlConnection.Open();
                             NpgsqlCommand command = new NpgsqlCommand();
                             command.Connection = npgsqlConnection;
+                           
                             command.CommandText = Sql;
                             command.ExecuteNonQuery();
 
@@ -126,6 +131,9 @@ namespace Server_Test_Users
                 {
                     //Postgres
                     case 1:
+                      
+
+
                         string Sql = "Create table IF NOT EXISTS  Users(Id Serial not null CONSTRAINT PK_Id PRIMARY KEY," +
                             "Name_Employee varchar not null," +
                             "Password varchar not null," +
@@ -137,6 +145,7 @@ namespace Server_Test_Users
                             npgsqlConnection.Open();
                             NpgsqlCommand command = new NpgsqlCommand();
                             command.Connection = npgsqlConnection;
+
                             command.CommandText = Sql;
                             command.ExecuteNonQuery();
                         }
