@@ -2,7 +2,7 @@
 
 namespace Server_Test_Users
 {
-    public class Command
+    internal class Command
     {
 
         public void Checks_User_and_password(byte[] arg1, GlobalClass @class, NetworkStream stream)
@@ -42,7 +42,7 @@ namespace Server_Test_Users
         {
         }
 
-        public void Search_Image_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        public  void Search_Image_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
         }
 

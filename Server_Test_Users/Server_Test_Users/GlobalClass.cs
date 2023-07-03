@@ -26,7 +26,7 @@ namespace Server_Test_Users
                     //Postgres
 
                     case 1:
-                        string Sql = "CREATE DATABASE Test;";
+                        string Sql = "CREATE DATABASE IF NOT EXISTS Test;";
 
                         using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(_connectionStringPostGreSQl))
                         {
@@ -92,7 +92,7 @@ namespace Server_Test_Users
                 {
                     //Postgres
                     case 1:
-                        string Sql = "Create table Test_Questions" +
+                        string Sql = "Create table IF NOT EXISTS  Test_Questions" +
                             "(Id_Questions Serial not null CONSTRAINT PK_Id_Questions PRIMARY KEY," +
                             "Name_Test  varchar not null," +
                             "Questions varchar not null," +
@@ -127,7 +127,7 @@ namespace Server_Test_Users
                 {
                     //Postgres
                     case 1:
-                        string Sql = "Create table Users(Id Serial not null CONSTRAINT PK_Id PRIMARY KEY," +
+                        string Sql = "Create table IF NOT EXISTS  Users(Id Serial not null CONSTRAINT PK_Id PRIMARY KEY," +
                             "Name_Employee varchar not null," +
                             "Password varchar not null," +
                             "Rechte Serial not null," +

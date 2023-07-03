@@ -35,11 +35,12 @@ namespace Server_Test_Users
         static void Main(string[] args)
 #pragma warning restore IDE0060 // Удалите неиспользуемый параметр
         {
-                GlobalClass globalClass = new GlobalClass();
+                GlobalClass globalClass = new GlobalClass(); 
+                 globalClass.Create_Database();
                 globalClass.CreateTable_Test();
                 globalClass.CreateTable_Users();
                 globalClass.CreateTable_Friends();
-                globalClass.Create_Database();
+              
                 TcpListener server ;
                 try
                 {
