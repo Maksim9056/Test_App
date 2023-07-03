@@ -24,18 +24,17 @@ namespace Server_Test_Users
                 switch (TypeSQL)
                 {
                     //Postgres
-
+                    //IF NOT EXISTS
                     case 1:
-                        string Sql = "CREATE DATABASE IF NOT EXISTS Test;";
+                        string Sql = "CREATE DATABASE  Test;";
 
                         using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(_connectionStringPostGreSQl))
                         {
-                            npgsqlConnection.Open();
+                            npgsqlConnection.Open();        
                             NpgsqlCommand command = new NpgsqlCommand();
                             command.Connection = npgsqlConnection;
                             command.CommandText = Sql;
                             command.ExecuteNonQuery();
-
                         }
                         break;
                     case 2:
