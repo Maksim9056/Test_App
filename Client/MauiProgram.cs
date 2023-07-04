@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Test_App
+namespace Client
 {
     public static class MauiProgram
     {
@@ -16,7 +16,7 @@ namespace Test_App
                 });
 
 #if DEBUG
-            builder.Logging.AddDebug();
+		builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

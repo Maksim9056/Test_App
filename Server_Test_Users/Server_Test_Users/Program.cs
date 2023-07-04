@@ -40,9 +40,13 @@ namespace Server_Test_Users
             {
                 GlobalClass globalClass = new GlobalClass();
                 SaveOpen();
+              
                 globalClass.Create_Database();
+               
                 globalClass.CreateTable_Test();
+               
                 globalClass.CreateTable_Users();
+                
                 globalClass.CreateTable_Test_Questions();
 
                 TcpListener server;

@@ -19,7 +19,7 @@ namespace Class_interaction_Users
         /// <summary>
         /// Ip_адресс
         /// </summary>
-        public string         Ip_adress {  get; set; }
+        public string Ip_adress {  get; set; }
 
         /// <summary>
         /// Порт
@@ -102,15 +102,15 @@ namespace Class_interaction_Users
             public CheckMails() { }
 
 
-            public Regis_users _Users { get; set; }
+            public Regis_users Users { get; set; }
 
         //   public string Employee_Mail { get; set; }
           
 
-            public CheckMails(Regis_users Users/* string @Mail*/)
+            public CheckMails(Regis_users users/* string @Mail*/)
             {
 
-                _Users = Users;
+                Users = users;
 
                // Employee_Mail = @Mail;
             }

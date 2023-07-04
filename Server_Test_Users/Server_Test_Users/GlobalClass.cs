@@ -29,27 +29,19 @@ namespace Server_Test_Users
 
 
 
-#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         /// <summary>
         /// Отсылает клиенту ответ 
         /// </summary>
-        public Regis_users Regis_users { get; set; }
-#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
-
-#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
-
-#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+        public Regis_users? Regis_users { get; set; }
 
 
 
 
 
-#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         /// <summary>
         /// Посылаем клиенту 
         /// </summary>
-        public Regis_users Travel { get; set; }
-#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+        public Regis_users? Travel { get; set; }
         /// <summary>
         /// Создает  базу данных 
         /// </summary>
@@ -132,7 +124,7 @@ namespace Server_Test_Users
         /// <summary>
         /// Создает табличку в базе данных Test
         /// </summary>
-        public void CreateTable_Test()
+        public  void  CreateTable_Test()
         {
             try
             {
@@ -168,7 +160,7 @@ namespace Server_Test_Users
         /// <summary>
         /// Создает табличку в базе данных Test_Questions
         /// </summary>
-        public void CreateTable_Test_Questions()
+        public  void CreateTable_Test_Questions()
         {
             try
             {
@@ -207,7 +199,7 @@ namespace Server_Test_Users
         /// <summary>
         /// Создает табличку в базе данных пользователями 
         /// </summary>
-        public void CreateTable_Users()
+        public  void CreateTable_Users()
         {
             try
             {
@@ -218,7 +210,7 @@ namespace Server_Test_Users
                         string Sql = "Create table IF NOT EXISTS  Users(Id Serial not null CONSTRAINT PK_Id PRIMARY KEY," +
                             "Name_Employee varchar not null," +
                             "Password varchar not null," +
-                            "Rechte Serial not null" +
+                            "Rechte Serial not null," +
                             "DataMess TIMESTAMP NOT NULL," +
                             "Employee_Mail VARCHAR not null CONSTRAINT CH_Employee_Mail CHECK(Employee_Mail like '%@%.%'));";
 
@@ -279,7 +271,6 @@ namespace Server_Test_Users
                     }
                 }
 
-#pragma warning disable CS0665 // Назначение в условном выражении всегда является константой
                 if (Exists_User = false)
                 {
                     DateTime dateTime = DateTime.Now;
@@ -299,7 +290,6 @@ namespace Server_Test_Users
                 {
                     Regis_users.Name_Employee = "Пользователь зарегистрирован !";
                 }
-#pragma warning restore CS0665 // Назначение в условном выражении всегда является константой
 
             }
             catch (Exception E)
@@ -314,7 +304,7 @@ namespace Server_Test_Users
                 int Current_User;
                 string sqlExpressiol = $"SELECT * FROM Users  WHERE Employee_Mail = '{checkMail_And_Password.Employee_Mail}' and Password='{checkMail_And_Password.Password}'";
 
-                using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                using(var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
                 {
                     connection.Open();
                     NpgsqlCommand command = new NpgsqlCommand(sqlExpressiol, connection);
