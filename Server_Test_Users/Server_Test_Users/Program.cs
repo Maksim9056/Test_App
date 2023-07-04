@@ -43,7 +43,7 @@ namespace Server_Test_Users
                 globalClass.Create_Database();
                 globalClass.CreateTable_Test();
                 globalClass.CreateTable_Users();
-                globalClass.CreateTable_Friends();
+                globalClass.CreateTable_Test_Questions();
 
                 TcpListener server;
 
@@ -90,7 +90,7 @@ namespace Server_Test_Users
             Command command = new Command();
             FDictCommands.Add("001", new Action<byte[], GlobalClass, NetworkStream>(command.Registration_users));
             FDictCommands.Add("002", new Action<byte[], GlobalClass, NetworkStream>(command.Registration_users));
-            FDictCommands.Add("003", new Action<byte[], GlobalClass, NetworkStream>(command.Checks_User_and_password));
+            FDictCommands.Add("003", new Action<byte[], GlobalClass, NetworkStream>(command.CheckMail_and_Passwords));
             FDictCommands.Add("004", new Action<byte[], GlobalClass, NetworkStream>(command.Sampling_Users_Correspondence));
             FDictCommands.Add("005", new Action<byte[], GlobalClass, NetworkStream>(command.Sampling_Messages_Correspondence));
             FDictCommands.Add("006", new Action<byte[], GlobalClass, NetworkStream>(command.Select_Message_Friend));

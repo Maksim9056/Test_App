@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server_Test_Users", "Server
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class_interaction_Users", "Class_interaction_Users\Class_interaction_Users.csproj", "{618DB64D-6A9F-48D4-8720-5BAD84B32C73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_App", "Test_App\Test_App.csproj", "{EA5A034F-F88D-4460-A3F2-256E7DAA9E06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test_App", "Test_App\Test_App.csproj", "{EA5A034F-F88D-4460-A3F2-256E7DAA9E06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1B8A2C66-3015-4CB0-B1D8-A9157FE7B907}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

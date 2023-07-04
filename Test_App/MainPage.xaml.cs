@@ -5,7 +5,7 @@ namespace Test_App
     public partial class MainPage : ContentPage
     {
 
-        int count = 0;
+ //       int count = 0;
 
         public MainPage()
         {
@@ -14,14 +14,14 @@ namespace Test_App
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
-            count++;
+            //count++;
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            //if (count == 1)
+            //    CounterBtn.Text = $"Clicked {count} time";
+            //else
+            //    CounterBtn.Text = $"Clicked {count} times";
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            //SemanticScreenReader.Announce(CounterBtn.Text);
         }
 
         private void CounterBts_Clicked(object sender, EventArgs e)
@@ -30,32 +30,56 @@ namespace Test_App
             StackLayout stackLayout = new StackLayout();
             Grid grid = new Grid();
 
+
+
+            Label entry = new Label
             {
-            
-                Entry entry = new Entry
-                {
-                    Placeholder = "Введите Техт",
-                    //  FontFamily = "Helvetica",
-                    FontSize = 15,
-                    MaxLength = 20,
-                    Margin = 100,
-                    Background = Brush.Default,
-                    BackgroundColor = Colors.White,
-                    CursorPosition = 50,
-                    //   IsTextPredictionEnabled = true,
-                    //      SelectionLength = 10,
-                    //   MaximumHeightRequest = 20,
-                    HeightRequest = 20,
-                    WidthRequest = 500,
-                };
-          
-                grid.Children.Add(entry);
-                Content = grid;
-                  //     stackLayout.Children.Add(entry);
-         //       grid;
+               // Placeholder = "Введите логин",
+                //  FontFamily = "Helvetica",
+                FontSize = 15,
+            //    MaxLength = 20,
+                Margin = 10,
+                Background = Brush.Default,
+                BackgroundColor = Colors.White,
+         //       CursorPosition = 50,
+                //   IsTextPredictionEnabled = true,
+                //      SelectionLength = 10,
+                //   MaximumHeightRequest = 20,
+                HeightRequest = 20,
+                HorizontalTextAlignment = TextAlignment.Start,
+                WidthRequest = 50,
+            };
+
+            BoxView Paswword = new BoxView
+            {
+         //       Placeholder = "Введите пароль",
+                //  FontFamily = "Helvetica",
+              //  FontSize = 15,
+            //    MaxLength = 20,
+                Margin = 20,
+               // Background = Brush.Default,
+                BackgroundColor = Colors.White,
+                //CursorPosition = 50,
+                //   IsTextPredictionEnabled = true,
+                //      SelectionLength = 10,
+                //   MaximumHeightRequest = 20,
+                HeightRequest = 10,
+                WidthRequest = 500,
+        //        HorizontalTextAlignment = TextAlignment.End,
+            };
+
+            grid.Children.Add(entry);
+            grid.Add(Paswword);
+
+         //   grid.Add(Paswword);
+            Content = grid;
+       //     Content .Window.BindingContext = stackLayout;
+                //     stackLayout.Children.Add(entry);
+                //       grid;
 
 
-            }
+
+
         }
     }
 }

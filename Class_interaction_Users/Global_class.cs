@@ -14,7 +14,7 @@ namespace Class_interaction_Users
 
     [Serializable]
     public class Seting
-   {
+    {
         Seting() { }
         /// <summary>
         /// Ip_адресс
@@ -39,5 +39,81 @@ namespace Class_interaction_Users
             TypeSQL = typeSQL;
         }
 
+    }
+
+    [Serializable]
+    /// <summary>
+    /// Класс Regis_users для регестрации пользователей
+    /// </summary>
+    public class Regis_users
+    {
+        public Regis_users() { }
+        public int Id { get; set; }
+        public   string Name_Employee { get; set; }
+        public string Password { get; set; }
+
+        public int  Rechte { get; set; }
+        public string Employee_Mail { get; set; }
+                   
+        public Regis_users(int id, string name_Employee, string password,int rechte,string @Mail)
+        {
+            Id = id; 
+            Name_Employee = name_Employee;
+            Password = password;
+            Rechte = rechte;
+            Employee_Mail = @Mail;
+        }
+    }
+
+
+
+
+    [Serializable]
+    /// <summary>
+    /// Класс Regis_users для регестрации пользователей
+    /// </summary>
+    public class CheckMail_and_Password
+    {
+        public CheckMail_and_Password() { }
+  
+     
+        public string Password { get; set; }
+
+        public string Employee_Mail { get; set; }
+
+        public CheckMail_and_Password( string password, string @Mail)
+        {
+   
+            Password = password;
+
+            Employee_Mail = @Mail;
+        }
+
+
+
+
+
+        [Serializable]
+        /// <summary>
+        /// Класс  для регестрации пользователей и прошедших авторизацию
+        /// </summary>
+        public class CheckMails
+        {
+            public CheckMails() { }
+
+
+            public Regis_users _Users { get; set; }
+
+        //   public string Employee_Mail { get; set; }
+          
+
+            public CheckMails(Regis_users Users/* string @Mail*/)
+            {
+
+                _Users = Users;
+
+               // Employee_Mail = @Mail;
+            }
+        }
     }
 }
