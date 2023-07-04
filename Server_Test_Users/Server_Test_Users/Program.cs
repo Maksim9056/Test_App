@@ -87,22 +87,28 @@ namespace Server_Test_Users
 
         static void RegisterCommands()
         {
-            Command command = new Command();
-            FDictCommands.Add("001", new Action<byte[], GlobalClass, NetworkStream>(command.Registration_users));
-            FDictCommands.Add("002", new Action<byte[], GlobalClass, NetworkStream>(command.Registration_users));
-            FDictCommands.Add("003", new Action<byte[], GlobalClass, NetworkStream>(command.CheckMail_and_Passwords));
-            FDictCommands.Add("004", new Action<byte[], GlobalClass, NetworkStream>(command.Sampling_Users_Correspondence));
-            FDictCommands.Add("005", new Action<byte[], GlobalClass, NetworkStream>(command.Sampling_Messages_Correspondence));
-            FDictCommands.Add("006", new Action<byte[], GlobalClass, NetworkStream>(command.Select_Message_Friend));
-            FDictCommands.Add("007", new Action<byte[], GlobalClass, NetworkStream>(command.Search_Image));
-            FDictCommands.Add("008", new Action<byte[], GlobalClass, NetworkStream>(command.Searh_Friends));
-            FDictCommands.Add("009", new Action<byte[], GlobalClass, NetworkStream>(command.Insert_Message));
-            FDictCommands.Add("010", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Message));
-            FDictCommands.Add("011", new Action<byte[], GlobalClass, NetworkStream>(command.Delete_Message));
-            FDictCommands.Add("012", new Action<byte[], GlobalClass, NetworkStream>(command.List_Friens_Message));
-            FDictCommands.Add("013", new Action<byte[], GlobalClass, NetworkStream>(command.List_Friens));
-            FDictCommands.Add("014", new Action<byte[], GlobalClass, NetworkStream>(command.Search_Image_Friends));
-
+            try
+            {
+                Command command = new Command();
+                FDictCommands.Add("001", new Action<byte[], GlobalClass, NetworkStream>(command.Registration_users));
+                FDictCommands.Add("002", new Action<byte[], GlobalClass, NetworkStream>(command.Registration_users));
+                FDictCommands.Add("003", new Action<byte[], GlobalClass, NetworkStream>(command.CheckMail_and_Passwords));
+                FDictCommands.Add("004", new Action<byte[], GlobalClass, NetworkStream>(command.Sampling_Users_Correspondence));
+                FDictCommands.Add("005", new Action<byte[], GlobalClass, NetworkStream>(command.Sampling_Messages_Correspondence));
+                FDictCommands.Add("006", new Action<byte[], GlobalClass, NetworkStream>(command.Select_Message_Friend));
+                FDictCommands.Add("007", new Action<byte[], GlobalClass, NetworkStream>(command.Search_Image));
+                FDictCommands.Add("008", new Action<byte[], GlobalClass, NetworkStream>(command.Searh_Friends));
+                FDictCommands.Add("009", new Action<byte[], GlobalClass, NetworkStream>(command.Insert_Message));
+                FDictCommands.Add("010", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Message));
+                FDictCommands.Add("011", new Action<byte[], GlobalClass, NetworkStream>(command.Delete_Message));
+                FDictCommands.Add("012", new Action<byte[], GlobalClass, NetworkStream>(command.List_Friens_Message));
+                FDictCommands.Add("013", new Action<byte[], GlobalClass, NetworkStream>(command.List_Friens));
+                FDictCommands.Add("014", new Action<byte[], GlobalClass, NetworkStream>(command.Search_Image_Friends));
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine(E.Message);
+            }
         }
 
         static void HandleCommand(string aCommand, byte[] data, GlobalClass cls, NetworkStream ns)
@@ -153,8 +159,6 @@ namespace Server_Test_Users
             }
             catch (Exception e)
             {
-
-
                 Console.WriteLine(e.Message);
             }
         }

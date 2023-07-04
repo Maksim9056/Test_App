@@ -84,8 +84,7 @@ namespace Server_Test_Users
 
                             if (sqReader.HasRows == true)
                             {
-                                //int id_telegram_user = 0;
-                                Console.WriteLine("Такое имя уже есть");
+                             
                                 Create_DATABASE = true;
                                 // Always call Read before accessing data.
                                 while (sqReader.Read())
@@ -151,7 +150,6 @@ namespace Server_Test_Users
 
                             command.CommandText = Sql;
                             command.ExecuteNonQuery();
-
                         }
                         break;
 
@@ -192,6 +190,7 @@ namespace Server_Test_Users
                             command.ExecuteNonQuery();
 
                         }
+
                         break;
                     case 2:
                         break;
@@ -216,9 +215,6 @@ namespace Server_Test_Users
                 {
                     //Postgres
                     case 1:
-
-
-
                         string Sql = "Create table IF NOT EXISTS  Users(Id Serial not null CONSTRAINT PK_Id PRIMARY KEY," +
                             "Name_Employee varchar not null," +
                             "Password varchar not null," +
@@ -314,56 +310,62 @@ namespace Server_Test_Users
 
         public void Check_login_amail(CheckMail_and_Password checkMail_And_Password)
         {
-            int Current_User;
-            string sqlExpressiol = $"SELECT * FROM Users  WHERE Employee_Mail = '{checkMail_And_Password.Employee_Mail}' and Password='{checkMail_And_Password.Password}'";
+            try {
+                int Current_User;
+                string sqlExpressiol = $"SELECT * FROM Users  WHERE Employee_Mail = '{checkMail_And_Password.Employee_Mail}' and Password='{checkMail_And_Password.Password}'";
 
-            using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
-            {
-                connection.Open();
-                NpgsqlCommand command = new NpgsqlCommand(sqlExpressiol, connection);
-                NpgsqlDataReader sqReader = command.ExecuteReader();
+                using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                {
+                    connection.Open();
+                    NpgsqlCommand command = new NpgsqlCommand(sqlExpressiol, connection);
+                    NpgsqlDataReader sqReader = command.ExecuteReader();
 
-                if (sqReader.HasRows == true)
-                {
-                    // Always call Read before accessing data.
-                    while (sqReader.Read())
+                    if (sqReader.HasRows == true)
                     {
-                        Current_User = Convert.ToInt32(sqReader["Id"]);
-                        int Image = Convert.ToInt32(sqReader["Image"].ToString());
-                        int Id = Convert.ToInt32(Current_User);
-                        Travel = new Regis_users(Id, sqReader["Name_Employee"].ToString(), sqReader["Password"].ToString(), Convert.ToInt32(sqReader["Rechte"]), sqReader["Employee_Mail"].ToString());
-                    }
-                    sqReader.Close();
-                    string buton = $"UPDATE Users SET Id_Telegram =   WHERE Id = ''";
-                }
-                else
-                {
-                    string sqlExpressi = $"SELECT * FROM Users  WHERE Employee_Mail = '{checkMail_And_Password.Employee_Mail}'";
-                    using (var connectio = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
-                    {
-                        connectio.Open();
-                        NpgsqlCommand _command = new NpgsqlCommand(sqlExpressi, connectio);
-                        //NpgsqlCommand __commandS = new NpgsqlCommand(sqlExpressi, connectio);
-                        NpgsqlDataReader sqReaders = _command.ExecuteReader();
-                        if (sqReaders.HasRows == true)
+                        // Always call Read before accessing data.
+                        while (sqReader.Read())
                         {
-                            // Always call Read before accessing data.
-                            while (sqReaders.Read())
+                            Current_User = Convert.ToInt32(sqReader["Id"]);
+                            int Image = Convert.ToInt32(sqReader["Image"].ToString());
+                            int Id = Convert.ToInt32(Current_User);
+                            Travel = new Regis_users(Id, sqReader["Name_Employee"].ToString(), sqReader["Password"].ToString(), Convert.ToInt32(sqReader["Rechte"]), sqReader["Employee_Mail"].ToString());
+                        }
+                        sqReader.Close();
+                        string buton = $"UPDATE Users SET Id_Telegram =   WHERE Id = ''";
+                    }
+                    else
+                    {
+                        string sqlExpressi = $"SELECT * FROM Users  WHERE Employee_Mail = '{checkMail_And_Password.Employee_Mail}'";
+                        using (var connectio = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                        {
+                            connectio.Open();
+                            NpgsqlCommand _command = new NpgsqlCommand(sqlExpressi, connectio);
+                            //NpgsqlCommand __commandS = new NpgsqlCommand(sqlExpressi, connectio);
+                            NpgsqlDataReader sqReaders = _command.ExecuteReader();
+                            if (sqReaders.HasRows == true)
                             {
-                                //       Current_User = sqReader["Id"].ToString();
-                                Travel = new Regis_users(Convert.ToInt32(sqReaders["Id"]), sqReaders["Name_Employee"].ToString(), "", 0, sqReader["Employee_Mail"].ToString());
+                                // Always call Read before accessing data.
+                                while (sqReaders.Read())
+                                {
+                                    //       Current_User = sqReader["Id"].ToString();
+                                    Travel = new Regis_users(Convert.ToInt32(sqReaders["Id"]), sqReaders["Name_Employee"].ToString(), "", 0, sqReader["Employee_Mail"].ToString());
+
+                                }
+                            }
+                            else
+                            {
 
                             }
                         }
-                        else
-                        {
-
-                        }
                     }
+                    connection.Close();
                 }
-                connection.Close();
-            }
 
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
