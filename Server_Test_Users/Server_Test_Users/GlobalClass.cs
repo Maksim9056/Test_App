@@ -44,7 +44,9 @@ namespace Server_Test_Users
         /// <summary>
         /// Отсылает клиенту ответ 
         /// </summary>
-        public Regis_users? Regis_users { get; set; }
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+        public Regis_users Regis_users { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
 
 
         public bool Tru_user { get; set; } = false;
