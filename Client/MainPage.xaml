@@ -6,34 +6,49 @@
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+            VerticalOptions="Fill">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+            <Entry x:Name="nameEntry" FontSize="22"
+              TextChanged="nameEntry_TextChanged"
+              Placeholder ="Введите электроную почту"
+              Keyboard="Email"
+              Margin="20"
+             />
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+            <Entry x:Name="nameEntry1" FontSize="22"
+             Placeholder ="Введите пароль"
+             Margin="20"
+             TextChanged="nameEntry1_TextChanged"
+             Keyboard ="Text"
+             />
+
+
+            <Button
+                x:Name="CounterLog"
+                Text="Войти"
+                 SemanticProperties.Hint="Counts the number of times you click"
+                 Clicked="CounterLog_Clicked" 
+                 VerticalOptions="Start"
+                HorizontalOptions="CenterAndExpand"
+                FontSize="16" HeightRequest="10"
+                WidthRequest="150"
+                Margin="10"
+                Padding="10"
+             />
 
             <Button
                 x:Name="CounterBtn"
-                Text="Click me"
+                Text="Регистрация"
+         
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                VerticalOptions="End" HorizontalOptions="CenterAndExpand"
+                FontSize="16" HeightRequest="10"
+                WidthRequest="150"
+                  Margin="10"
+                Padding="10"
+             />
 
         </VerticalStackLayout>
     </ScrollView>

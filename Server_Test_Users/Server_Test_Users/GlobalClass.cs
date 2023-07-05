@@ -271,7 +271,7 @@ namespace Server_Test_Users
                     }
                 }
 
-                if (Exists_User = false)
+                if (Exists_User == false)
                 {
                     DateTime dateTime = DateTime.Now;
 

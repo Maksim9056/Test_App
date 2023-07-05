@@ -191,6 +191,7 @@ namespace Server_Test_Users
 #pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
                         port = _aFile.Port;
                         GlobalClass.TypeSQL = _aFile.TypeSQL;
+                   
                     }
                 }
                 else

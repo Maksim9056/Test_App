@@ -12,6 +12,14 @@ namespace Class_interaction_Users
     /// </summary>
     /// 
 
+    public class Client
+    {
+        public string Ip_adress { get; set; }
+        public Client(string ip_adress)
+        {
+            Ip_adress = ip_adress;
+        }
+    }
     [Serializable]
     public class Seting
     {

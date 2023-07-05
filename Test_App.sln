@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server_Test_Users", "Server
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class_interaction_Users", "Class_interaction_Users\Class_interaction_Users.csproj", "{618DB64D-6A9F-48D4-8720-5BAD84B32C73}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test_App", "Test_App\Test_App.csproj", "{EA5A034F-F88D-4460-A3F2-256E7DAA9E06}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1B8A2C66-3015-4CB0-B1D8-A9157FE7B907}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -30,12 +28,6 @@ Global
 		{618DB64D-6A9F-48D4-8720-5BAD84B32C73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{618DB64D-6A9F-48D4-8720-5BAD84B32C73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{618DB64D-6A9F-48D4-8720-5BAD84B32C73}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA5A034F-F88D-4460-A3F2-256E7DAA9E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA5A034F-F88D-4460-A3F2-256E7DAA9E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA5A034F-F88D-4460-A3F2-256E7DAA9E06}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{EA5A034F-F88D-4460-A3F2-256E7DAA9E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA5A034F-F88D-4460-A3F2-256E7DAA9E06}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA5A034F-F88D-4460-A3F2-256E7DAA9E06}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{B8A38287-2F4A-4E8F-BFC3-03CE943B857D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B8A38287-2F4A-4E8F-BFC3-03CE943B857D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8A38287-2F4A-4E8F-BFC3-03CE943B857D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
