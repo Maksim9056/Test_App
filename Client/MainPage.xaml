@@ -10,7 +10,7 @@
 
 
             <Entry x:Name="nameEntry" FontSize="22"
-              TextChanged="nameEntry_TextChanged"
+              TextChanged="nameEntry_TextChanged_12"
               Placeholder ="Введите электроную почту"
               Keyboard="Email"
               Margin="20"
@@ -42,7 +42,7 @@
                 Text="Регистрация"
          
                 SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+                Clicked="CounterBtn_Clicked_1"
                 VerticalOptions="End" HorizontalOptions="CenterAndExpand"
                 FontSize="16" HeightRequest="10"
                 WidthRequest="150"

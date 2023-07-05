@@ -73,9 +73,6 @@ namespace Class_interaction_Users
         }
     }
 
-
-
-
     [Serializable]
     /// <summary>
     /// Класс Regis_users для регестрации пользователей

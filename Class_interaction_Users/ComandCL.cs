@@ -124,11 +124,11 @@ namespace Class_interaction_Users
                         }
                         while (stream.DataAvailable);
                         responseData = completeMessage.ToString();
-                    //Получаем имя пользователя
+                       //Получаем имя пользователя
 
 
-                    Regis_users msgImage = JsonSerializer.Deserialize<Regis_users>(responseData);
-                    Travel_Regis_users_message = msgImage;
+                      Regis_users msgImage = JsonSerializer.Deserialize<Regis_users>(responseData);
+                      Travel_Regis_users_message = msgImage;
 
                     //User_reg.UserName = responseData;
                 }

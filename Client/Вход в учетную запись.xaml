@@ -7,10 +7,50 @@
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center" 
+        />
+        
         <Button 
             Text="Нажать"
-            
-            />
+            Clicked="Button_Clicked"
+            Margin="10"
+        />
+
+        <Entry x:Name="nameEntry3" FontSize="22"
+              TextChanged="nameEntry1_TextChanged_2"
+               
+              Placeholder ="Введите имя"
+              Keyboard="Text"
+              Margin="20"
+             />
+
+        <Entry x:Name="nameEntry" FontSize="22"
+              TextChanged="nameEntry_TextChanged"
+              Placeholder ="Введите электроную почту"
+              Keyboard="Email"
+              Margin="20"
+             />
+
+        <Entry x:Name="nameEntry1" FontSize="22"
+             Placeholder ="Введите пароль"
+             Margin="20"
+             TextChanged="nameEntry1_TextChanged"
+             Keyboard ="Text"
+        />
+
+        <Entry x:Name="nameEntry2" FontSize="22"
+             Placeholder ="Введите пароль"
+             Margin="20"
+             TextChanged="nameEntry2_TextChanged"
+             Keyboard ="Text"
+        />
+
+        <Entry x:Name="nameEntry4" FontSize="22"
+             Placeholder ="Дать  Разрешение пиши 1 если нет 0"
+             Margin="20"
+             TextChanged="nameEntry4_TextChanged"
+               
+             Keyboard ="Text"
+        />
     </VerticalStackLayout>
 </ContentPage>
