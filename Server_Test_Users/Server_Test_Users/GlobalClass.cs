@@ -295,7 +295,7 @@ namespace Server_Test_Users
                 }
                 else
                 {
-                    Travel.Name_Employee = "Пользователь зарегистрирован !";
+                 //   Travel = new Regis_users(0,"False" ,"",1,"");
                 }
 
             }

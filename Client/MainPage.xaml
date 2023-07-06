@@ -1,24 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Client.MainPage">
-
+             x:Class="Client.MainPage"
+                         Title="Вход_в_учетную_запись">
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
             VerticalOptions="Fill">
 
-
             <Entry x:Name="nameEntry9" FontSize="22"
               TextChanged="nameEntry9_TextChanged"
               Placeholder ="Введите электроную почту"
               Keyboard="Email"
-              Margin="20"
+             Margin="30"
+             VerticalOptions="Center"
+             HorizontalOptions="Center"
+             HeightRequest="20"
+             WidthRequest="310"
              />
 
             <Entry x:Name="nameEntry1" FontSize="22"
              Placeholder ="Введите пароль"
-             Margin="20"
+             Margin="30"
+             VerticalOptions="Center"
+             HorizontalOptions="Center"
+             HeightRequest="20"
+             WidthRequest="310"
              TextChanged="nameEntry1_TextChanged"
              Keyboard ="Text"
              />

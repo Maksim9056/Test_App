@@ -66,13 +66,27 @@ namespace Server_Test_Users
 
 
 
-
-                // @class.Regis_users
-                using (MemoryStream ms = new MemoryStream())
+                if (@class.Travel == null)
                 {
-                    JsonSerializer.Serialize<Regis_users>(ms, @class.Travel);
-                    //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
-                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        Regis_users regis_Users = new Regis_users(0,"","",0,"");
+                        JsonSerializer.Serialize<Regis_users>(ms, regis_Users);
+                        //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+                        stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                    }
+                }
+                else
+                {
+
+
+                    // @class.Regis_users
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        JsonSerializer.Serialize<Regis_users>(ms, @class.Travel);
+                        //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+                        stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                    }
                 }
             }
             catch(Exception e)
