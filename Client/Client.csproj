@@ -60,6 +60,9 @@
 	  <MauiXaml Update="Вход в учетную запись.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Главная страница.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Регистрация.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

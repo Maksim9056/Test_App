@@ -70,7 +70,7 @@ namespace Server_Test_Users
                 // @class.Regis_users
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    JsonSerializer.Serialize<Regis_users>(ms, @class.Regis_users);
+                    JsonSerializer.Serialize<Regis_users>(ms, @class.Travel);
                     //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                 }

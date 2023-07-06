@@ -208,10 +208,10 @@ namespace Server_Test_Users
                     //Postgres
                     case 1:
                         string Sql = "Create table IF NOT EXISTS  Users(Id Serial not null CONSTRAINT PK_Id PRIMARY KEY," +
-                            "Name_Employee varchar not null," +
-                            "Password varchar not null," +
+                            "Name_Employee Varchar not null," +
+                            "Passwords Varchar not null," +
                             "Rechte Serial not null," +
-                            "DataMess TIMESTAMP NOT NULL," +
+                            "DataMess TIMESTAMP  null DEFAULT(CURRENT_TIMESTAMP)," +
                             "Employee_Mail VARCHAR not null CONSTRAINT CH_Employee_Mail CHECK(Employee_Mail like '%@%.%'));";
 
                         using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionStringPostGreSQL))
@@ -250,7 +250,7 @@ namespace Server_Test_Users
 #pragma warning restore CS0219 // Переменная назначена, но ее значение не используется
 
                 //    string Check_User = $"Select from User Where Name_Employee and Name_Employee ={regis_Users.Employee_Mail}";
-                string Check_User = $"Select  * From User Where Name_Employee = '{regis_Users.Name_Employee}'";
+                string Check_User = $"  Select * From Users where name_employee  = '{regis_Users.Name_Employee}'";
                 using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
                 {
                     connection.Open();
@@ -261,34 +261,41 @@ namespace Server_Test_Users
 
                     if (sqReader.HasRows == true)
                     {
-                        //int id_telegram_user = 0;
-                        Console.WriteLine("Такое имя уже есть");
+                     
                         Exists_User = true;
                         // Always call Read before accessing data.
                         while (sqReader.Read())
                         {
+
                         }
                     }
-                }
+                } DateTime dateTime = DateTime.Now;
 
                 if (Exists_User == false)
                 {
-                    DateTime dateTime = DateTime.Now;
-
-                    string sql = $"INSERT INTO Users (Name_Employee,Password,Rechte,Employee_Mail,DataMess) VALUES ({regis_Users.Name_Employee},{regis_Users.Password},'{regis_Users.Rechte}','{regis_Users.Employee_Mail}','{dateTime:s}')";
+                    string sql = $"INSERT INTO Users (Name_Employee,passwords,rechte, employee_mail) VALUES ('{regis_Users.Name_Employee}','{regis_Users.Password}',{regis_Users.Rechte},'{regis_Users.Employee_Mail}');";
                     using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
                     {
                         connection.Open();
                         NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                         command.CommandText = sql;
                         command.ExecuteNonQuery();
-                    }
-                    Regis_users.Name_Employee = "";
+                        string sq = "SELECT id, name_employee, passwords, rechte, datamess, employee_mail\r\n\tFROM public.users;";
+                        command.CommandText = sq; 
+                        command.ExecuteNonQuery();
+                        NpgsqlDataReader sqReader = command.ExecuteReader();
 
+                        while (sqReader.Read())
+                        {
+                            Travel = new Regis_users(Convert.ToInt32(sqReader["id"]), sqReader["Name_Employee"].ToString(), sqReader["passwords"].ToString(), Convert.ToInt32(sqReader["Rechte"]), sqReader["employee_mail"].ToString());
+                        }
+                        sqReader.Close();
+
+                    }
                 }
                 else
                 {
-                    Regis_users.Name_Employee = "Пользователь зарегистрирован !";
+                    Travel.Name_Employee = "Пользователь зарегистрирован !";
                 }
 
             }
@@ -302,26 +309,21 @@ namespace Server_Test_Users
         {
             try {
                 int Current_User;
-                string sqlExpressiol = $"SELECT * FROM Users  WHERE Employee_Mail = '{checkMail_And_Password.Employee_Mail}' and Password='{checkMail_And_Password.Password}'";
-
+                string sqlExpressiol = $"SELECT * FROM Users  WHERE employee_mail = '{checkMail_And_Password.Employee_Mail}' and Passwords ='{checkMail_And_Password.Password}'";
                 using(var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
                 {
                     connection.Open();
                     NpgsqlCommand command = new NpgsqlCommand(sqlExpressiol, connection);
                     NpgsqlDataReader sqReader = command.ExecuteReader();
-
                     if (sqReader.HasRows == true)
                     {
-                        // Always call Read before accessing data.
                         while (sqReader.Read())
                         {
-                            Current_User = Convert.ToInt32(sqReader["Id"]);
-                            int Image = Convert.ToInt32(sqReader["Image"].ToString());
+                            Current_User = Convert.ToInt32(sqReader["id"]);
                             int Id = Convert.ToInt32(Current_User);
-                            Travel = new Regis_users(Id, sqReader["Name_Employee"].ToString(), sqReader["Password"].ToString(), Convert.ToInt32(sqReader["Rechte"]), sqReader["Employee_Mail"].ToString());
+                            Travel = new Regis_users(Id, sqReader["Name_Employee"].ToString(), sqReader["passwords"].ToString(), Convert.ToInt32(sqReader["Rechte"]), sqReader["employee_mail"].ToString());
                         }
                         sqReader.Close();
-                        string buton = $"UPDATE Users SET Id_Telegram =   WHERE Id = ''";
                     }
                     else
                     {
@@ -331,15 +333,14 @@ namespace Server_Test_Users
                             connectio.Open();
                             NpgsqlCommand _command = new NpgsqlCommand(sqlExpressi, connectio);
                             //NpgsqlCommand __commandS = new NpgsqlCommand(sqlExpressi, connectio);
-                            NpgsqlDataReader sqReaders = _command.ExecuteReader();
+                            NpgsqlCommand sql = new NpgsqlCommand(sqlExpressi, connectio);
+                            NpgsqlDataReader sqReaders = sql.ExecuteReader();
                             if (sqReaders.HasRows == true)
                             {
                                 // Always call Read before accessing data.
                                 while (sqReaders.Read())
                                 {
-                                    //       Current_User = sqReader["Id"].ToString();
                                     Travel = new Regis_users(Convert.ToInt32(sqReaders["Id"]), sqReaders["Name_Employee"].ToString(), "", 0, sqReader["Employee_Mail"].ToString());
-
                                 }
                             }
                             else

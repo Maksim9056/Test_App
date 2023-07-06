@@ -9,8 +9,8 @@
             VerticalOptions="Fill">
 
 
-            <Entry x:Name="nameEntry" FontSize="22"
-              TextChanged="nameEntry_TextChanged_12"
+            <Entry x:Name="nameEntry9" FontSize="22"
+              TextChanged="nameEntry9_TextChanged"
               Placeholder ="Введите электроную почту"
               Keyboard="Email"
               Margin="20"

@@ -1,6 +1,6 @@
 using Class_interaction_Users;
 using Microsoft.Maui.ApplicationModel.Communication;
-using Microsoft.UI.Xaml.Controls;
+//using Microsoft.UI.Xaml.Controls;
 using System.Text.Json;
 using System.Text;
 using TextChangedEventArgs = Microsoft.Maui.Controls.TextChangedEventArgs;
@@ -65,7 +65,7 @@ public partial class Вход_в_учетную_запись : ContentPage
         Password1 = nameEntry2.Text;
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
         //Пароль сравниваем если пароли одинаковые то отправляем на сервер
         if (Password == Password1)
@@ -76,18 +76,21 @@ public partial class Вход_в_учетную_запись : ContentPage
                 string FileFS = "";
                 using (MemoryStream fs = new MemoryStream())
                 {
-                    Regis_users tom = new Regis_users(0,User_Name, Password,Convert.ToInt32( Rechte), Mail);
+                    Regis_users tom = new Regis_users(0,User_Name, Password,Convert.ToInt32(Rechte), Mail);
                     JsonSerializer.Serialize<Regis_users>(fs, tom);
                     FileFS = Encoding.Default.GetString(fs.ToArray());
                 }
                 //command.Reg_User(IP_ADRES.Ip_adress, FileFS, "002");
+
                 Task.Run(async () => await command.Reg_User(Ip_adress.Ip_adresss, FileFS, "002")).Wait();
                 //Получаем из сервера и фильтруем
               var Message = CommandCL.Travel_Regis_users_message;
-               //Фильтруем по имени
+               //Фильтруем по имени 
                 if(Message.Name_Employee == User_Name) 
-                {
+                { 
                     //Выводим успешная регистрация и закрываем эту страницу и преходи на вход!
+                    await Navigation.PushAsync(new MainPage());
+                   
                 }
                 else
                 {

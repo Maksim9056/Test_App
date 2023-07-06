@@ -111,7 +111,7 @@ namespace Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CounterLog_Clicked(object sender, EventArgs e)
+        private async void CounterLog_Clicked(object sender, EventArgs e)
         {
             if (Password == null)
             {
@@ -134,6 +134,8 @@ namespace Client
                     Task.Run(async () => await command.Check_User_Possword(Ip_adress.Ip_adresss, FileFS, "003")).Wait();
                     //Ответ с сервера получаем 
                     var regis_Users = command.Travel_logout;
+                    await Navigation.PushAsync(new MainPage());
+                  
                     //Значение почты пользователя  присваеваем по умолчанию почту для следущего входа пользователей
                     Mail = null;
                     //Значение пароля пользователя  присваеваем по умолчанию пароль для следущего входа пользователей 
@@ -147,18 +149,23 @@ namespace Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CounterBtn_Clicked_1(object sender, EventArgs e)
+        private async  void CounterBtn_Clicked_1(object sender, EventArgs e)
         {
-            Вход_в_учетную_запись вход_В_Учетную_Запись =new();
-
-            вход_В_Учетную_Запись.GetVisualElementWindow().Content.CaptureAsync();
+           //  вход_В_Учетную_Запись =new();
+            await Navigation.PushAsync(new Вход_в_учетную_запись());
+       //     вход_В_Учетную_Запись.GetVisualElementWindow().Content.CaptureAsync();
            //Открывает
            //  вход_В_Учетную_Запись.DisplayAlert(Title,"Открывает","");
         }
 
         private void nameEntry_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-            Mail = nameEntry.Text;
+        }
+
+        private void nameEntry9_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Mail = nameEntry9.Text;
+
         }
     }
 }
