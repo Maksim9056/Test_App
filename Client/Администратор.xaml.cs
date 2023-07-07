@@ -5,16 +5,17 @@ namespace Client;
 
 public partial class Администратор : ContentPage
 {
-    /// <summary>
-    /// Экземпляр класса CommandCL
-    /// </summary>
-    public CommandCL command = new CommandCL();
+   
 
     public Администратор()
 	{
 		InitializeComponent();
 	}
 
+     /// <summary>
+    /// Экземпляр класса CommandCL
+    /// </summary>
+    public CommandCL command = new CommandCL();
   
         void PickerSelectedIndexChanged(object sender, EventArgs e)
         {
