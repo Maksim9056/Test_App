@@ -405,13 +405,11 @@ namespace Server_Test_Users
                         Tru_user = true;
 
                         // Always call Read before accessing data.
-                        while (sqReader.Read())
-                        {
-                            sqReader.Read();
-                            Id = Convert.ToInt32(sqReader["rec_count"].ToString());
+                         sqReader.Read();
+                            Id = Convert.ToInt32(sqReader["rec_count"]);
 
-                        }
-                        sqReader.Close();
+                        
+                       
                     }
                     else
                     {

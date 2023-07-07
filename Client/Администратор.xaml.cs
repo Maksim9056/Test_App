@@ -38,24 +38,27 @@ public partial class Администратор : ContentPage
         }
         else
         {
-            if(CommandCL.Tests_Travel.Test.Count() == 0)
+            if (CommandCL.Tests_Travel.Test.Count() == 0)
             {
                 await DisplayAlert("Уведомление", "Тестов нету !", "ОK");
 
             }
-            string[]  strings = new string[CommandCL.Tests_Travel.Test.Count()];
-            for (int i =0;i < strings.Length; i++)
+            else
             {
-                strings[i] = CommandCL.Tests_Travel.Test[i].ToString();
+                string[] strings = new string[CommandCL.Tests_Travel.Test.Count()];
+                for (int i = 0; i < strings.Length; i++)
+                {
+                    strings[i] = CommandCL.Tests_Travel.Test[i].ToString();
+                }
+
+
+                for (int i = 0; i < strings.Length; i++)
+                {
+                    languagePicker.Items.Add(strings[i]);
+                }
+
+                await DisplayAlert("Уведомление", "Тесты есть", "ОK");
             }
-
-
-            for (int i = 0; i < strings.Length;i++) 
-            {
-                languagePicker.Items.Add(strings[i]);
-            }
-
-            await DisplayAlert("Уведомление", "Тесты есть", "ОK");
         }
        //.Add("1");
 

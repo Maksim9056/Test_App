@@ -118,7 +118,7 @@ namespace Client
             {
                 if (Mail == null)
                 {
-
+                    await DisplayAlert("Уведомление", "Почта не пустая!", "ОK");
                 }
                 else
                 {
@@ -165,6 +165,8 @@ namespace Client
                                         Mail = null;
                                         //Значение пароля пользователя  присваеваем по умолчанию пароль для следущего входа пользователей 
                                         Password = null;
+                                        nameEntry1.Text = null;
+                                        nameEntry9.Text = null;
                                         //Ответ с сервера получаем 
                                         if (command.Travel_logout == null)
                                         {

@@ -127,7 +127,6 @@ namespace Server_Test_Users
             {
                 @class.Check_Tests();
            
-
                 if (@class.Travels_test == null)
                 {
                     using (MemoryStream ms = new MemoryStream())
@@ -152,7 +151,6 @@ namespace Server_Test_Users
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            
             }
         }
 
