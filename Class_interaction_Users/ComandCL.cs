@@ -70,8 +70,10 @@ namespace Class_interaction_Users
         ///// id голосового сообщения для воспроизведения 
         ///// </summary>
         //public Insert_Fille_Music Select_Fille_Music_id { get; set; }
+
+
         /// <summary>
-        /// id голосового сообщения
+        /// Класс авторизации и регистрации
         /// </summary>
         public Regis_users Travel_logout { get; set; }
 

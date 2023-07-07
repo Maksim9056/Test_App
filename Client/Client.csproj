@@ -57,6 +57,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Администратор.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Вход в учетную запись.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

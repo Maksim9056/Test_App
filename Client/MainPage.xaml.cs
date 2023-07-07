@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls;
 using System.Text.Json;
 using System.Text;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace Client
 {
@@ -113,34 +114,110 @@ namespace Client
         /// <param name="e"></param>
         private async void CounterLog_Clicked(object sender, EventArgs e)
         {
-            if (Password == null)
+            try
             {
-
-            }
-            else
-            {
-                //FileFS обьявляем для отправки на сервер
-                string FileFS = "";
-                //Обьявляем MemoryStream 
-                using (MemoryStream memoryStream = new MemoryStream())
+                if (Mail == null)
                 {
-                    //Заполняем класс CheckMail_and_Password для отправки на сервер
-                    CheckMail_and_Password ss = new CheckMail_and_Password(Password, Mail);
-                    //Серелизуем класс CheckMail_and_Password для отправки на сервер
-                    JsonSerializer.Serialize<CheckMail_and_Password>(memoryStream, ss);
-                    //Декодировали в строку  memoryStream    класс запоаковали в json строку
-                    FileFS = Encoding.Default.GetString(memoryStream.ToArray());
-                    //Отправляем на сервер  команду 003
-                    Task.Run(async () => await command.Check_User_Possword(Ip_adress.Ip_adresss, FileFS, "003")).Wait();
-                    //Ответ с сервера получаем 
-                    var regis_Users = command.Travel_logout;
-                    await Navigation.PushAsync(new MainPage());
-                  
-                    //Значение почты пользователя  присваеваем по умолчанию почту для следущего входа пользователей
-                    Mail = null;
-                    //Значение пароля пользователя  присваеваем по умолчанию пароль для следущего входа пользователей 
-                    Password = null;
-                }  
+
+                }
+                else
+                {
+                    //Проверяет почту пуста или нет
+                    if (string.IsNullOrEmpty(Mail))
+                    {
+                        await DisplayAlert("Уведомление", "Почта не заполнена!", "ОK");
+                    }
+                    else
+                    {
+                        //Регеулярное выражение
+                        string patern = "@.";
+                        //Регулярное выражение
+                        Regex regex = new Regex(patern);
+                        //Проверяет в Mail есть ли в строке это @ почту
+                        if (Regex.IsMatch(Mail, patern))
+                        {
+                            if (Password == null)
+                            {
+                                await DisplayAlert("Уведомление", "Пароль не заполнен!", "ОK");
+                            }
+                            else
+                            {
+                                if (string.IsNullOrEmpty(Password))
+                                {
+                                    await DisplayAlert("Уведомление", "Пароль не заполнен!", "ОK");
+                                }
+                                else
+                                {
+                                    //FileFS обьявляем для отправки на сервер
+                                    string FileFS = "";
+                                    //Обьявляем MemoryStream 
+                                    using (MemoryStream memoryStream = new MemoryStream())
+                                    {
+                                        //Заполняем класс CheckMail_and_Password для отправки на сервер
+                                        CheckMail_and_Password ss = new CheckMail_and_Password(Password, Mail);
+                                        //Серелизуем класс CheckMail_and_Password для отправки на сервер
+                                        JsonSerializer.Serialize<CheckMail_and_Password>(memoryStream, ss);
+                                        //Декодировали в строку  memoryStream    класс запоаковали в json строку
+                                        FileFS = Encoding.Default.GetString(memoryStream.ToArray());
+                                        //Отправляем на сервер  команду 003
+                                        Task.Run(async () => await command.Check_User_Possword(Ip_adress.Ip_adresss, FileFS, "003")).Wait();
+                                        //Значение почты пользователя  присваеваем по умолчанию почту для следущего входа пользователей
+                                        Mail = null;
+                                        //Значение пароля пользователя  присваеваем по умолчанию пароль для следущего входа пользователей 
+                                        Password = null;
+                                        //Ответ с сервера получаем 
+                                        if (command.Travel_logout == null)
+                                        {
+                                            await DisplayAlert("Уведомление", "Такого пользователя нет!", "ОK");
+                                        }
+                                        else
+                                        {
+                                            if (string.IsNullOrEmpty(command.Travel_logout.Employee_Mail))
+                                            {
+                                                await DisplayAlert("Уведомление", "Такого пользователя нет!", "ОK");
+
+                                            }
+                                            else
+                                            {
+                                                if (command.Travel_logout.Id == 0)
+                                                {
+                                                    await DisplayAlert("Уведомление", "Пароль введен не верно!", "ОK");
+                                                }
+                                                else
+                                                {
+
+
+                                                    var regis_Users = command.Travel_logout;
+                                                    switch (regis_Users.Rechte)
+                                                    {
+                                                        case 0:
+                                                            await DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
+                                                            await Navigation.PushAsync(new Главная_страница());
+                                                            break;
+                                                        case 1:
+                                                            await DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
+                                                            await Navigation.PushAsync(new Администратор());
+                                                            break;
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //Не проходит на почту действетульную
+                            await DisplayAlert("Уведомление", "Ввели не почту!", "ОK");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Уведомление", ex.Message, "ОK");
             }
         }
 
@@ -153,7 +230,7 @@ namespace Client
         {
            //  вход_В_Учетную_Запись =new();
             await Navigation.PushAsync(new Вход_в_учетную_запись());
-       //     вход_В_Учетную_Запись.GetVisualElementWindow().Content.CaptureAsync();
+           //вход_В_Учетную_Запись.GetVisualElementWindow().Content.CaptureAsync();
            //Открывает
            //  вход_В_Учетную_Запись.DisplayAlert(Title,"Открывает","");
         }

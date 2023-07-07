@@ -35,7 +35,7 @@ namespace Server_Test_Users
         public Regis_users? Regis_users { get; set; }
 
 
-
+        public bool Tru_user { get; set; } = false;
 
 
         /// <summary>
@@ -307,16 +307,19 @@ namespace Server_Test_Users
 
         public void Check_login_amail(CheckMail_and_Password checkMail_And_Password)
         {
-            try {
+            try
+            {
+                bool Check = false;
                 int Current_User;
                 string sqlExpressiol = $"SELECT * FROM Users  WHERE employee_mail = '{checkMail_And_Password.Employee_Mail}' and Passwords ='{checkMail_And_Password.Password}'";
-                using(var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
                 {
                     connection.Open();
                     NpgsqlCommand command = new NpgsqlCommand(sqlExpressiol, connection);
                     NpgsqlDataReader sqReader = command.ExecuteReader();
                     if (sqReader.HasRows == true)
                     {
+                        Tru_user = true;
                         while (sqReader.Read())
                         {
                             Current_User = Convert.ToInt32(sqReader["id"]);
@@ -327,33 +330,43 @@ namespace Server_Test_Users
                     }
                     else
                     {
-                        string sqlExpressi = $"SELECT * FROM Users  WHERE Employee_Mail = '{checkMail_And_Password.Employee_Mail}'";
-                        using (var connectio = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
-                        {
-                            connectio.Open();
-                            NpgsqlCommand _command = new NpgsqlCommand(sqlExpressi, connectio);
-                            //NpgsqlCommand __commandS = new NpgsqlCommand(sqlExpressi, connectio);
-                            NpgsqlCommand sql = new NpgsqlCommand(sqlExpressi, connectio);
-                            NpgsqlDataReader sqReaders = sql.ExecuteReader();
-                            if (sqReaders.HasRows == true)
-                            {
-                                // Always call Read before accessing data.
-                                while (sqReaders.Read())
-                                {
-                                    Travel = new Regis_users(Convert.ToInt32(sqReaders["Id"]), sqReaders["Name_Employee"].ToString(), "", 0, sqReader["Employee_Mail"].ToString());
-                                }
-                            }
-                            else
-                            {
-
-                            }
-                        }
+                        Check = true;
                     }
                     connection.Close();
                 }
 
+                if (Check == true)
+                {
+                    string sqlExpressi = $"SELECT * FROM Users  WHERE Employee_Mail = '{checkMail_And_Password.Employee_Mail}'";
+                    using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                    {
+                        connection.Open();
+                        NpgsqlCommand command = new NpgsqlCommand(sqlExpressi, connection);
+                        NpgsqlDataReader sqReader = command.ExecuteReader();
+                        //NpgsqlCommand __commandS = new NpgsqlCommand(sqlExpressi, connectio);
+
+                        if (sqReader.HasRows == true)
+                        {
+                            Tru_user = true;
+                            // Always call Read before accessing data.
+                            while (sqReader.Read())
+                            {
+                                Travel = new Regis_users(0, "", "", 0, sqReader["Employee_Mail"].ToString());
+                            }
+                            sqReader.Close();
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+                else
+                {
+
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
