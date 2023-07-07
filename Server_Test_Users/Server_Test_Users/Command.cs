@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
+using static Class_interaction_Users.CheckMail_and_Password;
 
 namespace Server_Test_Users
 {
@@ -119,12 +120,46 @@ namespace Server_Test_Users
 
         }
 
-        public void Sampling_Messages_Correspondence(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        public void Check_test(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+
+            try
+            {
+                @class.Check_Tests();
+           
+
+                if (@class.Travels_test == null)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        Tests test = new Tests(@class.Travels_test);
+                        JsonSerializer.Serialize<Tests>(ms, test);
+                        stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                    }
+                }
+                else
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        Tests test = new Tests(@class.Travels_test);
+                        JsonSerializer.Serialize<Tests>(ms, test);
+                        stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                    }
+                }
+            
+            
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            
+            }
         }
 
         public void Sampling_Users_Correspondence(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+
+         //   Test
         }
 
         public void Search_Image(byte[] arg1, GlobalClass @class, NetworkStream stream)

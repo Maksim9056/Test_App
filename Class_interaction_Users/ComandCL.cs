@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-     ﻿//using Class_chat;
+//using Class_chat;
 //using Newtonsoft.Json.Linq;
 ///using System.Collections.Generic;
 //using System.Drawing;
@@ -76,6 +76,13 @@ namespace Class_interaction_Users
         /// Класс авторизации и регистрации
         /// </summary>
         public Regis_users Travel_logout { get; set; }
+
+
+
+        /// <summary>
+        /// Класс тесты
+        /// </summary>
+        public static Tests_Travel Tests_Travel { get; set; }
 
         ///// <summary>
         ///// Отправки в телеграм в чат
@@ -348,8 +355,8 @@ namespace Class_interaction_Users
             }
 
 
-            // Процедура отправки 006
-            async public Task Check_Mess_Friend(String server, string fs, string command)
+            // Процедура отправки 005
+            async public Task Check_Test(string server, string fs, string command)
             {
                 try
                 {
@@ -362,12 +369,7 @@ namespace Class_interaction_Users
                         //Назначаем длину 1024
                         //data = new Byte[1024];
                         String responseData = String.Empty;
-                        //функция получения но обрезающая 
-                        //responseData = await Task<string>.Run(() =>
-                        //{
-                        //    return Func_Read(stream, data.Length, client);
-                        //});
-
+                   
                         Byte[] readingData = new Byte[256];
                         StringBuilder completeMessage = new StringBuilder();
                         int numberOfBytesRead = 0;
@@ -383,24 +385,18 @@ namespace Class_interaction_Users
 
 
                         //получить перечень сообщений
-                        if (responseData == "false")
+                        if (responseData == null)
                         {   //Если нету списка
-                            //_Answe = "false";
+                           Tests_Travel = null;
                         }
                         else
                         {
-                            //Разбераем классом но надо правильно это делать может не сработать 
-                            //В данном случаи сработал
-                            //MsgInfo msgInfo = JsonSerializer.Deserialize<MsgInfo>(responseData);
-                            ////Разбераем JObject и JToken удобно для повторного использования
-                            //JObject details = JObject.Parse(responseData);
-                            //JToken Answe = details.SelectToken("Answe");
-                            //JToken List_Mess = details.SelectToken("List_Mess");
-                            //JToken AClass = details.SelectToken("AClass");
-                            ////Присваеваем значения
-                            //_Answe = Answe;
-                            //_List_Mess_count = List_Mess;
-                            //_AClass = AClass;
+                        //Разбераем классом но надо правильно это делать может не сработать 
+                        //В данном случаи сработал
+                        Tests_Travel msgtest = JsonSerializer.Deserialize<Tests_Travel>(responseData);
+
+                        Tests_Travel = msgtest;
+                 
                         }
 
                     }

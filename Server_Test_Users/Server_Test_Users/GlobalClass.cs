@@ -39,9 +39,16 @@ namespace Server_Test_Users
 
 
         /// <summary>
-        /// Посылаем клиенту 
+        /// Отсылает тесты
         /// </summary>
-        public Regis_users? Travel { get; set; }
+        public Test[] Travels_test { get; set; }
+
+
+
+    /// <summary>
+    /// Посылаем клиенту 
+    /// </summary>
+    public Regis_users? Travel { get; set; }
         /// <summary>
         /// Создает  базу данных 
         /// </summary>
@@ -76,7 +83,7 @@ namespace Server_Test_Users
 
                             if (sqReader.HasRows == true)
                             {
-                             
+
                                 Create_DATABASE = true;
                                 // Always call Read before accessing data.
                                 while (sqReader.Read())
@@ -124,7 +131,7 @@ namespace Server_Test_Users
         /// <summary>
         /// Создает табличку в базе данных Test
         /// </summary>
-        public  void  CreateTable_Test()
+        public void CreateTable_Test()
         {
             try
             {
@@ -160,7 +167,7 @@ namespace Server_Test_Users
         /// <summary>
         /// Создает табличку в базе данных Test_Questions
         /// </summary>
-        public  void CreateTable_Test_Questions()
+        public void CreateTable_Test_Questions()
         {
             try
             {
@@ -199,7 +206,7 @@ namespace Server_Test_Users
         /// <summary>
         /// Создает табличку в базе данных пользователями 
         /// </summary>
-        public  void CreateTable_Users()
+        public void CreateTable_Users()
         {
             try
             {
@@ -261,7 +268,7 @@ namespace Server_Test_Users
 
                     if (sqReader.HasRows == true)
                     {
-                     
+
                         Exists_User = true;
                         // Always call Read before accessing data.
                         while (sqReader.Read())
@@ -269,7 +276,8 @@ namespace Server_Test_Users
 
                         }
                     }
-                } DateTime dateTime = DateTime.Now;
+                }
+                DateTime dateTime = DateTime.Now;
 
                 if (Exists_User == false)
                 {
@@ -281,7 +289,7 @@ namespace Server_Test_Users
                         command.CommandText = sql;
                         command.ExecuteNonQuery();
                         string sq = "SELECT id, name_employee, passwords, rechte, datamess, employee_mail\r\n\tFROM public.users;";
-                        command.CommandText = sq; 
+                        command.CommandText = sq;
                         command.ExecuteNonQuery();
                         NpgsqlDataReader sqReader = command.ExecuteReader();
 
@@ -295,7 +303,7 @@ namespace Server_Test_Users
                 }
                 else
                 {
-                 //   Travel = new Regis_users(0,"False" ,"",1,"");
+                    //   Travel = new Regis_users(0,"False" ,"",1,"");
                 }
 
             }
@@ -305,6 +313,10 @@ namespace Server_Test_Users
             }
         }
 
+
+        /// <summary>
+        /// Проверка  почты пароля  авторизация  и проверяет по почте есть ли пользователь  
+        /// </summary>
         public void Check_login_amail(CheckMail_and_Password checkMail_And_Password)
         {
             try
@@ -369,6 +381,83 @@ namespace Server_Test_Users
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void Check_Tests()
+        {
+            try
+            {
+
+                Test[] tests = new Test[] { };
+                string sqlExpressil = $"SELECT  COUNT(*) AS rec_count FROM Test ";
+                int Id = 0;
+               
+                using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                {
+                    connection.Open();
+                    NpgsqlCommand command = new NpgsqlCommand(sqlExpressil, connection);
+                    NpgsqlDataReader sqReader = command.ExecuteReader();
+                    //NpgsqlCommand __commandS = new NpgsqlCommand(sqlExpressi, connectio);
+
+                    if (sqReader.HasRows == true)
+                    {
+                        Tru_user = true;
+
+                        // Always call Read before accessing data.
+                        while (sqReader.Read())
+                        {
+                            sqReader.Read();
+                            Id = Convert.ToInt32(sqReader["rec_count"].ToString());
+
+                        }
+                        sqReader.Close();
+                    }
+                    else
+                    {
+
+                    }
+                }
+                if (Id == 0)
+                {
+                    Travels_test = tests;
+                }
+                else
+                {
+                    Test[] test = new Test[Id];
+                    string sqlExpressi = $"SELECT * FROM Test  ";
+                    using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                    {
+                        connection.Open();
+                        NpgsqlCommand command = new NpgsqlCommand(sqlExpressi, connection);
+                        NpgsqlDataReader sqReader = command.ExecuteReader();
+                        if (sqReader.HasRows == true)
+                        {
+                            Tru_user = true;
+
+                            // Always call Read before accessing data.
+                            int i =0;
+                            while (sqReader.Read())
+                            {
+                                
+                                test[i] = new Test(Convert.ToInt32( sqReader["Id_test"]),Convert.ToString(sqReader["Name_Test"]));
+                                i++;
+                            }
+
+                            sqReader.Close();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    Travels_test = test;
+
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
             }
         }
     }

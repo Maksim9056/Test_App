@@ -1,9 +1,65 @@
+using Class_interaction_Users;
+using Microsoft.Maui.Controls;
+
 namespace Client;
 
 public partial class Администратор : ContentPage
 {
-	public Администратор()
+    /// <summary>
+    /// Экземпляр класса CommandCL
+    /// </summary>
+    public CommandCL command = new CommandCL();
+
+    public Администратор()
 	{
 		InitializeComponent();
 	}
+
+  
+        void PickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+
+         
+
+
+
+            header.Text = $"Вы выбрали: {languagePicker.SelectedItem}";
+        }
+
+    private  async void header_SizeChanged(object sender, EventArgs e)
+    {
+
+
+        Task.Run(async () => await command.Check_Test(Ip_adress.Ip_adresss, "", "004")).Wait();
+
+        if (CommandCL.Tests_Travel == null)
+        {
+
+        }
+        else
+        {
+            if(CommandCL.Tests_Travel.Test.Count() == 0)
+            {
+                await DisplayAlert("Уведомление", "Тестов нету !", "ОK");
+
+            }
+            string[]  strings = new string[CommandCL.Tests_Travel.Test.Count()];
+            for (int i =0;i < strings.Length; i++)
+            {
+                strings[i] = CommandCL.Tests_Travel.Test[i].ToString();
+            }
+
+
+            for (int i = 0; i < strings.Length;i++) 
+            {
+                languagePicker.Items.Add(strings[i]);
+            }
+
+            await DisplayAlert("Уведомление", "Тесты есть", "ОK");
+        }
+       //.Add("1");
+
+    }
 }
+
+

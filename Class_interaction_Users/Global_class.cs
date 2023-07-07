@@ -80,20 +80,20 @@ namespace Class_interaction_Users
     public class CheckMail_and_Password
     {
         public CheckMail_and_Password() { }
-  
-     
+
+
         public string Password { get; set; }
 
         public string Employee_Mail { get; set; }
 
-        public CheckMail_and_Password( string password, string @Mail)
+        public CheckMail_and_Password(string password, string @Mail)
         {
-   
+
             Password = password;
 
             Employee_Mail = @Mail;
         }
-
+    }
 
 
 
@@ -105,20 +105,57 @@ namespace Class_interaction_Users
         public class CheckMails
         {
             public CheckMails() { }
-
-
             public Regis_users Users { get; set; }
-
-        //   public string Employee_Mail { get; set; }
-          
-
-            public CheckMails(Regis_users users/* string @Mail*/)
+            public CheckMails(Regis_users users)
             {
 
                 Users = users;
-
-               // Employee_Mail = @Mail;
             }
         }
-    }
+
+        [Serializable]
+        /// <summary>
+        /// Класс  для названия теста которые создали
+        /// </summary>
+        public class Test
+        {
+            public Test() { }
+            public int Id { get; set; }
+            public string Tests { get; set; }
+            public Test(int id,string tests)
+            {
+                Id = id;
+                Tests = tests;
+            }
+        }
+
+
+        [Serializable]
+        /// <summary>
+        /// Класс  для Test запоковываем
+        /// </summary>
+        public class Tests
+        {
+            public Tests() { }
+
+            public Test[] TEST { get; set; }
+
+            public Tests (Test[] test)
+            {
+                TEST = test;
+            }
+        }
+
+
+         [Serializable]
+        /// <summary>
+        /// Класс  для Tests запоковываем в List
+        /// </summary>
+        public class  Tests_Travel
+        {
+            public List<Tests> Test { get; set; } = new List<Tests>();
+
+        }
+
+    
 }

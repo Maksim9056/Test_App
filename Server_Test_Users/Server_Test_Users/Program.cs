@@ -97,8 +97,8 @@ namespace Server_Test_Users
                 FDictCommands.Add("001", new Action<byte[], GlobalClass, NetworkStream>(command.Registration_users));
                 FDictCommands.Add("002", new Action<byte[], GlobalClass, NetworkStream>(command.Registration_users));
                 FDictCommands.Add("003", new Action<byte[], GlobalClass, NetworkStream>(command.CheckMail_and_Passwords));
-                FDictCommands.Add("004", new Action<byte[], GlobalClass, NetworkStream>(command.Sampling_Users_Correspondence));
-                FDictCommands.Add("005", new Action<byte[], GlobalClass, NetworkStream>(command.Sampling_Messages_Correspondence));
+                FDictCommands.Add("004", new Action<byte[], GlobalClass, NetworkStream>(command.Check_test));
+                FDictCommands.Add("005", new Action<byte[], GlobalClass, NetworkStream>(command.Check_test));
                 FDictCommands.Add("006", new Action<byte[], GlobalClass, NetworkStream>(command.Select_Message_Friend));
                 FDictCommands.Add("007", new Action<byte[], GlobalClass, NetworkStream>(command.Search_Image));
                 FDictCommands.Add("008", new Action<byte[], GlobalClass, NetworkStream>(command.Searh_Friends));
