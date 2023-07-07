@@ -19,20 +19,12 @@ public partial class Администратор : ContentPage
   
         void PickerSelectedIndexChanged(object sender, EventArgs e)
         {
-
-         
-
-
-
             header.Text = $"Вы выбрали: {languagePicker.SelectedItem}";
         }
 
     private  async void header_SizeChanged(object sender, EventArgs e)
     {
-
-
         Task.Run(async () => await command.Check_Test(Ip_adress.Ip_adresss, "", "004")).Wait();
-
         if (CommandCL.Tests_Travel == null)
         {
 
@@ -42,7 +34,6 @@ public partial class Администратор : ContentPage
             if (CommandCL.Tests_Travel.Test.Count() == 0)
             {
                 await DisplayAlert("Уведомление", "Тестов нету !", "ОK");
-
             }
             else
             {
@@ -51,18 +42,21 @@ public partial class Администратор : ContentPage
                 {
                     strings[i] = CommandCL.Tests_Travel.Test[i].ToString();
                 }
-
-
                 for (int i = 0; i < strings.Length; i++)
                 {
                     languagePicker.Items.Add(strings[i]);
                 }
-
                 await DisplayAlert("Уведомление", "Тесты есть", "ОK");
             }
         }
        //.Add("1");
 
+    }
+
+    private async void CounterLog1_Clicked(object sender, EventArgs e)
+    {
+        await DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
+        await Navigation.PushAsync(new NewPage1());
     }
 }
 

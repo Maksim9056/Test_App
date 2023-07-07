@@ -187,8 +187,6 @@ namespace Client
                                                 }
                                                 else
                                                 {
-
-
                                                     var regis_Users = command.Travel_logout;
                                                     switch (regis_Users.Rechte)
                                                     {
