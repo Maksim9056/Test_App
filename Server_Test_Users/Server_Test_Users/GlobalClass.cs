@@ -6,11 +6,19 @@ using Class_interaction_Users;
 using Npgsql;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static Class_interaction_Users.CheckMail_and_Password;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Sqlite;
 
 namespace Server_Test_Users
 {
     internal class GlobalClass
     {
+        /// <summary>
+        /// Использование Entity Framework Core и LINQ
+        /// </summary>
+        public static bool NewCoreSQL = true;
+
         /// <summary>
         /// Тип Sql
         /// </summary>
@@ -45,10 +53,95 @@ namespace Server_Test_Users
 
 
 
-    /// <summary>
-    /// Посылаем клиенту 
-    /// </summary>
-    public Regis_users? Travel { get; set; }
+        /// <summary>
+        /// Посылаем клиенту 
+        /// </summary>
+        public Regis_users? Travel { get; set; }
+
+
+        /// <summary>
+        /// https://metanit.com/sharp/efcore/1.2.php
+        /// </summary>
+        public class ApplicationContext : DbContext
+        {
+            public DbSet<User> Users { get; set; } = null!;
+            public DbSet<Questions> Questions { get; set; } = null!;
+
+            public ApplicationContext()
+            {
+                // Database.EnsureDeleted(); // гарантируем, что бд удалена
+                Database.EnsureCreated(); // гарантируем, что бд будет созд
+                //Database.Migrate();  // миграция
+            }
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            {
+                switch (TypeSQL)
+                {
+                    //Postgres
+                    //IF NOT EXISTS
+                    case 1:
+                        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=test1;Username=postgres;Password=1");
+                        break;
+                    case 2:
+                        optionsBuilder.UseSqlite("Data Source=helloapp.db");
+                        break;
+                }
+            }
+        }
+
+
+        public void TestSQL()
+        {
+            // добавление данных
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // создаем два объекта User
+                User user1 = new User { Name = "Tom", Age = 33 };
+                User user2 = new User { Name = "Alice", Age = 26 };
+
+                // добавляем их в бд
+                db.Users.AddRange(user1, user2);
+                db.SaveChanges();
+            }
+            // получение данных
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // получаем объекты из бд и выводим на консоль
+                var users = db.Users.ToList();
+                Console.WriteLine("Users list:");
+                foreach (User u in users)
+                {
+                    Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                }
+            }
+
+
+            // добавление данных
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // создаем два объекта User
+                Questions Q1 = new Questions { Name = "Tom1", Answers = "33" };
+                Questions Q2 = new Questions { Name = "Alice1", Answers = "26" };
+
+                // добавляем их в бд
+                db.Questions.AddRange(Q1, Q2);
+                db.SaveChanges();
+            }
+            // получение данных
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // получаем объекты из бд и выводим на консоль
+                var Qu = db.Questions.ToList();
+                Console.WriteLine("Questions list:");
+                foreach (Questions u in Qu)
+                {
+                    Console.WriteLine($"{u.Id}.{u.Name} - {u.Answers}");
+                }
+            }
+
+        }
+
+
         /// <summary>
         /// Создает  базу данных 
         /// </summary>
@@ -116,6 +209,10 @@ namespace Server_Test_Users
                         break;
                     case 2:
 
+
+
+
+
                         break;
                     case 3:
                         break;
@@ -140,7 +237,8 @@ namespace Server_Test_Users
                     //Postgres
                     case 1:
                         string Sql = "Create table IF NOT EXISTS  Test (Id_test Serial not null CONSTRAINT PK_Id_Test PRIMARY KEY," +
-                            "Name_Test  varchar );";
+                            "Name_Test  varchar," +
+                            "test_id Serial );";
                         using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionStringPostGreSQL))
                         {
                             npgsqlConnection.Open();

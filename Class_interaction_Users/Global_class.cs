@@ -7,11 +7,29 @@ using System.Threading.Tasks;
 namespace Class_interaction_Users
 {
 
+
+    public class User
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+    }
+
+    public class Questions
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Answers { get; set; }
+    }
+
+
+
+
+
     /// <summary>
     /// Класс настройки конфигурации
     /// </summary>
     /// 
-
     public class Client
     {
         public string Ip_adress { get; set; }
@@ -20,6 +38,7 @@ namespace Class_interaction_Users
             Ip_adress = ip_adress;
         }
     }
+
     [Serializable]
     public class Seting
     {
@@ -95,9 +114,6 @@ namespace Class_interaction_Users
         }
     }
 
-
-
-
         [Serializable]
         /// <summary>
         /// Класс  для регестрации пользователей и прошедших авторизацию
@@ -108,7 +124,6 @@ namespace Class_interaction_Users
             public Regis_users Users { get; set; }
             public CheckMails(Regis_users users)
             {
-
                 Users = users;
             }
         }

@@ -20,34 +20,15 @@ namespace Server_Test_Users
                 @class.Check_login_amail(person3);
 #pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
 
-
-
-                if (@class.Travel == null)
-                {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        Regis_users regis_Users = new Regis_users(0, "", "", 0, "");
-                        JsonSerializer.Serialize<Regis_users>(ms, regis_Users);
-                        //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
-                        stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
-                    }
-                }
-                else
-                {
-                   if(@class.Tru_user == true)
-                   {
-                      using (MemoryStream ms = new MemoryStream())
-                      {
-                        JsonSerializer.Serialize<Regis_users>(ms, @class.Travel);
-                         //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
-                        stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
-                      }
-                   }
-
-               
-                }
                 // @class.Regis_users
-             
+                using (MemoryStream ms = new MemoryStream())
+                {
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
+                    JsonSerializer.Serialize<Regis_users>(ms, @class.Travel);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
+                              //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
             }
             catch(Exception ex)
             {
@@ -84,9 +65,6 @@ namespace Server_Test_Users
 #pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
                 @class.Regis_user(person3);
 #pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-
-
-
 
                 if (@class.Travel == null)
                 {

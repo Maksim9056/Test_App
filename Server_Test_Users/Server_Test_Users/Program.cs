@@ -5,6 +5,7 @@ using System.Threading;
 using Class_interaction_Users;
 using System.IO;
 using System.Text.Json;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace Server_Test_Users
 {
@@ -40,7 +41,9 @@ namespace Server_Test_Users
             {
                 GlobalClass globalClass = new GlobalClass();
                 SaveOpen();
-              
+
+                globalClass.TestSQL();
+
                 globalClass.Create_Database();
                
                 globalClass.CreateTable_Test();
