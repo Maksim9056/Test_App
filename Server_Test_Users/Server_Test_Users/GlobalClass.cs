@@ -49,7 +49,9 @@ namespace Server_Test_Users
         /// <summary>
         /// Отсылает тесты
         /// </summary>
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public Test[] Travels_test { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
 
 
 
@@ -65,7 +67,17 @@ namespace Server_Test_Users
         public class ApplicationContext : DbContext
         {
             public DbSet<User> Users { get; set; } = null!;
-            public DbSet<Questions> Questions { get; set; } = null!;
+            public DbSet<User_roles> User_Roles { get; set; } = null!;
+            public DbSet<Roles> Roles { get; set; } = null!;
+            public DbSet<Test_Questions> Test_Questions { get; set; } = null!;
+            public DbSet<Answer> Answers { get; set; } = null!;
+            public DbSet<Options> Questions { get; set; } = null!;
+
+            public DbSet<Test> Test { get; set; } = null!;
+            public DbSet<Exam> Exam { get; set; } = null!;
+            public DbSet<Exams> Exams { get; set; } = null!;
+
+            public DbSet<Save_results> Save_Results { get; set; } = null!;
 
             public ApplicationContext()
             {
@@ -80,7 +92,7 @@ namespace Server_Test_Users
                     //Postgres
                     //IF NOT EXISTS
                     case 1:
-                        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=test1;Username=postgres;Password=1");
+                        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Testdb;Username=postgres;Password=1");
                         break;
                     case 2:
                         optionsBuilder.UseSqlite("Data Source=helloapp.db");
@@ -92,52 +104,56 @@ namespace Server_Test_Users
 
         public void TestSQL()
         {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+
+            }
             // добавление данных
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                // создаем два объекта User
-                User user1 = new User { Name = "Tom", Age = 33 };
-                User user2 = new User { Name = "Alice", Age = 26 };
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    // создаем два объекта User
+            //    User user1 = new User { Name = "Tom", Age = 33 };
+            //    User user2 = new User { Name = "Alice", Age = 26 };
 
-                // добавляем их в бд
-                db.Users.AddRange(user1, user2);
-                db.SaveChanges();
-            }
+            //    // добавляем их в бд
+            //    db.Users.AddRange(user1, user2);
+            //    db.SaveChanges();
+            //}
             // получение данных
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                // получаем объекты из бд и выводим на консоль
-                var users = db.Users.ToList();
-                Console.WriteLine("Users list:");
-                foreach (User u in users)
-                {
-                    Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
-                }
-            }
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    // получаем объекты из бд и выводим на консоль
+            //    var users = db.Users.ToList();
+            //    Console.WriteLine("Users list:");
+            //    foreach (User u in users)
+            //    {
+            //   //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+            //    }
+            //}
 
 
-            // добавление данных
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                // создаем два объекта User
-                Questions Q1 = new Questions { Name = "Tom1", Answers = "33" };
-                Questions Q2 = new Questions { Name = "Alice1", Answers = "26" };
+            //// добавление данных
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    // создаем два объекта User
+            //    Questions Q1 = new Questions { Name = "Tom1", Answers = "33" };
+            //    Questions Q2 = new Questions { Name = "Alice1", Answers = "26" };
 
-                // добавляем их в бд
-                db.Questions.AddRange(Q1, Q2);
-                db.SaveChanges();
-            }
-            // получение данных
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                // получаем объекты из бд и выводим на консоль
-                var Qu = db.Questions.ToList();
-                Console.WriteLine("Questions list:");
-                foreach (Questions u in Qu)
-                {
-                    Console.WriteLine($"{u.Id}.{u.Name} - {u.Answers}");
-                }
-            }
+            //    // добавляем их в бд
+            //    db.Questions.AddRange(Q1, Q2);
+            //    db.SaveChanges();
+            //}
+            //// получение данных
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    // получаем объекты из бд и выводим на консоль
+            //    var Qu = db.Questions.ToList();
+            //    Console.WriteLine("Questions list:");
+            //    foreach (Questions u in Qu)
+            //    {
+            //        Console.WriteLine($"{u.Id}.{u.Name} - {u.Answers}");
+            //    }
+            //}
 
         }
 
@@ -355,54 +371,122 @@ namespace Server_Test_Users
 #pragma warning restore CS0219 // Переменная назначена, но ее значение не используется
 
                 //    string Check_User = $"Select from User Where Name_Employee and Name_Employee ={regis_Users.Employee_Mail}";
-                string Check_User = $"  Select * From Users where name_employee  = '{regis_Users.Name_Employee}'";
-                using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
-                {
-                    connection.Open();
-                    NpgsqlCommand command = new NpgsqlCommand(Check_User, connection);
-                    command.CommandText = Check_User;
-                    command.ExecuteNonQuery();
-                    NpgsqlDataReader sqReader = command.ExecuteReader();
 
-                    if (sqReader.HasRows == true)
+
+
+
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    var users = db.Users.Where(p => p.Name_Employee == regis_Users.Name_Employee);
+                    if (users == null)
                     {
 
-                        Exists_User = true;
-                        // Always call Read before accessing data.
-                        while (sqReader.Read())
-                        {
+                    }
+                    else
+                    {
 
+                        foreach (User user in users)
+                        {
+                            Exists_User = true;
+                            Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
                         }
                     }
                 }
+
+                //string Check_User = $"  Select * From Users where name_employee  = '{regis_Users.Name_Employee}'";
+                //using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                //{
+                //    connection.Open();
+                //    NpgsqlCommand command = new NpgsqlCommand(Check_User, connection);
+                //    command.CommandText = Check_User;
+                //    command.ExecuteNonQuery();
+                //    NpgsqlDataReader sqReader = command.ExecuteReader();
+
+                //    if (sqReader.HasRows == true)
+                //    {
+
+                //        Exists_User = true;
+                //        // Always call Read before accessing data.
+                //        while (sqReader.Read())
+                //        {
+
+                //        }
+                //    }
+                //}
+
+
                 DateTime dateTime = DateTime.Now;
-
-                if (Exists_User == false)
+                var data = $"{dateTime:F}";
+                // добавление данных
+                using (ApplicationContext db = new ApplicationContext())
                 {
-                    string sql = $"INSERT INTO Users (Name_Employee,passwords,rechte, employee_mail) VALUES ('{regis_Users.Name_Employee}','{regis_Users.Password}',{regis_Users.Rechte},'{regis_Users.Employee_Mail}');";
-                    using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
-                    {
-                        connection.Open();
-                        NpgsqlCommand command = new NpgsqlCommand(sql, connection);
-                        command.CommandText = sql;
-                        command.ExecuteNonQuery();
-                        string sq = "SELECT id, name_employee, passwords, rechte, datamess, employee_mail\r\n\tFROM public.users;";
-                        command.CommandText = sq;
-                        command.ExecuteNonQuery();
-                        NpgsqlDataReader sqReader = command.ExecuteReader();
+                    // создаем два объекта User
+                    User user1 = new User { Name_Employee = regis_Users.Name_Employee, Password = regis_Users.Password,  DataMess = data, Id_roles_users=regis_Users.Rechte,Employee_Mail = regis_Users.Employee_Mail };
+                  //  User user2 = new User { Name = "Alice", Age = 26 };
 
-                        while (sqReader.Read())
-                        {
-                            Travel = new Regis_users(Convert.ToInt32(sqReader["id"]), sqReader["Name_Employee"].ToString(), sqReader["passwords"].ToString(), Convert.ToInt32(sqReader["Rechte"]), sqReader["employee_mail"].ToString());
-                        }
-                        sqReader.Close();
+
+                    // добавляем их в бд
+                    db.Users.AddRange(user1);
+                    db.SaveChanges();
+                }
+
+                //using (ApplicationContext db = new ApplicationContext())
+                //{
+                //    // получаем объекты из бд и выводим на консоль
+                //    var users = db.Users.ToList();
+                //    Console.WriteLine("Users list:");
+                //    foreach (User u in users)
+                //    {
+                //        //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                //    }
+                //}
+
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    var users = db.Users.ToList();
+                    if (users == null)
+                    {
 
                     }
+                    else
+                    {
+
+                        foreach (User user in users)
+                        {
+                            Exists_User = true;
+                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, user.Id_roles_users, user.Employee_Mail);
+
+                            Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
+                        }
+                    }
                 }
-                else
-                {
-                    //   Travel = new Regis_users(0,"False" ,"",1,"");
-                }
+
+                //if (Exists_User == false)
+                //{
+                //    string sql = $"INSERT INTO Users (Name_Employee,passwords,rechte, employee_mail) VALUES ('{regis_Users.Name_Employee}','{regis_Users.Password}',{regis_Users.Rechte},'{regis_Users.Employee_Mail}');";
+                //    using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                //    {
+                //        connection.Open();
+                //        NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+                //        command.CommandText = sql;
+                //        command.ExecuteNonQuery();
+                //        string sq = "SELECT id, name_employee, passwords, rechte, datamess, employee_mail\r\n\tFROM public.users;";
+                //        command.CommandText = sq;
+                //        command.ExecuteNonQuery();
+                //        NpgsqlDataReader sqReader = command.ExecuteReader();
+
+                //        while (sqReader.Read())
+                //        {
+                //            Travel = new Regis_users(Convert.ToInt32(sqReader["id"]), sqReader["Name_Employee"].ToString(), sqReader["passwords"].ToString(), Convert.ToInt32(sqReader["Rechte"]), sqReader["employee_mail"].ToString());
+                //        }
+                //        sqReader.Close();
+
+                //    }
+                //}
+                //else
+                //{
+                //    //   Travel = new Regis_users(0,"False" ,"",1,"");
+                //}
 
             }
             catch (Exception E)
@@ -420,61 +504,110 @@ namespace Server_Test_Users
             try
             {
                 bool Check = false;
-                int Current_User;
-                string sqlExpressiol = $"SELECT * FROM Users  WHERE employee_mail = '{checkMail_And_Password.Employee_Mail}' and Passwords ='{checkMail_And_Password.Password}'";
-                using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+           //     int Current_User;
+
+                using (ApplicationContext db = new ApplicationContext())
                 {
-                    connection.Open();
-                    NpgsqlCommand command = new NpgsqlCommand(sqlExpressiol, connection);
-                    NpgsqlDataReader sqReader = command.ExecuteReader();
-                    if (sqReader.HasRows == true)
+                    var users = db.Users.Where(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password);
+                    if (users == null)
                     {
-                        Tru_user = true;
-                        while (sqReader.Read())
-                        {
-                            Current_User = Convert.ToInt32(sqReader["id"]);
-                            int Id = Convert.ToInt32(Current_User);
-                            Travel = new Regis_users(Id, sqReader["Name_Employee"].ToString(), sqReader["passwords"].ToString(), Convert.ToInt32(sqReader["Rechte"]), sqReader["employee_mail"].ToString());
-                        }
-                        sqReader.Close();
+
                     }
                     else
                     {
-                        Check = true;
+
+                        foreach (User user in users)
+                        {
+                           Check = true;
+                                  Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, user.Id_roles_users, user.Employee_Mail);
+
+                            Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
+                        }
                     }
-                    connection.Close();
                 }
 
-                if (Check == true)
+                if(Check == false) 
                 {
-                    string sqlExpressi = $"SELECT * FROM Users  WHERE Employee_Mail = '{checkMail_And_Password.Employee_Mail}'";
-                    using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                    using (ApplicationContext db = new ApplicationContext())
                     {
-                        connection.Open();
-                        NpgsqlCommand command = new NpgsqlCommand(sqlExpressi, connection);
-                        NpgsqlDataReader sqReader = command.ExecuteReader();
-                        //NpgsqlCommand __commandS = new NpgsqlCommand(sqlExpressi, connectio);
+                        var users = db.Users.Where(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password);
 
-                        if (sqReader.HasRows == true)
+                        if (users == null)
                         {
-                            Tru_user = true;
-                            // Always call Read before accessing data.
-                            while (sqReader.Read())
-                            {
-                                Travel = new Regis_users(0, "", "", 0, sqReader["Employee_Mail"].ToString());
-                            }
-                            sqReader.Close();
+
                         }
                         else
                         {
+                            foreach (User user in users)
+                            {
+                                // Check = true;
+                                Travel = new Regis_users(0, "", "", 0, user.Employee_Mail);
 
+                                Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
+                            }
                         }
+
                     }
                 }
                 else
                 {
-
+                  
                 }
+
+                //string sqlExpressiol = $"SELECT * FROM Users  WHERE employee_mail = '{checkMail_And_Password.Employee_Mail}' and Passwords ='{checkMail_And_Password.Password}'";
+                //using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                //{
+                //    connection.Open();
+                //    NpgsqlCommand command = new NpgsqlCommand(sqlExpressiol, connection);
+                //    NpgsqlDataReader sqReader = command.ExecuteReader();
+                //    if (sqReader.HasRows == true)
+                //    {
+                //        Tru_user = true;
+                //        while (sqReader.Read())
+                //        {
+                //            Current_User = Convert.ToInt32(sqReader["id"]);
+                //            int Id = Convert.ToInt32(Current_User);
+                //            Travel = new Regis_users(Id, sqReader["Name_Employee"].ToString(), sqReader["passwords"].ToString(), Convert.ToInt32(sqReader["Rechte"]), sqReader["employee_mail"].ToString());
+                //        }
+                //        sqReader.Close();
+                //    }
+                //    else
+                //    {
+                //        Check = true;
+                //    }
+                //    connection.Close();
+                //}
+
+                //if (Check == true)
+                //{
+                //    string sqlExpressi = $"SELECT * FROM Users  WHERE Employee_Mail = '{checkMail_And_Password.Employee_Mail}'";
+                //    using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                //    {
+                //        connection.Open();
+                //        NpgsqlCommand command = new NpgsqlCommand(sqlExpressi, connection);
+                //        NpgsqlDataReader sqReader = command.ExecuteReader();
+                //        //NpgsqlCommand __commandS = new NpgsqlCommand(sqlExpressi, connectio);
+
+                //        if (sqReader.HasRows == true)
+                //        {
+                //            Tru_user = true;
+                //            // Always call Read before accessing data.
+                //            while (sqReader.Read())
+                //            {
+                //                Travel = new Regis_users(0, "", "", 0, sqReader["Employee_Mail"].ToString());
+                //            }
+                //            sqReader.Close();
+                //        }
+                //        else
+                //        {
+
+                //        }
+                //    }
+                //}
+                //else
+                //{
+
+                //}
             }
             catch (Exception ex)
             {
@@ -487,68 +620,68 @@ namespace Server_Test_Users
             try
             {
 
-                Test[] tests = new Test[] { };
-                string sqlExpressil = $"SELECT  COUNT(*) AS rec_count FROM Test ";
-                int Id = 0;
-               
-                using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
-                {
-                    connection.Open();
-                    NpgsqlCommand command = new NpgsqlCommand(sqlExpressil, connection);
-                    NpgsqlDataReader sqReader = command.ExecuteReader();
-                    //NpgsqlCommand __commandS = new NpgsqlCommand(sqlExpressi, connectio);
+                //    Test[] tests = new Test[] { };
+                //    string sqlExpressil = $"SELECT  COUNT(*) AS rec_count FROM Test ";
+                //    int Id = 0;
 
-                    if (sqReader.HasRows == true)
-                    {
-                        Tru_user = true;
+                //    using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                //    {
+                //        connection.Open();
+                //        NpgsqlCommand command = new NpgsqlCommand(sqlExpressil, connection);
+                //        NpgsqlDataReader sqReader = command.ExecuteReader();
+                //        //NpgsqlCommand __commandS = new NpgsqlCommand(sqlExpressi, connectio);
 
-                        // Always call Read before accessing data.
-                         sqReader.Read();
-                            Id = Convert.ToInt32(sqReader["rec_count"]);
+                //        if (sqReader.HasRows == true)
+                //        {
+                //            Tru_user = true;
 
-                        
-                       
-                    }
-                    else
-                    {
+                //            // Always call Read before accessing data.
+                //             sqReader.Read();
+                //                Id = Convert.ToInt32(sqReader["rec_count"]);
 
-                    }
-                }
-                if (Id == 0)
-                {
-                    Travels_test = tests;
-                }
-                else
-                {
-                    Test[] test = new Test[Id];
-                    string sqlExpressi = $"SELECT * FROM Test  ";
-                    using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
-                    {
-                        connection.Open();
-                        NpgsqlCommand command = new NpgsqlCommand(sqlExpressi, connection);
-                        NpgsqlDataReader sqReader = command.ExecuteReader();
-                        if (sqReader.HasRows == true)
-                        {
-                            Tru_user = true;
 
-                            // Always call Read before accessing data.
-                            int i =0;
-                            while (sqReader.Read())
-                            {
-                                
-                                test[i] = new Test(Convert.ToInt32( sqReader["Id_test"]),Convert.ToString(sqReader["Name_Test"]));
-                                i++;
-                            }
 
-                            sqReader.Close();
-                        }
-                        else
-                        {
-                        }
-                    }
-                    Travels_test = test;
+                //        }
+                //        else
+                //        {
 
-                }
+                //        }
+                //    }
+                //    if (Id == 0)
+                //    {
+                //        Travels_test = tests;
+                //    }
+                //    else
+                //    {
+                //        Test[] test = new Test[Id];
+                //        string sqlExpressi = $"SELECT * FROM Test  ";
+                //        using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                //        {
+                //            connection.Open();
+                //            NpgsqlCommand command = new NpgsqlCommand(sqlExpressi, connection);
+                //            NpgsqlDataReader sqReader = command.ExecuteReader();
+                //            if (sqReader.HasRows == true)
+                //            {
+                //                Tru_user = true;
+
+                //                // Always call Read before accessing data.
+                //                int i =0;
+                //                while (sqReader.Read())
+                //                {
+
+                //                    test[i] = new Test(Convert.ToInt32( sqReader["Id_test"]),Convert.ToString(sqReader["Name_Test"]));
+                //                    i++;
+                //                }
+
+                //                sqReader.Close();
+                //            }
+                //            else
+                //            {
+                //            }
+                //        }
+                //        Travels_test = test;
+
+                //    }
             }
             catch(Exception ex)
             {

@@ -11,16 +11,38 @@ namespace Class_interaction_Users
     public class User
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
+        public string Name_Employee { get; set; }
+        public string Password { get; set; }
+        public string DataMess { get; set; }
+        public int Id_roles_users { get; set; }
+        public string Employee_Mail { get; set; }
+
     }
 
-    public class Questions
+
+    public class User_roles
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Answers { get; set; }
+        public int Id_roles{ get; set; }
+
+        public int User_id { get; set; }
     }
+
+
+    public class Roles
+    {
+        public int Id { get; set; }
+        public string Name_roles { get; set; }
+    }
+    //public class Questions
+    //{
+    //    public int Id { get; set; }
+    //    public string Name_Employee { get; set; }     
+    //    public string Password { get; set; }
+    //    public DateTime DataMess { get;set; }
+    //    public int Rechte { get; set; }
+    //    public string Employee_Mail { get; set; }
+    //}
 
 
 
@@ -92,6 +114,96 @@ namespace Class_interaction_Users
         }
     }
 
+    public class Test_Questions
+    {
+        public Test_Questions() { }
+        public int Id { get; set; }
+        public string Name_Test { get; set; }
+       public string  Questions { get; set; }
+
+        public string Answer_True { get; set; }
+        public string Grade_Quessions { get; set; }
+
+        public int Answer_id { get; set; }
+        //public Test_Questions(int id,string name_Test, string questions, string answer_True, string grade_Quessions, int answer_id)
+        //{
+        //    Id = id;
+        //    Name_Test = name_Test;
+        //    Questions = questions;
+        //    Answer_True = answer_True;
+        //    Grade_Quessions = grade_Quessions;
+        //    Answer_id = answer_id;
+        //}
+    }
+
+
+    public class Answer
+    {
+
+        public int Id { get; set; }
+
+        public string Answer_options { get; set; }
+
+        public int id_Questions { get; set; }
+    }
+
+    public class Options 
+    { 
+       public  int Id { get; set; }
+     public int Id_Answer { get; set; }
+     public string Test_Name { get; set; }
+     public string Questions { get; set;}
+     public  int Questions_Id { get; set; } 
+      public int Id_Test { get; set; }
+    }
+
+    public class Test 
+    { 
+       public int Id { get; set; }
+
+        public string Name_Test { get; set; }
+        public int Options_Id { get; set; }
+    }
+
+    public class Exam
+    {
+        public int Id { get; set; }
+
+        public string Name_Quesrts { get; set; }
+
+        public string User { get; set; }
+        public string Questtion { get; set; }
+
+        public int Users_Id_Name { get; set; }
+
+        public DateTime Data_of_Exam { get; set; }
+        public int Grade_Exam { get; set; }
+        public int Name_exam { get; set; }
+    }
+
+    public class Exams
+    {
+        public int Id { get; set; }
+        public string Name_exam { get; set; }
+
+
+        
+    }
+
+
+    public class Save_results
+    {
+        public int Id { get; set; }
+        public string Questions { get; set; }
+        public string Name_Test { get; set; }
+        public string Users_Answers_Questions { get; set; }
+       public int Exam_id { get; set; }
+        public DateTime Date_of_Result_Exam_Endings { get; set; }
+        public string Name_Users { get; set; }
+        public int Resukts_exam { get; set; }
+    }
+
+
     [Serializable]
     /// <summary>
     /// Класс Regis_users для регестрации пользователей
@@ -128,21 +240,21 @@ namespace Class_interaction_Users
             }
         }
 
-        [Serializable]
-        /// <summary>
-        /// Класс  для названия теста которые создали
-        /// </summary>
-        public class Test
-        {
-            public Test() { }
-            public int Id { get; set; }
-            public string Tests { get; set; }
-            public Test(int id,string tests)
-            {
-                Id = id;
-                Tests = tests;
-            }
-        }
+        //[Serializable]
+        ///// <summary>
+        ///// Класс  для названия теста которые создали
+        ///// </summary>
+        //public class Test
+        //{
+        //    public Test() { }
+        //    public int Id { get; set; }
+        //    public string Tests { get; set; }
+        //    public Test(int id,string tests)
+        //    {
+        //        Id = id;
+        //        Tests = tests;
+        //    }
+        //}
 
 
         [Serializable]
@@ -171,6 +283,8 @@ namespace Class_interaction_Users
             public List<Tests> Test { get; set; } = new List<Tests>();
 
         }
+
+
 
     
 }

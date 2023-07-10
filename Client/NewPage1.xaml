@@ -9,10 +9,10 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
      
-        <Entry x:Name="nameEntry2" FontSize="16"
+        <Entry x:Name="nameEntrу4" FontSize="16"
              Placeholder ="Введите пароль"
              Margin="10"
-             TextChanged="nameEntry2_TextChanged"
+             TextChanged="nameEntrу4_TextChanged"
              VerticalOptions="Center"
              HorizontalOptions="Center"
              HeightRequest="20"
@@ -22,10 +22,10 @@
 
 
         <Button
-                x:Name="CounterLog1"
+                x:Name="CounterLog12"
                  Text="Создать тест"
                  SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="CounterLog1_Clicked"
+                Clicked="CounterLog12_Clicked"
                  VerticalOptions="Start"
                 HorizontalOptions="CenterAndExpand"
                 FontSize="16" HeightRequest="10"
