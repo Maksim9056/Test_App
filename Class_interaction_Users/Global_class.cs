@@ -7,28 +7,54 @@ using System.Threading.Tasks;
 namespace Class_interaction_Users
 {
 
-
+    /// <summary>
+    /// Пользователь
+    /// </summary>
     public class User
     {
+        /// <summary>
+        /// Id пользователя
+        /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// Имя пользователя или работника
+        /// </summary>
         public string Name_Employee { get; set; }
+        /// <summary>
+        /// Пароль 
+        /// </summary>
         public string Password { get; set; }
+        /// <summary>
+        /// Дата
+        /// </summary>
         public string DataMess { get; set; }
+        /// <summary>
+        /// id роли 
+        /// </summary>
         public int Id_roles_users { get; set; }
+        /// <summary>
+        /// Почта
+        /// </summary>
         public string Employee_Mail { get; set; }
 
     }
 
 
+   /// <summary>
+   /// Для ролей у пользователей  зарегистрировались
+   /// </summary>
     public class User_roles
     {
+       
         public int Id { get; set; }
         public int Id_roles{ get; set; }
 
         public int User_id { get; set; }
     }
 
-
+   /// <summary>
+   /// Для название ролей и id
+   /// </summary>
     public class Roles
     {
         public int Id { get; set; }
@@ -114,16 +140,40 @@ namespace Class_interaction_Users
         }
     }
 
+
+
+
+    /// <summary>
+    ///Тест вопросами
+    /// </summary>
     public class Test_Questions
     {
         public Test_Questions() { }
-        public int Id { get; set; }
-        public string Name_Test { get; set; }
-       public string  Questions { get; set; }
 
+        /// <summary>
+        ///Id  Тест вопросами
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
+        /// Названия теста
+        /// </summary>
+        public string Name_Test { get; set; }
+        /// <summary>
+        /// Вопросы
+        /// </summary>
+       public string  Questions { get; set; }
+       /// <summary>
+       /// Правильный ответ
+       /// </summary>
         public string Answer_True { get; set; }
+        /// <summary>
+        /// Оценка
+        /// </summary>
         public string Grade_Quessions { get; set; }
 
+       /// <summary>
+       /// Выборка вопросов несколько
+       /// </summary>
         public int Answer_id { get; set; }
         //public Test_Questions(int id,string name_Test, string questions, string answer_True, string grade_Quessions, int answer_id)
         //{
@@ -136,17 +186,25 @@ namespace Class_interaction_Users
         //}
     }
 
-
+    /// <summary>
+    /// Ответ
+    /// </summary>
     public class Answer
     {
 
         public int Id { get; set; }
 
+       /// <summary>
+       /// Ответ
+       /// </summary>
         public string Answer_options { get; set; }
 
         public int id_Questions { get; set; }
     }
 
+   /// <summary>
+   /// Параметры
+   /// </summary>
     public class Options 
     { 
        public  int Id { get; set; }
@@ -157,6 +215,9 @@ namespace Class_interaction_Users
       public int Id_Test { get; set; }
     }
 
+    /// <summary>
+    ///Название теста
+    /// </summary>
     public class Test 
     { 
        public int Id { get; set; }
@@ -165,6 +226,9 @@ namespace Class_interaction_Users
         public int Options_Id { get; set; }
     }
 
+    /// <summary>
+    /// Экзамен
+    /// </summary>
     public class Exam
     {
         public int Id { get; set; }
@@ -181,6 +245,9 @@ namespace Class_interaction_Users
         public int Name_exam { get; set; }
     }
 
+   /// <summary>
+   /// Название экзамена
+   /// </summary>
     public class Exams
     {
         public int Id { get; set; }
@@ -191,6 +258,9 @@ namespace Class_interaction_Users
     }
 
 
+   /// <summary>
+   /// Сохраняет результат экзамена
+   /// </summary>
     public class Save_results
     {
         public int Id { get; set; }
