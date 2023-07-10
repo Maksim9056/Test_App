@@ -223,7 +223,18 @@ public partial class Вход_в_учетную_запись : ContentPage
     /// </summary>
     private void nameEntry4_TextChanged(object sender, TextChangedEventArgs e)
     {
-        Rechte = nameEntry4.Text;
+        //Исправим вместо 1 будет список должностей а затем id получит!
+       // Rechte = nameEntry4.Text;
+    }
+
+    private void header_SizeChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void languagePicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
 }
 

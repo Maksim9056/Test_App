@@ -48,16 +48,35 @@
              Keyboard ="Text"
         />
 
-        <Entry x:Name="nameEntry4" FontSize="16"
-             Placeholder ="Дать  Разрешение пиши 1 если нет 0"
-             Margin="30"
-             TextChanged="nameEntry4_TextChanged"
-             VerticalOptions="Center"
+        <StackLayout Padding="10 " Margin="10">
+            
+            <Label x:Name="header" Text="Выберите Должность" FontSize="16"
+               VerticalOptions="Center"
              HorizontalOptions="Center"
              HeightRequest="20"
              WidthRequest="310"
-             Keyboard ="Text"
-        />
+                       SizeChanged="header_SizeChanged"
+                                Margin="10"
+
+                   
+                       />
+            <Picker x:Name="languagePicker" Title = "Должность"
+                SelectedIndexChanged="languagePicker_SelectedIndexChanged"
+                        VerticalOptions="Center"
+             HorizontalOptions="Center"
+             HeightRequest="20"
+             WidthRequest="310"
+                    FontSize="20"
+                   Margin="10"
+
+                    >
+                <Picker.Items>
+                    
+                </Picker.Items>
+            </Picker>
+           
+        </StackLayout>
+      
         <Button 
             Text="Зарегистроваться"
             Clicked="Button_Clicked"
