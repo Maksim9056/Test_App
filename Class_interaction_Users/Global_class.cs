@@ -47,9 +47,9 @@ namespace Class_interaction_Users
     {
        
         public int Id { get; set; }
-        public int Id_roles{ get; set; }
+        public Roles Id_roles { get; set; }
 
-        public int User_id { get; set; }
+        public User User_id { get; set; }
     }
 
    /// <summary>

@@ -168,6 +168,8 @@ public partial class Вход_в_учетную_запись : ContentPage
                                                 await DisplayAlert("Уведомление", "Пользователь зарегистровался!", "ОK");
                                                 //Выводим успешная регистрация и закрываем эту страницу и преходи на вход!
                                                 await Navigation.PushAsync(new MainPage());
+                                             
+                                   
 
                                             }
                                             else
@@ -260,10 +262,36 @@ public partial class Вход_в_учетную_запись : ContentPage
             }
             for (int i = 0; i < strings.Length; i++)
             {
+
                 languagePicker1.Items.Add(strings[i]);
+
             }
+
             await DisplayAlert("Уведомление", "Роль есть", "ОK");
         }
+    }
+
+    private void ContentPage_Loaded(System.Object sender, System.EventArgs e)
+    {
+
+        Application.Current.MainPage.Window.Width = 413.8d;
+        Application.Current.MainPage.Window.Height = 520.8d;
+
+        Application.Current.MainPage.Window.MinimumWidth = 413.8d;
+        Application.Current.MainPage.Window.MinimumHeight = 520.8d;
+
+        Application.Current.MainPage.Window.MaximumWidth = 413.8d;
+        Application.Current.MainPage.Window.MaximumHeight = 520.8d;
+    }
+
+    private void Button_Clicked_1(System.Object sender, System.EventArgs e)
+    {
+        // Создание NavigationPage с главной страницей
+        var mainPage = new MainPage();
+        var navigationPage = new NavigationPage(mainPage);
+
+        Application.Current.MainPage = navigationPage;
+
     }
 }
 

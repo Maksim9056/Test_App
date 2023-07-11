@@ -5,6 +5,9 @@ using System.Text.Json;
 using System.Text;
 using System.Xml;
 using System.Text.RegularExpressions;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
+using Microsoft.Maui.Platform;
 
 namespace Client
 {
@@ -226,13 +229,35 @@ namespace Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async  void CounterBtn_Clicked_1(object sender, EventArgs e)
+        private   void CounterBtn_Clicked_1(object sender, EventArgs e)
         {
-           //  вход_В_Учетную_Запись =new();
-            await Navigation.PushAsync(new Вход_в_учетную_запись());
-           //вход_В_Учетную_Запись.GetVisualElementWindow().Content.CaptureAsync();
-           //Открывает
-           //  вход_В_Учетную_Запись.DisplayAlert(Title,"Открывает","");
+
+
+            // Создание NavigationPage с главной страницей
+            var mainPage = new Вход_в_учетную_запись();
+            var navigationPage = new NavigationPage(mainPage);
+
+            Application.Current.MainPage = navigationPage;
+
+
+
+
+            //// Создание NavigationPage с главной страницей
+            //var mainPage = new MainPage();
+            //var navigationPage = new NavigationPage(mainPage);
+
+            //// Установка NavigationPage в качестве главной страницы приложения
+
+            //  вход_В_Учетную_Запись =new();
+            // INavigation navigation = new.Navigation;
+
+            // Переход на предыдущую страницу
+
+            //   await navigation.PopAsync();
+
+            //вход_В_Учетную_Запись.GetVisualElementWindow().Content.CaptureAsync();
+            //Открывает
+            //  вход_В_Учетную_Запись.DisplayAlert(Title,"Открывает","");
         }
 
         private void nameEntry_TextChanged_1(object sender, TextChangedEventArgs e)
@@ -240,8 +265,23 @@ namespace Client
         }
 
         private void nameEntry9_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        { 
             Mail = nameEntry9.Text;
+
+        }
+
+        private void ContentPage_Loaded(System.Object sender, System.EventArgs e)
+        {
+            //  Application.Current.MainPage.SetValue(NavigationPage.HasNavigationBarProperty, false);
+            //    Application.Current.MainPage.SetValue(NavigationPage.HasBackButtonProperty, false);
+            Application.Current.MainPage.Window.Width = 530.8d;
+            Application.Current.MainPage.Window.Height = 650.8d;
+
+            Application.Current.MainPage.Window.MinimumWidth = 530.8d;
+            Application.Current.MainPage.Window.MinimumHeight = 650.8d;
+
+            Application.Current.MainPage.Window.MaximumWidth = 530.8d;
+            Application.Current.MainPage.Window.MaximumHeight = 650.8d;
 
         }
     }
