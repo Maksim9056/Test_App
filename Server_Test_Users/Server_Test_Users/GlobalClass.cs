@@ -9,6 +9,7 @@ using static Class_interaction_Users.CheckMail_and_Password;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Server_Test_Users
 {
@@ -36,6 +37,9 @@ namespace Server_Test_Users
 
 
 
+
+
+       public  int Count_Roles { get; set; }
 
         /// <summary>
         /// Отсылает клиенту ответ 
@@ -108,17 +112,59 @@ namespace Server_Test_Users
             {
 
             }
-            // добавление данных
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    // создаем два объекта User
-            //    User user1 = new User { Name = "Tom", Age = 33 };
-            //    User user2 = new User { Name = "Alice", Age = 26 };
 
-            //    // добавляем их в бд
-            //    db.Users.AddRange(user1, user2);
-            //    db.SaveChanges();
-            //}
+
+            int Count_roles = 0;
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // получаем объекты из бд и выводим на консоль
+                var users = db.Roles.Count();
+                Count_roles = users;
+                // Console.WriteLine("Users list:");
+                //foreach (int  u in users)
+                //{
+                //    //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                //}
+
+            }
+            if (Count_roles == 1)
+            {
+
+            }
+            else
+            {
+
+
+                // добавление данных
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // создаем два объекта User
+
+                    Roles user1 = new Roles { Name_roles = "Admin" };
+                    // добавляем их в бд
+                    db.Roles.AddRange(user1);
+                    db.SaveChanges();
+                }
+
+
+                string Email = "Admin@Admin.ru";
+
+                DateTime dateTime = DateTime.Now;
+                var data = $"{dateTime:F}";
+                
+                // добавление данных
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // создаем два объекта User
+
+                    User user1 = new User { Name_Employee = "Admin"  ,Password = "Admin", DataMess = data,Id_roles_users =1, Employee_Mail = Email};
+
+
+                    // добавляем их в бд
+                    db.Users.AddRange(user1);
+                    db.SaveChanges();
+                }
+            }
             // получение данных
             //using (ApplicationContext db = new ApplicationContext())
             //{
@@ -460,7 +506,7 @@ namespace Server_Test_Users
                         }
                     }
                 }
-
+                /*
                 //if (Exists_User == false)
                 //{
                 //    string sql = $"INSERT INTO Users (Name_Employee,passwords,rechte, employee_mail) VALUES ('{regis_Users.Name_Employee}','{regis_Users.Password}',{regis_Users.Rechte},'{regis_Users.Employee_Mail}');";
@@ -486,7 +532,7 @@ namespace Server_Test_Users
                 //else
                 //{
                 //    //   Travel = new Regis_users(0,"False" ,"",1,"");
-                //}
+                //}*/
 
             }
             catch (Exception E)
@@ -619,7 +665,7 @@ namespace Server_Test_Users
         {
             try
             {
-
+             /*
                 //    Test[] tests = new Test[] { };
                 //    string sqlExpressil = $"SELECT  COUNT(*) AS rec_count FROM Test ";
                 //    int Id = 0;
@@ -682,12 +728,53 @@ namespace Server_Test_Users
                 //        Travels_test = test;
 
                 //    }
+                */
+                
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
 
             }
+        }
+
+        //Roles
+        public void Check_Roles()
+        {
+            int Count_roles = 0;
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // получаем объекты из бд и выводим на консоль
+                var users = db.Roles.Count();
+                Count_roles =users;
+               // Console.WriteLine("Users list:");
+                //foreach (int  u in users)
+                //{
+
+                //    //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                //}
+            }
+
+
+            if (Count_roles == 1)
+            {
+
+            }
+            else
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // получаем объекты из бд и выводим на консоль
+                    var users = db.Roles.ToList();
+                    Console.WriteLine("Users list:");
+                    foreach (Roles u in users)
+                    {
+
+                        //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                    }
+                }
+            }
+            Count_Roles = Count_roles;
         }
     }
 }

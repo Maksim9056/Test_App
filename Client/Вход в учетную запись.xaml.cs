@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text;
 using TextChangedEventArgs = Microsoft.Maui.Controls.TextChangedEventArgs;
 using System.Text.RegularExpressions;
-//using PushKit;
+
 
 namespace Client;
 
@@ -227,14 +227,43 @@ public partial class Вход_в_учетную_запись : ContentPage
        // Rechte = nameEntry4.Text;
     }
 
-    private void header_SizeChanged(object sender, EventArgs e)
+    private  void header_SizeChanged(object sender, EventArgs e)
     {
-
+      
     }
 
     private void languagePicker_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+        
+    }
+
+    private  void languagePicker_ParentChanged(object sender, EventArgs e)
+    {
+    
+    }
+
+    private async void languagePicker1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Task.Run(async () => await command.Get_Image(Ip_adress.Ip_adresss, "", "006")).Wait();
+        var Client = CommandCL.Roles_Accept_Client;
+        if (Client.Test.Count() == 1)
+        {
+            await DisplayAlert("Уведомление", "Ролей нет!", "ОK");
+        }
+        else
+        {
+            string[] strings = new string[CommandCL.Roles_Accept_Client.Test.Count()];
+            for (int i = 0; i < strings.Length; i++)
+            {
+                strings[i] = CommandCL.Roles_Accept_Client.Test[i].ToString();
+            }
+            for (int i = 0; i < strings.Length; i++)
+            {
+                languagePicker1.Items.Add(strings[i]);
+            }
+            await DisplayAlert("Уведомление", "Роль есть", "ОK");
+        }
     }
 }
 

@@ -150,8 +150,33 @@ namespace Server_Test_Users
         {
         }
 
-        public void Select_Message_Friend(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        public void Select_job_title(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+            @class.Check_Roles();
+
+
+            if (@class.Count_Roles == 1)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    Roles[] roles = new Roles[] { };
+                    
+                    Roles_Travel roles_Travel= new Roles_Travel(roles);
+                    JsonSerializer.Serialize<Roles_Travel>(ms, roles_Travel);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+            else
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    Tests test = new Tests(@class.Travels_test);
+                    JsonSerializer.Serialize<Tests>(ms, test);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+            //Проверяем должности  какие есть и отправляем клиенту 
+
         }
 
         public void Update_Message(byte[] arg1, GlobalClass @class, NetworkStream stream)

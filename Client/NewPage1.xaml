@@ -6,20 +6,31 @@
     <VerticalStackLayout>
         <Label 
             Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            VerticalOptions="Fill" 
+            HorizontalOptions="Fill" />
      
-        <Entry x:Name="nameEntrу4" FontSize="16"
-             Placeholder ="Введите пароль"
+        <Entry x:Name="nameEntrу5" FontSize="16"
+             Placeholder ="Введите вопросы"
              Margin="10"
-             TextChanged="nameEntrу4_TextChanged"
-             VerticalOptions="Center"
-             HorizontalOptions="Center"
+             TextChanged="nameEntrу5_TextChanged"
+               
+             VerticalOptions="Fill"
+             HorizontalOptions="Fill"
              HeightRequest="20"
              WidthRequest="310"
              Keyboard ="Text"
         />
-
+        
+        <Entry x:Name="nameEntrу9" FontSize="16"
+             Placeholder ="Введите ответ"
+             Margin="10"
+             TextChanged="nameEntrу4_TextChanged"
+             VerticalOptions="Fill"
+             HorizontalOptions="Fill"
+             HeightRequest="20"
+             WidthRequest="310"
+             Keyboard ="Text"
+        />
 
         <Button
                 x:Name="CounterLog12"
@@ -32,6 +43,32 @@
                 WidthRequest="150"
                 Margin="10"
                 Padding="10"
-             />
+        />
+        <Button
+                x:Name="CounterLog13"
+                 Text="Посмотреть список вопросов"
+                 SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="CounterLog13_Clicked"
+                 VerticalOptions="Start"
+                HorizontalOptions="CenterAndExpand"
+                FontSize="16" HeightRequest="10"
+                WidthRequest="150"
+                Margin="10"
+                Padding="10"
+        />
+        
+        <Button
+                x:Name="CounterLog14"
+                 Text="Посмотреть список ответов"
+                 SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="CounterLog13_Clicked"
+                 VerticalOptions="Start"
+                HorizontalOptions="CenterAndExpand"
+                FontSize="16" HeightRequest="10"
+                WidthRequest="150"
+                Margin="10"
+                Padding="10"
+        />
+
     </VerticalStackLayout>
 </ContentPage>

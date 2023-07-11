@@ -59,6 +59,7 @@ namespace Class_interaction_Users
     {
         public int Id { get; set; }
         public string Name_roles { get; set; }
+     
     }
     //public class Questions
     //{
@@ -69,6 +70,30 @@ namespace Class_interaction_Users
     //    public int Rechte { get; set; }
     //    public string Employee_Mail { get; set; }
     //}
+   
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Roles_Travel 
+    {
+        Roles_Travel() { }
+         Roles[] Roles { get; set; } 
+        public Roles_Travel(Roles[] roles)
+        {
+            Roles = roles;
+        }   
+    }
+
+
+    /// <summary>
+    /// Принемает на клиенте при регистрации 
+    /// </summary>
+    public class Roles_Accept_Client
+    {  
+        public List<Roles_Travel> Test { get; set; } = new List<Roles_Travel>();
+    }
 
 
 
@@ -252,9 +277,6 @@ namespace Class_interaction_Users
     {
         public int Id { get; set; }
         public string Name_exam { get; set; }
-
-
-        
     }
 
 

@@ -2,62 +2,77 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.MainPage"
-                         Title="Вход_в_учетную_запись">
+              Title="Вход в учетную запись" >
     <ScrollView>
         <VerticalStackLayout
-            Spacing="25"
-            VerticalOptions="Fill">
+           
+         >
+            <Grid  Padding="20">
+                <Border Stroke="Gray" BackgroundColor="White" WidthRequest="450" HeightRequest="530"  >
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20" />
+                    </Border.StrokeShape>
+                    <StackLayout  >
+                        <Entry x:Name="nameEntry9" FontSize="22"
+                         TextChanged="nameEntry9_TextChanged"
+                         Placeholder ="Введите электроную почту"
+                         Keyboard="Email"
+                         Margin="10, 190, -0, -4"
+                         VerticalOptions="Fill"
+                         HorizontalOptions="Fill"
+                         HeightRequest="60"
+                         WidthRequest="370"
+                   
+                         />
 
-            <Entry x:Name="nameEntry9" FontSize="22"
-              TextChanged="nameEntry9_TextChanged"
-              Placeholder ="Введите электроную почту"
-              Keyboard="Email"
-             Margin="30"
-             VerticalOptions="Center"
-             HorizontalOptions="Center"
-             HeightRequest="20"
-             WidthRequest="310"
-             />
+                        <Entry x:Name="nameEntry1" FontSize="22"
+                         Placeholder ="Введите пароль"
+                         VerticalOptions="Fill"
+                         HorizontalOptions="Fill"
+                         HeightRequest="60"
+                         WidthRequest="370"
+                         TextChanged="nameEntry1_TextChanged"
+                         Keyboard ="Text"
+                         Margin="10, 100, -0, 0"
+                            
+                       />
 
-            <Entry x:Name="nameEntry1" FontSize="22"
-             Placeholder ="Введите пароль"
-             Margin="30"
-             VerticalOptions="Center"
-             HorizontalOptions="Center"
-             HeightRequest="20"
-             WidthRequest="310"
-             TextChanged="nameEntry1_TextChanged"
-             Keyboard ="Text"
-             />
+                <StackLayout>
 
+                      <Button
+                       x:Name="CounterLog"
+                       Text="Войти"
+                       SemanticProperties.Hint="Counts the number of times you click"
+                       Clicked="CounterLog_Clicked" 
+                       VerticalOptions= "Fill"
+                       HorizontalOptions="Fill"
+                       FontSize="18"
+                       HeightRequest="10"
+                       WidthRequest="160"
+                        Margin="30, 40, -190, -4"
+                       />
 
-            <Button
-                x:Name="CounterLog"
-                Text="Войти"
-                 SemanticProperties.Hint="Counts the number of times you click"
-                 Clicked="CounterLog_Clicked" 
-                 VerticalOptions="Start"
-                HorizontalOptions="CenterAndExpand"
-                FontSize="16" HeightRequest="10"
-                WidthRequest="150"
-                Margin="10"
-                Padding="10"
-             />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Регистрация"
-         
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="CounterBtn_Clicked_1"
-                VerticalOptions="End" HorizontalOptions="CenterAndExpand"
-                FontSize="16" HeightRequest="10"
-                WidthRequest="150"
-                  Margin="10"
-                Padding="10"
-             />
-
+                    <Button
+                     x:Name="CounterBtn"
+                     Text="Регистрация"
+                     SemanticProperties.Hint="Counts the number of times you click"
+                     Clicked="CounterBtn_Clicked_1"
+                       
+                     VerticalOptions="Fill"
+                     HorizontalOptions="Fill"
+                     FontSize="18" 
+                     HeightRequest="10"
+                     WidthRequest="160"
+                   
+                      Margin="-20, -40,180, 8"
+                     />
+                    </StackLayout>
+                
+                  </StackLayout>
+                </Border>
+            </Grid>
         </VerticalStackLayout>
+
     </ScrollView>
 
 </ContentPage>

@@ -72,6 +72,13 @@ namespace Class_interaction_Users
         //public Insert_Fille_Music Select_Fille_Music_id { get; set; }
 
 
+
+        /// <summary>
+        /// Роли 
+        /// </summary>
+        public static Roles_Accept_Client Roles_Accept_Client { get; set; }
+
+
         /// <summary>
         /// Класс авторизации и регистрации
         /// </summary>
@@ -269,17 +276,21 @@ namespace Class_interaction_Users
                         }
                         else
                         {
-                            ////Так обрабатываем картинки 
-                            //JObject details = JObject.Parse(responseData);
-                            //JToken Answe = details.SelectToken("Answe");
-                            //JToken List_Mess = details.SelectToken("List_Mess");
-                            //JToken AClass = details.SelectToken("Image");
-                            //AnsweIm = Answe;
-                            //List_Mess_countIm = List_Mess;
-                            //AClassIm = AClass;
 
-                            //UseImage_OutPut msgImage = JsonSerializer.Deserialize<UseImage_OutPut>(responseData);
-                            //UserImage = AClass;
+                        Roles_Accept_Client roles_Accept = JsonSerializer.Deserialize<Roles_Accept_Client>(responseData);
+                       
+                        
+                        Roles_Accept_Client = roles_Accept;
+                        ////Так обрабатываем картинки 
+                        //JObject details = JObject.Parse(responseData);
+                        //JToken Answe = details.SelectToken("Answe");
+                        //JToken List_Mess = details.SelectToken("List_Mess");
+                        //JToken AClass = details.SelectToken("Image");
+                        //AnsweIm = Answe;
+                        //List_Mess_countIm = List_Mess;
+                        //AClassIm = AClass;
+
+                        //UserImage = AClass;
                         }
                     }
                 }

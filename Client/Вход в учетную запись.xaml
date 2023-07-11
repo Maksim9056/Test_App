@@ -2,89 +2,103 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.Вход_в_учетную_запись"
-             Title="Регистрация">
-    <VerticalStackLayout>
-        <Entry x:Name="nameEntry3" FontSize="16"
-              TextChanged="nameEntry1_TextChanged_2"
-              Placeholder ="Введите имя"
-             VerticalOptions="Center"
-             HorizontalOptions="Center"
-             HeightRequest="20"
-             WidthRequest="310"
-              Keyboard="Text"
-              Margin="30"
-             />
+             Title ="Регистрация" BackgroundColor="White" >
 
-        <Entry x:Name="nameEntry" FontSize="16"
-              TextChanged="nameEntry_TextChanged"
-              Placeholder ="Введите электроную почту"
-              Keyboard="Email"
-              Margin="30"
-             VerticalOptions="Center"
-             HorizontalOptions="Center"
-             HeightRequest="20"
-             WidthRequest="310"
-             />
+    <VerticalStackLayout
+     Padding="5">
 
-        <Entry x:Name="nameEntry1" FontSize="16"
-             Placeholder ="Введите пароль"
-             Margin="30"
-             VerticalOptions="Center"
-             HorizontalOptions="Center"
-             HeightRequest="20"
-             WidthRequest="310"
-             TextChanged="nameEntry1_TextChanged"
-             Keyboard ="Text"
-        />
+        <Grid >
+            <Border Stroke="Gray" BackgroundColor="#e1e1e1" WidthRequest="400" HeightRequest="630">
+                
+                <StackLayout Padding="0" Margin="10" BackgroundColor="White" >
+                       
+                           <Entry x:Name="nameEntry3"
+                            FontSize="16"
+                            TextChanged="nameEntry1_TextChanged_2"
+                            Placeholder ="Введите имя"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            HeightRequest="20"
+                            WidthRequest="310"
+                            Keyboard="Text"
+                            Margin="30"
+                           />
 
-        <Entry x:Name="nameEntry2" FontSize="16"
-             Placeholder ="Введите пароль"
-             Margin="10"
-             TextChanged="nameEntry2_TextChanged"
-             VerticalOptions="Center"
-             HorizontalOptions="Center"
-             HeightRequest="20"
-             WidthRequest="310"
-             Keyboard ="Text"
-        />
+                         <Entry x:Name="nameEntry" FontSize="16"
+                          TextChanged="nameEntry_TextChanged"
+                          Placeholder ="Введите электроную почту"
+                          Keyboard="Email"
+                          Margin="30"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center"
+                          HeightRequest="20"
+                          WidthRequest="310"
+                          />
 
-        <StackLayout Padding="10 " Margin="10">
+                          <Entry x:Name="nameEntry1" FontSize="16"
+                           Placeholder ="Введите пароль"
+                           Margin="30"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           HeightRequest="20"
+                           WidthRequest="310"
+                           TextChanged="nameEntry1_TextChanged"
+                           Keyboard ="Text"
+                           />
+
+                          <Entry x:Name="nameEntry2" FontSize="16"
+                            Placeholder ="Введите пароль"
+                            Margin="10"
+                            TextChanged="nameEntry2_TextChanged"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            HeightRequest="20"
+                            WidthRequest="310"
+                            Keyboard ="Text"
+                          />
+        
+                   <StackLayout Padding="10 " Margin="10" >
             
-            <Label x:Name="header" Text="Выберите Должность" FontSize="16"
-               VerticalOptions="Center"
-             HorizontalOptions="Center"
-             HeightRequest="20"
-             WidthRequest="310"
-                       SizeChanged="header_SizeChanged"
-                                Margin="10"
-
-                   
-                       />
-            <Picker x:Name="languagePicker" Title = "Должность"
-                SelectedIndexChanged="languagePicker_SelectedIndexChanged"
+                       <Label x:Name="header"
+                        Text="Выберите Роль" 
+                              FontSize="16"
                         VerticalOptions="Center"
-             HorizontalOptions="Center"
-             HeightRequest="20"
-             WidthRequest="310"
-                    FontSize="20"
-                   Margin="10"
-
-                    >
-                <Picker.Items>
+                        HorizontalOptions="Center"
+                        HeightRequest="20"
+                        WidthRequest="310"
+                        SizeChanged="header_SizeChanged"
+                        Margin="10"
+                       />
+                        <Picker x:Name="languagePicker1" 
+                       SelectedIndexChanged ="languagePicker1_SelectedIndexChanged"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       HeightRequest="20"
+                       WidthRequest="310"
+                       FontSize="20"
+                       Margin="10"
+                       HandlerChanged="header_SizeChanged"
+                       ParentChanged="languagePicker_ParentChanged">
+                           <Picker.Items>
                     
-                </Picker.Items>
-            </Picker>
+                   
+                            </Picker.Items>
+                        </Picker>
            
-        </StackLayout>
+                   </StackLayout>
       
-        <Button 
-            Text="Зарегистроваться"
-            Clicked="Button_Clicked"
-            Margin="30"
-             VerticalOptions="Center"
-             HorizontalOptions="Center"
-             HeightRequest="20"
-             WidthRequest="190"
-        />
+                      <Button 
+                       Text="Зарегистроваться"
+                       Clicked="Button_Clicked"
+                       Margin="30"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       HeightRequest="20"
+                       WidthRequest="190"
+            
+                   />
+                </StackLayout>
+            </Border>
+         </Grid>
     </VerticalStackLayout>
 </ContentPage>

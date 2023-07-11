@@ -102,7 +102,7 @@ namespace Server_Test_Users
                 FDictCommands.Add("003", new Action<byte[], GlobalClass, NetworkStream>(command.CheckMail_and_Passwords));
                 FDictCommands.Add("004", new Action<byte[], GlobalClass, NetworkStream>(command.Check_test));
                 FDictCommands.Add("005", new Action<byte[], GlobalClass, NetworkStream>(command.Check_test));
-                FDictCommands.Add("006", new Action<byte[], GlobalClass, NetworkStream>(command.Select_Message_Friend));
+                FDictCommands.Add("006", new Action<byte[], GlobalClass, NetworkStream>(command.Select_job_title));
                 FDictCommands.Add("007", new Action<byte[], GlobalClass, NetworkStream>(command.Search_Image));
                 FDictCommands.Add("008", new Action<byte[], GlobalClass, NetworkStream>(command.Searh_Friends));
                 FDictCommands.Add("009", new Action<byte[], GlobalClass, NetworkStream>(command.Insert_Message));

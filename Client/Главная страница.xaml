@@ -2,12 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.Главная_страница"
-             Title="Главная_страница ">
+              Title="Главная_страница ">
     <VerticalStackLayout>
 
         <StackLayout Padding="8">
             <Label x:Name="header" Text="Выберите Тест" FontSize="18"
                        SizeChanged="header_SizeChanged"
+                
+                
                        />
             <Picker x:Name="languagePicker" Title = "Тест"
                 SelectedIndexChanged="PickerSelectedIndexChanged">
