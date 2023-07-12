@@ -17,7 +17,7 @@ namespace Testing
             string Return = "Вопросы?";
 
             Вопросы.Add(Return);
-            var Ad = " Вопросы ?";
+            var Ad = "Вопросы ?";
             Вопросы.Add(Ad);
 
             string[] вопросы = new string[Вопросы.Count()];
