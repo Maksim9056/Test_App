@@ -7,10 +7,10 @@
 
 
         <StackLayout Padding="8">
-            <Label x:Name="header" Text="Выберите Тест" FontSize="18"
+            <Label x:Name="header" Text="Выберит Тест" FontSize="18"
                        SizeChanged="header_SizeChanged"
                        />
-            <Picker x:Name="languagePicker" Title = "Тест"
+            <Picker x:Name="languagePicker" Title = "Тесты"
                 SelectedIndexChanged="PickerSelectedIndexChanged">
                 <Picker.Items>
 
@@ -19,13 +19,13 @@
 
             <Button
                     x:Name="CounterLog1"
-                    Text="Создать тест"
+                    Text="Создать вопросы"
                     SemanticProperties.Hint="Counts the number of times you click"
                     Clicked="CounterLog1_Clicked"
                     VerticalOptions="Start"
                     HorizontalOptions="CenterAndExpand"
                     FontSize="16" HeightRequest="10"
-                    WidthRequest="150"
+                    WidthRequest="320"
                     Margin="10"
                     Padding="10"
                    />

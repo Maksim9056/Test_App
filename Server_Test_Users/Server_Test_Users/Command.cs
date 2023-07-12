@@ -140,6 +140,24 @@ namespace Server_Test_Users
 
         public void Search_Image(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+
+            Questions person3 = JsonSerializer.Deserialize<Questions>(arg1);
+            @class.Insert_Questin(person3);
+
+         var Quest=   @class.questionss;
+
+
+
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                
+                Questionss List_Quest = new Questionss(Quest);
+                JsonSerializer.Serialize<Questionss>(ms, List_Quest);
+                stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+            }
+            /// person3;
+           // @class.Regis_user(person3);
         }
 
         public  void Search_Image_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)

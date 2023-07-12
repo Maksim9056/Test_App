@@ -72,7 +72,7 @@ namespace Class_interaction_Users
         //public Insert_Fille_Music Select_Fille_Music_id { get; set; }
 
 
-
+        public static Questionss_travel Questionss_Travel { get; set; }
         /// <summary>
         /// Роли 
         /// </summary>
@@ -340,16 +340,19 @@ namespace Class_interaction_Users
                         }
                         else
                         {
-                            ////Разбераем JObject и JToken удобно без обрезания серилизует байты
-                            //JObject details = JObject.Parse(responseData);
-                            //JToken Answe = details.SelectToken("List_Mess");
-                            //JToken List_Mess = details.SelectToken("Image");
-                            //List_Friends = List_Mess;
-                            ////UseImage_OutPut msgImage = JsonSerializer.Deserialize<UseImage_OutPut>(responseData);
-                            ////UserImage = AClass;
+
+
+                        Questionss_travel Questionss_TravelS = JsonSerializer.Deserialize<Questionss_travel>(responseData);
+                        Questionss_Travel = Questionss_TravelS;
+                        ////Разбераем JObject и JToken удобно без обрезания серилизует байты
+                        //JObject details = JObject.Parse(responseData);
+                        //JToken Answe = details.SelectToken("List_Mess");
+                        //JToken List_Mess = details.SelectToken("Image");
+                        //List_Friends = List_Mess;
+                        ////UserImage = AClass;
 
                         }
-                    }
+                }
                 }
                 catch (ArgumentNullException)
                 {

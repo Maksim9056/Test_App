@@ -55,7 +55,7 @@ public partial class Администратор : ContentPage
 
     private async void CounterLog1_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
+        //await DisplayAlert("Уведомление", "!", "ОK");
         await Navigation.PushAsync(new NewPage1());
     }
 }
