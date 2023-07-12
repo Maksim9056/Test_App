@@ -141,18 +141,15 @@ namespace Server_Test_Users
         public void Search_Image(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
 
-            Questions person3 = JsonSerializer.Deserialize<Questions>(arg1);
+            Questions? person3 = JsonSerializer.Deserialize<Questions>(arg1);
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Insert_Questin(person3);
-
-         var Quest=   @class.questionss;
-
-
-
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
 
             using (MemoryStream ms = new MemoryStream())
             {
                 
-                Questionss List_Quest = new Questionss(Quest);
+                Questionss List_Quest = new Questionss(@class.questionss);
                 JsonSerializer.Serialize<Questionss>(ms, List_Quest);
                 stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
             }

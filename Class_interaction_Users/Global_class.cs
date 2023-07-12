@@ -79,7 +79,8 @@ namespace Class_interaction_Users
 
     public class Questionss
     {
-        Questions[] Quest { get; set; }
+        Questionss() { }
+      public  Questions[] Quest { get; set; }
         public Questionss(Questions[] quest)
         {
             Quest = quest;

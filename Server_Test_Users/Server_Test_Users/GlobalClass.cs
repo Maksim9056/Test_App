@@ -66,7 +66,9 @@ namespace Server_Test_Users
         /// </summary>
         public Regis_users? Travel { get; set; }
 
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public Questions [] questionss { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
 
 
         /// <summary>
@@ -668,6 +670,7 @@ namespace Server_Test_Users
                 db.Question.AddRange(user1);
                 db.SaveChanges();
             }
+
             int Count = 0;
             using (ApplicationContext db = new ApplicationContext())
             {

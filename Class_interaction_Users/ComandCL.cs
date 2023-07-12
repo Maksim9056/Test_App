@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -95,6 +96,12 @@ namespace Class_interaction_Users
         ///// Отправки в телеграм в чат
         ///// </summary>
         public static Regis_users Travel_Regis_users_message { get; set; }
+
+
+        public static JToken Answer_True { get; set; }
+
+        public static JToken Questionss { get; set; }
+        public static JToken Answe { get; set; }
         //Функция считывания байт из потока и формирование единой строки
         public string Func_Read(Stream str, int length, TcpClient client)
             {
@@ -341,17 +348,24 @@ namespace Class_interaction_Users
                         else
                         {
 
-
-                        Questionss_travel Questionss_TravelS = JsonSerializer.Deserialize<Questionss_travel>(responseData);
-                        Questionss_Travel = Questionss_TravelS;
-                        ////Разбераем JObject и JToken удобно без обрезания серилизует байты
                         //JObject details = JObject.Parse(responseData);
+                        //JToken List_Mess = details.SelectToken("Quest");
+                        // Answe = List_Mess.SelectToken("Id");
+                        // Questionss = List_Mess.SelectToken("Questionss");
+                        // Answer_True = List_Mess.SelectToken("Answer_True");
+
+                        //ВЕЗЕНИЕ ДЕСЕРИЛИЗАЦИЯ ПОЛУЧИЛАСЬ
+                        Questionss roles_Accept = JsonSerializer.Deserialize<Questionss>(responseData);
+
+
+                     
+                        //Questionss_Travel = Questionss_TravelS;
+                        ////Разбераем JObject и JToken удобно без обрезания серилизует байты
                         //JToken Answe = details.SelectToken("List_Mess");
-                        //JToken List_Mess = details.SelectToken("Image");
                         //List_Friends = List_Mess;
                         ////UserImage = AClass;
 
-                        }
+                    }
                 }
                 }
                 catch (ArgumentNullException)

@@ -60,89 +60,111 @@ public partial class NewPage1 : ContentPage
 
     private async void CounterLog13_Clicked(object sender, EventArgs e)
     {
-        if (Вопрос == null)
+        try
         {
-            await DisplayAlert("Уведомление", "Вопросы пустой заполните поле!", "ОK");
-
-        }
-        else
-        {
-            if (string.IsNullOrEmpty(Вопрос))
+            if (Вопрос == null)
             {
                 await DisplayAlert("Уведомление", "Вопросы пустой заполните поле!", "ОK");
 
             }
             else
             {
-                if (Ответ == null)
+                if (string.IsNullOrEmpty(Вопрос))
                 {
-                    await DisplayAlert("Уведомление", "Ответ пустой заполните поле!", "ОK");
+                    await DisplayAlert("Уведомление", "Вопросы пустой заполните поле!", "ОK");
 
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(Ответ))
+                    if (Ответ == null)
                     {
                         await DisplayAlert("Уведомление", "Ответ пустой заполните поле!", "ОK");
 
                     }
                     else
                     {
-                        Вопросы.Add(Вопрос);
-
-                        Ответы.Add(Ответ);
-                        //FileFS обьявляем для отправки на сервер
-                        string FileFS = "";
-                        //Обьявляем MemoryStream 
-                        using (MemoryStream memoryStream = new MemoryStream())
+                        if (string.IsNullOrEmpty(Ответ))
                         {
-                            //Заполняем класс Questions для отправки на сервер
-                            Questions questions = new Questions { Questionss = Вопросы[0], Answer_True = Ответы[0] };
-                            //Серелизуем класс CheckMail_and_Password для отправки на сервер
-                            JsonSerializer.Serialize<Questions>(memoryStream, questions);
-                            //Декодировали в строку  memoryStream    класс запоаковали в json строку
-                            FileFS = Encoding.Default.GetString(memoryStream.ToArray());
-                            Вопросы = null;
-                            Ответы = null;
-                            Task.Run(async () => await command.Get_Image_Friends(Ip_adress.Ip_adresss, FileFS, "007")).Wait();
+                            await DisplayAlert("Уведомление", "Ответ пустой заполните поле!", "ОK");
 
-                       
-                            await DisplayAlert("Уведомление", "Вопросы и ответ добавлен!", "ОK");
+                        }
+                        else
+                        {
+                            Вопросы.Add(Вопрос);
 
-                            string[] strings = new string[CommandCL.Questionss_Travel.Questionsses.Count()];
-                            for (int i = 0; i < strings.Length; i++)
+                            Ответы.Add(Ответ);
+                            //FileFS обьявляем для отправки на сервер
+                            string FileFS = "";
+                            //Обьявляем MemoryStream 
+                            using (MemoryStream memoryStream = new MemoryStream())
                             {
-                                strings[i] = CommandCL.Questionss_Travel.Questionsses[i].ToString();
-                            }
-                            for (int i = 0; i < strings.Length; i++)
-                            {
-                                usersList.ItemsSource =strings[i];
-                            }
+                                //Заполняем класс Questions для отправки на сервер
+                                Questions questions = new Questions { Questionss = Вопросы[0], Answer_True = Ответы[0] };
+                                //Серелизуем класс CheckMail_and_Password для отправки на сервер
+                                JsonSerializer.Serialize<Questions>(memoryStream, questions);
+                                //Декодировали в строку  memoryStream    класс запоаковали в json строку
+                                FileFS = Encoding.Default.GetString(memoryStream.ToArray());
+                                Вопросы = null;
+                                Ответы = null;
+                                Task.Run(async () => await command.Get_Image_Friends(Ip_adress.Ip_adresss, FileFS, "007")).Wait();
 
-                            usersList.ItemsSource = ;
-                            usersList.
-                            nameEntrу5.Text = null;
-                            nameEntrу9.Text = null;
-                            Вопрос = null;
-                            Ответ = null;
+                                var True = CommandCL.Answer_True;
+                                var Trues = CommandCL.Questionss;
+                                var Truess =  CommandCL.Answe;
+
+                              
+
+                                //Questions[] s = new Questions[] {   };
+                                //s[Truess].Questionss = Trues;
+
+
+                                string[] strings = new string[CommandCL.Questionss_Travel.Questionsses.Count()];
+                                for (int i = 0; i < strings.Length; i++)
+                                {
+                                    strings[i] = CommandCL.Questionss_Travel.Questionsses[i].ToString();
+                                }
+
+                                Questionss[] questionsses = new Questionss[CommandCL.Questionss_Travel.Questionsses.Count()];
+                                for (int i = 0; i < strings.Length; i++)
+                                {
+                                    questionsses[i] = CommandCL.Questionss_Travel.Questionsses[i];
+                                }
+                                for (int i = 0; i < questionsses.Length; i++)
+                                {
+                                    usersList.ItemsSource = questionsses[i].Quest;
+
+                                }
+                                await DisplayAlert("Уведомление", "Вопросы и ответ добавлен!", "ОK");
+
+                                //  usersList.ItemsSource = ;
+                                // usersList.
+                                nameEntrу5.Text = "";
+                                nameEntrу9.Text = "";
+
+                            }
                         }
                     }
                 }
             }
-            //string[][] вопросы = new string[Вопросы.Keys][Вопросы.Values;)] {};
-
-            //for (int i = 0; i < Вопросы.Count(); i++)
-            //{
-            //    вопросы[i] = Вопросы[i];
-            //}
-
-            //Вопросы.Add();
-
-            //for (int i = 0; i < вопросы.Length; i++)
-            //{
-            //    Console.WriteLine(вопросы[i]);
-            //}
         }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Уведомление", ex.Message, "ОK");
+        }
+        //string[][] вопросы = new string[Вопросы.Keys][Вопросы.Values;)] {};
+
+        //for (int i = 0; i < Вопросы.Count(); i++)
+        //{
+        //    вопросы[i] = Вопросы[i];
+        //}
+
+        //Вопросы.Add();
+
+        //for (int i = 0; i < вопросы.Length; i++)
+        //{
+        //    Console.WriteLine(вопросы[i]);
+        //}
+
     }
 
     private void CounterLog13_Clicked_1(object sender, EventArgs e)
