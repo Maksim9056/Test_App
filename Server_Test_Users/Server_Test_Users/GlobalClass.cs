@@ -241,18 +241,11 @@ namespace Server_Test_Users
 
                             if (sqReader.HasRows == true)
                             {
-
                                 Create_DATABASE = true;
                                 // Always call Read before accessing data.
                                 while (sqReader.Read())
                                 {
-
-
-
-
                                 }
-
-
                             }
                         }
 
