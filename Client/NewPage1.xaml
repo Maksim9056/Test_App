@@ -6,64 +6,7 @@
              Loaded="ContentPage_Loaded">
     <VerticalStackLayout>
         
-        <Entry x:Name="nameEntrу5" FontSize="16"
-             Placeholder ="Введите вопросы"
-             Margin="10"
-             TextChanged="nameEntrу5_TextChanged"
-               
-             VerticalOptions="Start"
-             HorizontalOptions="Start"
-             HeightRequest="20"
-             WidthRequest="310"
-             Keyboard ="Text"
-        />
-        
-        <Entry x:Name="nameEntrу9" FontSize="16"
-             Placeholder ="Введите ответ"
-             Margin="10"
-             TextChanged="nameEntrу4_TextChanged"
-             VerticalOptions="Start"
-             HorizontalOptions="Start"
-             HeightRequest="20"
-             WidthRequest="310"
-             Keyboard ="Text"
-        />
-
-        <Button
-                x:Name="CounterLog12"
-                 Text="Сохранить вопрос и ответ"
-                 SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="CounterLog13_Clicked"
-                 VerticalOptions="Start"
-                HorizontalOptions="Start"
-                FontSize="16" HeightRequest="10"
-                WidthRequest="310"
-                Margin="10"
-                Padding="10"
-        />
-        
-        <Button
-                x:Name="CounterLog13"
-                 Text="Посмотреть список вопросов и ответов"
-                 SemanticProperties.Hint="Counts the number of times you click"
-                  Clicked="CounterLog13_Clicked_1"
-                 VerticalOptions="Start"
-                HorizontalOptions="Start"
-                FontSize="16" HeightRequest="10"
-                WidthRequest="350"
-                Margin="10"
-                Padding="10"
-        />
-
-        <Label x:Name="header" Text="Выберите вопросы для редактирования " FontSize="18"
-               SizeChanged="header_SizeChanged"
-               
-                       />
-        <StackLayout Padding="7">
-            <Label x:Name="selected"/>
-            <ListView x:Name="usersList" ItemSelected="usersList_ItemSelected" />
-        </StackLayout>
-
+       
 
 
     </VerticalStackLayout>

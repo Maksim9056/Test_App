@@ -231,17 +231,22 @@ namespace Client
         /// <param name="e"></param>
         private   void CounterBtn_Clicked_1(object sender, EventArgs e)
         {
+            try
+            {
+
+                // Создание NavigationPage с главной страницей
+                var mainPage = new Вход_в_учетную_запись();
+                var navigationPage = new NavigationPage(mainPage);
+
+                Application.Current.MainPage = navigationPage;
 
 
-            // Создание NavigationPage с главной страницей
-            var mainPage = new Вход_в_учетную_запись();
-            var navigationPage = new NavigationPage(mainPage);
 
-            Application.Current.MainPage = navigationPage;
+            }
+            catch
+            {
 
-
-
-
+            }
             //// Создание NavigationPage с главной страницей
             //var mainPage = new MainPage();
             //var navigationPage = new NavigationPage(mainPage);
@@ -272,16 +277,25 @@ namespace Client
 
         private void ContentPage_Loaded(System.Object sender, System.EventArgs e)
         {
-            //  Application.Current.MainPage.SetValue(NavigationPage.HasNavigationBarProperty, false);
-            //    Application.Current.MainPage.SetValue(NavigationPage.HasBackButtonProperty, false);
-            Application.Current.MainPage.Window.Width = 530.8d;
-            Application.Current.MainPage.Window.Height = 650.8d;
+            try
+            {
 
-            Application.Current.MainPage.Window.MinimumWidth = 530.8d;
-            Application.Current.MainPage.Window.MinimumHeight = 650.8d;
 
-            Application.Current.MainPage.Window.MaximumWidth = 530.8d;
-            Application.Current.MainPage.Window.MaximumHeight = 650.8d;
+                //  Application.Current.MainPage.SetValue(NavigationPage.HasNavigationBarProperty, false);
+                //    Application.Current.MainPage.SetValue(NavigationPage.HasBackButtonProperty, false);
+                Application.Current.MainPage.Window.Width = 530.8d;
+                Application.Current.MainPage.Window.Height = 650.8d;
+
+                Application.Current.MainPage.Window.MinimumWidth = 530.8d;
+                Application.Current.MainPage.Window.MinimumHeight = 650.8d;
+
+                Application.Current.MainPage.Window.MaximumWidth = 530.8d;
+                Application.Current.MainPage.Window.MaximumHeight = 650.8d;
+            }
+            catch
+            {
+
+            }
 
         }
     }

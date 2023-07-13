@@ -142,8 +142,6 @@ namespace Server_Test_Users
             }
             else
             {
-
-
                 // добавление данных
                 using (ApplicationContext db = new ApplicationContext())
                 {
@@ -155,12 +153,9 @@ namespace Server_Test_Users
                     db.SaveChanges();
                 }
 
-
                 string Email = "Admin@Admin.ru";
-
                 DateTime dateTime = DateTime.Now;
                 var data = $"{dateTime:F}";
-
                 Roles roles = new Roles { Id = 1 };
                 // добавление данных
                 using (ApplicationContext db = new ApplicationContext())
@@ -186,8 +181,6 @@ namespace Server_Test_Users
             //   //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
             //    }
             //}
-
-
             //// добавление данных
             //using (ApplicationContext db = new ApplicationContext())
             //{

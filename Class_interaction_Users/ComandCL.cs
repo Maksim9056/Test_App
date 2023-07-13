@@ -86,7 +86,7 @@ namespace Class_interaction_Users
         public Regis_users Travel_logout { get; set; }
 
 
-
+        public static Questionss Roles_Accept { get; set; }
         /// <summary>
         /// Класс тесты
         /// </summary>
@@ -357,8 +357,8 @@ namespace Class_interaction_Users
                         //ВЕЗЕНИЕ ДЕСЕРИЛИЗАЦИЯ ПОЛУЧИЛАСЬ
                         Questionss roles_Accept = JsonSerializer.Deserialize<Questionss>(responseData);
 
+                        Roles_Accept = roles_Accept;
 
-                     
                         //Questionss_Travel = Questionss_TravelS;
                         ////Разбераем JObject и JToken удобно без обрезания серилизует байты
                         //JToken Answe = details.SelectToken("List_Mess");

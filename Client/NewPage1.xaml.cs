@@ -6,14 +6,21 @@ using System.Text.Json;
 using System.Text;
 using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Animations;
+using Microsoft.Maui;
 
 namespace Client;
-
 public partial class NewPage1 : ContentPage
 {
 	public NewPage1()
 	{
-		InitializeComponent();
+        try
+        {
+            InitializeComponent();
+        }
+        catch
+        {
+
+        }
 	}
 
   //  Dictionary<string, string> Вопросы = new Dictionary<string, string>();
@@ -25,21 +32,35 @@ public partial class NewPage1 : ContentPage
     /// </summary>
     public CommandCL command = new CommandCL();
 
-    List<string> Вопросы = new List<string>();
+    public List<string> Вопросы = new List<string>();
 
-    List<string> Ответы = new List<string>();
+    public List<string> Ответы = new List<string>();
+
+
+    public List<string> Вопросыs = new List<string>();
+
+    public List<string> Ответыs = new List<string>();
+
+    List<string>Вопросы_вывод = new List<string>();
 
     private void nameEntrу4_TextChanged(object sender, TextChangedEventArgs e)
     {
-        Ответ = nameEntrу9.Text;
-        //Console.WriteLine(Results[0]);
-        //Console.WriteLine(Results[1]);
-        // Console.WriteLine(Results[3]);
-        //var Results = Return?.Split(new char[] { '.' });
-        //Console.WriteLine(Results[0]);
-        //Console.WriteLine(Results[1]);
-        //Console.WriteLine(Results[2]);
-        //Console.WriteLine(Results[3]);
+        try
+        {
+            Ответ = nameEntrу9.Text;
+            //Console.WriteLine(Results[0]);
+            //Console.WriteLine(Results[1]);
+            // Console.WriteLine(Results[3]);
+            //var Results = Return?.Split(new char[] { '.' });
+            //Console.WriteLine(Results[0]);
+            //Console.WriteLine(Results[1]);
+            //Console.WriteLine(Results[2]);
+            //Console.WriteLine(Results[3]);
+        }
+        catch
+        {
+
+        }
     }
 
     private void CounterLog12_Clicked(object sender, EventArgs e)
@@ -47,10 +68,7 @@ public partial class NewPage1 : ContentPage
 
     }
 
-    private void nameEntrу4_TextChanged_1(object sender, TextChangedEventArgs e)
-    {
-
-    }
+   
 
     private void nameEntrу5_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -104,43 +122,46 @@ public partial class NewPage1 : ContentPage
                                 JsonSerializer.Serialize<Questions>(memoryStream, questions);
                                 //Декодировали в строку  memoryStream    класс запоаковали в json строку
                                 FileFS = Encoding.Default.GetString(memoryStream.ToArray());
-                                Вопросы = null;
-                                Ответы = null;
+                                //Вопросы = Вопросыs;
+                                //Ответы = Ответыs;
+                                for(int i = 0; i < Вопросы.Count(); i++)
+                                {
+                                    Вопросы.Clear();
+
+                                }
+
+                                for (int i = 0; i < Ответы.Count(); i++)
+                                {
+                                    Ответы.Clear();
+                                }
+
                                 Task.Run(async () => await command.Get_Image_Friends(Ip_adress.Ip_adresss, FileFS, "007")).Wait();
 
-                                var True = CommandCL.Answer_True;
-                                var Trues = CommandCL.Questionss;
-                                var Truess =  CommandCL.Answe;
-
-                              
-
-                                //Questions[] s = new Questions[] {   };
-                                //s[Truess].Questionss = Trues;
-
-
-                                string[] strings = new string[CommandCL.Questionss_Travel.Questionsses.Count()];
+                                //вопросы
+                               string[] strings = new string[CommandCL.Roles_Accept.Quest.Length];
                                 for (int i = 0; i < strings.Length; i++)
                                 {
-                                    strings[i] = CommandCL.Questionss_Travel.Questionsses[i].ToString();
+                                    strings[i] = CommandCL.Roles_Accept.Quest[i].Questionss.ToString();
                                 }
-
-                                Questionss[] questionsses = new Questionss[CommandCL.Questionss_Travel.Questionsses.Count()];
-                                for (int i = 0; i < strings.Length; i++)
-                                {
-                                    questionsses[i] = CommandCL.Questionss_Travel.Questionsses[i];
-                                }
-                                for (int i = 0; i < questionsses.Length; i++)
-                                {
-                                    usersList.ItemsSource = questionsses[i].Quest;
-
-                                }
-                                await DisplayAlert("Уведомление", "Вопросы и ответ добавлен!", "ОK");
-
-                                //  usersList.ItemsSource = ;
-                                // usersList.
                                 nameEntrу5.Text = "";
                                 nameEntrу9.Text = "";
 
+                              for(int i = 0; i < strings.Length; i++)
+                              {
+                                    Вопросы_вывод.Add(strings[i]);
+                              }
+                                //  usersList.AutomationId 
+                                //usersList.AutomationId =Convert.ToString( Вопросы_вывод.Count()); 
+                                //.ScrollIntoView(myList.Items[myList.Items.Count - 1])
+                                usersList.ItemsSource = Вопросы_вывод;
+                                for (int i = 0; i < Вопросы_вывод.Count(); i++)
+                                {
+                                    Вопросы_вывод.Clear();
+                                }
+                                // определяем источник данных
+                                await DisplayAlert("Уведомление", "Вопросы и ответ добавлен!", "ОK");
+                                //  usersList.ItemsSource = ;
+                                // usersList.
                             }
                         }
                     }
@@ -169,34 +190,37 @@ public partial class NewPage1 : ContentPage
 
     private void CounterLog13_Clicked_1(object sender, EventArgs e)
     {
+        try
+        {
+
+        }
+        catch
+        {
+
+        }
 
     }
 
-    private void CounterLog14_Clicked(object sender, EventArgs e)
-    {
 
-    }
 
-    private void nameEntrу10_TextChanged(object sender, TextChangedEventArgs e)
-    {
-
-    }
-
-    private void CounterLog15_Clicked(object sender, EventArgs e)
-    {
-
-    }
 
     private void ContentPage_Loaded(object sender, EventArgs e)
     {
-        Application.Current.MainPage.Window.Width = 1000.8d;
-        Application.Current.MainPage.Window.Height = 650.8d;
+            //Application.Current.MainPage.Window.Width =;
+            //    Application.Current.MainPage.Window.Height = ;  
+            //Application.Current.MainPage.Window.MaximumWidth = 1200.8d;
+            //Application.Current.MainPage.Window.MaximumHeight = 650.8d;
 
-        Application.Current.MainPage.Window.MinimumWidth = 1000.8d;
-        Application.Current.MainPage.Window.MinimumHeight = 650.8d;
+            //Application.Current.MainPage.GetParentWindow(); 
+            //Application.Current.MainPage.GetVisualElementWindow();
+            //= 1600.8d; 
+            //= 1200.8d;  //Console.WindowHeight;
+            //Application.Current.MainPage.Window.MinimumWidth = Application.Current.MainPage.Width; Application.Current.MainPage.Width
+            //Application.Current.MainPage.Window.MinimumHeight = Application.Current.MainPage.Height;Application.Current.MainPage.Height
+            Application.Current.MainPage.Window.MaximumWidth = 1600;
+            Application.Current.MainPage.Window.MaximumHeight = 1400;
 
-        Application.Current.MainPage.Window.MaximumWidth = 1200.8d;
-        Application.Current.MainPage.Window.MaximumHeight = 650.8d;
+      
     }
 
     //private void languagePicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -206,49 +230,53 @@ public partial class NewPage1 : ContentPage
         
     //}
 
-    private  void header_SizeChanged_1(object sender, EventArgs e)
-    {
-        //Task.Run(async () => await command.Check_Test(Ip_adress.Ip_adresss, "", "004")).Wait();
-        //if (CommandCL.Tests_Travel == null)
-        //{
 
-        //}
-        //else
-        //{
-        //    if (CommandCL.Tests_Travel.Test.Count() == 0)
-        //    {
-        //        await DisplayAlert("Уведомление", "Вопросов нету нету !", "ОK");
-        //    }
-        //    else
-        //    {
-        //        string[] strings = new string[CommandCL.Tests_Travel.Test.Count()];
-        //        for (int i = 0; i < strings.Length; i++)
-        //        {
-        //            strings[i] = CommandCL.Tests_Travel.Test[i].ToString();
-        //        }
-        //        for (int i = 0; i < strings.Length; i++)
-        //        {
-        //            languagePicker.Items.Add(strings[i]);
-        //        }
-        //        await DisplayAlert("Уведомление", "Вопросов есть", "ОK");
-        //    }
-        //}
-    }
 
     private void usersList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        //оставить
-        selected.Text = $"Выбрано: {e.SelectedItem}";
+        try
+        {
+            //оставить
+            headers.Text = $"Выбрано: {e.SelectedItem}";
+        }
+        catch
+        {
+
+        }
     }
 
-    /// <summary>
-    /// Передалать на запрос на сервер
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void header_SizeChanged(object sender, EventArgs e)
+
+    private void usersList_ItemTapped(object sender, ItemTappedEventArgs e)
     {
-       //Запрос на сервер передлать
-        usersList.ItemsSource = Вопросы;
+        try
+        {
+
+
+            var tappedUser = e.Item  ;
+            if (tappedUser != null)
+                header.Text = $"Нажато: {tappedUser}";
+        }
+        catch
+        {
+
+        }
     }
+
+    private void usersList_ItemSelected_2(object sender, SelectedItemChangedEventArgs e)
+    {
+        try
+
+        {
+            var selectedUser = e.SelectedItem;
+                if (selectedUser != null)
+                {
+
+                }
+                headers.Text = $"Выбрано: {selectedUser}";
+            }
+        catch
+        {
+
+        }
+     }
 }

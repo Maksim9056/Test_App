@@ -17,37 +17,51 @@ public partial class Администратор : ContentPage
     /// </summary>
     public CommandCL command = new CommandCL();
   
-        void PickerSelectedIndexChanged(object sender, EventArgs e)
+    void PickerSelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
         {
             header.Text = $"Вы выбрали: {languagePicker.SelectedItem}";
         }
-
-    private  async void header_SizeChanged(object sender, EventArgs e)
-    {
-        Task.Run(async () => await command.Check_Test(Ip_adress.Ip_adresss, "", "004")).Wait();
-        if (CommandCL.Tests_Travel == null)
+        catch
         {
 
         }
-        else
+    }
+
+    private  async void header_SizeChanged(object sender, EventArgs e)
+    {
+        try
         {
-            if (CommandCL.Tests_Travel.Test.Count() == 0)
+            Task.Run(async () => await command.Check_Test(Ip_adress.Ip_adresss, "", "004")).Wait();
+            if (CommandCL.Tests_Travel == null)
             {
-                await DisplayAlert("Уведомление", "Тестов нету !", "ОK");
+
             }
             else
             {
-                string[] strings = new string[CommandCL.Tests_Travel.Test.Count()];
-                for (int i = 0; i < strings.Length; i++)
+                if (CommandCL.Tests_Travel.Test.Count() == 0)
                 {
-                    strings[i] = CommandCL.Tests_Travel.Test[i].ToString();
+                    await DisplayAlert("Уведомление", "Тестов нету !", "ОK");
                 }
-                for (int i = 0; i < strings.Length; i++)
+                else
                 {
-                    languagePicker.Items.Add(strings[i]);
+                    string[] strings = new string[CommandCL.Tests_Travel.Test.Count()];
+                    for (int i = 0; i < strings.Length; i++)
+                    {
+                        strings[i] = CommandCL.Tests_Travel.Test[i].ToString();
+                    }
+                    for (int i = 0; i < strings.Length; i++)
+                    {
+                        languagePicker.Items.Add(strings[i]);
+                    }
+                    await DisplayAlert("Уведомление", "Тесты есть", "ОK");
                 }
-                await DisplayAlert("Уведомление", "Тесты есть", "ОK");
             }
+        }
+        catch
+        {
+
         }
        //.Add("1");
 
@@ -55,8 +69,15 @@ public partial class Администратор : ContentPage
 
     private async void CounterLog1_Clicked(object sender, EventArgs e)
     {
-        //await DisplayAlert("Уведомление", "!", "ОK");
-        await Navigation.PushAsync(new NewPage1());
+        try
+        {
+            //await DisplayAlert("Уведомление", "!", "ОK");
+            await Navigation.PushAsync(new NewPage1());
+        }
+        catch
+        {
+
+        }
     }
 }
 
