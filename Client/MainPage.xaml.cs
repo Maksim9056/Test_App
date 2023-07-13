@@ -195,6 +195,7 @@ namespace Client
                                                     {
                                                         case 0:
                                                             await DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
+                                                          
                                                             await Navigation.PushAsync(new Главная_страница());
                                                             break;
                                                         case 1:

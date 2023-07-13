@@ -71,13 +71,14 @@ public partial class Администратор : ContentPage
     {
         try
         {
-            //await DisplayAlert("Уведомление", "!", "ОK");
-            await Navigation.PushAsync(new NewPage1());
+            await Navigation.PushAsync(new Questin());
         }
         catch
         {
 
         }
+    //    Application.Current.MainPage = navigationPage;
+
     }
 }
 
