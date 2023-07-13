@@ -113,10 +113,6 @@ namespace Class_interaction_Users
         public List<Roles_Travel> Test { get; set; } = new List<Roles_Travel>();
     }
 
-
-
-
-
     /// <summary>
     /// Класс настройки конфигурации
     /// </summary>

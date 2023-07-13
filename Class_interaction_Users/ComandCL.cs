@@ -408,10 +408,6 @@ namespace Class_interaction_Users
                         }
                         while (stream.DataAvailable);
                         responseData = completeMessage.ToString();
-
-
-
-
                         //получить перечень сообщений
                         if (responseData == null)
                         {   //Если нету списка
@@ -907,7 +903,6 @@ namespace Class_interaction_Users
                         //Получаем имя пользователя
                         if (responseData == null)
                         {
-
                         }
                         else
                         {
@@ -930,8 +925,6 @@ namespace Class_interaction_Users
                     // MessageBox.Show(e.Message);
                 }
             }
-
-
 
             /// <summary>
             /// Процедура отправки регистрации пользователей 020
