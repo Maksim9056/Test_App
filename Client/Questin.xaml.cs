@@ -2,15 +2,17 @@ using Class_interaction_Users;
 using Microsoft.Maui.Controls;
 using System.Text;
 using System.Text.Json;
+using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
 
 namespace Client;
 
 public partial class Questin : ContentPage
 {
-	public Questin()
-	{
-		InitializeComponent();
-	}
+    public Questin()
+    {
+        InitializeComponent();
+    }
 
     string Вопрос { get; set; }
     string Ответ { get; set; }
@@ -31,6 +33,11 @@ public partial class Questin : ContentPage
 
     List<string> Вопросы_вывод = new List<string>();
 
+
+    public ObservableCollection<Questionss> Userss ;
+
+
+public ObservableCollection<string> Users { get; set; }
     private void nameEntrу9_TextChanged(object sender, TextChangedEventArgs e)
     {
         Ответ = nameEntrу9.Text;
@@ -40,7 +47,6 @@ public partial class Questin : ContentPage
     private void nameEntrу5_TextChanged(object sender, TextChangedEventArgs e)
     {
         Вопрос = nameEntrу5.Text;
-
     }
 
     private async void CounterLog12_Clicked(object sender, EventArgs e)
@@ -50,11 +56,10 @@ public partial class Questin : ContentPage
             if (Вопрос == null)
             {
                 await DisplayAlert("Уведомление", "Вопросы пустой заполните поле!", "ОK");
-
             }
             else
             {
-                if (string.IsNullOrEmpty(Вопрос))
+                if(string.IsNullOrEmpty(Вопрос))
                 {
                     await DisplayAlert("Уведомление", "Вопросы пустой заполните поле!", "ОK");
 
@@ -108,11 +113,18 @@ public partial class Questin : ContentPage
                                 string[] strings = new string[CommandCL.Roles_Accept.Quest.Length];
                                 for (int i = 0; i < strings.Length; i++)
                                 {
-                                    strings[i] = CommandCL.Roles_Accept.Quest[i].Questionss.ToString();
+                                    CommandCL.Roles_Accept.Quest[i].Questionss.
+                                    Userss = new ObservableCollection<User>
+                                    {
+
+                                    }
                                 }
+
+                               
                                 nameEntrу5.Text = "";
                                 nameEntrу9.Text = "";
 
+                     
                                 for (int i = 0; i < strings.Length; i++)
                                 {
                                     Вопросы_вывод.Add(strings[i]);
@@ -120,7 +132,18 @@ public partial class Questin : ContentPage
                                 //  usersList.AutomationId 
                                 //usersList.AutomationId =Convert.ToString( Вопросы_вывод.Count()); 
                                 //.ScrollIntoView(myList.Items[myList.Items.Count - 1])
-                               usersList.ItemsSource = Вопросы_вывод;
+                                //     usersList.ItemsSource = Вопросы_вывод;
+                                //for (int i = 0; i < strings.Length; i++)
+                                //{
+                                //    Вопросы.Items.Add(strings[i]);
+                                //}
+                                //Вопросы.SelectedIndexChanged += Вопросы_SelectedIndexChanged;
+                                //Users = Вопросы_вывод;
+                                
+                                usersList.ItemsSource = Вопросы_вывод;
+
+                                //        usersList.SelectedItem = Вопросы_вывод;
+
                                 for (int i = 0; i < Вопросы_вывод.Count(); i++)
                                 {
                                     Вопросы_вывод.Clear();
@@ -143,7 +166,76 @@ public partial class Questin : ContentPage
 
     private void ContentPage_Loaded(object sender, EventArgs e)
     {
+         //Admin @Admin.ru
+         //Application.Current.MainPage.Window.
+        Application.Current.MainPage.Window.MinimumWidth = 1000;
+        Application.Current.MainPage.Window.MinimumHeight = 800;
         Application.Current.MainPage.Window.MaximumWidth = 1600;
-            Application.Current.MainPage.Window.MaximumHeight = 1400;
+        Application.Current.MainPage.Window.MaximumHeight = 1400;
+    }
+
+    private   void usersList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        try
+        {
+            //if (e.SelectedItem != null)
+            //{
+            //    nameEntrу1.Text = $"Выбрано: {e.SelectedItem}";
+
+            //}
+
+
+        }
+        catch(Exception )
+        {
+
+        }
+    }
+
+    //private void usersList_ItemTapped(object sender, ItemTappedEventArgs e)
+    //{
+    //    try
+    //    {
+    //     //   usersList.SelectedItem = null;
+
+
+    //    }
+    //    catch(Exception)
+    //    {
+
+    //    }
+
+    //}
+
+    private void nameEntrу1_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        
+    }
+
+    private void Вопросы_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      
+           // nameEntrу1.Text = $"Вы выбрали: {Вопросы.SelectedItem}";
+        
+       
+    }
+
+    //private void usersList_ItemSelected_1(object sender, SelectedItemChangedEventArgs e)
+    //{ 
+    //     if (e.SelectedItem != null)
+    //    {
+    //        string selectedValue = (string)e.SelectedItem;
+    //        nameEntrу1.Text = selectedValue;
+    //    }
+    //}
+
+ 
+
+    private void usersList_ItemTapped_1(object sender, ItemTappedEventArgs e)
+    {
+        if (e.Item is string selectedUser)
+        {
+           nameEntrу1.Text = selectedUser;
+        }
     }
 }

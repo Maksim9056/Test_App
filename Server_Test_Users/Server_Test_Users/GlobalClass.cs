@@ -157,13 +157,13 @@ namespace Server_Test_Users
                 DateTime dateTime = DateTime.Now;
                 var data = $"{dateTime:F}";
                 Roles roles = new Roles { Id = 1 };
+
                 // добавление данных
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     // создаем два объекта User
 
                     User user1 = new User { Name_Employee = "Admin"  ,Password = "Admin", DataMess = data,Id_roles_users = roles.Id, Employee_Mail = Email};
-
 
                     // добавляем их в бд
                     db.Users.AddRange(user1);

@@ -36,7 +36,6 @@ namespace Class_interaction_Users
         /// Почта
         /// </summary>
         public string Employee_Mail { get; set; }
-
     }
 
 
@@ -47,7 +46,6 @@ namespace Class_interaction_Users
     {
         public int Id { get; set; }
         public Roles Id_roles { get; set; }
-
         public User User_id { get; set; }
     }
 
@@ -57,8 +55,7 @@ namespace Class_interaction_Users
     public class Roles
     {
         public int Id { get; set; }
-        public string Name_roles { get; set; }
-     
+        public string Name_roles { get; set; }    
     }
 
 
@@ -86,6 +83,7 @@ namespace Class_interaction_Users
             Quest = quest;
         }
     }
+
     public class Questionss_travel
     {
        public List<Questionss> Questionsses = new List<Questionss>();
@@ -103,7 +101,6 @@ namespace Class_interaction_Users
             Roles = roles;
         }   
     }
-
 
     /// <summary>
     /// Принемает на клиенте при регистрации 
