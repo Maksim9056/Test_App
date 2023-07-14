@@ -46,10 +46,12 @@
 
 
                 
-                    <ListView x:Name="usersList" ItemTapped="usersList_ItemTapped_1">
+                    <ListView x:Name="usersList" 
+                              ItemTapped="usersList_ItemTapped_1">
+         
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextCell Text="{Binding Name}" />
+                            <TextCell Text= "{Binding}" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

@@ -34,10 +34,10 @@ public partial class Questin : ContentPage
     List<string> Вопросы_вывод = new List<string>();
 
 
-    public ObservableCollection<Questionss> Userss ;
+    //public ObservableCollection<Questions[> Userss ;
 
 
-public ObservableCollection<string> Users { get; set; }
+    public List<string> Users { get; set; }
     private void nameEntrу9_TextChanged(object sender, TextChangedEventArgs e)
     {
         Ответ = nameEntrу9.Text;
@@ -113,14 +113,12 @@ public ObservableCollection<string> Users { get; set; }
                                 string[] strings = new string[CommandCL.Roles_Accept.Quest.Length];
                                 for (int i = 0; i < strings.Length; i++)
                                 {
-                                    CommandCL.Roles_Accept.Quest[i].Questionss.
-                                    Userss = new ObservableCollection<User>
-                                    {
 
-                                    }
+                                    strings[i] = CommandCL.Roles_Accept.Quest[i].Questionss;
+
+
                                 }
-
-                               
+                              
                                 nameEntrу5.Text = "";
                                 nameEntrу9.Text = "";
 
@@ -129,7 +127,7 @@ public ObservableCollection<string> Users { get; set; }
                                 {
                                     Вопросы_вывод.Add(strings[i]);
                                 }
-                                //  usersList.AutomationId 
+                                //  usersList.AutomationId  Admin@Admin.ru
                                 //usersList.AutomationId =Convert.ToString( Вопросы_вывод.Count()); 
                                 //.ScrollIntoView(myList.Items[myList.Items.Count - 1])
                                 //     usersList.ItemsSource = Вопросы_вывод;
@@ -139,11 +137,14 @@ public ObservableCollection<string> Users { get; set; }
                                 //}
                                 //Вопросы.SelectedIndexChanged += Вопросы_SelectedIndexChanged;
                                 //Users = Вопросы_вывод;
-                                
-                                usersList.ItemsSource = Вопросы_вывод;
+
+
 
                                 //        usersList.SelectedItem = Вопросы_вывод;
+                                Users = Вопросы_вывод;
 
+                                 usersList.ItemsSource = Users;
+                             //   usersList.ItemsSource = Вопросы_вывод;
                                 for (int i = 0; i < Вопросы_вывод.Count(); i++)
                                 {
                                     Вопросы_вывод.Clear();
