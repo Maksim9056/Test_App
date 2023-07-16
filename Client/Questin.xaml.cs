@@ -132,7 +132,7 @@ public partial class Questin : ContentPage
                                 //.ScrollIntoView(myList.Items[myList.Items.Count - 1])
                                usersList.ItemsSource = Вопросы_вывод;
 
-                                //тест работы с git
+                                //тест работы с git151556
                                 // Обработчик события выбора ячейки
                                 usersList.ItemSelected += (sender, e) =>
                                 {
