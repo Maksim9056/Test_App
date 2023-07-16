@@ -41,34 +41,19 @@
                 Padding="10"
         />
 
+              
         <Grid Margin="300, -190, 0,0">
             <Border Stroke="Gray" BackgroundColor="White" WidthRequest="800" HeightRequest="450" >
+                <ListView x:Name="usersList"  
+             
+                         
+            
+                          
+                 />
 
-
-                
-                    <ListView x:Name="usersList" 
-                              ItemTapped="usersList_ItemTapped_1">
-         
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                            <TextCell Text= "{Binding}" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                       
             </Border>
         </Grid>
         <Label x:Name="selected" Text="Здесь"
                Margin="40, -190, 0,0"/>
-        <Entry x:Name="nameEntrу1" FontSize="16"
-             Placeholder ="Для редактирования"
-             Margin="10"
-             TextChanged="nameEntrу1_TextChanged"
-             VerticalOptions="Start"
-             HorizontalOptions="Start"
-             HeightRequest="20"
-             WidthRequest="200"
-             Keyboard ="Text"
-        />
     </VerticalStackLayout>
 </ContentPage>

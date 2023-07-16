@@ -317,7 +317,7 @@ namespace Class_interaction_Users
             }
 
             // Передача картинок друзей
-            async public Task Get_Image_Friends(String server, string fs, string command)
+           async public Task Get_Image_Friends(String server, string fs, string command)
             {
                 try
                 {
@@ -326,21 +326,25 @@ namespace Class_interaction_Users
                         Byte[] data = System.Text.Encoding.Default.GetBytes(command + fs);
                         NetworkStream stream = client.GetStream();
                         //Отправили на сервер
-                        await stream.WriteAsync(data, 0, data.Length);
+                       await  stream.WriteAsync(data, 0, data.Length);
                         //data = new Byte[1024];
                         String responseData = String.Empty;
                         //Функция получения
                         Byte[] readingData = new Byte[256];
                         StringBuilder completeMessage = new StringBuilder();
                         int numberOfBytesRead = 0;
-                        do
-                        {
-                            numberOfBytesRead = stream.Read(readingData, 0, readingData.Length);
-                            completeMessage.AppendFormat("{0}", Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
-                        }
-                        while (stream.DataAvailable);
-                        responseData = completeMessage.ToString();
-                        //Проверяем
+                    responseData = await Task<string>.Run(() =>
+                    {
+                        return Func_Read(stream, data.Length, client);
+                    });
+                    //do
+                    //{
+                    //    numberOfBytesRead = stream.Read(readingData, 0, readingData.Length);
+                    //    completeMessage.AppendFormat("{0}", Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
+                    //}
+                    //while (stream.DataAvailable);
+                    //responseData = completeMessage.ToString();
+                    //Проверяем
                         if (responseData == "false")
                         {
                             //Обработаем

@@ -417,6 +417,11 @@ namespace Class_interaction_Users
             Answer_id = answer_id;
         }
     }
+    public class Book 
+    { 
+
+       public string book { get;set; }
+    }
 
 
 

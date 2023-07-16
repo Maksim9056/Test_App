@@ -1,5 +1,6 @@
 using Class_interaction_Users;
 using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Maui.Controls;
@@ -31,7 +32,7 @@ public partial class Questin : ContentPage
 
     public List<string> Ответыs = new List<string>();
 
-    List<string> Вопросы_вывод = new List<string>();
+    public List<string> Вопросы_вывод   = new List<string>();
 
 
     //public ObservableCollection<Questions[> Userss ;
@@ -108,7 +109,7 @@ public partial class Questin : ContentPage
                                 }
 
                                 Task.Run(async () => await command.Get_Image_Friends(Ip_adress.Ip_adresss, FileFS, "007")).Wait();
-
+                                string Team ="";
                                 //вопросы
                                 string[] strings = new string[CommandCL.Roles_Accept.Quest.Length];
                                 for (int i = 0; i < strings.Length; i++)
@@ -122,35 +123,33 @@ public partial class Questin : ContentPage
                                 nameEntrу5.Text = "";
                                 nameEntrу9.Text = "";
 
-                     
                                 for (int i = 0; i < strings.Length; i++)
                                 {
                                     Вопросы_вывод.Add(strings[i]);
                                 }
-                                //  usersList.AutomationId  Admin@Admin.ru
+                                //  usersList.AutomationId 
                                 //usersList.AutomationId =Convert.ToString( Вопросы_вывод.Count()); 
                                 //.ScrollIntoView(myList.Items[myList.Items.Count - 1])
-                                //     usersList.ItemsSource = Вопросы_вывод;
-                                //for (int i = 0; i < strings.Length; i++)
-                                //{
-                                //    Вопросы.Items.Add(strings[i]);
-                                //}
-                                //Вопросы.SelectedIndexChanged += Вопросы_SelectedIndexChanged;
-                                //Users = Вопросы_вывод;
+                               usersList.ItemsSource = Вопросы_вывод;
 
-
-
-                                //        usersList.SelectedItem = Вопросы_вывод;
-                                Users = Вопросы_вывод;
-
-                                 usersList.ItemsSource = Users;
-                             //   usersList.ItemsSource = Вопросы_вывод;
-                                for (int i = 0; i < Вопросы_вывод.Count(); i++)
+                                // Обработчик события выбора ячейки
+                                usersList.ItemSelected += (sender, e) =>
                                 {
-                                    Вопросы_вывод.Clear();
-                                }
+                                    if (e.SelectedItem != null)
+                                    {
+                                        int selectedIndex = Вопросы_вывод.IndexOf(e.SelectedItem.ToString());
+                                        string selectedValue = e.SelectedItem.ToString();
+                                        // Выполните необходимые действия с выбранным значением и индексом
+                                        // Например, выведите их на экран или сохраните в переменные
+                                        DisplayAlert("Выбранная строка", $"Индекс: {selectedIndex}, Значение: {selectedValue}", "ОК");
+                                    }
+                                };
+
+                                //for (int i = 0; i < Вопросы_вывод.Count(); i++)
+                                //{
+                                //    Вопросы_вывод.Clear();
+                                //}
                                 // определяем источник данных
-                                await DisplayAlert("Уведомление", "Вопросы и ответ добавлен!", "ОK");
                                 //  usersList.ItemsSource = ;
                                 // usersList.
                             }
@@ -173,70 +172,5 @@ public partial class Questin : ContentPage
         Application.Current.MainPage.Window.MinimumHeight = 800;
         Application.Current.MainPage.Window.MaximumWidth = 1600;
         Application.Current.MainPage.Window.MaximumHeight = 1400;
-    }
-
-    private   void usersList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        try
-        {
-            //if (e.SelectedItem != null)
-            //{
-            //    nameEntrу1.Text = $"Выбрано: {e.SelectedItem}";
-
-            //}
-
-
-        }
-        catch(Exception )
-        {
-
-        }
-    }
-
-    //private void usersList_ItemTapped(object sender, ItemTappedEventArgs e)
-    //{
-    //    try
-    //    {
-    //     //   usersList.SelectedItem = null;
-
-
-    //    }
-    //    catch(Exception)
-    //    {
-
-    //    }
-
-    //}
-
-    private void nameEntrу1_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        
-    }
-
-    private void Вопросы_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      
-           // nameEntrу1.Text = $"Вы выбрали: {Вопросы.SelectedItem}";
-        
-       
-    }
-
-    //private void usersList_ItemSelected_1(object sender, SelectedItemChangedEventArgs e)
-    //{ 
-    //     if (e.SelectedItem != null)
-    //    {
-    //        string selectedValue = (string)e.SelectedItem;
-    //        nameEntrу1.Text = selectedValue;
-    //    }
-    //}
-
- 
-
-    private void usersList_ItemTapped_1(object sender, ItemTappedEventArgs e)
-    {
-        if (e.Item is string selectedUser)
-        {
-           nameEntrу1.Text = selectedUser;
-        }
     }
 }

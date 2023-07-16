@@ -81,11 +81,11 @@ namespace Server_Test_Users
      
             public DbSet<User> Users { get; set; } = null!;
             
-            public DbSet<Questions> Question { get; set; } = null!;
+            public DbSet<Questions> Questions { get; set; } = null!;
 
             public DbSet<Test_Questions> Test_Questions { get; set; } = null!;
             public DbSet<Answer> Answers { get; set; } = null!;
-            public DbSet<Options> Questions { get; set; } = null!;
+            public DbSet<Options> Options { get; set; } = null!;
 
             public DbSet<Test> Test { get; set; } = null!;
             public DbSet<Exam> Exam { get; set; } = null!;
@@ -163,7 +163,7 @@ namespace Server_Test_Users
                 {
                     // создаем два объекта User
 
-                    User user1 = new User { Name_Employee = "Admin"  ,Password = "Admin", DataMess = data,Id_roles_users = roles.Id, Employee_Mail = Email};
+                    User user1 = new User { Name_Employee = "Admin",Password = "Admin", DataMess = data,Id_roles_users = roles.Id, Employee_Mail = Email};
 
                     // добавляем их в бд
                     db.Users.AddRange(user1);
@@ -641,7 +641,7 @@ namespace Server_Test_Users
             Count_Roles = Count_roles;
         }
 
-        public void Insert_Questin(Questions Questions)
+        public  void Insert_Questin(Questions Questions)
         {
 
             // добавление данных
@@ -653,7 +653,7 @@ namespace Server_Test_Users
 
 
                 // добавляем их в бд
-                db.Question.AddRange(user1);
+                db.Questions.AddRange(user1);
                 db.SaveChanges();
             }
 
@@ -661,7 +661,7 @@ namespace Server_Test_Users
             using (ApplicationContext db = new ApplicationContext())
             {
                 // получаем объекты из бд и выводим на консоль
-                Count = db.Question.Count();
+                Count = db.Questions.Count();
             }
             if (Count == 0)
             {
@@ -673,7 +673,7 @@ namespace Server_Test_Users
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     // получаем объекты из бд и выводим на консоль
-                    var users = db.Question.ToList();
+                    var users = db.Questions.ToList();
                     Console.WriteLine("Users list:");
                     int i = 0;
                     foreach (Questions u in users)
