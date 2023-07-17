@@ -67,11 +67,15 @@ public partial class Администратор : ContentPage
 
     }
 
-    private async void CounterLog1_Clicked(object sender, EventArgs e)
+    private  void CounterLog1_Clicked(object sender, EventArgs e)
     {
         try
         {
-            await Navigation.PushAsync(new Questin());
+            var mainPage = new Questin();
+            var navigationPage = new NavigationPage(mainPage);
+
+            Application.Current.MainPage = navigationPage;
+            //await Navigation.PushAsync(new ());
         }
         catch
         {
@@ -79,6 +83,22 @@ public partial class Администратор : ContentPage
         }
     //    Application.Current.MainPage = navigationPage;
 
+    }
+
+    private void CounterLog2_Clicked(object sender, EventArgs e)
+    {
+        var mainPage = new MainPage();
+        var navigationPage = new NavigationPage(mainPage);
+
+        Application.Current.MainPage = navigationPage;
+    }
+
+    private void CounterLog3_Clicked(object sender, EventArgs e)
+    {
+        var mainPage = new Test();
+        var navigationPage = new NavigationPage(mainPage);
+
+        Application.Current.MainPage = navigationPage;
     }
 }
 

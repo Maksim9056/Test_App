@@ -175,9 +175,20 @@ namespace Class_interaction_Users
             Employee_Mail = @Mail;
         }
     }
+    [Serializable]
+    public class Regis_users_test 
+    {
+    
+        public   Regis_users[]  regis { get;set; }
+   
 
+    }
 
-
+    [Serializable]
+    public class Regis_users_travels
+    {
+     public    List<Regis_users_travels> Regis_Users_Travels = new List<Regis_users_travels>();
+    }
 
     /// <summary>
     ///Тест вопросами

@@ -50,6 +50,7 @@ public partial class Questin : ContentPage
         Вопрос = nameEntrу5.Text;
     }
 
+    //Введите
     private async void CounterLog12_Clicked(object sender, EventArgs e)
     {
         try
@@ -60,7 +61,7 @@ public partial class Questin : ContentPage
             }
             else
             {
-                if(string.IsNullOrEmpty(Вопрос))
+                if (string.IsNullOrEmpty(Вопрос))
                 {
                     await DisplayAlert("Уведомление", "Вопросы пустой заполните поле!", "ОK");
 
@@ -102,57 +103,98 @@ public partial class Questin : ContentPage
                                     _Вопросы.Clear();
 
                                 }
+                                if (usersList.ItemsSource == null)
+                                {
+
+                                }
+                                else
+                                {
+                                    usersList.ItemsSource = null;
+                                    for (int i = 0; i < Вопросы_вывод.Count(); i++)
+                                    {
+                                        Вопросы_вывод.Clear();
+                                    }
+                                }
 
                                 for (int i = 0; i < Ответы.Count(); i++)
                                 {
                                     Ответы.Clear();
                                 }
 
+                                bool Вопрос_уникальный = false;
                                 Task.Run(async () => await command.Get_Image_Friends(Ip_adress.Ip_adresss, FileFS, "007")).Wait();
-                                string Team ="";
+                                string Team = "";
                                 //вопросы
-                                string[] strings = new string[CommandCL.Roles_Accept.Quest.Length];
-                                for (int i = 0; i < strings.Length; i++)
+                                for (int i = 0; i < CommandCL.Roles_Accept.Quest.Length; i++)
                                 {
-
-                                    strings[i] = CommandCL.Roles_Accept.Quest[i].Questionss;
-
-
-                                }
-                              
-                                nameEntrу5.Text = "";
-                                nameEntrу9.Text = "";
-
-                                for (int i = 0; i < strings.Length; i++)
-                                {
-                                    Вопросы_вывод.Add(strings[i]);
-                                }
-                                //  usersList.AutomationId 
-                                //usersList.AutomationId =Convert.ToString( Вопросы_вывод.Count()); 
-                                //.ScrollIntoView(myList.Items[myList.Items.Count - 1])
-                               usersList.ItemsSource = Вопросы_вывод;
-
-                                //тест работы с git151556
-                                // Обработчик события выбора ячейки
-                                usersList.ItemSelected += (sender, e) =>
-                                {
-                                    if (e.SelectedItem != null)
+                                    if (CommandCL.Roles_Accept.Quest[i].Id == 0)
                                     {
-                                        int selectedIndex = Вопросы_вывод.IndexOf(e.SelectedItem.ToString());
-                                        string selectedValue = e.SelectedItem.ToString();
-                                        // Выполните необходимые действия с выбранным значением и индексом
-                                        // Например, выведите их на экран или сохраните в переменные
-                                        DisplayAlert("Выбранная строка", $"Индекс: {selectedIndex}, Значение: {selectedValue}", "ОК");
+                                        Вопрос_уникальный = true;
+                                        break;
                                     }
-                                };
+                                    else
+                                    {
 
-                                //for (int i = 0; i < Вопросы_вывод.Count(); i++)
-                                //{
-                                //    Вопросы_вывод.Clear();
-                                //}
-                                // определяем источник данных
-                                //  usersList.ItemsSource = ;
-                                // usersList.
+                                    }
+                                }
+                                if (Вопрос_уникальный == false)
+                                {
+                                    string[] strings = new string[CommandCL.Roles_Accept.Quest.Length];
+                                    for (int i = 0; i < strings.Length; i++)
+                                    {
+
+                                        strings[i] = CommandCL.Roles_Accept.Quest[i].Questionss;
+
+
+                                    }
+
+                                    nameEntrу5.Text = "";
+                                    nameEntrу9.Text = "";
+
+                                    for (int i = 0; i < strings.Length; i++)
+                                    {
+                                        Вопросы_вывод.Add(strings[i]);
+                                    }
+                                    //  usersList.AutomationId 
+                                    //usersList.AutomationId =Convert.ToString( Вопросы_вывод.Count()); 
+                                    //.ScrollIntoView(myList.Items[myList.Items.Count - 1])
+                                    usersList.ItemsSource = Вопросы_вывод;
+
+                                    //тест работы с git151556
+                                    // Обработчик события выбора ячейки
+                                    //usersList.ItemSelected += (sender, e) =>
+                                    //{
+                                    //    if (e.SelectedItem != null)
+                                    //    {
+                                    //        int selectedIndex = Вопросы_вывод.IndexOf(e.SelectedItem.ToString());
+                                    //        string selectedValue = e.SelectedItem.ToString();
+                                    //        // Выполните необходимые действия с выбранным значением и индексом
+                                    //        // Например, выведите их на экран или сохраните в переменные
+                                    //        DisplayAlert("Выбранная строка", $"Индекс: {selectedIndex}, Значение: {selectedValue}", "ОК");
+                                    //    }
+                                    //};
+
+                                    
+                                    // определяем источник данных
+                                    //  usersList.ItemsSource = ;
+                                    // usersList.
+                                }
+                                else
+                                {
+                                    await DisplayAlert("Уведомление","Вопросы уже есть такой !Введите другой вопрос !", "ОK");
+
+                                    //usersList.ItemSelected += (sender, e) =>
+                                    //{
+                                    //    if (e.SelectedItem != null)
+                                    //    {
+                                    //        int selectedIndex = Вопросы_вывод.IndexOf(e.SelectedItem.ToString());
+                                    //        string selectedValue = e.SelectedItem.ToString();
+                                    //        // Выполните необходимые действия с выбранным значением и индексом
+                                    //        // Например, выведите их на экран или сохраните в переменные
+                                    //        DisplayAlert("Выбранная строка", $"Индекс: {selectedIndex}, Значение: {selectedValue}", "ОК");
+                                    //    }
+                                    //};
+                                }
                             }
                         }
                     }
@@ -167,11 +209,72 @@ public partial class Questin : ContentPage
 
     private void ContentPage_Loaded(object sender, EventArgs e)
     {
-         //Admin @Admin.ru
-         //Application.Current.MainPage.Window.
-        Application.Current.MainPage.Window.MinimumWidth = 1000;
-        Application.Current.MainPage.Window.MinimumHeight = 800;
-        Application.Current.MainPage.Window.MaximumWidth = 1600;
-        Application.Current.MainPage.Window.MaximumHeight = 1400;
+        try
+        {
+            string FileFS = "";
+            //Admin @Admin.ru
+            //Application.Current.MainPage.Window.
+            Application.Current.MainPage.Window.MinimumWidth = 1550;
+            Application.Current.MainPage.Window.MinimumHeight = 1250;
+            Application.Current.MainPage.Window.MaximumWidth = 1550;
+            Application.Current.MainPage.Window.MaximumHeight = 1300;
+
+            Task.Run(async () => await command.Connect_Friends(Ip_adress.Ip_adresss, FileFS, "008")).Wait();
+            string[] strings = new string[CommandCL.Roles_Accept.Quest.Length];
+            for (int i = 0; i < strings.Length; i++)
+            {
+
+                strings[i] = CommandCL.Roles_Accept.Quest[i].Questionss;
+
+              
+            }
+
+            for (int j = 0; j < strings.Length; j++)
+            {
+                Вопросы_вывод.Add(strings[j]);
+            }
+
+            usersList.ItemsSource = Вопросы_вывод;
+        }catch (Exception )
+        {
+
+        }
+    }
+
+    private void usersList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem != null)
+        {
+            int selectedIndex = Вопросы_вывод.IndexOf(e.SelectedItem.ToString());
+            string selectedValue = e.SelectedItem.ToString();
+            // Выполните необходимые действия с выбранным значением и индексом
+            // Например, выведите их на экран или сохраните в переменные
+            DisplayAlert("Выбранная строка", $"Индекс: {selectedIndex}, Значение: {selectedValue}", "ОК");
+        }
+    }
+
+    private void CounterLog13_Clicked(object sender, EventArgs e)
+    {
+        if (usersList.ItemsSource == null)
+        {
+
+        }
+        else
+        {
+            usersList.ItemsSource = null;
+            for (int i = 0; i < Вопросы_вывод.Count(); i++)
+            {
+                Вопросы_вывод.Clear();
+            }
+        }
+        var mainPage = new Администратор();
+        var navigationPage = new NavigationPage(mainPage);
+
+        Application.Current.MainPage = navigationPage;
+    }
+
+    private void CounterLog14_Clicked(object sender, EventArgs e)
+    {
+
     }
 }

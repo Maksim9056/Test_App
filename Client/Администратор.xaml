@@ -29,7 +29,31 @@
                     Margin="10"
                     Padding="10"
                    />
-
+           
+            <Button
+                    x:Name="CounterLog2"
+                    Text="Перейти к тестам"
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Clicked="CounterLog3_Clicked"
+                    VerticalOptions="Start"
+                    HorizontalOptions="CenterAndExpand"
+                    FontSize="16" HeightRequest="10"
+                    WidthRequest="320"
+                    Margin="10"
+                    Padding="10"
+                   />
+            <Button
+                    x:Name="CounterLog3"
+                    Text="Перейти в начало"
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Clicked="CounterLog2_Clicked"
+                    VerticalOptions="Start"
+                    HorizontalOptions="CenterAndExpand"
+                    FontSize="16" HeightRequest="10"
+                    WidthRequest="320"
+                    Margin="3, -30, 0,1"
+                    Padding="10"
+                   />
         </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

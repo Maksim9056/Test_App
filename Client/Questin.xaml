@@ -30,7 +30,7 @@
         />
         <Button
                 x:Name="CounterLog12"
-                 Text="Сохранить вопрос и ответ"
+                 Text="Сохранить Тест "
                  SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="CounterLog12_Clicked"
                  VerticalOptions="Start"
@@ -41,19 +41,42 @@
                 Padding="10"
         />
 
-              
-        <Grid Margin="300, -190, 0,0">
+        <Button
+                x:Name="CounterLog14"
+                 Text="Добавить в тест"
+                 SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="CounterLog14_Clicked"
+                 VerticalOptions="Start"
+                HorizontalOptions="Start"
+                FontSize="16" HeightRequest="10"
+                WidthRequest="310"
+                Margin="10"
+                Padding="10"
+        />
+        
+        <Grid x:Name="Табличка" Margin="300, -190, 0,0">
             <Border Stroke="Gray" BackgroundColor="White" WidthRequest="800" HeightRequest="450" >
                 <ListView x:Name="usersList"  
-             
-                         
-            
-                          
+                          CachingStrategy="RecycleElementAndDataTemplate"
+                 ItemSelected="usersList_ItemSelected"
+
                  />
 
             </Border>
         </Grid>
         <Label x:Name="selected" Text="Здесь"
                Margin="40, -190, 0,0"/>
+        <Button
+                x:Name="CounterLog13"
+                 Text="Вернуться к администраторским настройкам"
+                 SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="CounterLog13_Clicked"
+                 VerticalOptions="Start"
+                HorizontalOptions="Start"
+                FontSize="16" HeightRequest="10"
+                WidthRequest="440"
+                Margin="10"
+                Padding="10"
+        />
     </VerticalStackLayout>
 </ContentPage>

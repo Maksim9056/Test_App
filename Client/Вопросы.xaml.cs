@@ -23,7 +23,7 @@ public partial class Вопросы : ContentPage
 
     public List<string> Ответыs = new List<string>();
 
-    List<string> Вопросы_вывод = new List<string>();
+    public List<string> Вопросы_вывод = new List<string>();
 
     public Вопросы()
 	{
@@ -37,7 +37,7 @@ public partial class Вопросы : ContentPage
         }
     }
 
-    private  async void CounterLog12_Clicked(object sender, EventArgs e)
+    private   void CounterLog12_Clicked(object sender, EventArgs e)
     {
       
         //string[][] вопросы = new string[Вопросы.Keys][Вопросы.Values;)] {};

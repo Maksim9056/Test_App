@@ -195,12 +195,19 @@ namespace Client
                                                     {
                                                         case 0:
                                                             await DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
-                                                          
-                                                            await Navigation.PushAsync(new Главная_страница());
+                                                            var mainPage = new Главная_страница();
+                                                            var navigationPage = new NavigationPage(mainPage);
+
+                                                            Application.Current.MainPage = navigationPage;
+                                                        //    await Navigation.PushAsync(new ());
                                                             break;
                                                         case 1:
                                                             await DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
-                                                            await Navigation.PushAsync(new Администратор());
+                                                            var mainPage1 = new Администратор();
+                                                            var navigationPage2 = new NavigationPage(mainPage1);
+
+                                                            Application.Current.MainPage = navigationPage2;
+                                                           // await Navigation.PushAsync(new ());
                                                             break;
 
                                                     }

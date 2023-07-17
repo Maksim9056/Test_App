@@ -161,36 +161,87 @@ namespace Server_Test_Users
         {
         }
 
-        public void Searh_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        public void Check_Users_test_insert(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
-        }
-
-        public void Select_job_title(byte[] arg1, GlobalClass @class, NetworkStream stream)
-        {
-            @class.Check_Roles();
-
-
-            if (@class.Count_Roles == 1)
+            @class.Check_Users_test_insert();
+            if (@class.Travels == null)
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    Roles[] roles = new Roles[] { };
-                    
-                    Roles_Travel roles_Travel= new Roles_Travel(roles);
-                    JsonSerializer.Serialize<Roles_Travel>(ms, roles_Travel);
+                    Regis_users [] regis_Users = new Regis_users[] {};
+        //            Regis_users regis_Users = new Regis_users(0, "", "", 0, "2");
+                    Regis_users_test regis_Users_Test = new Regis_users_test {regis = regis_Users };
+                    JsonSerializer.Serialize<Regis_users_test>(ms, regis_Users_Test);
+                    //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                 }
             }
             else
             {
+                // @class.Regis_users
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    Tests test = new Tests(@class.Travels_test);
-                    JsonSerializer.Serialize<Tests>(ms, test);
+                    Regis_users_test regis_Users_Test = new Regis_users_test { regis = @class.Travels };
+                    JsonSerializer.Serialize<Regis_users_test>(ms, regis_Users_Test);
+                    //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                 }
             }
-            //Проверяем должности  какие есть и отправляем клиенту 
+        }
+
+        public void Searh_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            try
+            {
+                @class.Check_Questin();
+
+
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+
+                    Questionss List_Quest = new Questionss(@class.questionss);
+                    JsonSerializer.Serialize<Questionss>(ms, List_Quest);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+            catch
+            {
+
+
+            }
+        }
+
+        public void Select_job_title(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            try
+            {
+                @class.Check_Roles();
+
+
+                if (@class.Count_Roles == 1)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        Roles[] roles = new Roles[] { };
+
+                        Roles_Travel roles_Travel = new Roles_Travel(roles);
+                        JsonSerializer.Serialize<Roles_Travel>(ms, roles_Travel);
+                        stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                    }
+                }
+                else
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        Tests test = new Tests(@class.Travels_test);
+                        JsonSerializer.Serialize<Tests>(ms, test);
+                        stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                    }
+                }
+                //Проверяем должности  какие есть и отправляем клиенту 
+            }catch { }
+
 
         }
 

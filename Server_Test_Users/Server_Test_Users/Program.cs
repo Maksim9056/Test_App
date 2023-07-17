@@ -111,6 +111,8 @@ namespace Server_Test_Users
                 FDictCommands.Add("012", new Action<byte[], GlobalClass, NetworkStream>(command.List_Friens_Message));
                 FDictCommands.Add("013", new Action<byte[], GlobalClass, NetworkStream>(command.List_Friens));
                 FDictCommands.Add("014", new Action<byte[], GlobalClass, NetworkStream>(command.Search_Image_Friends));
+                FDictCommands.Add("015", new Action<byte[], GlobalClass, NetworkStream>(command.Check_Users_test_insert));
+
             }
             catch (Exception E)
             {

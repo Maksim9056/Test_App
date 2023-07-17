@@ -71,9 +71,9 @@ namespace Class_interaction_Users
         ///// id голосового сообщения для воспроизведения 
         ///// </summary>
         //public Insert_Fille_Music Select_Fille_Music_id { get; set; }
+     public static Regis_users_test Regis_Users_Test { get; set; }
 
-
-        public static Questionss_travel Questionss_Travel { get; set; }
+    public static Questionss_travel Questionss_Travel { get; set; }
         /// <summary>
         /// Роли 
         /// </summary>
@@ -468,11 +468,25 @@ namespace Class_interaction_Users
                             completeMessage.AppendFormat("{0}", Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
                         }
                         while (stream.DataAvailable);
+
+
+                    
                         responseDat = completeMessage.ToString();
-                        //Получили данные в строке и десеризовали класс Searh_Friends
-                        //Searh_Friends searh_Friends = JsonSerializer.Deserialize<Searh_Friends>(responseDat);
-                        //_Friends = searh_Friends;
+                    if (string.IsNullOrEmpty(responseDat))
+                    {
+
                     }
+                    else
+                    {
+                        Questionss roles_Accept = JsonSerializer.Deserialize<Questionss>(responseDat);
+
+                        Roles_Accept = roles_Accept;
+                    }
+                 
+                    //Получили данные в строке и десеризовали класс Searh_Friends
+                    //Searh_Friends searh_Friends = JsonSerializer.Deserialize<Searh_Friends>(responseDat);
+                    //_Friends = searh_Friends;
+                }
                 }
                 catch (ArgumentNullException)
                 {
@@ -861,10 +875,23 @@ namespace Class_interaction_Users
                         }
                         else
                         {
-                            //Получили данные в строке и десеризовали класс Searh_Friends
-                            //_Name searh_Friends = JsonSerializer.Deserialize<_Name>(responseDat);
-                            //id_Friends = searh_Friends;
+
+
+                        Regis_users_test msgImage = JsonSerializer.Deserialize<Regis_users_test>(responseDat);
+                        if (msgImage == null)
+                        {
+
                         }
+                        else
+                        {
+
+
+                            Regis_Users_Test = msgImage;
+                        }
+                        //Получили данные в строке и десеризовали класс Searh_Friends
+                        //_Name searh_Friends = JsonSerializer.Deserialize<_Name>(responseDat);
+                        //id_Friends = searh_Friends;
+                         }
 
                     }
                 }

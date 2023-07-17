@@ -10,6 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Net.Sockets;
 
 namespace Server_Test_Users
 {
@@ -39,7 +40,7 @@ namespace Server_Test_Users
 
 
 
-       public  int Count_Roles { get; set; }
+        public int Count_Roles { get; set; }
 
         /// <summary>
         /// Отсылает клиенту ответ 
@@ -66,8 +67,11 @@ namespace Server_Test_Users
         /// </summary>
         public Regis_users? Travel { get; set; }
 
+
+        public Regis_users[] Travels { get; set; }
+
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
-        public Questions [] questionss { get; set; }
+        public Questions[] questionss { get; set; }
 #pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
 
 
@@ -75,12 +79,12 @@ namespace Server_Test_Users
         /// https://metanit.com/sharp/efcore/1.2.php
         /// </summary>
         public class ApplicationContext : DbContext
-        {  
-            public DbSet<Roles> Roles { get; set; } = null!; 
+        {
+            public DbSet<Roles> Roles { get; set; } = null!;
             public DbSet<User_roles> User_Roles { get; set; } = null!;
-     
+
             public DbSet<User> Users { get; set; } = null!;
-            
+
             public DbSet<Questions> Questions { get; set; } = null!;
 
             public DbSet<Test_Questions> Test_Questions { get; set; } = null!;
@@ -89,7 +93,7 @@ namespace Server_Test_Users
 
             public DbSet<Test> Test { get; set; } = null!;
             public DbSet<Exam> Exam { get; set; } = null!;
-            public DbSet<Exams> Exams { get; set; } = null!; 
+            public DbSet<Exams> Exams { get; set; } = null!;
             public DbSet<Save_results> Save_Results { get; set; } = null!;
 
             public ApplicationContext()
@@ -163,7 +167,7 @@ namespace Server_Test_Users
                 {
                     // создаем два объекта User
 
-                    User user1 = new User { Name_Employee = "Admin",Password = "Admin", DataMess = data,Id_roles_users = roles.Id, Employee_Mail = Email};
+                    User user1 = new User { Name_Employee = "Admin", Password = "Admin", DataMess = data, Id_roles_users = roles.Id, Employee_Mail = Email };
 
                     // добавляем их в бд
                     db.Users.AddRange(user1);
@@ -435,20 +439,20 @@ namespace Server_Test_Users
                     }
                 }
 
-         
+
 
                 DateTime dateTime = DateTime.Now;
                 var data = $"{dateTime:F}";
 
                 Roles roles = new Roles { Id = regis_Users.Rechte };
-                
+
 
                 // добавление данных
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     // создаем два объекта User
-                    User user1 = new User { Name_Employee = regis_Users.Name_Employee, Password = regis_Users.Password,  DataMess = data, Id_roles_users = roles.Id, Employee_Mail = regis_Users.Employee_Mail };
-                  //  User user2 = new User { Name = "Alice", Age = 26 };
+                    User user1 = new User { Name_Employee = regis_Users.Name_Employee, Password = regis_Users.Password, DataMess = data, Id_roles_users = roles.Id, Employee_Mail = regis_Users.Employee_Mail };
+                    //  User user2 = new User { Name = "Alice", Age = 26 };
 
 
                     // добавляем их в бд
@@ -530,7 +534,7 @@ namespace Server_Test_Users
             try
             {
                 bool Check = false;
-           //     int Current_User;
+                //     int Current_User;
 
                 using (ApplicationContext db = new ApplicationContext())
                 {
@@ -544,15 +548,15 @@ namespace Server_Test_Users
 
                         foreach (User user in users)
                         {
-                           Check = true;
-                                  Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, user.Id_roles_users, user.Employee_Mail);
+                            Check = true;
+                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, user.Id_roles_users, user.Employee_Mail);
 
                             Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
                         }
                     }
                 }
 
-                if(Check == false) 
+                if (Check == false)
                 {
                     using (ApplicationContext db = new ApplicationContext())
                     {
@@ -577,10 +581,10 @@ namespace Server_Test_Users
                 }
                 else
                 {
-                  
+
                 }
 
-            
+
             }
             catch (Exception ex)
             {
@@ -592,10 +596,10 @@ namespace Server_Test_Users
         {
             try
             {
-         
-                
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
 
@@ -610,8 +614,8 @@ namespace Server_Test_Users
             {
                 // получаем объекты из бд и выводим на консоль
                 var users = db.Roles.Count();
-                Count_roles =users;
-               // Console.WriteLine("Users list:");
+                Count_roles = users;
+                // Console.WriteLine("Users list:");
                 //foreach (int  u in users)
                 //{
 
@@ -641,27 +645,135 @@ namespace Server_Test_Users
             Count_Roles = Count_roles;
         }
 
-        public  void Insert_Questin(Questions Questions)
+        public void Check_Questin()
         {
+            try 
+            {
+                int Count = 0;
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // получаем объекты из бд и выводим на консоль
+                    Count = db.Questions.Count();
+                }
+                if (Count == 0)
+                {
+                    Questions [] questions= new Questions[1];
+                    questions[0].Questionss = "";
 
-            // добавление данных
+                    questionss = questions;
+                }
+                else
+                {
+
+
+                    Questions[] questions = new Questions[Count];
+                    using (ApplicationContext db = new ApplicationContext())
+                    {
+                        // получаем объекты из бд и выводим на консоль
+                        var users = db.Questions.ToList();
+                        Console.WriteLine("Users list:");
+                        int i = 0;
+                        foreach (Questions u in users)
+                        {
+
+                            questions[i] = new Questions { Id = u.Id, Questionss = u.Questionss, Answer_True = u.Answer_True };
+                            i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                        }
+                    }
+                    questionss = questions;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        public void Insert_Questin(Questions Questions)
+        {
+            bool Вопрос = false;
+            //Проверка вопрос на уникальный
             using (ApplicationContext db = new ApplicationContext())
             {
-                // создаем два объекта User
-                Questions user1 = new Questions { Questionss = Questions.Questionss, Answer_True = Questions.Answer_True };
-                //  User user2 = new User { Name = "Alice", Age = 26 };
+                // получаем объекты из бд и выводим на консоль
+                var users = db.Questions.Where(p => p.Questionss == Questions.Questionss);
+                Console.WriteLine("Users list:");
+                int i = 0;
+                Questions[] questions = new Questions[1];
+                foreach (Questions u in users)
+                {
 
+                    Вопрос = true;
+                    questions[i] = new Questions { Id = 0, Questionss = u.Questionss, Answer_True = u.Answer_True };
+                    // i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                }
+                if (questions == null)
+                {
 
-                // добавляем их в бд
-                db.Questions.AddRange(user1);
-                db.SaveChanges();
+                }
+                else
+                {
+                    questionss = questions;
+
+                }
+
             }
+            if (Вопрос == false)
+            {
+                // добавление данных
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // создаем два объекта User
+                    Questions user1 = new Questions { Questionss = Questions.Questionss, Answer_True = Questions.Answer_True };
+                    //  User user2 = new User { Name = "Alice", Age = 26 };
 
+
+                    // добавляем их в бд
+                    db.Questions.AddRange(user1);
+                    db.SaveChanges();
+                }
+
+                int Count = 0;
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // получаем объекты из бд и выводим на консоль
+                    Count = db.Questions.Count();
+                }
+                if (Count == 0)
+                {
+
+                }
+                else
+                {
+                    Questions[] questions = new Questions[Count];
+                    using (ApplicationContext db = new ApplicationContext())
+                    {
+                        // получаем объекты из бд и выводим на консоль
+                        var users = db.Questions.ToList();
+                        Console.WriteLine("Users list:");
+                        int i = 0;
+                        foreach (Questions u in users)
+                        {
+
+                            questions[i] = new Questions { Id = u.Id, Questionss = u.Questionss, Answer_True = u.Answer_True };
+                            i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                        }
+                    }
+                    questionss = questions;
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        public void Check_Users_test_insert()
+        {
             int Count = 0;
             using (ApplicationContext db = new ApplicationContext())
             {
                 // получаем объекты из бд и выводим на консоль
-                Count = db.Questions.Count();
+                Count = db.Users.Count();
             }
             if (Count == 0)
             {
@@ -669,22 +781,31 @@ namespace Server_Test_Users
             }
             else
             {
-                Questions[] questions = new Questions[Count];
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    // получаем объекты из бд и выводим на консоль
-                    var users = db.Questions.ToList();
-                    Console.WriteLine("Users list:");
-                    int i = 0;
-                    foreach (Questions u in users)
+                    var users = db.Users.ToList();
+                    if (users == null)
                     {
 
-                        questions[i] = new Questions { Id = u.Id, Questionss = u.Questionss, Answer_True = u.Answer_True };
-                        i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                    }
+                    else
+                    {
+
+                        Regis_users[] regis_Users = new Regis_users[Count];
+                        int i = 0;
+
+                        foreach (User user in users)
+                        {
+
+                            regis_Users[i] = new Regis_users(user.Id, user.Name_Employee, user.Password, user.Id_roles_users, user.Employee_Mail);
+                            i++;
+                        }
+                        Travels = regis_Users;
                     }
                 }
-                questionss = questions;
             }
         }
+
+
     }
 }

@@ -282,6 +282,7 @@ public partial class Вход_в_учетную_запись : ContentPage
 
         Application.Current.MainPage.Window.MaximumWidth = 413.8d;
         Application.Current.MainPage.Window.MaximumHeight = 520.8d;
+
     }
 
     private void Button_Clicked_1(System.Object sender, System.EventArgs e)
