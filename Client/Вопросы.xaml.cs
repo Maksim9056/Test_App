@@ -105,6 +105,14 @@ public partial class Вопросы : ContentPage
     /// <param name="e"></param>
     private void ContentPage_Loaded(object sender, EventArgs e)
     {
-    //    
+        //    
+        Application.Current.MainPage.Window.Width = 600.8d;
+        Application.Current.MainPage.Window.Height = 400.8d;
+
+        Application.Current.MainPage.Window.MinimumWidth = 600.8d;
+        Application.Current.MainPage.Window.MinimumHeight = 400.8d;
+
+        Application.Current.MainPage.Window.MaximumWidth = 600.8d;
+        Application.Current.MainPage.Window.MaximumHeight = 400.8d;
     }
 }

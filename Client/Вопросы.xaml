@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.Вопросы"
-             Title="Вопросы"
+           
              Loaded="ContentPage_Loaded">
-    <VerticalStackLayout>
+    <VerticalStackLayout WidthRequest="600" HeightRequest="600">
 
 
         <Entry x:Name="nameEntrу5" FontSize="16"
@@ -17,7 +17,7 @@
              HeightRequest="20"
              WidthRequest="310"
              Keyboard ="Text"
-        />
+         />
 
         <Entry x:Name="nameEntrу9" FontSize="16"
              Placeholder ="Введите ответ"

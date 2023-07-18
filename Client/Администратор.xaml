@@ -2,20 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.Администратор"
-             Title="Администратор" >
+              >
     <VerticalStackLayout>
 
+        <Button
+          x:Name="CounterLog3"
+        
+          SemanticProperties.Hint="Counts the number of times you click"
+          Clicked="CounterLog2_Clicked"
+            Text="←"
+          VerticalOptions="Start"
+          BorderColor="Black"
+          BorderWidth="2"
+          BackgroundColor="White"
+          TextColor="Black"
+          HorizontalOptions="Start"
+          FontSize="36" 
+          HeightRequest="10"
+          WidthRequest="50"
+          Margin="-1,-46,0,0"
+          Padding="10"      
+         />
 
-        <StackLayout Padding="8">
-            <Label x:Name="header" Text="Выберит Тест" FontSize="18"
-                       SizeChanged="header_SizeChanged"
-                       />
-            <Picker x:Name="languagePicker" Title = "Тесты"
-                SelectedIndexChanged="PickerSelectedIndexChanged">
-                <Picker.Items>
-
-                </Picker.Items>
-            </Picker>
+        <Grid x:Name="Табличка"  WidthRequest="800" HeightRequest="800">
 
             <Button
                     x:Name="CounterLog1"
@@ -26,34 +35,22 @@
                     HorizontalOptions="CenterAndExpand"
                     FontSize="16" HeightRequest="10"
                     WidthRequest="320"
-                    Margin="10"
+                    Margin="0,80,0,0"
                     Padding="10"
                    />
-           
+
             <Button
                     x:Name="CounterLog2"
-                    Text="Перейти к тестам"
+                    Text="Создать тест"
                     SemanticProperties.Hint="Counts the number of times you click"
                     Clicked="CounterLog3_Clicked"
                     VerticalOptions="Start"
                     HorizontalOptions="CenterAndExpand"
                     FontSize="16" HeightRequest="10"
                     WidthRequest="320"
-                    Margin="10"
+                    Margin="0,8,0,0"
                     Padding="10"
-                   />
-            <Button
-                    x:Name="CounterLog3"
-                    Text="Перейти в начало"
-                    SemanticProperties.Hint="Counts the number of times you click"
-                    Clicked="CounterLog2_Clicked"
-                    VerticalOptions="Start"
-                    HorizontalOptions="CenterAndExpand"
-                    FontSize="16" HeightRequest="10"
-                    WidthRequest="320"
-                    Margin="3, -30, 0,1"
-                    Padding="10"
-                   />
-        </StackLayout>
+                  />
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

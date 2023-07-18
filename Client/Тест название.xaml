@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.Тест_название"
+             Title="Тест_название">
+    <VerticalStackLayout>
+        <Button
+           x:Name="CounterLog3"
+          Text="←"
+          SemanticProperties.Hint="Counts the number of times you click"
+          Clicked="CounterLog3_Clicked"
+          VerticalOptions="Start"
+          BorderColor="Black"
+          BorderWidth="2"
+          BackgroundColor="White"
+          TextColor="Black"
+          HorizontalOptions="Start"
+          FontSize="36" HeightRequest="10"
+          WidthRequest="50"
+          Margin="-1,-46,0,0"
+          Padding="10"
+           />
+
+
+        <Entry x:Name="nameEntrу10" FontSize="16"
+             Placeholder ="Введите название теста!"
+             Margin="20,60,0,-140"
+             TextChanged="nameEntrу10_TextChanged"
+             VerticalOptions="Start"
+             HorizontalOptions="Start"
+             HeightRequest="20"
+             WidthRequest="310"
+             Keyboard ="Text"
+        />
+        <Button
+                x:Name="CounterLog13"
+                 Text="Сохранить"
+                 SemanticProperties.Hint="Counts the number of times you click"
+                  Clicked="CounterLog13_Clicked"
+                 VerticalOptions="Start"
+                HorizontalOptions="Start"
+                FontSize="16" HeightRequest="10"
+                WidthRequest="110"
+                Margin="10,190,0,0"
+                Padding="10"
+        />
+
+
+
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.Список_пользователей"
+           
+             Loaded="ContentPage_Loaded">
+    <VerticalStackLayout WidthRequest="500" HeightRequest="100" >
+ 
+        <Button
+           x:Name="CounterLog7"
+          Text="→"
+          SemanticProperties.Hint="Counts the number of times you click"
+          Clicked="CounterLog7_Clicked"
+          VerticalOptions="End"
+          BorderColor="Black"
+          BorderWidth="2"
+          BackgroundColor="White"
+          TextColor="Black"
+          HorizontalOptions="End"
+          FontSize="36" 
+          HeightRequest="10"
+          WidthRequest="50"
+          Padding="10"
+            Margin="0,-154,-30,-90"
+           />
+
+        <Entry x:Name="nameEntrу10" FontSize="16"
+             Placeholder ="Выберите пользователя в таблице!"
+             Margin="180,100,0,-570"
+             TextChanged="nameEntrу10_TextChanged"
+             VerticalOptions="Start"
+             HorizontalOptions="Start"
+             HeightRequest="20"
+             WidthRequest="310"
+             Keyboard ="Text"
+        />
+        <Button
+          x:Name="Counter"
+          Text="Добавить"
+          SemanticProperties.Hint="Counts the number of times you click"
+          Clicked="Counter_Clicked"
+          VerticalOptions="Start"
+          HorizontalOptions="Start"
+          FontSize="16" 
+          HeightRequest="10"
+          WidthRequest="100"
+          Margin="180,600,0,-240"
+          Padding="10"
+               />
+        <Label x:Name="selecteds" Text="Пользователи" VerticalOptions="Start" HorizontalOptions="Start" Margin="-30,120,0,-80"/>
+
+
+        <Grid Margin="-30,90,0,0"   VerticalOptions="End"  HorizontalOptions="Start">
+
+
+            <Border Stroke="Gray" BackgroundColor="White" WidthRequest="200" HeightRequest="250" >
+
+                <ListView x:Name="usersList1" ItemSelected="usersList1_ItemSelected"/>
+            </Border>
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>

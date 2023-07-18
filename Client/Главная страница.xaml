@@ -8,9 +8,7 @@
         <StackLayout Padding="8">
             <Label x:Name="header" Text="Выберите Тест" FontSize="18"
                        SizeChanged="header_SizeChanged"
-                
-                
-                       />
+                 />
             <Picker x:Name="languagePicker" Title = "Тест"
                 SelectedIndexChanged="PickerSelectedIndexChanged">
                 <Picker.Items>
@@ -18,6 +16,6 @@
                 </Picker.Items>
             </Picker>
         </StackLayout>
-        
+
     </VerticalStackLayout>
 </ContentPage>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.Вопросы_для_теста"
+            
+             Loaded="ContentPage_Loaded">
+    <VerticalStackLayout >
+
+ 
+
+
+        <Button
+           x:Name="CounterLog4"
+          Text="→"
+          SemanticProperties.Hint="Counts the number of times you click"
+          Clicked="CounterLog4_Clicked"
+          VerticalOptions="Start"
+          BorderColor="Black"
+          BorderWidth="2"
+          BackgroundColor="White"
+          TextColor="Black"
+          HorizontalOptions="Start"
+          FontSize="36" HeightRequest="10"
+          WidthRequest="50"
+          Margin="525,-46,0,0"
+          Padding="10"
+           />
+
+
+
+        <Entry x:Name="nameEntrу10" FontSize="16"
+             Placeholder ="Выбирите вопрос в таблице!"
+             Margin="210,60,0,-140"
+             TextChanged="nameEntrу10_TextChanged"
+             VerticalOptions="Start"
+             HorizontalOptions="Start"
+             HeightRequest="20"
+             WidthRequest="310"
+             Keyboard ="Text"
+        />
+
+        <Entry x:Name="nameEntrу19" FontSize="16"
+             Placeholder ="Выбирите Ответ в таблице!"
+             Margin="210,170,30,-380"
+             TextChanged="nameEntrу19_TextChanged"
+             VerticalOptions="Start"
+             HorizontalOptions="Start"
+             HeightRequest="20"
+             WidthRequest="280"
+             Keyboard ="Text"
+        />
+        
+        <Button
+          x:Name="CounterLog2"
+          Text="Добавить"
+          SemanticProperties.Hint="Counts the number of times you click"
+          Clicked="CounterLog2_Clicked"
+          VerticalOptions="Start"
+          HorizontalOptions="Start"
+          FontSize="16" 
+          HeightRequest="10"
+          WidthRequest="100"
+          Margin="220,410,0,-23"
+          Padding="10"
+               />
+        <Label x:Name="selectedS" Text="Вопросы"  VerticalOptions="Start"
+                    HorizontalOptions="Start" Margin="0,-230,0,10"/>
+        <Grid Margin="0, 0, 0,0"  VerticalOptions="Start"
+                    HorizontalOptions="Start">
+            <Border Stroke="Gray" BackgroundColor="White" WidthRequest="200" HeightRequest="250"  >
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="5" />
+                </Border.StrokeShape>
+                <ListView x:Name="usersList2" ItemSelected="usersList2_ItemSelected" />
+            </Border>
+        </Grid>
+        <Label x:Name="selectedsы" Text="Ответы" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,0,0,0"/>
+        <Grid Margin="0,10,360,0"   VerticalOptions="StartAndExpand" HorizontalOptions="Start">
+            <Border Stroke="Gray" BackgroundColor="White" WidthRequest="200" HeightRequest="250" >
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="5"/>
+                </Border.StrokeShape>
+                <ListView x:Name="usersList3" ItemSelected="usersList3_ItemSelected"/>
+            </Border>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

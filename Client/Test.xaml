@@ -1,103 +1,54 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Client.Test"
-             Title="Test"
-              Loaded="ContentPage_Loaded">
-    <VerticalStackLayout>
-        <Entry x:Name="nameEntrу5" FontSize="16"
-             Placeholder ="Выберите вопросы"
-             Margin="10"
-             TextChanged="nameEntrу5_TextChanged"
-               
-             VerticalOptions="Start"
-             HorizontalOptions="Start"
-             HeightRequest="20"
-             WidthRequest="310"
-             Keyboard ="Text"
-        />
+             x:Class="Client.Test"     
+             Loaded="ContentPage_Loaded"
+             >
+    
+    <VerticalStackLayout WidthRequest="400" HeightRequest="6">
 
-        <Entry x:Name="nameEntrу9" FontSize="16"
-             Placeholder ="Выберите ответ"
-             Margin="10"
-             TextChanged="nameEntrу9_TextChanged"
-             VerticalOptions="Start"
-             HorizontalOptions="Start"
-             HeightRequest="20"
-             WidthRequest="310"
-             Keyboard ="Text"
-        />
-        <Button
-                x:Name="CounterLog14"
-                 Text="Вернуться к администраторским настройкам"
-                 SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="CounterLog14_Clicked"
-                 VerticalOptions="Start"
-                HorizontalOptions="Start"
-                FontSize="16" HeightRequest="10"
-                WidthRequest="420"
-                Margin="0, 0, 0,0"
-                Padding="10"
-        />
-        <Button
-                x:Name="CounterLog13"
-                 Text="Сохранить вопрос и ответ"
-                 SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="CounterLog13_Clicked"
-                 VerticalOptions="Start"
-                HorizontalOptions="Start"
-                FontSize="16" HeightRequest="10"
-                WidthRequest="310"
-                Margin="0, 20, 20,0"
-                Padding="10"
-             
-        />
+    
+ 
+        <Grid  Padding="20">
+            
+            <Border Stroke="Gray" BackgroundColor="White" WidthRequest="250" HeightRequest="80">
+                
+                <StackLayout>
+                    
+                    <Button
+                     x:Name="CounterLog16"
+                     Text="Отменить"
+                     SemanticProperties.Hint="Counts the number of times you click"
+                     Clicked="CounterLog16_Clicked"
+                     VerticalOptions="Start"
+                     HorizontalOptions="Start"
+                     FontSize="16" 
+                     HeightRequest="10"
+                     WidthRequest="110"
+                     Margin="10, 10,0, 0"
+                     Padding="10"           
+                    />
 
-      
-
-        <Label x:Name="selectedS" Text="Вопросы"  VerticalOptions="End"
-                    HorizontalOptions="End" Margin="0,-220,140,9"/>
+                    <Button
+                      x:Name="CounterLog13"
+                      Text="Сохранить"
+                      SemanticProperties.Hint="Counts the number of times you click"
+                      Clicked="CounterLog13_Clicked"
+                      VerticalOptions="End"
+                      HorizontalOptions="End"
+                      FontSize="16" 
+                      HeightRequest="10"
+                      WidthRequest="110"
+                      Margin="10, -44, 12, 0"
+                      Padding="10"
+                     />
+                    
+                </StackLayout>
+                
+            </Border>
+            
+        </Grid>
         
-        
-        <Grid Margin="0, 0, 10,0"  VerticalOptions="End"
-                    HorizontalOptions="End">
-
-
-
-            <Border Stroke="Gray" BackgroundColor="White" WidthRequest="200" HeightRequest="250"  >
-                <ListView x:Name="usersList2" ItemSelected="usersList1_ItemSelected" />
-            </Border>
-           
-        </Grid>
-
-
-        <Label x:Name="selecteds" Text="Пользователи" VerticalOptions="End" HorizontalOptions="End" Margin="90,0,110,0"/>
-
-
-        <Grid Margin="0,0,10,0"   VerticalOptions="End"
-                    HorizontalOptions="End">
-
-
-            <Border Stroke="Gray" BackgroundColor="White" WidthRequest="200" HeightRequest="250" >
-
-                <ListView x:Name="usersList1" ItemSelected="usersList1_ItemSelected"/>
-            </Border>
-        </Grid>
-
-        <Label x:Name="selectedsы" Text="Ответы" VerticalOptions="Center" HorizontalOptions="Center" Margin="-10,-550,-800,0"/>
-
-
-        <Grid Margin="890,10,10,0"   VerticalOptions="Center"
-                    HorizontalOptions="Center">
-
-
-            <Border Stroke="Gray" BackgroundColor="White" WidthRequest="200" HeightRequest="250" >
-
-                <ListView x:Name="usersList3" ItemSelected="usersList3_ItemSelected"/>
-            </Border>
-        </Grid>
-
-
-
     </VerticalStackLayout>
+    
 </ContentPage>

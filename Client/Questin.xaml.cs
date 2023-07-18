@@ -213,11 +213,11 @@ public partial class Questin : ContentPage
         {
             string FileFS = "";
             //Admin @Admin.ru
-            //Application.Current.MainPage.Window.
-            Application.Current.MainPage.Window.MinimumWidth = 1550;
-            Application.Current.MainPage.Window.MinimumHeight = 1250;
-            Application.Current.MainPage.Window.MaximumWidth = 1550;
-            Application.Current.MainPage.Window.MaximumHeight = 1300;
+           // Application.Current.MainPage.Window.
+            Application.Current.MainPage.Window.MinimumWidth = 750;
+            Application.Current.MainPage.Window.MinimumHeight = 300;
+            Application.Current.MainPage.Window.MaximumWidth = 750;
+            Application.Current.MainPage.Window.MaximumHeight = 300;
 
             Task.Run(async () => await command.Connect_Friends(Ip_adress.Ip_adresss, FileFS, "008")).Wait();
             string[] strings = new string[CommandCL.Roles_Accept.Quest.Length];
