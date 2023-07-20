@@ -34,7 +34,7 @@
                          WidthRequest="370"
                          TextChanged="nameEntry1_TextChanged"
                          Keyboard ="Text"
-                         Margin="10, 100, -0, 0"
+                         Margin="10, 90, -0, 0"
                             
                        />
                         

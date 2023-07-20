@@ -17,6 +17,8 @@
 		<ApplicationId>com.companyname.client</ApplicationId>
 		<ApplicationIdGuid>65c78fd1-c930-4471-9266-46aa6ba38793</ApplicationIdGuid>
 
+		<JavaPlatformJarPath>C:\Program Files\Android\jdk\jdk-8.0.302.8-hotspot\jdk8u302-b08\bin</JavaPlatformJarPath>
+
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
@@ -31,6 +33,7 @@
 
 	<PropertyGroup>
 	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+	  <DefaultLanguage>ru-ru</DefaultLanguage>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -69,6 +72,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Project\QuestionListPage.xaml.cs">
+	    <DependentUpon>QuestionListPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Project\QuestionListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Questin.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -99,10 +111,6 @@
 	  <MauiXaml Update="Тест название.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Project\" />
 	</ItemGroup>
 
 </Project>

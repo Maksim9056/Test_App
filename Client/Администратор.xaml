@@ -28,7 +28,7 @@
 
             <Button
                     x:Name="CounterLog1"
-                    Text="Создать вопросы"
+                    Text="Справочник вопросов"
                     SemanticProperties.Hint="Counts the number of times you click"
                     Clicked="CounterLog1_Clicked"
                     VerticalOptions="Start"
@@ -41,14 +41,14 @@
 
             <Button
                     x:Name="CounterLog2"
-                    Text="Создать тест"
+                    Text="Справочник тестов"
                     SemanticProperties.Hint="Counts the number of times you click"
                     Clicked="CounterLog3_Clicked"
                     VerticalOptions="Start"
                     HorizontalOptions="CenterAndExpand"
                     FontSize="16" HeightRequest="10"
                     WidthRequest="320"
-                    Margin="0,8,0,0"
+                    Margin="0,20,0,0"
                     Padding="10"
                   />
         </Grid>

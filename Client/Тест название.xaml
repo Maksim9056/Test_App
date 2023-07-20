@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.Тест_название"
              Title="Тест_название">
+    
     <VerticalStackLayout>
         <Button
-           x:Name="CounterLog3"
+          x:Name="CounterLog3"
           Text="←"
           SemanticProperties.Hint="Counts the number of times you click"
           Clicked="CounterLog3_Clicked"
@@ -34,10 +35,10 @@
         />
         <Button
                 x:Name="CounterLog13"
-                 Text="Сохранить"
-                 SemanticProperties.Hint="Counts the number of times you click"
-                  Clicked="CounterLog13_Clicked"
-                 VerticalOptions="Start"
+                Text="Сохранить"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="CounterLog13_Clicked"
+                VerticalOptions="Start"
                 HorizontalOptions="Start"
                 FontSize="16" HeightRequest="10"
                 WidthRequest="110"
