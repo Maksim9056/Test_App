@@ -93,34 +93,34 @@
 	  <MauiXaml Update="Project\RefUser\RefUserListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Questin.xaml">
+	  <MauiXaml Update="Project\Old\Questin.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Test.xaml">
+	  <MauiXaml Update="Project\Old\Test.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Администратор.xaml">
+	  <MauiXaml Update="Project\Old\Администратор.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Вопросы для теста.xaml">
+	  <MauiXaml Update="Project\Old\Вопросы для теста.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Вопросы.xaml">
+	  <MauiXaml Update="Project\Old\Вопросы.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Вход в учетную запись.xaml">
+	  <MauiXaml Update="Project\Old\Вход в учетную запись.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Главная страница.xaml">
+	  <MauiXaml Update="Project\Old\Главная страница.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Регистрация.xaml">
+	  <MauiXaml Update="Project\Old\Регистрация.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Список пользователей.xaml">
+	  <MauiXaml Update="Project\Old\Список пользователей.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Тест название.xaml">
+	  <MauiXaml Update="Project\Old\Тест название.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
