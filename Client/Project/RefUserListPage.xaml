@@ -36,7 +36,8 @@
                                         CommandParameter="{Binding .}" Grid.Column="1" />
                                 <Button Text="Выбрать"  
                                         Command="{Binding SelectCommand}"  
-                                        CommandParameter="{Binding .}" Grid.Column="2" />
+                                        CommandParameter="{Binding .}" Grid.Column="2" 
+                                        IsVisible="False" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
