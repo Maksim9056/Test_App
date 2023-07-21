@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             x:Class="Client.Project.RefUserListPage"  
+             Title="Справочник пользователей">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <!-- Дополнительная строка для кнопки -->
+            </Grid.RowDefinitions>
+            <ListView x:Name="UserList"  
+                      ItemSelected="OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <!-- Ширина в 2/3 -->
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding User}" Grid.Column="0"
+                                        FontSize="16"
+                                        FontFamily="Arial"
+                                        FontAttributes="Bold"
+                                        TextColor="Red"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center" />
+                                <Button Text="Редактировать"  
+                                        Command="{Binding EditCommand}"  
+                                        CommandParameter="{Binding .}" Grid.Column="1" />
+                                <Button Text="Выбрать"  
+                                        Command="{Binding SelectCommand}"  
+                                        CommandParameter="{Binding .}" Grid.Column="2" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Назад"  
+                    Clicked="GoBack" Grid.Row="1" />
+            <!-- Размещение кнопки во второй строке -->
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

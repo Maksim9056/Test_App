@@ -101,6 +101,23 @@ public partial class Администратор : ContentPage
 
         Application.Current.MainPage = navigationPage;
     }
+
+    private void CounterLog4_Clicked(object sender, EventArgs e)
+    {
+        var mainPage = new Project.RefUserListPage();
+        var navigationPage = new NavigationPage(mainPage);
+
+        Application.Current.MainPage = navigationPage;
+
+    }
+    private void GoBack(object sender, EventArgs e)
+    {
+        var mainPage = new MainPage();
+        var navigationPage = new NavigationPage(mainPage);
+
+        Application.Current.MainPage = navigationPage;
+    }
+
 }
 
 
