@@ -217,6 +217,37 @@ namespace Server_Test_Users
             }
         }
 
+        public void Update_Users(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            User? UpUser = JsonSerializer.Deserialize<User>(arg1);
+
+            @class.Update_Users_ds(UpUser);
+            //if (@class.UserListTest == null)
+            //{
+            //    using (MemoryStream ms = new MemoryStream())
+            //    {
+            //        Regis_users[] regis_Users = new Regis_users[] { };
+            //        //            Regis_users regis_Users = new Regis_users(0, "", "", 0, "2");
+            //        Regis_users_test regis_Users_Test = new Regis_users_test { regis = regis_Users };
+            //        JsonSerializer.Serialize<Regis_users_test>(ms, regis_Users_Test);
+            //        //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+            //        stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+            //    }
+            //}
+            //else
+            //{
+            //    using (MemoryStream ms = new MemoryStream())
+            //    {
+            //        UserList regis_Users_Test = new UserList { };
+            //        regis_Users_Test.ListUser = @class.UserListTest;
+            //        JsonSerializer.Serialize<UserList>(ms, regis_Users_Test);
+            //        //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+            //        stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+            //    }
+            //}
+        }
+
+
 
         public void Searh_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {

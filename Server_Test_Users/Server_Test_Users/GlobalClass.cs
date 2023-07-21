@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Net.Sockets;
+using System.Text.Json;
 
 namespace Server_Test_Users
 {
@@ -834,7 +835,27 @@ namespace Server_Test_Users
             }
         }
 
+        public void Update_Users_ds(User updatedUser)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // Retrieve the existing user from the database based on the user's ID
+                User existingUser = db.Users.FirstOrDefault(u => u.Id == updatedUser.Id);
 
+                if (existingUser != null)
+                {
+                    // Update the properties of the existing user with the new values
+                    existingUser.Name_Employee = updatedUser.Name_Employee;
+                    existingUser.Password = updatedUser.Password;
+                    existingUser.DataMess = updatedUser.DataMess;
+                    existingUser.Id_roles_users = updatedUser.Id_roles_users;
+                    existingUser.Employee_Mail = updatedUser.Employee_Mail;
+
+                    // Save the changes to the database
+                    db.SaveChanges();
+                }
+            }
+        }
 
     }
 }

@@ -32,7 +32,7 @@
             </StackLayout>
 
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Margin="10">
-                <Button Text="Созранить" Clicked="SaveButton_Click" />
+                <Button Text="Сохранить" Clicked="SaveButton_Click" />
                 <Button Text="Отмена" Clicked="CancelButton_Click" />
             </StackLayout>
         </Grid>
