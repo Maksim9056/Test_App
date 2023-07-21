@@ -112,8 +112,9 @@ namespace Server_Test_Users
                 FDictCommands.Add("013", new Action<byte[], GlobalClass, NetworkStream>(command.List_Friens));
                 FDictCommands.Add("014", new Action<byte[], GlobalClass, NetworkStream>(command.Search_Image_Friends));
                 FDictCommands.Add("015", new Action<byte[], GlobalClass, NetworkStream>(command.Check_Users_test_insert));
-                FDictCommands.Add("016", new Action<byte[], GlobalClass, NetworkStream>(command.Check_Users)); // получить список User
+                FDictCommands.Add("016", new Action<byte[], GlobalClass, NetworkStream>(command.Check_Users));  // получить список User
                 FDictCommands.Add("017", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Users)); // Изменить данные User
+                FDictCommands.Add("018", new Action<byte[], GlobalClass, NetworkStream>(command.Create_Users)); // Создать данные User
 
             }
             catch (Exception E)

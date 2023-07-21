@@ -1,12 +1,20 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
+using System.Net;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+
 
 namespace Class_interaction_Users
 {
-        public class UserEditorViewModel : INotifyPropertyChanged
+
+    public class UserEditorViewModel : INotifyPropertyChanged
         {
+            public CommandCL command = new CommandCL();
+
             private int id;
             private string name_Employee;
             private string password;
@@ -99,9 +107,27 @@ namespace Class_interaction_Users
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
 
-            public void SaveUser()
+            public void CreateUserData(User user)
             {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    JsonSerializer.Serialize<User>(memoryStream, user);
+                    Task.Run(async () => await command.UpdateUser(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "018")).Wait();
+                }
 
+            }
+
+            public void UpDateUserData(User user)
+            {
+                // Implement the logic to save the user data
+                // Example: Call a service or repository method to save the user data
+                // SaveUser(user);
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    JsonSerializer.Serialize<User>(memoryStream, user);
+                    Task.Run(async () => await command.UpdateUser(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "017")).Wait();
+                }
             }
 
     }

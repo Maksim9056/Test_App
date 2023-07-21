@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 namespace Class_interaction_Users
 {
 
+    public class Ip_adress
+    {
+        public static string Ip_adresss { get; set; } = "127.0.0.1";
+    }
+
     /// <summary>
     /// Пользователь
     /// </summary>

@@ -857,5 +857,24 @@ namespace Server_Test_Users
             }
         }
 
+        public void Create_Users_ds(User newUser)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                User user = new User
+                {
+                    Name_Employee = newUser.Name_Employee,
+                    Password = newUser.Password,
+                    DataMess = newUser.DataMess,
+                    Id_roles_users = newUser.Id_roles_users,
+                    Employee_Mail = newUser.Employee_Mail
+                };
+
+                db.Users.Add(user);
+                db.SaveChanges();
+            }
+        }
+
+
     }
 }

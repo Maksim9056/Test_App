@@ -17,8 +17,6 @@ namespace Client.Project
     {
         private UserEditorViewModel viewModel;
 
-        public CommandCL command = new CommandCL();
-
         public UserEditor(User user)
         {
             InitializeComponent();
@@ -57,7 +55,7 @@ namespace Client.Project
 
             // Perform the necessary operations to save the updated or new User data
             // Example: Call a method to save the user data to a database or update an existing record
-            SaveUserData(user);
+            viewModel.UpDateUserData(user);
 
             // Display a message to indicate that the user data has been saved successfully
             DisplayAlert("Изменения сохранены", "", "OK");
@@ -67,23 +65,7 @@ namespace Client.Project
             GoBack(sender, e);
         }
 
-        private void SaveUserData(User user)
-        {
-            // Implement the logic to save the user data
-            // Example: Call a service or repository method to save the user data
-            // SaveUser(user);
-
-            string FileFS = "";
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                //User questions = new User;
-                JsonSerializer.Serialize<User>(memoryStream, user);
-                FileFS = Encoding.Default.GetString(memoryStream.ToArray());
-                Task.Run(async () => await command.UpdateUser(Ip_adress.Ip_adresss, FileFS, "017")).Wait();
-            }
-        }
-
-            private void CancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             // Обработчик для кнопки "Отмена"
             // В этом методе вы можете выполнить действия при отмене редактирования пользователя
@@ -93,7 +75,7 @@ namespace Client.Project
 
             // Закрыть окно без сохранения
             Navigation.PopModalAsync();
-            GoBack(sender,e);
+            GoBack(sender, e);
 
         }
 
