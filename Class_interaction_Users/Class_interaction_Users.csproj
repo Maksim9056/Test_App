@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="ComandCL.cs" />
     <Compile Include="Global_class.cs" />
+    <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -145,5 +145,10 @@ namespace Client.Project
             public Command EditCommand { get; set; }
             public Command SelectCommand { get; set; }
         }
+
+        private void CreateButtonClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new UserCreate());
+        }
     }
 }

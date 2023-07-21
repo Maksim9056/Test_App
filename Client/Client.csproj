@@ -72,19 +72,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Project\UserEditor.xaml.cs">
+	  <Compile Update="Project\RefUser\UserCreate.xaml.cs">
+	    <DependentUpon>UserCreate.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Project\RefUser\UserEditor.xaml.cs">
 	    <DependentUpon>UserEditor.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\RefUserListPage.xaml.cs">
+	  <Compile Update="Project\RefUser\RefUserListPage.xaml.cs">
 	    <DependentUpon>RefUserListPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Project\UserEditor.xaml">
+	  <MauiXaml Update="Project\RefUser\UserCreate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\RefUserListPage.xaml">
+	  <MauiXaml Update="Project\RefUser\UserEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Project\RefUser\RefUserListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Questin.xaml">

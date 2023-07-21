@@ -10,7 +10,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
-                <!-- Дополнительная строка для кнопки -->
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <ListView x:Name="UserList"  
                       ItemSelected="OnItemSelected">
@@ -43,9 +43,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Text="Создать"
+                    Clicked="CreateButtonClicked" Grid.Row="1" />
             <Button Text="Назад"  
-                    Clicked="GoBack" Grid.Row="1" />
-            <!-- Размещение кнопки во второй строке -->
+                    Clicked="GoBack" Grid.Row="2" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
