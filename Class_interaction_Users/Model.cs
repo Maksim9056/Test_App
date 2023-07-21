@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
-
+using System.Collections.ObjectModel;
 
 namespace Class_interaction_Users
 {
@@ -14,6 +14,8 @@ namespace Class_interaction_Users
     public class UserEditorViewModel : INotifyPropertyChanged
         {
             public CommandCL command = new CommandCL();
+
+            public ObservableCollection<User> Users { get; set; }
 
             private int id;
             private string name_Employee;
@@ -100,35 +102,58 @@ namespace Class_interaction_Users
                 }
             }
 
-            public event PropertyChangedEventHandler PropertyChanged;
+        private PropertyChangedEventHandler propertyChanged;
 
-            protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
+        public event PropertyChangedEventHandler PropertyChanged
+        {
+            add => propertyChanged += value;
+            remove => propertyChanged -= value;
+        }
 
-            public void CreateUserData(User user)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            propertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+        public void CreateUserData(User user)
             {
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
                     JsonSerializer.Serialize<User>(memoryStream, user);
-                    Task.Run(async () => await command.UpdateUser(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "018")).Wait();
+                    Task.Run(async () => await command.CreateUser(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "018")).Wait();
                 }
 
             }
 
             public void UpDateUserData(User user)
             {
-                // Implement the logic to save the user data
-                // Example: Call a service or repository method to save the user data
-                // SaveUser(user);
+            // Implement the logic to save the user data
+            // Example: Call a service or repository method to save the user data
+            // UpDateUser(user);
 
-                using (MemoryStream memoryStream = new MemoryStream())
+            using (MemoryStream memoryStream = new MemoryStream())
                 {
                     JsonSerializer.Serialize<User>(memoryStream, user);
                     Task.Run(async () => await command.UpdateUser(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "017")).Wait();
                 }
             }
 
+            public void DelUserData(User user)
+            {
+                // Implement the logic to save the user data
+                // Example: Call a service or repository method to save the user data
+                // DelUser(user);
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    JsonSerializer.Serialize<User>(memoryStream, user);
+                    Task.Run(async () => await command.DelUser(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "019")).Wait();
+                }
+            }
+
+
     }
+
+
 }

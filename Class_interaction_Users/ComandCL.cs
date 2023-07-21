@@ -1168,6 +1168,86 @@ namespace Class_interaction_Users
             }
         }
 
+        // Проццедура отправки 018
+        async public Task CreateUser(String server, string fs, string command)
+        {
+            try
+            {
+                using (TcpClient client = new TcpClient(server, 9595))
+                {
+                    Byte[] data = System.Text.Encoding.Default.GetBytes(command + fs);
+                    NetworkStream stream = client.GetStream();
+                    await stream.WriteAsync(data, 0, data.Length);
+                    String responseDat = String.Empty;
+                    Byte[] readingData = new Byte[256];
+                    StringBuilder completeMessage = new StringBuilder();
+                    int numberOfBytesRead = 0;
+                    do
+                    {
+                        numberOfBytesRead = stream.Read(readingData, 0, readingData.Length);
+                        completeMessage.AppendFormat("{0}", Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
+                    }
+                    while (stream.DataAvailable);
+                    responseDat = completeMessage.ToString();
+
+                    if (string.IsNullOrEmpty(responseDat))
+                    {
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                // MessageBox.Show("ArgumentNullException:{0}", e.Message);
+            }
+            catch (SocketException)
+            {
+                //MessageBox.Show("SocketException: {0}", e.Message);
+            }
+        }
+
+        async public Task DelUser(String server, string fs, string command)
+        {
+            try
+            {
+                using (TcpClient client = new TcpClient(server, 9595))
+                {
+                    Byte[] data = System.Text.Encoding.Default.GetBytes(command + fs);
+                    NetworkStream stream = client.GetStream();
+                    await stream.WriteAsync(data, 0, data.Length);
+                    String responseDat = String.Empty;
+                    Byte[] readingData = new Byte[256];
+                    StringBuilder completeMessage = new StringBuilder();
+                    int numberOfBytesRead = 0;
+                    do
+                    {
+                        numberOfBytesRead = stream.Read(readingData, 0, readingData.Length);
+                        completeMessage.AppendFormat("{0}", Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
+                    }
+                    while (stream.DataAvailable);
+                    responseDat = completeMessage.ToString();
+
+                    if (string.IsNullOrEmpty(responseDat))
+                    {
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                // MessageBox.Show("ArgumentNullException:{0}", e.Message);
+            }
+            catch (SocketException)
+            {
+                //MessageBox.Show("SocketException: {0}", e.Message);
+            }
+        }
+
+
     }
 
 }

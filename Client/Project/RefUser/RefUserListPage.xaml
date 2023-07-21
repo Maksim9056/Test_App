@@ -13,7 +13,8 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <ListView x:Name="UserList"  
-                      ItemSelected="OnItemSelected">
+                      ItemSelected="OnItemSelected"
+                      ItemsSource="{Binding Users}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -34,10 +35,10 @@
                                 <Button Text="Редактировать"  
                                         Command="{Binding EditCommand}"  
                                         CommandParameter="{Binding .}" Grid.Column="1" />
-                                <Button Text="Выбрать"  
-                                        Command="{Binding SelectCommand}"  
+                                <Button Text="Удалить"  
+                                        Command="{Binding DelCommand}"  
                                         CommandParameter="{Binding .}" Grid.Column="2" 
-                                        IsVisible="False" />
+                                        IsVisible="True" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

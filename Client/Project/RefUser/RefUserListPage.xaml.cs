@@ -1,4 +1,3 @@
-//namespace Client.Project;
 using System;
 using System.Collections.Generic;
 using Microsoft.Maui.Controls;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Class_interaction_Users;
-//using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace Client.Project
 {
@@ -16,88 +15,50 @@ namespace Client.Project
 
         public CommandCL command = new CommandCL();
 
-        public List<RefUser> Пользователи_для_теста = new List<RefUser>();
-        //public Command EditCommand { get; set; }
-        //public Command SelectCommand { get; set; }
+
+        private UserEditorViewModel viewModel;
+
         public RefUserListPage()
         {
             InitializeComponent();
+            viewModel = new UserEditorViewModel();
             UserList.ItemsSource = GetUser();
-            //EditCommand = new Command(EditQuestion);
-            //SelectCommand = new Command(SelectQuestion);
+        }
+
+        private void UpdateForm()
+        {
+            UserList.ItemsSource = GetUser();
         }
 
         private void ContentPage_Loaded(object sender, EventArgs e)
         {
-
-
             //Application.Current.MainPage.Window.MinimumWidth = 580;
             //Application.Current.MainPage.Window.MinimumHeight = 400;
             //Application.Current.MainPage.Window.MaximumWidth = 590;
             //Application.Current.MainPage.Window.MaximumHeight = 400;
-
         }
-
 
         // Метод для получения списка вопросов
         private List<RefUser> GetUser()
         {
+            List<RefUser> aUserList = new List<RefUser>();
 
             Task.Run(async () => await command.GetUserList(Ip_adress.Ip_adresss, "", "016")).Wait();
 
             if (CommandCL.UserListGet == null)
             {
-
             }
             else
-            {
-                //string[] strings = new string[CommandCL.UserListGet.ListUser.Count];
-                //for (int i = 0; i < strings.Length; i++)
-                //{
-                //    strings[i] = CommandCL.UserListGet.ListUser[i].Name_Employee;
-                //}
-
-
+            {     
                 for (int i = 0; i < CommandCL.UserListGet.ListUser.Count; i++)
                 {
-                     var Ref = new RefUser { User = CommandCL.UserListGet.ListUser[i], EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) };
-                     Пользователи_для_теста.Add(Ref);
-
+                     var Ref = new RefUser { User = CommandCL.UserListGet.ListUser[i], EditCommand = new Command(EditUser), DelCommand = new Command(DelUser) };
+                    aUserList.Add(Ref);
                 }
-
-                //UserList.ItemsSource = Пользователи_для_теста;
             }
-
             // Здесь вы можете получить список вопросов из вашего источника данных
             // Возвращаем примерный список вопросов для демонстрации
-            return Пользователи_для_теста;
-
-
-            //return new List<RefUser>
-            //{
-            //new RefUser { User = "Пользователь 1", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 2", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) },
-            //new RefUser { User = "Пользователь 3", EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) }
-
-            //};
+            return aUserList;
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -123,12 +84,16 @@ namespace Client.Project
         }
 
         // Метод для выбора вопроса
-        private void SelectUser(object question)
+        private void DelUser(object question)
         {
             var selectedUser = (RefUser)question;
-            // Выполните здесь необходимые действия при нажатии кнопки "Выбрать"
+
+            viewModel.DelUserData(selectedUser.User);
+
+            // Выполните здесь необходимые действия при нажатии кнопки "Удалить"
             // Например, передайте выбранный вопрос обратно на предыдущую страницу или выполните другую логику
-            DisplayAlert("Выбирается пользователь", selectedUser.User.Name_Employee, "OK");
+            DisplayAlert("Удаляется пользователь", selectedUser.User.Name_Employee, "OK");
+            UpdateForm();
         }
 
         private void GoBack(object sender, EventArgs e)
@@ -143,7 +108,7 @@ namespace Client.Project
         {
             public User User { get; set; }
             public Command EditCommand { get; set; }
-            public Command SelectCommand { get; set; }
+            public Command DelCommand { get; set; }
         }
 
         private void CreateButtonClicked(object sender, EventArgs e)

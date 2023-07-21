@@ -875,6 +875,17 @@ namespace Server_Test_Users
             }
         }
 
-
+        public void Del_Users_ds(int userId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                User user = db.Users.FirstOrDefault(u => u.Id == userId);
+                if (user != null)
+                {
+                    db.Users.Remove(user);
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }

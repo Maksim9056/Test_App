@@ -231,6 +231,14 @@ namespace Server_Test_Users
             @class.Create_Users_ds(CrUser);
         }
 
+        public void Del_Users(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            User? DelUser = JsonSerializer.Deserialize<User>(arg1);
+
+            @class.Del_Users_ds(DelUser.Id);
+        }
+
+
 
 
 
