@@ -69,6 +69,7 @@ namespace Server_Test_Users
 
 
         public Regis_users[] Travels { get; set; }
+        public List<User> UserListTest { get; set; }
 
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public Questions[] questionss { get; set; }
@@ -805,6 +806,34 @@ namespace Server_Test_Users
                 }
             }
         }
+
+        public void Check_Users_ds()
+        {
+            int Count = 0;
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // получаем объекты из бд и выводим на консоль
+                Count = db.Users.Count();
+            }
+            if (Count == 0)
+            {
+            }
+            else
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    var users = db.Users.ToList();
+                    if (users == null)
+                    {
+                    }
+                    else
+                    {
+                        UserListTest = users;
+                    }
+                }
+            }
+        }
+
 
 
     }

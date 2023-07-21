@@ -38,10 +38,19 @@ namespace Class_interaction_Users
         public string Employee_Mail { get; set; }
     }
 
+    [Serializable]
+    /// <summary>
+    /// Класс  для User запоковываем в List
+    /// </summary>
+    public class UserList
+    {
+        public List<User> ListUser { get; set; }
+    }
 
-   /// <summary>
-   /// Для ролей у пользователей  зарегистрировались
-   /// </summary>
+
+    /// <summary>
+    /// Для ролей у пользователей  зарегистрировались
+    /// </summary>
     public class User_roles
     {
         public int Id { get; set; }

@@ -43,24 +43,24 @@ namespace Client.Project
         private List<RefUser> GetUser()
         {
 
-            Task.Run(async () => await command.From_Friend(Ip_adress.Ip_adresss, "", "015")).Wait();
+            Task.Run(async () => await command.GetUserList(Ip_adress.Ip_adresss, "", "016")).Wait();
 
-            if (CommandCL.Regis_Users_Test == null)
+            if (CommandCL.UserListGet == null)
             {
 
             }
             else
             {
-                string[] strings = new string[CommandCL.Regis_Users_Test.regis.Length];
-                for (int i = 0; i < strings.Length; i++)
-                {
-                    strings[i] = CommandCL.Regis_Users_Test.regis[i].Name_Employee;
-                }
+                //string[] strings = new string[CommandCL.UserListGet.ListUser.Count];
+                //for (int i = 0; i < strings.Length; i++)
+                //{
+                //    strings[i] = CommandCL.UserListGet.ListUser[i].Name_Employee;
+                //}
 
 
-                for (int i = 0; i < strings.Length; i++)
+                for (int i = 0; i < CommandCL.UserListGet.ListUser.Count; i++)
                 {
-                     var Ref = new RefUser { User = strings[i], EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) };
+                     var Ref = new RefUser { User = CommandCL.UserListGet.ListUser[i], EditCommand = new Command(EditUser), SelectCommand = new Command(SelectUser) };
                      Пользователи_для_теста.Add(Ref);
 
                 }
@@ -106,7 +106,7 @@ namespace Client.Project
                 return;
 
             var selectedUser = (RefUser)e.SelectedItem;
-            await DisplayAlert("Выбранный пользователь", selectedUser.User, "OK");
+            await DisplayAlert("Выбранный пользователь", selectedUser.User.Name_Employee, "OK");
             ((ListView)sender).SelectedItem = null;
         }
 
@@ -115,8 +115,11 @@ namespace Client.Project
         {
             var selectedUser = (RefUser)question;
             // Выполните здесь необходимые действия при нажатии кнопки "Редактировать"
-            // Например, откройте страницу редактирования с передачей выбранного вопроса в качестве параметра
-            DisplayAlert("Редактируется пользователь", selectedUser.User, "OK");
+            // Например, откройте страницу редактирования с передачей выбранного пользователя в качестве параметра
+            Navigation.PushAsync(new UserEditor(selectedUser.User));
+
+            // Пример использования DisplayAlert для отображения сообщения
+            //DisplayAlert("Редактируется пользователь", selectedUser.User, "OK");
         }
 
         // Метод для выбора вопроса
@@ -125,7 +128,7 @@ namespace Client.Project
             var selectedUser = (RefUser)question;
             // Выполните здесь необходимые действия при нажатии кнопки "Выбрать"
             // Например, передайте выбранный вопрос обратно на предыдущую страницу или выполните другую логику
-            DisplayAlert("Выбирается пользователь", selectedUser.User, "OK");
+            DisplayAlert("Выбирается пользователь", selectedUser.User.Name_Employee, "OK");
         }
 
         private void GoBack(object sender, EventArgs e)
@@ -138,7 +141,7 @@ namespace Client.Project
 
         public class RefUser
         {
-            public string User { get; set; }
+            public User User { get; set; }
             public Command EditCommand { get; set; }
             public Command SelectCommand { get; set; }
         }

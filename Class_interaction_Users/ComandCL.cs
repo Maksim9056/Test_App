@@ -71,9 +71,10 @@ namespace Class_interaction_Users
         ///// id голосового сообщения для воспроизведения 
         ///// </summary>
         //public Insert_Fille_Music Select_Fille_Music_id { get; set; }
-     public static Regis_users_test Regis_Users_Test { get; set; }
+        public static Regis_users_test Regis_Users_Test { get; set; }
+        public static UserList UserListGet { get; set; }
 
-    public static Questionss_travel Questionss_Travel { get; set; }
+        public static Questionss_travel Questionss_Travel { get; set; }
         /// <summary>
         /// Роли 
         /// </summary>
@@ -1070,7 +1071,63 @@ namespace Class_interaction_Users
                 }
             }
 
+        // Проццедура отправки 019
+        async public Task GetUserList(String server, string fs, string command)
+        {
+            try
+            {
+                using (TcpClient client = new TcpClient(server, 9595))
+                {    //Сформировали в Byte массив весь класс и команду
+                    Byte[] data = System.Text.Encoding.Default.GetBytes(command + fs);
+                    NetworkStream stream = client.GetStream();
+                    //Отправили друзей
+
+                    await stream.WriteAsync(data, 0, data.Length);
+
+                    String responseDat = String.Empty;
+                    //Функция для получения ответа 
+                    Byte[] readingData = new Byte[256];
+                    StringBuilder completeMessage = new StringBuilder();
+                    int numberOfBytesRead = 0;
+                    do
+                    {
+                        numberOfBytesRead = stream.Read(readingData, 0, readingData.Length);
+                        completeMessage.AppendFormat("{0}", Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
+                    }
+                    while (stream.DataAvailable);
+                    responseDat = completeMessage.ToString();
+
+                    if (string.IsNullOrEmpty(responseDat))
+                    {
+                    }
+                    else
+                    {
+                        UserList msgUserList = JsonSerializer.Deserialize<UserList>(responseDat);
+                        if (msgUserList == null)
+                        {
+                        }
+                        else
+                        {
+                            UserListGet = msgUserList;
+                        }
+                        //Получили данные в строке и десеризовали класс Searh_Friends
+                        //_Name searh_Friends = JsonSerializer.Deserialize<_Name>(responseDat);
+                        //id_Friends = searh_Friends;
+                    }
+
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                // MessageBox.Show("ArgumentNullException:{0}", e.Message);
+            }
+            catch (SocketException)
+            {
+                //MessageBox.Show("SocketException: {0}", e.Message);
+            }
         }
+    }
+
     }
 
 

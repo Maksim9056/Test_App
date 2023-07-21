@@ -24,7 +24,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding User}" Grid.Column="0"
+                                <Label Text="{Binding User.Name_Employee}" Grid.Column="0"
                                         FontSize="16"
                                         FontFamily="Arial"
                                         FontAttributes="Bold"
