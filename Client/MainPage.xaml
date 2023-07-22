@@ -1,80 +1,58 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Client.MainPage"
-              Title="Вход в учетную запись" 
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Client.MainPage" 
+             Title="Вход в учетную запись" 
              Loaded="ContentPage_Loaded">
     <ScrollView>
-        <VerticalStackLayout
-           
-         >
-            <Grid  Padding="20">
-                <Border Stroke="Gray" BackgroundColor="White" WidthRequest="450" HeightRequest="530"  >
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="20" />
-                    </Border.StrokeShape>
-                    <StackLayout  >
-                        <Entry x:Name="nameEntry9" FontSize="22"
-                         TextChanged="nameEntry9_TextChanged"
-                         Placeholder ="Введите электроную почту"
-                         Keyboard="Email"
-                         Margin="10, 190, -0, -4"
-                         VerticalOptions="Fill"
-                         HorizontalOptions="Fill"
-                         HeightRequest="60"
-                         WidthRequest="370"
-                   
-                         />
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                        <Entry x:Name="nameEntry1" FontSize="22"
-                         Placeholder ="Введите пароль"
-                         VerticalOptions="Fill"
-                         HorizontalOptions="Fill"
-                         HeightRequest="60"
-                         WidthRequest="370"
-                         TextChanged="nameEntry1_TextChanged"
-                         Keyboard ="Text"
-                         Margin="10, 90, -0, 0"
-                            
-                       />
-                        
+            <Border Stroke="Gray" BackgroundColor="White" HorizontalOptions="CenterAndExpand" Grid.Row="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="20">
+                    <Entry x:Name="nameEntry9" FontSize="22" 
+                           TextChanged="nameEntry9_TextChanged" 
+                           Placeholder="Введите электроную почту" 
+                           Keyboard="Email" 
+                           HeightRequest="60" 
+                           HorizontalOptions="FillAndExpand" />
 
-                <StackLayout>
+                    <Entry x:Name="nameEntry1" FontSize="22" 
+                           Placeholder="Введите пароль" 
+                           HeightRequest="60" 
+                           HorizontalOptions="FillAndExpand" 
+                           TextChanged="nameEntry1_TextChanged" 
+                           Keyboard="Text" />
 
-                      <Button
-                       x:Name="CounterLog"
-                       Text="Войти"
-                       SemanticProperties.Hint="Counts the number of times you click"
-                       Clicked="CounterLog_Clicked" 
-                       VerticalOptions= "Fill"
-                       HorizontalOptions="Fill"
-                       FontSize="18"
-                       HeightRequest="10"
-                       WidthRequest="160"
-                        Margin="30, 40, -190, -4"
-                       />
+                    <StackLayout VerticalOptions="CenterAndExpand" Margin="30, 40">
+                        <Button x:Name="CounterLog" 
+                                Text="Войти" 
+                                SemanticProperties.Hint="Counts the number of times you click" 
+                                Clicked="CounterLog_Clicked" 
+                                VerticalOptions="CenterAndExpand" 
+                                HorizontalOptions="FillAndExpand" 
+                                FontSize="18" 
+                                HeightRequest="60" />
 
-                    <Button
-                     x:Name="CounterBtn"
-                     Text="Регистрация"
-                     SemanticProperties.Hint="Counts the number of times you click"
-                     Clicked="CounterBtn_Clicked_1"
-                       
-                     VerticalOptions="Fill"
-                     HorizontalOptions="Fill"
-                     FontSize="18" 
-                     HeightRequest="10"
-                     WidthRequest="160"
-                   
-                      Margin="-20, -40,180, 8"
-                     />
+                        <Button x:Name="CounterBtn" 
+                                Text="Регистрация" 
+                                SemanticProperties.Hint="Counts the number of times you click" 
+                                Clicked="CounterBtn_Clicked_1" 
+                                VerticalOptions="CenterAndExpand" 
+                                HorizontalOptions="FillAndExpand" 
+                                FontSize="18" 
+                                HeightRequest="60" 
+                                Margin="0, 20, 0, 0" />
                     </StackLayout>
-                
-                  </StackLayout>
-                </Border>
-            </Grid>
-        </VerticalStackLayout>
-
+                </StackLayout>
+            </Border>
+        </Grid>
     </ScrollView>
-
 </ContentPage>
