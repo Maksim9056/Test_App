@@ -72,6 +72,8 @@ namespace Server_Test_Users
         public Regis_users[] Travels { get; set; }
         public List<User> UserListTest { get; set; }
         public List<Test> TestListTest { get; set; }
+        public List<Exams> ExamsListTest { get; set; }
+        
 
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public Questions[] questionss { get; set; }
@@ -961,6 +963,75 @@ namespace Server_Test_Users
                     else
                     {
                         TestListTest = tests;
+                    }
+                }
+            }
+        }
+
+        public void Create_Exams_ds(Exams newExams)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Exams exams = new Exams
+                {
+                    Name_exam = newExams.Name_exam,
+                   // Options_Id = newTest.Options_Id
+                };
+                db.Exams.Add(exams);
+                db.SaveChanges();
+            }
+        }
+
+        public void Del_Exams_ds(int ExamsId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Exams exams = db.Exams.FirstOrDefault(t => t.Id == ExamsId);
+                if (exams != null)
+                {
+                    db.Exams.Remove(exams);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void Update_Exams_ds(Exams updatedExams)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Exams existingExams = db.Exams.FirstOrDefault(t => t.Id == updatedExams.Id);
+                if (existingExams != null)
+                {
+                    existingExams.Name_exam = updatedExams.Name_exam;
+                    //existingTest.Options_Id = updatedTest.Options_Id;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void Check_Exams_ds()
+        {
+            int Count = 0;
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Count = db.Exams.Count();
+            }
+            if (Count == 0)
+            {
+                // Handle the case when there are no exams
+            }
+            else
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    var exams = db.Exams.ToList();
+                    if (exams == null)
+                    {
+                        // Handle the case when the exams list is null
+                    }
+                    else
+                    {
+                        ExamsListTest = exams;
                     }
                 }
             }

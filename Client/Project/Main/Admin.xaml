@@ -75,6 +75,18 @@
                     WidthRequest="320" 
                     Margin="0,200,0,0" 
                     Padding="10" />
+                <Button 
+                    x:Name="CounterLogExams" 
+                    Text="Справочник экзаменов" 
+                    SemanticProperties.Hint="Counts the number of times you click" 
+                    Clicked="CounterLogExamsClicked" 
+                    VerticalOptions="Start" 
+                    HorizontalOptions="CenterAndExpand" 
+                    HeightRequest="50" 
+                    WidthRequest="320" 
+                    Margin="0,260,0,0" 
+                    Padding="10" />
+
             </Grid>
         </StackLayout>
 

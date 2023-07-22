@@ -74,6 +74,7 @@ namespace Class_interaction_Users
         public static Regis_users_test Regis_Users_Test { get; set; }
         public static UserList UserListGet { get; set; }
         public static TestList TestListGet { get; set; }
+        public static ExamsList ExamsListGet { get; set; }
 
         public static Questionss_travel Questionss_Travel { get; set; }
         /// <summary>
@@ -1248,30 +1249,7 @@ namespace Class_interaction_Users
             }
         }
 
-
-
-        // Проццедура отправки 023
-        async public Task<TestList> GetTestList(string server, string fs, string command)
-        {
-            string responseDat = await SendClass(server, fs, command);
-            if (string.IsNullOrEmpty(responseDat))
-            {
-                return null;
-            }
-            else
-            {
-                TestList msgTestList = JsonSerializer.Deserialize<TestList>(responseDat);
-                if (msgTestList == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    TestListGet = msgTestList;
-                    return msgTestList;
-                }
-            }
-        }
+        
 
         /// <summary>
         /// Procedure for sending 020
@@ -1312,43 +1290,102 @@ namespace Class_interaction_Users
             return !string.IsNullOrEmpty(responseDat);
         }
 
+        /// <summary>
+        /// Проццедура отправки 023
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="fs"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        async public Task<TestList> GetTestList(string server, string fs, string command)
+        {
+            string responseDat = await SendClass(server, fs, command);
+            if (string.IsNullOrEmpty(responseDat))
+            {
+                return null;
+            }
+            else
+            {
+                TestList msgTestList = JsonSerializer.Deserialize<TestList>(responseDat);
+                if (msgTestList == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    TestListGet = msgTestList;
+                    return msgTestList;
+                }
+            }
+        }
 
+        /// <summary>
+        /// Проццедура отправки 024
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="fs"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        async public Task<bool> CreateExams(string server, string fs, string command)
+        {
+            string responseDat = await SendClass(server, fs, command);
+            return !string.IsNullOrEmpty(responseDat);
+        }
 
-        //async public Task<string> SendClass(string server, string fs, string command)
-        //{
-        //    try
-        //    {
-        //        using (TcpClient client = new TcpClient(server, 9595))
-        //        {
-        //            Byte[] data = System.Text.Encoding.Default.GetBytes(command + fs);
-        //            NetworkStream stream = client.GetStream();
-        //            await stream.WriteAsync(data, 0, data.Length);
-        //            string responseDat = string.Empty;
-        //            Byte[] readingData = new Byte[256];
-        //            StringBuilder completeMessage = new StringBuilder();
-        //            int numberOfBytesRead = 0;
-        //            do
-        //            {
-        //                numberOfBytesRead = await stream.ReadAsync(readingData, 0, readingData.Length);
-        //                completeMessage.AppendFormat("{0}", Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
-        //            }
-        //            while (stream.DataAvailable);
-        //            responseDat = completeMessage.ToString();
+        /// <summary>
+        /// Проццедура отправки 025
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="fs"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        async public Task<bool> UpdateExams(string server, string fs, string command)
+        {
+            string responseDat = await SendClass(server, fs, command);
+            return !string.IsNullOrEmpty(responseDat);
+        }
 
-        //            return responseDat; // Return the responseDat value
-        //        }
-        //    }
-        //    catch (ArgumentNullException e)
-        //    {
-        //        Console.WriteLine($"Exception: {e.Message}");
-        //    }
-        //    catch (SocketException e)
-        //    {
-        //        Console.WriteLine(string.Format("SocketException: {0}", e.Message));
-        //    }
+        /// <summary>
+        /// Проццедура отправки 026
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="fs"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        async public Task<bool> DelExams(string server, string fs, string command)
+        {
+            string responseDat = await SendClass(server, fs, command);
+            return !string.IsNullOrEmpty(responseDat);
+        }
 
-        //    return string.Empty; // Return an empty string if an exception occurs
-        //}
+        /// <summary>
+        /// Проццедура отправки 027
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="fs"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        async public Task<ExamsList> GetExamsList(string server, string fs, string command)
+        {
+            string responseDat = await SendClass(server, fs, command);
+            if (string.IsNullOrEmpty(responseDat))
+            {
+                return null;
+            }
+            else
+            {
+                ExamsList msgExamsList = JsonSerializer.Deserialize<ExamsList>(responseDat);
+                if (msgExamsList == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    ExamsListGet = msgExamsList;
+                    return msgExamsList;
+                }
+            }
+        }
 
         public async Task<string> SendClass(string server, string fs, string command)
         {

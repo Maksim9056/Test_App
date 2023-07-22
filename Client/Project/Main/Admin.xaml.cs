@@ -125,6 +125,15 @@ public partial class Администратор : ContentPage
 
         Application.Current.MainPage = navigationPage;
     }
+
+    private void CounterLogExamsClicked(object sender, EventArgs e)
+    {
+        var mainPage = new Project.RefExamsListPage();
+        var navigationPage = new NavigationPage(mainPage);
+
+        Application.Current.MainPage = navigationPage;
+
+    }
 }
 
 

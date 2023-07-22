@@ -289,6 +289,43 @@ namespace Server_Test_Users
             }
         }
 
+        //Для справочника Exams
+        public void Create_Exams(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Exams? CrExams = JsonSerializer.Deserialize<Exams>(arg1);
+            @class.Create_Exams_ds(CrExams);
+        }
+
+        public void Update_Exams(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Exams? UpExams = JsonSerializer.Deserialize<Exams>(arg1);
+            @class.Update_Exams_ds(UpExams);
+        }
+
+        public void Del_Exams(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Exams? DelExams = JsonSerializer.Deserialize<Exams>(arg1);
+            @class.Del_Exams_ds(DelExams.Id);
+        }
+
+        public void Get_ExamsList(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            @class.Check_Exams_ds();
+            if (@class.ExamsListTest == null)
+            {
+                // Handle the case when TestListTest is null
+            }
+            else
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    ExamsList regis_Exams = new ExamsList { };
+                    regis_Exams.ListExams = @class.ExamsListTest;
+                    JsonSerializer.Serialize<ExamsList>(ms, regis_Exams);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+        }
 
         public void Searh_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {

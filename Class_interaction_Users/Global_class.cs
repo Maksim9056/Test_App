@@ -313,10 +313,19 @@ namespace Class_interaction_Users
         public string Name_exam { get; set; }
     }
 
+    [Serializable]
+    /// <summary>
+    /// Класс  для Exams запоковываем в List
+    /// </summary>
+    public class ExamsList
+    {
+        public List<Exams> ListExams { get; set; }
+    }
 
-   /// <summary>
-   /// Сохраняет результат экзамена
-   /// </summary>
+
+    /// <summary>
+    /// Сохраняет результат экзамена
+    /// </summary>
     public class Save_results
     {
         public int Id { get; set; }

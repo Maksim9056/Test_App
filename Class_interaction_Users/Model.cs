@@ -226,11 +226,6 @@ namespace Class_interaction_Users
             }
         }
 
-        //public TestEditorViewModel(Test test)
-        //{
-        //    this.test = test;
-        //}
-
         private PropertyChangedEventHandler propertyChanged;
 
         public event PropertyChangedEventHandler PropertyChanged
@@ -251,7 +246,6 @@ namespace Class_interaction_Users
                 JsonSerializer.Serialize<Test>(memoryStream, Test);
                 Task.Run(async () => await command.CreateTest(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "020")).Wait();
             }
-
         }
 
         public void UpDateTestData(Test Test)
@@ -302,6 +296,100 @@ namespace Class_interaction_Users
 
     }
 
+    public class ExamsEditorViewModel : INotifyPropertyChanged
+    {
+        public CommandCL command = new CommandCL();
 
+        private int id;
+        private string name_exam;
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string Name_exam
+        {
+            get { return name_exam; }
+            set
+            {
+                if (name_exam != value)
+                {
+                    name_exam = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private PropertyChangedEventHandler propertyChanged;
+
+        public event PropertyChangedEventHandler PropertyChanged
+        {
+            add => propertyChanged += value;
+            remove => propertyChanged -= value;
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            propertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class ExamManager
+    {
+        private CommandCL command = new CommandCL();
+
+        public void CreateExamsData(Exams exams)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Exams>(memoryStream, exams);
+                Task.Run(async () => await command.CreateExams(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "024")).Wait();
+            }
+        }
+
+        public void UpdateExamsData(Exams exams)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Exams>(memoryStream, exams);
+                Task.Run(async () => await command.UpdateExams(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "025")).Wait();
+            }
+        }
+
+        public void DeleteExamsData(Exams exams)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Exams>(memoryStream, exams);
+                Task.Run(async () => await command.DelExams(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "026")).Wait();
+            }
+        }
+
+        public List<Exams> GetExamsList()
+        {
+            List<Exams> examList = new List<Exams>();
+
+            Task.Run(async () => await command.GetExamsList(Ip_adress.Ip_adresss, "", "027")).Wait();
+
+            if (CommandCL.ExamsListGet == null)
+            {
+                examList = null;
+            }
+            else
+            {
+                examList = CommandCL.ExamsListGet.ListExams;
+            }
+            return examList;
+        }
+    }
 
 }
