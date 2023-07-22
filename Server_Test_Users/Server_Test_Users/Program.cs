@@ -116,6 +116,10 @@ namespace Server_Test_Users
                 FDictCommands.Add("017", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Users)); // Изменить данные User
                 FDictCommands.Add("018", new Action<byte[], GlobalClass, NetworkStream>(command.Create_Users)); // Создать данные User
                 FDictCommands.Add("019", new Action<byte[], GlobalClass, NetworkStream>(command.Del_Users));    // Удалить данные User
+                FDictCommands.Add("020", new Action<byte[], GlobalClass, NetworkStream>(command.Create_Test));  
+                FDictCommands.Add("021", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Test));  
+                FDictCommands.Add("022", new Action<byte[], GlobalClass, NetworkStream>(command.Del_Test));    
+                FDictCommands.Add("023", new Action<byte[], GlobalClass, NetworkStream>(command.Get_TestList)); 
 
             }
             catch (Exception E)

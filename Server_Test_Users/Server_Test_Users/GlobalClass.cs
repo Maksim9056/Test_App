@@ -71,6 +71,7 @@ namespace Server_Test_Users
 
         public Regis_users[] Travels { get; set; }
         public List<User> UserListTest { get; set; }
+        public List<Test> TestListTest { get; set; }
 
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public Questions[] questionss { get; set; }
@@ -884,6 +885,83 @@ namespace Server_Test_Users
                 {
                     db.Users.Remove(user);
                     db.SaveChanges();
+                }
+            }
+        }
+
+
+        public void Create_Test_ds(Test newTest)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Test test = new Test
+                {
+                    Name_Test = newTest.Name_Test,
+                    Options_Id = newTest.Options_Id
+                };
+
+                db.Test.Add(test);
+                db.SaveChanges();
+            }
+        }
+
+        public void Del_Test_ds(int testId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Test test = db.Test.FirstOrDefault(t => t.Id == testId);
+                if (test != null)
+                {
+                    db.Test.Remove(test);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void Update_Test_ds(Test updatedTest)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // Retrieve the existing test from the database based on the test's ID
+                Test existingTest = db.Test.FirstOrDefault(t => t.Id == updatedTest.Id);
+                if (existingTest != null)
+                {
+                    // Update the properties of the existing test with the new values
+                    existingTest.Name_Test = updatedTest.Name_Test;
+                    existingTest.Options_Id = updatedTest.Options_Id;
+
+                    // Save the changes to the database
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void Check_Test_ds()
+        {
+            int Count = 0;
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                // Get the count of tests from the database
+                Count = db.Test.Count();
+            }
+
+            if (Count == 0)
+            {
+                // Handle the case when there are no tests
+            }
+            else
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    var tests = db.Test.ToList();
+                    if (tests == null)
+                    {
+                        // Handle the case when the tests list is null
+                    }
+                    else
+                    {
+                        TestListTest = tests;
+                    }
                 }
             }
         }

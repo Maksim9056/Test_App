@@ -42,8 +42,8 @@ namespace Client.Project
         private List<RefUser> GetUser()
         {
             List<RefUser> aUserList = new List<RefUser>();
-
-            Task.Run(async () => await command.GetUserList(Ip_adress.Ip_adresss, "", "016")).Wait();
+            CommandCL.UserListGet = null;
+            viewModel.GetUserList();
 
             if (CommandCL.UserListGet == null)
             {
@@ -52,7 +52,7 @@ namespace Client.Project
             {     
                 for (int i = 0; i < CommandCL.UserListGet.ListUser.Count; i++)
                 {
-                     var Ref = new RefUser { User = CommandCL.UserListGet.ListUser[i], EditCommand = new Command(EditUser), DelCommand = new Command(DelUser) };
+                    var Ref = new RefUser { User = CommandCL.UserListGet.ListUser[i], EditCommand = new Command(EditUser), DelCommand = new Command(DelUser) };
                     aUserList.Add(Ref);
                 }
             }

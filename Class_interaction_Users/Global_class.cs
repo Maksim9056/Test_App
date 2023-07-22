@@ -15,7 +15,7 @@ namespace Class_interaction_Users
     }
 
     /// <summary>
-    /// Пользователь
+    /// Справочник Пользователей
     /// </summary>
     public class User
     {
@@ -66,7 +66,7 @@ namespace Class_interaction_Users
     }
 
    /// <summary>
-   /// Для название ролей и id
+   /// Справочник ролей для название ролей и id
    /// </summary>
     public class Roles
     {
@@ -74,7 +74,7 @@ namespace Class_interaction_Users
         public string Name_roles { get; set; }    
     }
 
-
+    [Serializable]
     public class Questions
     {
         public int Id { get; set; }
@@ -93,7 +93,7 @@ namespace Class_interaction_Users
     public class Questionss
     {
         Questionss() { }
-      public  Questions[] Quest { get; set; }
+        public  Questions[] Quest { get; set; }
         public Questionss(Questions[] quest)
         {
             Quest = quest;
@@ -191,13 +191,12 @@ namespace Class_interaction_Users
             Employee_Mail = @Mail;
         }
     }
+
+
     [Serializable]
     public class Regis_users_test 
     {
-    
         public   Regis_users[]  regis { get;set; }
-   
-
     }
 
     [Serializable]
@@ -243,7 +242,6 @@ namespace Class_interaction_Users
     /// </summary>
     public class Answer
     {
-
         public int Id { get; set; }
 
        /// <summary>
@@ -259,7 +257,7 @@ namespace Class_interaction_Users
    /// </summary>
     public class Options 
     { 
-       public  int Id { get; set; }
+     public  int Id { get; set; }
      public Answer Id_Answer { get; set; }
      public string Test_Name { get; set; }
      public Questions Questions { get; set;}
@@ -268,15 +266,24 @@ namespace Class_interaction_Users
     }
 
     /// <summary>
-    ///Название теста
+    /// Справочник тестов
     /// </summary>
     public class Test 
     { 
-       public int Id { get; set; }
-
+        public int Id { get; set; }
         public string Name_Test { get; set; }
         public int Options_Id { get; set; }
     }
+
+    [Serializable]
+    /// <summary>
+    /// Класс  для Test запоковываем в List
+    /// </summary>
+    public class TestList
+    {
+        public List<Test> ListTest { get; set; }
+    }
+
 
     /// <summary>
     /// Экзамен
@@ -298,7 +305,7 @@ namespace Class_interaction_Users
     }
 
    /// <summary>
-   /// Название экзамена
+   /// Справочник экзаменов
    /// </summary>
     public class Exams
     {
@@ -316,7 +323,7 @@ namespace Class_interaction_Users
         public Questions Questions { get; set; }
         public Test Name_Test { get; set; }
         public string Users_Answers_Questions { get; set; }
-       public Exam Exam_id { get; set; }
+        public Exam Exam_id { get; set; }
         public DateTime Date_of_Result_Exam_Endings { get; set; }
         public User Name_Users { get; set; }
         public int Resukts_exam { get; set; }
@@ -330,17 +337,11 @@ namespace Class_interaction_Users
     public class CheckMail_and_Password
     {
         public CheckMail_and_Password() { }
-
-
         public string Password { get; set; }
-
         public string Employee_Mail { get; set; }
-
         public CheckMail_and_Password(string password, string @Mail)
         {
-
             Password = password;
-
             Employee_Mail = @Mail;
         }
     }
@@ -383,9 +384,7 @@ namespace Class_interaction_Users
         public class Tests
         {
             public Tests() { }
-
             public Test[] TEST { get; set; }
-
             public Tests (Test[] test)
             {
                 TEST = test;
@@ -393,15 +392,16 @@ namespace Class_interaction_Users
         }
 
 
-         [Serializable]
+        [Serializable]
         /// <summary>
         /// Класс  для Tests запоковываем в List
         /// </summary>
         public class  Tests_Travel
         {
             public List<Tests> Test { get; set; } = new List<Tests>();
-
         }
+
+    [Serializable]
     /// <summary>
     ///Тест вопросами
     /// </summary>
@@ -443,11 +443,6 @@ namespace Class_interaction_Users
             Grade_Quessions = grade_Quessions;
             Answer_id = answer_id;
         }
-    }
-    public class Book 
-    { 
-
-       public string book { get;set; }
     }
 
 

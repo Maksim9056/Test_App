@@ -73,6 +73,7 @@ namespace Class_interaction_Users
         //public Insert_Fille_Music Select_Fille_Music_id { get; set; }
         public static Regis_users_test Regis_Users_Test { get; set; }
         public static UserList UserListGet { get; set; }
+        public static TestList TestListGet { get; set; }
 
         public static Questionss_travel Questionss_Travel { get; set; }
         /// <summary>
@@ -1248,6 +1249,143 @@ namespace Class_interaction_Users
         }
 
 
+
+        // Проццедура отправки 023
+        async public Task<TestList> GetTestList(string server, string fs, string command)
+        {
+            string responseDat = await SendClass(server, fs, command);
+            if (string.IsNullOrEmpty(responseDat))
+            {
+                return null;
+            }
+            else
+            {
+                TestList msgTestList = JsonSerializer.Deserialize<TestList>(responseDat);
+                if (msgTestList == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    TestListGet = msgTestList;
+                    return msgTestList;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Procedure for sending 020
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="fs"></param>
+        /// <param name="command"></param>
+        /// <returns>True if the procedure succeeds, False otherwise</returns>
+        async public Task<bool> CreateTest(string server, string fs, string command)
+        {
+            string responseDat = await SendClass(server, fs, command);
+            return !string.IsNullOrEmpty(responseDat);
+        }
+
+        /// <summary>
+        /// Procedure for sending 021
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="fs"></param>
+        /// <param name="command"></param>
+        /// <returns>True if the procedure succeeds, False otherwise</returns>
+        async public Task<bool> UpdateTest(string server, string fs, string command)
+        {
+            string responseDat = await SendClass(server, fs, command);
+            return !string.IsNullOrEmpty(responseDat);
+        }
+
+        /// <summary>
+        /// Procedure for sending 022
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="fs"></param>
+        /// <param name="command"></param>
+        /// <returns>True if the procedure succeeds, False otherwise</returns>
+        async public Task<bool> DelTest(string server, string fs, string command)
+        {
+            string responseDat = await SendClass(server, fs, command);
+            return !string.IsNullOrEmpty(responseDat);
+        }
+
+
+
+        //async public Task<string> SendClass(string server, string fs, string command)
+        //{
+        //    try
+        //    {
+        //        using (TcpClient client = new TcpClient(server, 9595))
+        //        {
+        //            Byte[] data = System.Text.Encoding.Default.GetBytes(command + fs);
+        //            NetworkStream stream = client.GetStream();
+        //            await stream.WriteAsync(data, 0, data.Length);
+        //            string responseDat = string.Empty;
+        //            Byte[] readingData = new Byte[256];
+        //            StringBuilder completeMessage = new StringBuilder();
+        //            int numberOfBytesRead = 0;
+        //            do
+        //            {
+        //                numberOfBytesRead = await stream.ReadAsync(readingData, 0, readingData.Length);
+        //                completeMessage.AppendFormat("{0}", Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
+        //            }
+        //            while (stream.DataAvailable);
+        //            responseDat = completeMessage.ToString();
+
+        //            return responseDat; // Return the responseDat value
+        //        }
+        //    }
+        //    catch (ArgumentNullException e)
+        //    {
+        //        Console.WriteLine($"Exception: {e.Message}");
+        //    }
+        //    catch (SocketException e)
+        //    {
+        //        Console.WriteLine(string.Format("SocketException: {0}", e.Message));
+        //    }
+
+        //    return string.Empty; // Return an empty string if an exception occurs
+        //}
+
+        public async Task<string> SendClass(string server, string fs, string command)
+        {
+            try
+            {
+                using (TcpClient client = new TcpClient(server, 9595))
+                using (NetworkStream stream = client.GetStream())
+                {
+                    byte[] data = System.Text.Encoding.Default.GetBytes(command + fs);
+                    await stream.WriteAsync(data, 0, data.Length);
+
+                    StringBuilder completeMessage = new StringBuilder();
+                    byte[] readingData = new byte[256];
+                    int numberOfBytesRead = 0;
+
+                    do
+                    {
+                        numberOfBytesRead = await stream.ReadAsync(readingData, 0, readingData.Length);
+                        completeMessage.Append(Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
+                    }
+                    while (stream.DataAvailable);
+
+                    string responseDat = completeMessage.ToString();
+                    return responseDat;
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine($"SocketException: {e.Message}");
+            }
+
+            return string.Empty;
+        }
     }
 
 }

@@ -189,6 +189,8 @@ namespace Server_Test_Users
             }
         }
 
+
+        //Для справоника user
         public void Check_Users(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             @class.Check_Users_ds();
@@ -217,6 +219,7 @@ namespace Server_Test_Users
             }
         }
 
+
         public void Update_Users(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             User? UpUser = JsonSerializer.Deserialize<User>(arg1);
@@ -238,8 +241,53 @@ namespace Server_Test_Users
             @class.Del_Users_ds(DelUser.Id);
         }
 
+        //Для справочника test
 
+        public void Create_Test(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Test? CrTest = JsonSerializer.Deserialize<Test>(arg1);
 
+            @class.Create_Test_ds(CrTest);
+        }
+
+        public void Update_Test(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Test? UpTest = JsonSerializer.Deserialize<Test>(arg1);
+
+            @class.Update_Test_ds(UpTest);
+        }
+
+        public void Del_Test(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Test? DelTest = JsonSerializer.Deserialize<Test>(arg1);
+
+            @class.Del_Test_ds(DelTest.Id);
+        }
+
+        public void Get_TestList(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            @class.Check_Test_ds();
+            if (@class.TestListTest == null)
+            {
+                //using (MemoryStream ms = new MemoryStream())
+                //{
+                //    Regis_users[] regis_Users = new Regis_users[] { };
+                //    Regis_users_test regis_Users_Test = new Regis_users_test { regis = regis_Users };
+                //    JsonSerializer.Serialize<Regis_users_test>(ms, regis_Users_Test);
+                //    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                //}
+            }
+            else
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    TestList regis_Test = new TestList { };
+                    regis_Test.ListTest = @class.TestListTest;
+                    JsonSerializer.Serialize<TestList>(ms, regis_Test);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+        }
 
 
         public void Searh_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)

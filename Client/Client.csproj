@@ -69,9 +69,22 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Class_interaction_Users\Class_interaction_Users.csproj" />
+	  <ProjectReference Include="..\Server_Test_Users\Server_Test_Users\Server_Test_Users.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Project\Main\Admin.xaml.cs">
+	    <DependentUpon>Admin.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Project\RefTest\RefTestListPage.xaml.cs">
+	    <DependentUpon>RefTestListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Project\RefTest\TestCreate.xaml.cs">
+	    <DependentUpon>TestCreate.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Project\RefTest\TestEditor.xaml.cs">
+	    <DependentUpon>TestEditor.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Project\RefUser\UserCreate.xaml.cs">
 	    <DependentUpon>UserCreate.xaml</DependentUpon>
 	  </Compile>
@@ -84,6 +97,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Project\RefTest\RefTestListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Project\RefTest\TestCreate.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Project\RefTest\TestEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Project\RefUser\UserCreate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -99,7 +121,7 @@
 	  <MauiXaml Update="Project\Old\Test.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\Old\Администратор.xaml">
+	  <MauiXaml Update="Project\Main\Admin.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Old\Вопросы для теста.xaml">
