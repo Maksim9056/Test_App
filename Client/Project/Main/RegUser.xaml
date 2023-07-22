@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Client.Вход_в_учетную_запись"
+             x:Class="Client.Main.RegUser"
              Title ="Регистрация" BackgroundColor="White" 
              Loaded="ContentPage_Loaded">
 
@@ -9,7 +9,7 @@
      Padding="5">
 
         <Grid >
-            <Border Stroke="Gray" BackgroundColor="#e1e1e1" WidthRequest="400" HeightRequest="425">
+            <!--<Border Stroke="Gray" BackgroundColor="#e1e1e1" WidthRequest="400" HeightRequest="425">-->
                 
                 <StackLayout Padding="0" Margin="10" BackgroundColor="White" >
                        
@@ -25,6 +25,7 @@
                             Margin="0, 20, 0,0"
 
                            />
+                    
 
                          <Entry x:Name="nameEntry" FontSize="16"
                           TextChanged="nameEntry_TextChanged"
@@ -88,31 +89,35 @@
                         </Picker>
            
                    </StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <Button 
-                       Text="Предыдущую страницу"
-                       Clicked="Button_Clicked_1"
-                       VerticalOptions="Fill"
-                       HorizontalOptions="Fill"
-                       HeightRequest="20"
-                       WidthRequest="180"
-                        Padding="10"
-                      Margin="-180, 0, 0, 0"
+                        <Button
+                            Text="Предыдущую страницу"
+                            Clicked="Button_Clicked_1"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="40"
+                            Margin="10"
+                         />
 
-                     />
-                    <Button 
-                       Text="Зарегистроваться"
-                       Clicked="Button_Clicked"
-                       Margin="180, -44, 0, 0"
-
-                       VerticalOptions="Fill"
-                       HorizontalOptions="Fill"
-                       HeightRequest="20"
-                       WidthRequest="170"
-            
-                   />
+                        <Button
+                            Text="Зарегистроваться"
+                            Clicked="Button_Clicked"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="40"
+                            Margin="10"
+                            Grid.Column="1"
+                        />
+                    </Grid>
                 </StackLayout>
-            </Border>
+            <!--</Border>-->
          </Grid>
     </VerticalStackLayout>
 </ContentPage>
+
+    

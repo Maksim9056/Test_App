@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui;
 using Microsoft.Maui.Platform;
+using Client.Main;
 
 namespace Client
 {
@@ -242,7 +243,7 @@ namespace Client
             {
 
                 // Создание NavigationPage с главной страницей
-                var mainPage = new Вход_в_учетную_запись();
+                var mainPage = new RegUser();
                 var navigationPage = new NavigationPage(mainPage);
 
                 Application.Current.MainPage = navigationPage;

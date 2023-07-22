@@ -7,11 +7,11 @@ using TextChangedEventArgs = Microsoft.Maui.Controls.TextChangedEventArgs;
 using System.Text.RegularExpressions;
 
 
-namespace Client;
+namespace Client.Main;
 
-public partial class Вход_в_учетную_запись : ContentPage
+public partial class RegUser : ContentPage
 {
-    public Вход_в_учетную_запись()
+    public RegUser()
     {
         InitializeComponent();
     }
@@ -274,14 +274,14 @@ public partial class Вход_в_учетную_запись : ContentPage
     private void ContentPage_Loaded(System.Object sender, System.EventArgs e)
     {
 
-        Application.Current.MainPage.Window.Width = 413.8d;
-        Application.Current.MainPage.Window.Height = 520.8d;
+        //Application.Current.MainPage.Window.Width = 413.8d;
+        //Application.Current.MainPage.Window.Height = 520.8d;
 
-        Application.Current.MainPage.Window.MinimumWidth = 413.8d;
-        Application.Current.MainPage.Window.MinimumHeight = 520.8d;
+        //Application.Current.MainPage.Window.MinimumWidth = 413.8d;
+        //Application.Current.MainPage.Window.MinimumHeight = 520.8d;
 
-        Application.Current.MainPage.Window.MaximumWidth = 413.8d;
-        Application.Current.MainPage.Window.MaximumHeight = 520.8d;
+        //Application.Current.MainPage.Window.MaximumWidth = 413.8d;
+        //Application.Current.MainPage.Window.MaximumHeight = 520.8d;
 
     }
 

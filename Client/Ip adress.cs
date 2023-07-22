@@ -8,6 +8,6 @@ namespace Client
 {
     public class Ip_adress
     {
-        public static string Ip_adresss { get; set; } = "127.0.0.1";
+        public static string Ip_adresss { get; set; } = "192.168.0.112";
     }
 }

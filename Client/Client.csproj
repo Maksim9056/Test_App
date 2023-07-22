@@ -75,6 +75,12 @@
 	  <Compile Update="Project\Main\Admin.xaml.cs">
 	    <DependentUpon>Admin.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Project\Main\RegUser.xaml.cs">
+	    <DependentUpon>RegUser.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Project\Old\Регистрация.xaml.cs">
+	    <DependentUpon>Регистрация.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Project\RefTest\RefTestListPage.xaml.cs">
 	    <DependentUpon>RefTestListPage.xaml</DependentUpon>
 	  </Compile>
@@ -129,7 +135,7 @@
 	  <MauiXaml Update="Project\Old\Вопросы.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\Old\Вход в учетную запись.xaml">
+	  <MauiXaml Update="Project\Main\RegUser.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Old\Главная страница.xaml">
