@@ -69,7 +69,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Class_interaction_Users\Class_interaction_Users.csproj" />
-	  <ProjectReference Include="..\Server_Test_Users\Server_Test_Users\Server_Test_Users.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
