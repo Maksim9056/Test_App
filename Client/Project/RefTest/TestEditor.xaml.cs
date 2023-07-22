@@ -19,8 +19,12 @@ namespace Client.Project
         public TestEditor(Class_interaction_Users.Test test)
         {
             InitializeComponent();
-
-            viewModel = new TestEditorViewModel();
+            viewModel = new TestEditorViewModel
+            {
+                Id = test.Id,
+                Name_Test = test.Name_Test,
+                Options_Id = test.Options_Id,
+            };
             BindingContext = viewModel;
         }
 
