@@ -32,6 +32,7 @@ namespace Client.Project
         private void ContentPage_Loaded(object sender, EventArgs e)
         {
             // Your code here
+            UpdateForm();
         }
 
         private List<Questions> GetQuestions()

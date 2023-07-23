@@ -26,6 +26,12 @@ namespace Client.Project
             CurrrentTest = test;
             QuestionList1.ItemsSource = GetTestQuestions(test);
             Title = "Вопросы для теста: "+ test.Name_Test;
+            MessagingCenter.Subscribe<DocTestQuestionListPage>(this, "UpdateForm", (sender) =>
+            {
+                // Perform the necessary updates to the form here
+                // For example, update the fields, refresh data, etc.
+                QuestionList1.ItemsSource = GetTestQuestions(test);
+            });
         }
 
         private void UpdateForm(Class_interaction_Users.Test test)
@@ -81,7 +87,7 @@ namespace Client.Project
         {
             var selectedTestQuestion = (RefTestQuestion)testQuestion;
 
-            //viewModelManager.DeleteTestQuestionData(selectedTestQuestion.TestQuestion.Test);
+            viewModelManager.DeleteTestQuestionData(selectedTestQuestion.TestQuestion);
 
             DisplayAlert("Удаляется вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
             UpdateForm(CurrrentTest);
@@ -105,24 +111,30 @@ namespace Client.Project
         private async void CreateButtonClicked(object sender, EventArgs e)
         {
             var refQuestionsListPage = new RefQuestionsListPage();
+
             refQuestionsListPage.Disappearing += (s, args) =>
             {
                 if (refQuestionsListPage.vSelectedItem != null)
                 {
-                    // Получите выбранный элемент из RefQuestionsListPage
                     var selectedItem = refQuestionsListPage.vSelectedItem;
 
-                    // Делайте что-то с выбранным элементом здесь
-                    // Например, установите его значение в текстовом поле на текущей форме
-                    //MyTextField.Text = selectedItem;
+                    TestQuestion aTestQ = new TestQuestion();
+                    aTestQ.IdQuestions = selectedItem;
+                    aTestQ.IdTest = CurrrentTest;
+                    viewModelManager.CreateTestQuestionData(aTestQ);
 
-                    // Очистите выбранный элемент в RefQuestionsListPage
+                    // Clear the selected item in RefQuestionsListPage
                     refQuestionsListPage.vSelectedItem = null;
+
+                    // Send a message to update the current form
+                    MessagingCenter.Send(this, "UpdateForm");
                 }
             };
 
             await Navigation.PushModalAsync(refQuestionsListPage);
         }
+
+
 
         private void ContentPageLoaded(object sender, EventArgs e)
         {

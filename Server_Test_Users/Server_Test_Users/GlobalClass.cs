@@ -1120,7 +1120,17 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                db.TestQuestion.Add(newTestQuestions);
+                TestQuestion questions = new TestQuestion();
+
+                // Retrieve the Test and Questions objects from the database
+                Test test = db.Test.Find(newTestQuestions.IdTest.Id);
+                Questions questions1 = db.Questions.Find(newTestQuestions.IdQuestions.Id);
+
+                // Assign the retrieved objects to the TestQuestion properties
+                questions.IdTest = test;
+                questions.IdQuestions = questions1;
+
+                db.TestQuestion.Add(questions);
                 db.SaveChanges();
             }
         }
