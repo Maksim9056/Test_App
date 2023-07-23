@@ -38,7 +38,7 @@ public partial class Вопросы_для_теста : ContentPage
         string[] stringsS = new string[CommandCL.Roles_Accept.Quest.Length];
         for (int i = 0; i < stringsS.Length; i++)
         {
-            stringsS[i] = CommandCL.Roles_Accept.Quest[i].Questionss;
+            stringsS[i] = CommandCL.Roles_Accept.Quest[i].Question;
         }
         for (int j = 0; j < stringsS.Length; j++)
         {
@@ -49,7 +49,7 @@ public partial class Вопросы_для_теста : ContentPage
         string[] stringsSs = new string[CommandCL.Roles_Accept.Quest.Length];
         for (int i = 0; i < stringsS.Length; i++)
         {
-            stringsSs[i] = CommandCL.Roles_Accept.Quest[i].Answer_True;
+            stringsSs[i] = CommandCL.Roles_Accept.Quest[i].AnswerTrue;
         }
         for (int j = 0; j < stringsSs.Length; j++)
         {

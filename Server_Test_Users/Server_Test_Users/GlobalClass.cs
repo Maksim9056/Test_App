@@ -73,7 +73,8 @@ namespace Server_Test_Users
         public List<User> UserListTest { get; set; }
         public List<Test> TestListTest { get; set; }
         public List<Exams> ExamsListTest { get; set; }
-        
+        public List<Questions> QuestionsListTest { get; set; }
+
 
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public Questions[] questionss { get; set; }
@@ -663,7 +664,7 @@ namespace Server_Test_Users
                 if (Count == 0)
                 {
                     Questions [] questions= new Questions[1];
-                    questions[0].Questionss = "";
+                    questions[0].Question = "";
 
                     questionss = questions;
                 }
@@ -681,7 +682,7 @@ namespace Server_Test_Users
                         foreach (Questions u in users)
                         {
 
-                            questions[i] = new Questions { Id = u.Id, Questionss = u.Questionss, Answer_True = u.Answer_True };
+                            questions[i] = new Questions { Id = u.Id, Question = u.Question, AnswerTrue = u.AnswerTrue };
                             i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
                         }
                     }
@@ -700,7 +701,7 @@ namespace Server_Test_Users
             using (ApplicationContext db = new ApplicationContext())
             {
                 // получаем объекты из бд и выводим на консоль
-                var users = db.Questions.Where(p => p.Questionss == Questions.Questionss);
+                var users = db.Questions.Where(p => p.Question == Questions.Question);
                 Console.WriteLine("Users list:");
                 int i = 0;
                 Questions[] questions = new Questions[1];
@@ -708,7 +709,7 @@ namespace Server_Test_Users
                 {
 
                     Вопрос = true;
-                    questions[i] = new Questions { Id = 0, Questionss = u.Questionss, Answer_True = u.Answer_True };
+                    questions[i] = new Questions { Id = 0, Question = u.Question, AnswerTrue = u.AnswerTrue };
                     // i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
                 }
                 if (questions == null)
@@ -728,7 +729,7 @@ namespace Server_Test_Users
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     // создаем два объекта User
-                    Questions user1 = new Questions { Questionss = Questions.Questionss, Answer_True = Questions.Answer_True };
+                    Questions user1 = new Questions { Question = Questions.Question, AnswerTrue = Questions.AnswerTrue };
                     //  User user2 = new User { Name = "Alice", Age = 26 };
 
 
@@ -759,7 +760,7 @@ namespace Server_Test_Users
                         foreach (Questions u in users)
                         {
 
-                            questions[i] = new Questions { Id = u.Id, Questionss = u.Questionss, Answer_True = u.Answer_True };
+                            questions[i] = new Questions { Id = u.Id, Question = u.Question, AnswerTrue = u.AnswerTrue };
                             i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
                         }
                     }
@@ -968,6 +969,8 @@ namespace Server_Test_Users
             }
         }
 
+
+        // для класса Exams
         public void Create_Exams_ds(Exams newExams)
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -1032,6 +1035,79 @@ namespace Server_Test_Users
                     else
                     {
                         ExamsListTest = exams;
+                    }
+                }
+            }
+        }
+
+        // Для класса Questions
+
+        public void Create_Questions_ds(Questions newQuestions)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Questions questions = new Questions
+                {
+                    Question = newQuestions.Question,
+                    AnswerTrue = newQuestions.AnswerTrue,
+                    Grade = newQuestions.Grade
+                };
+                db.Questions.Add(questions);
+                db.SaveChanges();
+            }
+        }
+
+        public void Del_Questions_ds(int QuestionsId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Questions questions = db.Questions.FirstOrDefault(t => t.Id == QuestionsId);
+                if (questions != null)
+                {
+                    db.Questions.Remove(questions);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void Update_Questions_ds(Questions updatedQuestions)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Questions existingQuestions = db.Questions.FirstOrDefault(t => t.Id == updatedQuestions.Id);
+                if (existingQuestions != null)
+                {
+                    existingQuestions.Question = updatedQuestions.Question;
+                    existingQuestions.AnswerTrue = updatedQuestions.AnswerTrue;
+                    existingQuestions.Grade = updatedQuestions.Grade;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void Check_Questions_ds()
+        {
+            int Count = 0;
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Count = db.Questions.Count();
+            }
+            if (Count == 0)
+            {
+                // Handle the case when there are no questions
+            }
+            else
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    var questions = db.Questions.ToList();
+                    if (questions == null)
+                    {
+                        // Handle the case when the questions list is null
+                    }
+                    else
+                    {
+                        QuestionsListTest = questions;
                     }
                 }
             }

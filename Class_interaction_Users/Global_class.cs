@@ -74,21 +74,38 @@ namespace Class_interaction_Users
         public string Name_roles { get; set; }    
     }
 
+    /// <summary>
+    /// Справочник вопросов для теста
+    /// </summary>
     [Serializable]
     public class Questions
     {
         public int Id { get; set; }
 
-        public string Questionss { get; set; }
+        /// <summary>
+        /// Наименование вопроса
+        /// </summary>
+        public string Question { get; set; }
+
         /// <summary>
         /// Правильный ответ
         /// </summary>
-        public string Answer_True { get; set; }
+        public string AnswerTrue { get; set; }
+
         /// <summary>
-        /// Оценка
+        /// Оценка вопроса
         /// </summary>
-        public string Grade_Quessions { get; set; }
+        public int Grade { get; set; }
     }
+
+
+    [Serializable]
+    public class QuestionsList
+    {
+        public List<Questions> QuestionList { get; set; } = new List<Questions>();
+    }
+
+
 
     public class Questionss
     {
@@ -100,7 +117,7 @@ namespace Class_interaction_Users
         }
     }
 
-    public class Questionss_travel
+    public class QuestionssList
     {
        public List<Questionss> Questionsses = new List<Questionss>();
     }

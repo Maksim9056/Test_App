@@ -327,6 +327,46 @@ namespace Server_Test_Users
             }
         }
 
+        //Для справочника Questions
+
+        public void Create_Questions(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Questions? CrQuestions = JsonSerializer.Deserialize<Questions>(arg1);
+            @class.Create_Questions_ds(CrQuestions);
+        }
+
+        public void Update_Questions(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Questions? UpQuestions = JsonSerializer.Deserialize<Questions>(arg1);
+            @class.Update_Questions_ds(UpQuestions);
+        }
+
+        public void Del_Questions(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Questions? DelQuestions = JsonSerializer.Deserialize<Questions>(arg1);
+            @class.Del_Questions_ds(DelQuestions.Id);
+        }
+
+        public void Get_QuestionsList(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            @class.Check_Questions_ds();
+            if (@class.QuestionsListTest == null)
+            {
+                // Handle the case when QuestionsListTest is null 
+            }
+            else
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    QuestionsList regis_Questions = new QuestionsList { };
+                    regis_Questions.QuestionList = @class.QuestionsListTest;
+                    JsonSerializer.Serialize<QuestionsList>(ms, regis_Questions);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+        }
+
+
         public void Searh_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             try

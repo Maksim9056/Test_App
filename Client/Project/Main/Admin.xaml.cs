@@ -134,6 +134,15 @@ public partial class Администратор : ContentPage
         Application.Current.MainPage = navigationPage;
 
     }
+
+    private void CounterLogQuestionsClicked(object sender, EventArgs e)
+    {
+        var mainPage = new Project.RefQuestionsListPage();
+        var navigationPage = new NavigationPage(mainPage);
+
+        Application.Current.MainPage = navigationPage;
+
+    }
 }
 
 

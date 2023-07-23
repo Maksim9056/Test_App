@@ -124,6 +124,11 @@ namespace Server_Test_Users
                 FDictCommands.Add("025", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Exams));
                 FDictCommands.Add("026", new Action<byte[], GlobalClass, NetworkStream>(command.Del_Exams));
                 FDictCommands.Add("027", new Action<byte[], GlobalClass, NetworkStream>(command.Get_ExamsList));
+                FDictCommands.Add("028", new Action<byte[], GlobalClass, NetworkStream>(command.Create_Questions));
+                FDictCommands.Add("029", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Questions));
+                FDictCommands.Add("030", new Action<byte[], GlobalClass, NetworkStream>(command.Del_Questions));
+                FDictCommands.Add("031", new Action<byte[], GlobalClass, NetworkStream>(command.Get_QuestionsList));
+
 
             }
             catch (Exception E)

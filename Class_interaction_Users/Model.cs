@@ -178,7 +178,8 @@ namespace Class_interaction_Users
 
     public class TestEditorViewModel : INotifyPropertyChanged
     {
-        public CommandCL command = new CommandCL();
+        public CommandCL.TestCommand command = new CommandCL.TestCommand();
+
 
         //private Test test;
 
@@ -345,7 +346,7 @@ namespace Class_interaction_Users
 
     public class ExamManager
     {
-        private CommandCL command = new CommandCL();
+        private CommandCL.ExamsCommand command = new CommandCL.ExamsCommand();
 
         public void CreateExamsData(Exams exams)
         {
@@ -392,4 +393,129 @@ namespace Class_interaction_Users
         }
     }
 
+
+    public class QuestionsEditorViewModel : INotifyPropertyChanged
+    {
+
+        public CommandCL command = new CommandCL();
+
+        private int id;
+        private string question;
+        private string answerTrue;
+        private int grade;
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string Question
+        {
+            get { return question; }
+            set
+            {
+                if (question != value)
+                {
+                    question = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string AnswerTrue
+        {
+            get { return answerTrue; }
+            set
+            {
+                if (answerTrue != value)
+                {
+                    answerTrue = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int Grade
+        {
+            get { return grade; }
+            set
+            {
+                if (grade != value)
+                {
+                    grade = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private PropertyChangedEventHandler propertyChanged;
+
+        public event PropertyChangedEventHandler PropertyChanged
+        {
+            add => propertyChanged += value;
+            remove => propertyChanged -= value;
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            propertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class QuestionManager
+    {
+        private CommandCL.QuestionsCommand command = new CommandCL.QuestionsCommand();
+
+        public void CreateQuestionData(Questions question)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Questions>(memoryStream, question);
+                Task.Run(async () => await command.CreateQuestion(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "028")).Wait();
+            }
+        }
+
+        public void UpdateQuestionData(Questions question)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Questions>(memoryStream, question);
+                Task.Run(async () => await command.UpdateQuestion(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "029")).Wait();
+            }
+        }
+
+        public void DeleteQuestionData(Questions question)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Questions>(memoryStream, question);
+                Task.Run(async () => await command.DelQuestion(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "030")).Wait();
+            }
+        }
+
+        public List<Questions> GetQuestionList()
+        {
+            List<Questions> questionList = new List<Questions>();
+
+            Task.Run(async () => await command.GetQuestionList(Ip_adress.Ip_adresss, "", "031")).Wait();
+
+            if (CommandCL.QuestionsListGet == null)
+            {
+                questionList = null;
+            }
+            else
+            {
+                questionList = CommandCL.QuestionsListGet.QuestionList;
+            }
+            return questionList;
+        }
+    }
 }

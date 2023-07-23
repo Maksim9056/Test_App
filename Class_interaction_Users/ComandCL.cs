@@ -75,8 +75,9 @@ namespace Class_interaction_Users
         public static UserList UserListGet { get; set; }
         public static TestList TestListGet { get; set; }
         public static ExamsList ExamsListGet { get; set; }
+        public static QuestionsList QuestionsListGet { get; set; }
 
-        public static Questionss_travel Questionss_Travel { get; set; }
+        public static QuestionssList QuestionssList { get; set; }
         /// <summary>
         /// Роли 
         /// </summary>
@@ -1249,142 +1250,212 @@ namespace Class_interaction_Users
             }
         }
 
-        
 
-        /// <summary>
-        /// Procedure for sending 020
-        /// </summary>
-        /// <param name="server"></param>
-        /// <param name="fs"></param>
-        /// <param name="command"></param>
-        /// <returns>True if the procedure succeeds, False otherwise</returns>
-        async public Task<bool> CreateTest(string server, string fs, string command)
+        public class TestCommand
         {
-            string responseDat = await SendClass(server, fs, command);
-            return !string.IsNullOrEmpty(responseDat);
-        }
-
-        /// <summary>
-        /// Procedure for sending 021
-        /// </summary>
-        /// <param name="server"></param>
-        /// <param name="fs"></param>
-        /// <param name="command"></param>
-        /// <returns>True if the procedure succeeds, False otherwise</returns>
-        async public Task<bool> UpdateTest(string server, string fs, string command)
-        {
-            string responseDat = await SendClass(server, fs, command);
-            return !string.IsNullOrEmpty(responseDat);
-        }
-
-        /// <summary>
-        /// Procedure for sending 022
-        /// </summary>
-        /// <param name="server"></param>
-        /// <param name="fs"></param>
-        /// <param name="command"></param>
-        /// <returns>True if the procedure succeeds, False otherwise</returns>
-        async public Task<bool> DelTest(string server, string fs, string command)
-        {
-            string responseDat = await SendClass(server, fs, command);
-            return !string.IsNullOrEmpty(responseDat);
-        }
-
-        /// <summary>
-        /// Проццедура отправки 023
-        /// </summary>
-        /// <param name="server"></param>
-        /// <param name="fs"></param>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        async public Task<TestList> GetTestList(string server, string fs, string command)
-        {
-            string responseDat = await SendClass(server, fs, command);
-            if (string.IsNullOrEmpty(responseDat))
+            /// <summary>
+            /// Procedure for sending 020
+            /// </summary>
+            /// <param name="server"></param>
+            /// <param name="fs"></param>
+            /// <param name="command"></param>
+            /// <returns>True if the procedure succeeds, False otherwise</returns>
+            async public Task<bool> CreateTest(string server, string fs, string command)
             {
-                return null;
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
             }
-            else
+
+            /// <summary>
+            /// Procedure for sending 021
+            /// </summary>
+            /// <param name="server"></param>
+            /// <param name="fs"></param>
+            /// <param name="command"></param>
+            /// <returns>True if the procedure succeeds, False otherwise</returns>
+            async public Task<bool> UpdateTest(string server, string fs, string command)
             {
-                TestList msgTestList = JsonSerializer.Deserialize<TestList>(responseDat);
-                if (msgTestList == null)
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            /// <summary>
+            /// Procedure for sending 022
+            /// </summary>
+            /// <param name="server"></param>
+            /// <param name="fs"></param>
+            /// <param name="command"></param>
+            /// <returns>True if the procedure succeeds, False otherwise</returns>
+            async public Task<bool> DelTest(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            /// <summary>
+            /// Проццедура отправки 023
+            /// </summary>
+            /// <param name="server"></param>
+            /// <param name="fs"></param>
+            /// <param name="command"></param>
+            /// <returns></returns>
+            async public Task<TestList> GetTestList(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                if (string.IsNullOrEmpty(responseDat))
                 {
                     return null;
                 }
                 else
                 {
-                    TestListGet = msgTestList;
-                    return msgTestList;
+                    TestList msgTestList = JsonSerializer.Deserialize<TestList>(responseDat);
+                    if (msgTestList == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        TestListGet = msgTestList;
+                        return msgTestList;
+                    }
                 }
             }
         }
 
-        /// <summary>
-        /// Проццедура отправки 024
-        /// </summary>
-        /// <param name="server"></param>
-        /// <param name="fs"></param>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        async public Task<bool> CreateExams(string server, string fs, string command)
+        // для класса Exams
+        public class ExamsCommand
         {
-            string responseDat = await SendClass(server, fs, command);
-            return !string.IsNullOrEmpty(responseDat);
-        }
-
-        /// <summary>
-        /// Проццедура отправки 025
-        /// </summary>
-        /// <param name="server"></param>
-        /// <param name="fs"></param>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        async public Task<bool> UpdateExams(string server, string fs, string command)
-        {
-            string responseDat = await SendClass(server, fs, command);
-            return !string.IsNullOrEmpty(responseDat);
-        }
-
-        /// <summary>
-        /// Проццедура отправки 026
-        /// </summary>
-        /// <param name="server"></param>
-        /// <param name="fs"></param>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        async public Task<bool> DelExams(string server, string fs, string command)
-        {
-            string responseDat = await SendClass(server, fs, command);
-            return !string.IsNullOrEmpty(responseDat);
-        }
-
-        /// <summary>
-        /// Проццедура отправки 027
-        /// </summary>
-        /// <param name="server"></param>
-        /// <param name="fs"></param>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        async public Task<ExamsList> GetExamsList(string server, string fs, string command)
-        {
-            string responseDat = await SendClass(server, fs, command);
-            if (string.IsNullOrEmpty(responseDat))
+            /// <summary>
+            /// Проццедура отправки 024
+            /// </summary>
+            /// <param name="server"></param>
+            /// <param name="fs"></param>
+            /// <param name="command"></param>
+            /// <returns></returns>
+            async public Task<bool> CreateExams(string server, string fs, string command)
             {
-                return null;
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
             }
-            else
+
+            /// <summary>
+            /// Проццедура отправки 025
+            /// </summary>
+            /// <param name="server"></param>
+            /// <param name="fs"></param>
+            /// <param name="command"></param>
+            /// <returns></returns>
+            async public Task<bool> UpdateExams(string server, string fs, string command)
             {
-                ExamsList msgExamsList = JsonSerializer.Deserialize<ExamsList>(responseDat);
-                if (msgExamsList == null)
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            /// <summary>
+            /// Проццедура отправки 026
+            /// </summary>
+            /// <param name="server"></param>
+            /// <param name="fs"></param>
+            /// <param name="command"></param>
+            /// <returns></returns>
+            async public Task<bool> DelExams(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            /// <summary>
+            /// Проццедура отправки 027
+            /// </summary>
+            /// <param name="server"></param>
+            /// <param name="fs"></param>
+            /// <param name="command"></param>
+            /// <returns></returns>
+            async public Task<ExamsList> GetExamsList(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                if (string.IsNullOrEmpty(responseDat))
                 {
                     return null;
                 }
                 else
                 {
-                    ExamsListGet = msgExamsList;
-                    return msgExamsList;
+                    ExamsList msgExamsList = JsonSerializer.Deserialize<ExamsList>(responseDat);
+                    if (msgExamsList == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        ExamsListGet = msgExamsList;
+                        return msgExamsList;
+                    }
                 }
             }
+        }
+
+
+        public class QuestionsCommand
+        {
+            /// <summary>
+            /// Процедура отправки 28
+            /// </summary>
+            /// <param name="server"></param>
+            /// <param name="fs"></param>
+            /// <param name="command"></param>
+            /// <returns></returns>
+            async public Task<bool> CreateQuestion(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<bool> UpdateQuestion(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<bool> DelQuestion(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<QuestionsList> GetQuestionList(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                if (string.IsNullOrEmpty(responseDat))
+                {
+                    return null;
+                }
+                else
+                {
+                    QuestionsList msgQuestionList = JsonSerializer.Deserialize<QuestionsList>(responseDat);
+                    if (msgQuestionList == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        QuestionsListGet = msgQuestionList;
+                        return msgQuestionList;
+                    }
+                }
+            }
+
         }
 
         public async Task<string> SendClass(string server, string fs, string command)

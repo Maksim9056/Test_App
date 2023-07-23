@@ -91,7 +91,7 @@ public partial class Questin : ContentPage
                             using (MemoryStream memoryStream = new MemoryStream())
                             {
                                 //Заполняем класс Questions для отправки на сервер
-                                Questions questions = new Questions { Questionss = _Вопросы[0], Answer_True = Ответы[0] };
+                                Questions questions = new Questions { Question = _Вопросы[0], AnswerTrue = Ответы[0] };
                                 //Серелизуем класс CheckMail_and_Password для отправки на сервер
                                 JsonSerializer.Serialize<Questions>(memoryStream, questions);
                                 //Декодировали в строку  memoryStream    класс запоаковали в json строку
@@ -143,7 +143,7 @@ public partial class Questin : ContentPage
                                     for (int i = 0; i < strings.Length; i++)
                                     {
 
-                                        strings[i] = CommandCL.Roles_Accept.Quest[i].Questionss;
+                                        strings[i] = CommandCL.Roles_Accept.Quest[i].Question;
 
 
                                     }
@@ -224,7 +224,7 @@ public partial class Questin : ContentPage
             for (int i = 0; i < strings.Length; i++)
             {
 
-                strings[i] = CommandCL.Roles_Accept.Quest[i].Questionss;
+                strings[i] = CommandCL.Roles_Accept.Quest[i].Question;
 
               
             }
