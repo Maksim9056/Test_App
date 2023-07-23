@@ -72,6 +72,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Project\Doc\DocTestQuestion\DocTestQuestionListPage.xaml.cs">
+	    <DependentUpon>DocTestQuestionListPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Project\Main\Admin.xaml.cs">
 	    <DependentUpon>Admin.xaml</DependentUpon>
 	  </Compile>
@@ -81,79 +84,82 @@
 	  <Compile Update="Project\Old\Регистрация.xaml.cs">
 	    <DependentUpon>Регистрация.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\RefExams\RefExamsListPage.xaml.cs">
+	  <Compile Update="Project\Ref\RefExams\RefExamsListPage.xaml.cs">
 	    <DependentUpon>RefExamsListPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\RefExams\ExamsCreate.xaml.cs">
+	  <Compile Update="Project\Ref\RefExams\ExamsCreate.xaml.cs">
 	    <DependentUpon>ExamsCreate.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\RefExams\ExamsEditor.xaml.cs">
+	  <Compile Update="Project\Ref\RefExams\ExamsEditor.xaml.cs">
 	    <DependentUpon>ExamsEditor.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\refQuestions\QuestionsCreate.xaml.cs">
+	  <Compile Update="Project\Ref\RefQuestions\QuestionsCreate.xaml.cs">
 	    <DependentUpon>QuestionsCreate.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\refQuestions\QuestionsEditor.xaml.cs">
+	  <Compile Update="Project\Ref\RefQuestions\QuestionsEditor.xaml.cs">
 	    <DependentUpon>QuestionsEditor.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\refQuestions\RefQuestionsListPage.xaml.cs">
+	  <Compile Update="Project\Ref\RefQuestions\RefQuestionsListPage.xaml.cs">
 	    <DependentUpon>RefQuestionsListPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\RefTest\RefTestListPage.xaml.cs">
+	  <Compile Update="Project\Ref\RefTest\RefTestListPage.xaml.cs">
 	    <DependentUpon>RefTestListPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\RefTest\TestCreate.xaml.cs">
+	  <Compile Update="Project\Ref\RefTest\TestCreate.xaml.cs">
 	    <DependentUpon>TestCreate.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\RefTest\TestEditor.xaml.cs">
+	  <Compile Update="Project\Ref\RefTest\TestEditor.xaml.cs">
 	    <DependentUpon>TestEditor.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\RefUser\UserCreate.xaml.cs">
+	  <Compile Update="Project\Ref\RefUser\UserCreate.xaml.cs">
 	    <DependentUpon>UserCreate.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\RefUser\UserEditor.xaml.cs">
+	  <Compile Update="Project\Ref\RefUser\UserEditor.xaml.cs">
 	    <DependentUpon>UserEditor.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\RefUser\RefUserListPage.xaml.cs">
+	  <Compile Update="Project\Ref\RefUser\RefUserListPage.xaml.cs">
 	    <DependentUpon>RefUserListPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Project\RefExams\RefExamsListPage.xaml">
+	  <MauiXaml Update="Project\Doc\DocTestQuestion\DocTestQuestionListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\RefExams\ExamsCreate.xaml">
+	  <MauiXaml Update="Project\Ref\RefExams\RefExamsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\RefExams\ExamsEditor.xaml">
+	  <MauiXaml Update="Project\Ref\RefExams\ExamsCreate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\refQuestions\QuestionsCreate.xaml">
+	  <MauiXaml Update="Project\Ref\RefExams\ExamsEditor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\refQuestions\QuestionsEditor.xaml">
+	  <MauiXaml Update="Project\Ref\RefQuestions\QuestionsCreate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\refQuestions\RefQuestionsListPage.xaml">
+	  <MauiXaml Update="Project\Ref\RefQuestions\QuestionsEditor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\RefTest\RefTestListPage.xaml">
+	  <MauiXaml Update="Project\Ref\RefQuestions\RefQuestionsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\RefTest\TestCreate.xaml">
+	  <MauiXaml Update="Project\Ref\RefTest\RefTestListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\RefTest\TestEditor.xaml">
+	  <MauiXaml Update="Project\Ref\RefTest\TestCreate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\RefUser\UserCreate.xaml">
+	  <MauiXaml Update="Project\Ref\RefTest\TestEditor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\RefUser\UserEditor.xaml">
+	  <MauiXaml Update="Project\Ref\RefUser\UserCreate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Project\RefUser\RefUserListPage.xaml">
+	  <MauiXaml Update="Project\Ref\RefUser\UserEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Project\Ref\RefUser\RefUserListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Old\Questin.xaml">

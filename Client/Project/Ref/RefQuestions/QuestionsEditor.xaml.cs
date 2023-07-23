@@ -25,7 +25,7 @@ namespace Client.Project
             viewModel = new QuestionsEditorViewModel
             {
                 Id = questions.Id,
-                Question = questions.Question,
+                QuestionName = questions.QuestionName,
                 AnswerTrue = questions.AnswerTrue,
                 Grade = questions.Grade,
             };
@@ -38,7 +38,7 @@ namespace Client.Project
         {
             // Retrieve the values from the properties of the QuestionsEditorViewModel instance
             int id = viewModel.Id;
-            string question = viewModel.Question;
+            string question = viewModel.QuestionName;
             string answerTrue = viewModel.AnswerTrue;
             int grade = viewModel.Grade;
 
@@ -46,7 +46,7 @@ namespace Client.Project
             Questions questions = new Questions
             {
                 Id = id,
-                Question = question,
+                QuestionName = question,
                 AnswerTrue = answerTrue,
                 Grade = grade
             };

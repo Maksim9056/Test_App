@@ -400,7 +400,7 @@ namespace Class_interaction_Users
         public CommandCL command = new CommandCL();
 
         private int id;
-        private string question;
+        private string questionName;
         private string answerTrue;
         private int grade;
 
@@ -417,14 +417,14 @@ namespace Class_interaction_Users
             }
         }
 
-        public string Question
+        public string QuestionName
         {
-            get { return question; }
+            get { return questionName; }
             set
             {
-                if (question != value)
+                if (questionName != value)
                 {
-                    question = value;
+                    questionName = value;
                     OnPropertyChanged();
                 }
             }
@@ -516,6 +516,104 @@ namespace Class_interaction_Users
                 questionList = CommandCL.QuestionsListGet.QuestionList;
             }
             return questionList;
+        }
+    }
+
+    public class TestQuestionEditorViewModel 
+    {
+        private int id;
+        private Test test;
+        private Questions questions;
+
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
+        }
+
+        public Test Test
+        {
+            get => test;
+            set => SetProperty(ref test, value);
+        }
+
+        public Questions Questions
+        {
+            get => questions;
+            set => SetProperty(ref questions, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return false;
+            }
+
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+    }
+
+    public class TestQuestionManager
+    {
+        private CommandCL.TestQuestionCommand command = new CommandCL.TestQuestionCommand();
+
+        public void CreateTestQuestionData(TestQuestion testQuestion)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<TestQuestion>(memoryStream, testQuestion);
+                Task.Run(async () => await command.CreateTestQuestion(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "032")).Wait();
+            }
+        }
+
+        public void UpdateTestQuestionData(TestQuestion testQuestion)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<TestQuestion>(memoryStream, testQuestion);
+                Task.Run(async () => await command.UpdateTestQuestion(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "033")).Wait();
+            }
+        }
+
+        public void DeleteTestQuestionData(TestQuestion testQuestion)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<TestQuestion>(memoryStream, testQuestion);
+                Task.Run(async () => await command.DelTestQuestion(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "034")).Wait();
+            }
+        }
+
+        public List<TestQuestion> GetTestQuestionList(Class_interaction_Users.Test test)
+        {
+            List<TestQuestion> testQuestionList = new List<TestQuestion>();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Test>(memoryStream, test);
+                Task.Run(async () => await command.GetTestQuestionList(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "035")).Wait();
+            }
+
+            if (CommandCL.QuestionsListGet == null)
+            {
+                testQuestionList = null;
+            }
+            else
+            {
+                testQuestionList = CommandCL.TestQuestionListGet.ListTestQuestion;
+            }
+            return testQuestionList;
         }
     }
 }

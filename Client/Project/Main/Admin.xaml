@@ -28,8 +28,8 @@
                 Padding="10" />-->
 
             <Grid x:Name="Табличка" WidthRequest="800" HeightRequest="1000">
-                <Button 
-                    x:Name="CounterLog1" 
+                <!--<Button--> 
+                    <!--x:Name="CounterLog1" 
                     Text="Справочник вопросов" 
                     SemanticProperties.Hint="Counts the number of times you click" 
                     Clicked="CounterLog1_Clicked" 
@@ -50,7 +50,7 @@
                     HeightRequest="50" 
                     WidthRequest="320" 
                     Margin="0,20,0,0" 
-                    Padding="10" />
+                    Padding="10" />-->
 
                 <Button 
                     x:Name="CounterLog4" 

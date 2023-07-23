@@ -16,7 +16,7 @@
                 <Entry Text="{Binding Id}" />-->
 
                 <Label Text="Имя/Вопрос:" />
-                <Entry Text="{Binding Question}" />
+                <Entry Text="{Binding QuestionName}" />
 
                 <Label Text="Правильный ответ:" />
                 <Entry Text="{Binding AnswerTrue}" />

@@ -74,6 +74,7 @@ namespace Server_Test_Users
         public List<Test> TestListTest { get; set; }
         public List<Exams> ExamsListTest { get; set; }
         public List<Questions> QuestionsListTest { get; set; }
+        public List<TestQuestion> TestQuestionListTest { get; set; }
 
 
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
@@ -93,7 +94,7 @@ namespace Server_Test_Users
 
             public DbSet<Questions> Questions { get; set; } = null!;
 
-            public DbSet<Test_Questions> Test_Questions { get; set; } = null!;
+            public DbSet<TestQuestion> TestQuestion { get; set; } = null!;
             public DbSet<Answer> Answers { get; set; } = null!;
             public DbSet<Options> Options { get; set; } = null!;
 
@@ -664,7 +665,7 @@ namespace Server_Test_Users
                 if (Count == 0)
                 {
                     Questions [] questions= new Questions[1];
-                    questions[0].Question = "";
+                    questions[0].QuestionName = "";
 
                     questionss = questions;
                 }
@@ -682,7 +683,7 @@ namespace Server_Test_Users
                         foreach (Questions u in users)
                         {
 
-                            questions[i] = new Questions { Id = u.Id, Question = u.Question, AnswerTrue = u.AnswerTrue };
+                            questions[i] = new Questions { Id = u.Id, QuestionName = u.QuestionName, AnswerTrue = u.AnswerTrue };
                             i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
                         }
                     }
@@ -701,7 +702,7 @@ namespace Server_Test_Users
             using (ApplicationContext db = new ApplicationContext())
             {
                 // получаем объекты из бд и выводим на консоль
-                var users = db.Questions.Where(p => p.Question == Questions.Question);
+                var users = db.Questions.Where(p => p.QuestionName == Questions.QuestionName);
                 Console.WriteLine("Users list:");
                 int i = 0;
                 Questions[] questions = new Questions[1];
@@ -709,7 +710,7 @@ namespace Server_Test_Users
                 {
 
                     Вопрос = true;
-                    questions[i] = new Questions { Id = 0, Question = u.Question, AnswerTrue = u.AnswerTrue };
+                    questions[i] = new Questions { Id = 0, QuestionName = u.QuestionName, AnswerTrue = u.AnswerTrue };
                     // i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
                 }
                 if (questions == null)
@@ -729,7 +730,7 @@ namespace Server_Test_Users
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     // создаем два объекта User
-                    Questions user1 = new Questions { Question = Questions.Question, AnswerTrue = Questions.AnswerTrue };
+                    Questions user1 = new Questions { QuestionName = Questions.QuestionName, AnswerTrue = Questions.AnswerTrue };
                     //  User user2 = new User { Name = "Alice", Age = 26 };
 
 
@@ -760,7 +761,7 @@ namespace Server_Test_Users
                         foreach (Questions u in users)
                         {
 
-                            questions[i] = new Questions { Id = u.Id, Question = u.Question, AnswerTrue = u.AnswerTrue };
+                            questions[i] = new Questions { Id = u.Id, QuestionName = u.QuestionName, AnswerTrue = u.AnswerTrue };
                             i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
                         }
                     }
@@ -1048,7 +1049,7 @@ namespace Server_Test_Users
             {
                 Questions questions = new Questions
                 {
-                    Question = newQuestions.Question,
+                    QuestionName = newQuestions.QuestionName,
                     AnswerTrue = newQuestions.AnswerTrue,
                     Grade = newQuestions.Grade
                 };
@@ -1077,7 +1078,7 @@ namespace Server_Test_Users
                 Questions existingQuestions = db.Questions.FirstOrDefault(t => t.Id == updatedQuestions.Id);
                 if (existingQuestions != null)
                 {
-                    existingQuestions.Question = updatedQuestions.Question;
+                    existingQuestions.QuestionName = updatedQuestions.QuestionName;
                     existingQuestions.AnswerTrue = updatedQuestions.AnswerTrue;
                     existingQuestions.Grade = updatedQuestions.Grade;
                     db.SaveChanges();
@@ -1108,6 +1109,70 @@ namespace Server_Test_Users
                     else
                     {
                         QuestionsListTest = questions;
+                    }
+                }
+            }
+        }
+
+        // для TestQuestion
+
+        public void Create_TestQuestions_ds(TestQuestion newTestQuestions)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.TestQuestion.Add(newTestQuestions);
+                db.SaveChanges();
+            }
+        }
+
+        public void Del_TestQuestions_ds(int TestQuestionsId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                TestQuestion testQuestions = db.TestQuestion.FirstOrDefault(t => t.Id == TestQuestionsId);
+                if (testQuestions != null)
+                {
+                    db.TestQuestion.Remove(testQuestions);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void Update_TestQuestions_ds(TestQuestion updatedTestQuestions)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                TestQuestion existingTestQuestions = db.TestQuestion.FirstOrDefault(t => t.Id == updatedTestQuestions.Id);
+                if (existingTestQuestions != null)
+                {
+                    existingTestQuestions.IdTest = updatedTestQuestions.IdTest;
+                    existingTestQuestions.IdQuestions = updatedTestQuestions.IdQuestions;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void Check_TestQuestions_ds(Test test)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                int count = db.TestQuestion.Count();
+                if (count == 0)
+                {
+                    // Handle the case when there are no test questions
+                }
+                else
+                {
+                    var testQuestions = db.TestQuestion.ToList();
+                    if (testQuestions == null)
+                    {
+                        // Handle the case when the test questions list is null
+                    }
+                    else
+                    {
+                        // Use the testQuestions list as needed
+                        //TestQuestionListTest = testQuestions.Where(tq => tq.Test != null && tq.Test.Id == test.Id).ToList();
+                        TestQuestionListTest = testQuestions.ToList();
                     }
                 }
             }

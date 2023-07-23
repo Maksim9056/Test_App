@@ -38,7 +38,7 @@ public partial class Вопросы_для_теста : ContentPage
         string[] stringsS = new string[CommandCL.Roles_Accept.Quest.Length];
         for (int i = 0; i < stringsS.Length; i++)
         {
-            stringsS[i] = CommandCL.Roles_Accept.Quest[i].Question;
+            stringsS[i] = CommandCL.Roles_Accept.Quest[i].QuestionName;
         }
         for (int j = 0; j < stringsS.Length; j++)
         {

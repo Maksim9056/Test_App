@@ -29,7 +29,7 @@ namespace Client.Project
         {
             // Retrieve the values from the properties of the UserEditorViewModel instance
             // int id = viewModel.Id;
-            string question1 = viewModel.Question;
+            string question1 = viewModel.QuestionName;
             string answerTrue = viewModel.AnswerTrue;
             int grade = viewModel.Grade;
 
@@ -37,7 +37,7 @@ namespace Client.Project
             Questions question = new Questions
             {
                 // Id = id,
-                Question = question1,
+                QuestionName = question1,
                 AnswerTrue = answerTrue,
                 Grade = grade,
                 // Set other properties of the Questions class accordingly

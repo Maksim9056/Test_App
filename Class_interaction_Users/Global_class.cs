@@ -85,7 +85,7 @@ namespace Class_interaction_Users
         /// <summary>
         /// Наименование вопроса
         /// </summary>
-        public string Question { get; set; }
+        public string QuestionName { get; set; }
 
         /// <summary>
         /// Правильный ответ
@@ -96,6 +96,12 @@ namespace Class_interaction_Users
         /// Оценка вопроса
         /// </summary>
         public int Grade { get; set; }
+
+        ///// <summary>
+        ///// Выбранные ответы
+        ///// </summary>
+        //public List<Answer> allAnswers { get; set; }
+
     }
 
 
@@ -222,36 +228,70 @@ namespace Class_interaction_Users
      public    List<Regis_users_travels> Regis_Users_Travels = new List<Regis_users_travels>();
     }
 
+
+    [Serializable]
     /// <summary>
-    ///Тест вопросами
+    /// Тест с вопросами
     /// </summary>
-    public class Test_Questions
+    public class TestQuestion
     {
-        public Test_Questions() { }
+        public TestQuestion() { }
 
         /// <summary>
-        ///Id  Тест вопросами
+        /// Id Теста с вопросами
         /// </summary>
         public int Id { get; set; }
-      
+
+        /// <summary>
+        /// Тест, к которому относится вопрос
+        /// </summary>
+        public Test IdTest { get; set; }
+
         /// <summary>
         /// Вопросы
         /// </summary>
-       public Questions Questions { get; set; }
-       /// <summary>
-       /// Правильный ответ
-       /// </summary>
-        public string Answer_True { get; set; }
+        public Questions IdQuestions { get; set; }
+    }
+
+    [Serializable]
+    public class TestQuestionList
+    {
+        public List<TestQuestion> ListTestQuestion{ get; set; } = new List<TestQuestion>();
+    }
+
+
+    [Serializable]
+    /// <summary>
+    /// Вопросы с ответами
+    /// </summary>
+    public class QuestionAnswer
+    {
+        public QuestionAnswer() { }
+
+        /// <summary>
+        /// Id вопроса
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Вопросы
+        /// </summary>
+        public Questions Questions { get; set; }
+
+        /// <summary>
+        /// Правильные ответы
+        /// </summary>
+        public string CorrectAnswers { get; set; }
+
         /// <summary>
         /// Оценка
         /// </summary>
-        public string Grade_Quessions { get; set; }
+        public int Grade { get; set; }
 
-       /// <summary>
-       /// Выборка вопросов несколько
-       /// </summary>
-        public Answer Answer_id { get; set; }
-   
+        /// <summary>
+        /// Выбранные ответы
+        /// </summary>
+        public List<Answer> AllAnswers { get; set; }
     }
 
     /// <summary>
@@ -261,17 +301,22 @@ namespace Class_interaction_Users
     {
         public int Id { get; set; }
 
-       /// <summary>
-       /// Ответ
-       /// </summary>
-        public string Answer_options { get; set; }
+        /// <summary>
+        /// Ответ
+        /// </summary>
+        public string AnswerOptions { get; set; }
 
-        public Questions id_Questions { get; set; }
+        /// <summary>
+        /// Правильные ответы
+        /// </summary>
+        public bool CorrectAnswers { get; set; }
+
+        public Questions IdQuestions { get; set; }
     }
 
-   /// <summary>
-   /// Параметры
-   /// </summary>
+    /// <summary>
+    /// Параметры
+    /// </summary>
     public class Options 
     { 
      public  int Id { get; set; }
@@ -282,6 +327,7 @@ namespace Class_interaction_Users
       public Test Id_Test { get; set; }
     }
 
+    [Serializable]
     /// <summary>
     /// Справочник тестов
     /// </summary>

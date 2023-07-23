@@ -63,7 +63,7 @@ namespace Client.Project
                 return;
 
             var selectedQuestion = (Questions)e.SelectedItem;
-            await DisplayAlert("Выбранный вопрос", selectedQuestion.Question.Question, "OK");
+            await DisplayAlert("Выбранный вопрос", selectedQuestion.Question.QuestionName, "OK");
             ((ListView)sender).SelectedItem = null;
         }
 
@@ -79,7 +79,7 @@ namespace Client.Project
 
             viewModelManager.DeleteQuestionData(selectedQuestion.Question);
 
-            DisplayAlert("Удаляется вопрос", selectedQuestion.Question.Question, "OK");
+            DisplayAlert("Удаляется вопрос", selectedQuestion.Question.QuestionName, "OK");
             UpdateForm();
         }
 
