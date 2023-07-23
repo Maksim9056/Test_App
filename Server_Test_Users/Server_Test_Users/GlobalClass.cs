@@ -1159,20 +1159,24 @@ namespace Server_Test_Users
                 int count = db.TestQuestion.Count();
                 if (count == 0)
                 {
-                    // Handle the case when there are no test questions
+                    // Обработка случая, когда нет вопросов в тесте
                 }
                 else
                 {
-                    var testQuestions = db.TestQuestion.ToList();
+                    var testQuestions = db.TestQuestion
+                        .Include(tq => tq.IdTest)
+                        .Include(tq => tq.IdQuestions)
+                        .Where(tq => tq.IdTest != null && tq.IdTest.Id == test.Id)
+                        .ToList();
+
                     if (testQuestions == null)
                     {
-                        // Handle the case when the test questions list is null
+                        // Обработка случая, когда список вопросов равен null
                     }
                     else
                     {
-                        // Use the testQuestions list as needed
-                        //TestQuestionListTest = testQuestions.Where(tq => tq.Test != null && tq.Test.Id == test.Id).ToList();
-                        TestQuestionListTest = testQuestions.ToList();
+                        // Используйте список testQuestions по мере необходимости
+                        TestQuestionListTest = testQuestions;
                     }
                 }
             }

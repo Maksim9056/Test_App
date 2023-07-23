@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"   
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"   
              x:Class="Client.Project.DocTestQuestionListPage"   
-             Title="Справочник экзаменов" 
+             Title="Перечень вопросов" 
              Loaded="ContentPageLoaded">
 
     <ContentPage.Content>
@@ -25,7 +25,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding IdQuestions.QuestionName}" Grid.Column="0" 
+                                <Label Text="{Binding TestQuestion.IdQuestions.QuestionName}" Grid.Column="0" 
                                         FontSize="16" 
                                         FontFamily="Arial" 
                                         FontAttributes="Bold" 
