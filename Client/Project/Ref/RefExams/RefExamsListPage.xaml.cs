@@ -83,15 +83,23 @@ public partial class RefExamsListPage : ContentPage
         UpdateForm();
     }
 
-    private void GoBack(object sender, EventArgs e)
-    {
-        var mainPage = new Администратор();
-        var navigationPage = new NavigationPage(mainPage);
+        private void GoBack(object sender, EventArgs e)
+        {
+            var mainPage = new Администратор();
+            var navigationPage = new NavigationPage(mainPage);
 
-        Application.Current.MainPage = navigationPage;
-    }
+            Application.Current.MainPage = navigationPage;
+        }
+        //private void GoBack(object sender, EventArgs e)
+        //{
+        //    if (Application.Current.MainPage is NavigationPage navigationPage)
+        //    {
+        //        navigationPage.Navigation.PopAsync();
+        //    }
+        //}
 
-    public class RefExams
+
+        public class RefExams
         {
         public Class_interaction_Users.Exams Exams { get; set; }
         public Command EditCommand { get; set; }

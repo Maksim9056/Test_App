@@ -62,9 +62,11 @@ public partial class RefTestListPage : ContentPage
 
             var selectedTest = (RefTest)e.SelectedItem;
             //await DisplayAlert("Выбранный тест", selectedTest.Test.Name_Test, "OK");
-            Navigation.PushAsync(new DocTestQuestionListPage(selectedTest.Test));
+            await Navigation.PushAsync(new DocTestQuestionListPage(selectedTest.Test));
 
             ((ListView)sender).SelectedItem = null;
+
+            //await Navigation.PopAsync();
         }
 
         private void EditTest(object test)
@@ -90,6 +92,14 @@ public partial class RefTestListPage : ContentPage
 
             Application.Current.MainPage = navigationPage;
         }
+        //private void GoBack(object sender, EventArgs e)
+        //{
+        //    if (Application.Current.MainPage is NavigationPage navigationPage)
+        //    {
+        //        navigationPage.Navigation.PopAsync();
+        //    }
+        //}
+
 
         public class RefTest
         {

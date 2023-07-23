@@ -67,24 +67,19 @@ public partial class Администратор : ContentPage
 
     }
 
-    private  void CounterLog1_Clicked(object sender, EventArgs e)
+    private async void CounterLog1Clicked(object sender, EventArgs e)
     {
         try
         {
             var mainPage = new Questin();
             var navigationPage = new NavigationPage(mainPage);
-
-            Application.Current.MainPage = navigationPage;
-            //await Navigation.PushAsync(new ());
+            await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
         }
-        catch
+        catch (Exception ex)
         {
-
+            // Обработка исключения, если необходимо
         }
-    //    Application.Current.MainPage = navigationPage;
-
     }
-
     private void CounterLog2_Clicked(object sender, EventArgs e)
     {
         var mainPage = new MainPage();
@@ -102,46 +97,48 @@ public partial class Администратор : ContentPage
         Application.Current.MainPage = navigationPage;
     }
 
-    private void CounterLog4_Clicked(object sender, EventArgs e)
+    private async void CounterLog4_Clicked(object sender, EventArgs e)
     {
         var mainPage = new Project.RefUserListPage();
         var navigationPage = new NavigationPage(mainPage);
-
         Application.Current.MainPage = navigationPage;
-
     }
+
+    //private void GoBack(object sender, EventArgs e)
+    //{
+    //    var mainPage = new MainPage();
+    //    var navigationPage = new NavigationPage(mainPage);
+
+    //    Application.Current.MainPage = navigationPage;
+    //}
     private void GoBack(object sender, EventArgs e)
     {
-        var mainPage = new MainPage();
-        var navigationPage = new NavigationPage(mainPage);
-
-        Application.Current.MainPage = navigationPage;
+        if (Application.Current.MainPage is NavigationPage navigationPage)
+        {
+            navigationPage.Navigation.PopAsync();
+        }
     }
 
-    private void CounterLogTest_Clicked(object sender, EventArgs e)
+
+    private async void CounterLogTest_Clicked(object sender, EventArgs e)
     {
         var mainPage = new Project.RefTestListPage();
         var navigationPage = new NavigationPage(mainPage);
-
         Application.Current.MainPage = navigationPage;
     }
 
-    private void CounterLogExamsClicked(object sender, EventArgs e)
+    private async void CounterLogExamsClicked(object sender, EventArgs e)
     {
         var mainPage = new Project.RefExamsListPage();
         var navigationPage = new NavigationPage(mainPage);
-
         Application.Current.MainPage = navigationPage;
-
     }
 
-    private void CounterLogQuestionsClicked(object sender, EventArgs e)
+    private async void CounterLogQuestionsClicked(object sender, EventArgs e)
     {
         var mainPage = new Project.RefQuestionsListPage();
         var navigationPage = new NavigationPage(mainPage);
-
         Application.Current.MainPage = navigationPage;
-
     }
 }
 

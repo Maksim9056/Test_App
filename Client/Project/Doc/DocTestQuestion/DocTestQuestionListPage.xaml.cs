@@ -24,6 +24,7 @@ namespace Client.Project
             viewModelManager = new TestQuestionManager();
             CurrrentTest = test;
             QuestionList1.ItemsSource = GetTestQuestions(test);
+            Title = "Вопросы для теста: "+ test.Name_Test;
         }
 
         private void UpdateForm(Class_interaction_Users.Test test)
@@ -72,7 +73,7 @@ namespace Client.Project
         private void EditTestQuestion(object testQuestion)
         {
             var selectedTestQuestion = (RefTestQuestion)testQuestion;
-            //Navigation.PushAsync(new TestQuestionEditor(selectedTestQuestion.TestQuestion.Test));
+            Navigation.PushAsync(new QuestionsEditor(selectedTestQuestion.TestQuestion.IdQuestions));
         }
 
         private void DelTestQuestion(object testQuestion)
@@ -87,10 +88,10 @@ namespace Client.Project
 
         private void GoBack(object sender, EventArgs e)
         {
-            var mainPage = new Администратор();
-            var navigationPage = new NavigationPage(mainPage);
-
-            Application.Current.MainPage = navigationPage;
+            if (Application.Current.MainPage is NavigationPage navigationPage)
+            {
+                navigationPage.Navigation.PopAsync();
+            }
         }
 
         public class RefTestQuestion

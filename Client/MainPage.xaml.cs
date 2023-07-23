@@ -191,25 +191,43 @@ namespace Client
                                                 else
                                                 {
                                                     var regis_Users = command.Travel_logout;
+                                                    //switch (regis_Users.Rechte)
+                                                    //{
+                                                    //    case 0:
+                                                    //        await DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
+                                                    //        var mainPage = new Главная_страница();
+                                                    //        var navigationPage = new NavigationPage(mainPage);
+
+                                                    //        Application.Current.MainPage = navigationPage;
+                                                    //    //    await Navigation.PushAsync(new ());
+                                                    //        break;
+                                                    //    case 1:
+                                                    //        await DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
+                                                    //        var mainPage1 = new Администратор();
+                                                    //        var navigationPage2 = new NavigationPage(mainPage1);
+
+                                                    //        Application.Current.MainPage = navigationPage2;
+                                                    //       // await Navigation.PushAsync(new ());
+                                                    //        break;
+
+                                                    //}
                                                     switch (regis_Users.Rechte)
                                                     {
                                                         case 0:
                                                             await DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
                                                             var mainPage = new Главная_страница();
                                                             var navigationPage = new NavigationPage(mainPage);
-
                                                             Application.Current.MainPage = navigationPage;
-                                                        //    await Navigation.PushAsync(new ());
                                                             break;
                                                         case 1:
                                                             await DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
+
                                                             var mainPage1 = new Администратор();
                                                             var navigationPage2 = new NavigationPage(mainPage1);
 
                                                             Application.Current.MainPage = navigationPage2;
-                                                           // await Navigation.PushAsync(new ());
+                                                            //Application.Current.MainPage.Navigation.PushAsync(navigationPage2);
                                                             break;
-
                                                     }
                                                 }
                                             }

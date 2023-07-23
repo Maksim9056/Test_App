@@ -44,7 +44,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Создать" 
+            <Button Text="Добавить вопрос" 
                     Clicked="CreateButtonClicked" Grid.Row="1" />
             <Button Text="Назад"   
                     Clicked="GoBack" Grid.Row="2" />

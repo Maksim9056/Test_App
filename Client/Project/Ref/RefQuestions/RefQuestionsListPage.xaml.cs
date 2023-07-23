@@ -90,6 +90,13 @@ namespace Client.Project
 
             Application.Current.MainPage = navigationPage;
         }
+        //private void GoBack(object sender, EventArgs e)
+        //{
+        //    if (Application.Current.MainPage is NavigationPage navigationPage)
+        //    {
+        //        navigationPage.Navigation.PopAsync();
+        //    }
+        //}
 
         public class Questions
         {

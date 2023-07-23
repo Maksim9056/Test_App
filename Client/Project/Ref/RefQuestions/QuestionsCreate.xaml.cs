@@ -58,11 +58,19 @@ namespace Client.Project
             GoBack(sender, e);
         }
 
+        //private void GoBack(object sender, EventArgs e)
+        //{
+        //    var mainPage = new Project.RefQuestionsListPage();
+        //    var navigationPage = new NavigationPage(mainPage);
+        //    Application.Current.MainPage = navigationPage;
+        //}
         private void GoBack(object sender, EventArgs e)
         {
-            var mainPage = new Project.RefQuestionsListPage();
-            var navigationPage = new NavigationPage(mainPage);
-            Application.Current.MainPage = navigationPage;
+            if (Application.Current.MainPage is NavigationPage navigationPage)
+            {
+                navigationPage.Navigation.PopAsync();
+            }
         }
+
     }
 }
