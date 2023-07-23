@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Class_interaction_Users;
 using System.Collections.ObjectModel;
 
+
 namespace Client.Project
 {
     public partial class DocTestQuestionListPage : ContentPage
@@ -101,9 +102,26 @@ namespace Client.Project
             public Command DelCommand { get; set; }
         }
 
-        private void CreateButtonClicked(object sender, EventArgs e)
+        private async void CreateButtonClicked(object sender, EventArgs e)
         {
-            //Navigation.PushAsync(new TestQuestionCreate());
+            var refQuestionsListPage = new RefQuestionsListPage();
+            refQuestionsListPage.Disappearing += (s, args) =>
+            {
+                if (refQuestionsListPage.vSelectedItem != null)
+                {
+                    // Получите выбранный элемент из RefQuestionsListPage
+                    var selectedItem = refQuestionsListPage.vSelectedItem;
+
+                    // Делайте что-то с выбранным элементом здесь
+                    // Например, установите его значение в текстовом поле на текущей форме
+                    //MyTextField.Text = selectedItem;
+
+                    // Очистите выбранный элемент в RefQuestionsListPage
+                    refQuestionsListPage.vSelectedItem = null;
+                }
+            };
+
+            await Navigation.PushModalAsync(refQuestionsListPage);
         }
 
         private void ContentPageLoaded(object sender, EventArgs e)

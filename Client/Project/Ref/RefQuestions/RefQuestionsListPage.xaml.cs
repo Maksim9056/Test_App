@@ -15,7 +15,7 @@ namespace Client.Project
         public CommandCL command = new CommandCL();
         private QuestionsEditorViewModel viewModel;
         private QuestionManager viewModelManager;
-
+        public Class_interaction_Users.Questions vSelectedItem { get; set; }
         public RefQuestionsListPage()
         {
             InitializeComponent();
@@ -65,6 +65,11 @@ namespace Client.Project
             var selectedQuestion = (Questions)e.SelectedItem;
             await DisplayAlert("Выбранный вопрос", selectedQuestion.Question.QuestionName, "OK");
             ((ListView)sender).SelectedItem = null;
+
+            vSelectedItem = selectedQuestion.Question;
+
+            // Закройте форму RefQuestionsListPage
+            Navigation.PopModalAsync();
         }
 
         private void EditQuestion(object question)
@@ -109,5 +114,7 @@ namespace Client.Project
         {
             Navigation.PushAsync(new QuestionsCreate());
         }
+
+
     }
 }
