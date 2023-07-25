@@ -77,6 +77,7 @@ namespace Class_interaction_Users
         public static ExamsList ExamsListGet { get; set; }
         public static QuestionsList QuestionsListGet { get; set; }
         public static TestQuestionList TestQuestionListGet { get; set; }
+        public static QuestionAnswerList QuestionAnswerListGet { get; set; }
 
         public static QuestionssList QuestionssList { get; set; }
         /// <summary>
@@ -1505,7 +1506,54 @@ namespace Class_interaction_Users
                 }
             }
         }
-        
+
+        public class QuestionAnswerCommand
+        {
+            async public Task<bool> CreateQuestionAnswer(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<bool> UpdateQuestionAnswer(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<bool> DelQuestionAnswer(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<QuestionAnswerList> GetQuestionAnswerList(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                if (string.IsNullOrEmpty(responseDat))
+                {
+                    return null;
+                }
+                else
+                {
+                    QuestionAnswerList questionAnswerList = JsonSerializer.Deserialize<QuestionAnswerList>(responseDat);
+                    if (questionAnswerList == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        QuestionAnswerListGet = questionAnswerList;
+                        return questionAnswerList;
+                    }
+                }
+            }
+        }
+
         public async Task<string> SendClass(string server, string fs, string command)
         {
             try

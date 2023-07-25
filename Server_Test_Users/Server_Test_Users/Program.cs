@@ -132,6 +132,11 @@ namespace Server_Test_Users
                 FDictCommands.Add("033", new Action<byte[], GlobalClass, NetworkStream>(command.Update_TestQuestions));
                 FDictCommands.Add("034", new Action<byte[], GlobalClass, NetworkStream>(command.Del_TestQuestions));
                 FDictCommands.Add("035", new Action<byte[], GlobalClass, NetworkStream>(command.Get_TestQuestionsList));
+                FDictCommands.Add("036", new Action<byte[], GlobalClass, NetworkStream>(command.Create_QuestionAnswer));
+                FDictCommands.Add("037", new Action<byte[], GlobalClass, NetworkStream>(command.Update_QuestionAnswer));
+                FDictCommands.Add("038", new Action<byte[], GlobalClass, NetworkStream>(command.Del_QuestionAnswer));
+                FDictCommands.Add("039", new Action<byte[], GlobalClass, NetworkStream>(command.Get_QuestionAnswerList));
+
 
 
 

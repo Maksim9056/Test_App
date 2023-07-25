@@ -75,6 +75,7 @@ namespace Server_Test_Users
         public List<Exams> ExamsListTest { get; set; }
         public List<Questions> QuestionsListTest { get; set; }
         public List<TestQuestion> TestQuestionListTest { get; set; }
+        public List<QuestionAnswer> QuestionAnswerListTest { get; set; }
 
 
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
@@ -95,6 +96,7 @@ namespace Server_Test_Users
             public DbSet<Questions> Questions { get; set; } = null!;
 
             public DbSet<TestQuestion> TestQuestion { get; set; } = null!;
+            public DbSet<QuestionAnswer> QuestionAnswer { get; set; } = null!;
             public DbSet<Answer> Answers { get; set; } = null!;
             public DbSet<Options> Options { get; set; } = null!;
 
@@ -654,7 +656,7 @@ namespace Server_Test_Users
 
         public void Check_Questin()
         {
-            try 
+            try
             {
                 int Count = 0;
                 using (ApplicationContext db = new ApplicationContext())
@@ -664,7 +666,7 @@ namespace Server_Test_Users
                 }
                 if (Count == 0)
                 {
-                    Questions [] questions= new Questions[1];
+                    Questions[] questions = new Questions[1];
                     questions[0].QuestionName = "";
 
                     questionss = questions;
@@ -979,7 +981,7 @@ namespace Server_Test_Users
                 Exams exams = new Exams
                 {
                     Name_exam = newExams.Name_exam,
-                   // Options_Id = newTest.Options_Id
+                    // Options_Id = newTest.Options_Id
                 };
                 db.Exams.Add(exams);
                 db.SaveChanges();
@@ -1189,6 +1191,64 @@ namespace Server_Test_Users
                         TestQuestionListTest = testQuestions;
                     }
                 }
+            }
+        }
+
+
+        // For the QuestionAnswer class
+
+        public void CreateQuestionAnswer_ds(QuestionAnswer newQuestionAnswer)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                QuestionAnswer question = new QuestionAnswer();
+                question.Questions = newQuestionAnswer.Questions;
+                question.CorrectAnswers = newQuestionAnswer.CorrectAnswers;
+                question.Grade = newQuestionAnswer.Grade;
+                question.AllAnswers = newQuestionAnswer.AllAnswers;
+                question.CorrectAnswers = newQuestionAnswer.CorrectAnswers;
+
+                db.Set<QuestionAnswer>().Add(question);
+                db.SaveChanges();
+            }
+        }
+
+        public void DeleteQuestionAnswer_ds(int testQuestionId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                QuestionAnswer testQuestion = db.QuestionAnswer.FirstOrDefault(tq => tq.Id == testQuestionId);
+                if (testQuestion != null)
+                {
+                    db.QuestionAnswer.Remove(testQuestion);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void UpdateQuestionAnswer_ds(QuestionAnswer updatedQuestionAnswer)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                QuestionAnswer existingQuestionAnswer = db.QuestionAnswer.FirstOrDefault(tq => tq.Id == updatedQuestionAnswer.Id);
+                if (existingQuestionAnswer != null)
+                {
+                    existingQuestionAnswer.Questions.Id = updatedQuestionAnswer.Questions.Id;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void CheckQuestionAnswer_ds(Questions questions)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var testQuestions = db.QuestionAnswer
+                    .Include(tq => tq.Questions)
+                    .Where(tq => tq.Questions.Id != null && tq.Questions.Id == questions.Id)
+                    .ToList();
+
+                QuestionAnswerListTest = testQuestions;
             }
         }
     }

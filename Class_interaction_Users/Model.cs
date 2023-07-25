@@ -616,4 +616,101 @@ namespace Class_interaction_Users
             return testQuestionList;
         }
     }
+
+    public class QuestionAnswerEditorViewModel
+    {
+        private int id;
+        private Test test;
+        private QuestionAnswer questionAnswer;
+
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
+        }
+
+        public Test Test
+        {
+            get => test;
+            set => SetProperty(ref test, value);
+        }
+
+        public QuestionAnswer QuestionAnswer
+        {
+            get => questionAnswer;
+            set => SetProperty(ref questionAnswer, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return false;
+            }
+
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class QuestionAnswerManager
+    {
+        private CommandCL.QuestionAnswerCommand command = new CommandCL.QuestionAnswerCommand();
+
+        public void CreateQuestionAnswerData(QuestionAnswer questionAnswer)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<QuestionAnswer>(memoryStream, questionAnswer);
+                Task.Run(async () => await command.CreateQuestionAnswer(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "036")).Wait();
+            }
+        }
+
+        public void UpdateQuestionAnswerData(QuestionAnswer questionAnswer)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<QuestionAnswer>(memoryStream, questionAnswer);
+                Task.Run(async () => await command.UpdateQuestionAnswer(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "037")).Wait();
+            }
+        }
+
+        public void DeleteQuestionAnswerData(QuestionAnswer questionAnswer)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<QuestionAnswer>(memoryStream, questionAnswer);
+                Task.Run(async () => await command.DelQuestionAnswer(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "038")).Wait();
+            }
+        }
+
+        public List<QuestionAnswer> GetQuestionAnswerList(Questions question)
+        {
+            List<QuestionAnswer> questionAnswerList = new List<QuestionAnswer>();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Questions>(memoryStream, question);
+                Task.Run(async () => await command.GetQuestionAnswerList(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "039")).Wait();
+            }
+
+            if (CommandCL.QuestionAnswerListGet == null)
+            {
+                questionAnswerList = null;
+            }
+            else
+            {
+                questionAnswerList = CommandCL.QuestionAnswerListGet.ListQuestionAnswer;
+            }
+            return questionAnswerList;
+        }
+    }
+
 }

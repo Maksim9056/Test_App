@@ -72,6 +72,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Project\Doc\DocQuestionAnswer\DocQuestionAnswerListPage.xaml.cs">
+	    <DependentUpon>DocQuestionAnswerListPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Project\Doc\DocTestQuestion\DocTestQuestionListPage.xaml.cs">
 	    <DependentUpon>DocTestQuestionListPage.xaml</DependentUpon>
 	  </Compile>
@@ -123,6 +126,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Project\Doc\DocQuestionAnswer\DocQuestionAnswerListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Project\Doc\DocTestQuestion\DocTestQuestionListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

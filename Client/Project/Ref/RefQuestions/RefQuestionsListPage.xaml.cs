@@ -64,14 +64,17 @@ namespace Client.Project
                 return;
 
             var selectedQuestion = (Questions)e.SelectedItem;
-            await DisplayAlert("Выбранный вопрос", selectedQuestion.Question.QuestionName, "OK");
+            //await DisplayAlert("Выбранный вопрос", selectedQuestion.Question.QuestionName, "OK");
+            await Navigation.PushAsync(new DocQuestionAnswerListPage(selectedQuestion.Question));
+
             ((ListView)sender).SelectedItem = null;
 
-            vSelectedItem = selectedQuestion.Question;
+            //vSelectedItem = selectedQuestion.Question;
 
             // Закройте форму RefQuestionsListPage
-            Navigation.PopModalAsync();
+            //Navigation.PopModalAsync();
         }
+
 
         private void EditQuestion(object question)
         {

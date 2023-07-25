@@ -407,6 +407,47 @@ namespace Server_Test_Users
             }
         }
 
+
+        // For the QuestionAnswers directory
+
+        public void Create_QuestionAnswer(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            QuestionAnswer CrQuestionAnswer = JsonSerializer.Deserialize<QuestionAnswer>(arg1);
+            @class.CreateQuestionAnswer_ds(CrQuestionAnswer);
+        }
+
+        public void Update_QuestionAnswer(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            QuestionAnswer UpQuestionAnswer = JsonSerializer.Deserialize<QuestionAnswer>(arg1);
+            @class.UpdateQuestionAnswer_ds(UpQuestionAnswer);
+        }
+
+        public void Del_QuestionAnswer(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            QuestionAnswer DelQuestionAnswer = JsonSerializer.Deserialize<QuestionAnswer>(arg1);
+            @class.DeleteQuestionAnswer_ds(DelQuestionAnswer.Id);
+        }
+
+        public void Get_QuestionAnswerList(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Questions CrTest = JsonSerializer.Deserialize<Questions>(arg1);
+            @class.CheckQuestionAnswer_ds(CrTest);
+            if (@class.TestQuestionListTest == null)
+            {
+                // Handle the case when TestQuestionListTest is null 
+            }
+            else
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    QuestionAnswerList regis_QuestionAnswers = new QuestionAnswerList { };
+                    regis_QuestionAnswers.ListQuestionAnswer = @class.QuestionAnswerListTest;
+                    JsonSerializer.Serialize<QuestionAnswerList>(ms, regis_QuestionAnswers);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+        }
+
         public void Searh_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             try

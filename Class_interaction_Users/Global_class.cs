@@ -294,6 +294,13 @@ namespace Class_interaction_Users
         public List<Answer> AllAnswers { get; set; }
     }
 
+    [Serializable]
+    public class QuestionAnswerList
+    {
+        public List<QuestionAnswer> ListQuestionAnswer { get; set; } = new List<QuestionAnswer>();
+    }
+
+
     /// <summary>
     /// Ответ
     /// </summary>
