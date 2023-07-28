@@ -112,30 +112,42 @@ namespace Server_Test_Users
                 FDictCommands.Add("013", new Action<byte[], GlobalClass, NetworkStream>(command.List_Friens));
                 FDictCommands.Add("014", new Action<byte[], GlobalClass, NetworkStream>(command.Search_Image_Friends));
                 FDictCommands.Add("015", new Action<byte[], GlobalClass, NetworkStream>(command.Check_Users_test_insert));
+
                 FDictCommands.Add("016", new Action<byte[], GlobalClass, NetworkStream>(command.Check_Users));  // Получить список User
                 FDictCommands.Add("017", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Users)); // Изменить данные User
                 FDictCommands.Add("018", new Action<byte[], GlobalClass, NetworkStream>(command.Create_Users)); // Создать данные User
                 FDictCommands.Add("019", new Action<byte[], GlobalClass, NetworkStream>(command.Del_Users));    // Удалить данные User
+
                 FDictCommands.Add("020", new Action<byte[], GlobalClass, NetworkStream>(command.Create_Test));  
                 FDictCommands.Add("021", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Test));  
                 FDictCommands.Add("022", new Action<byte[], GlobalClass, NetworkStream>(command.Del_Test));
                 FDictCommands.Add("023", new Action<byte[], GlobalClass, NetworkStream>(command.Get_TestList));
+
                 FDictCommands.Add("024", new Action<byte[], GlobalClass, NetworkStream>(command.Create_Exams));
                 FDictCommands.Add("025", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Exams));
                 FDictCommands.Add("026", new Action<byte[], GlobalClass, NetworkStream>(command.Del_Exams));
                 FDictCommands.Add("027", new Action<byte[], GlobalClass, NetworkStream>(command.Get_ExamsList));
+
                 FDictCommands.Add("028", new Action<byte[], GlobalClass, NetworkStream>(command.Create_Questions));
                 FDictCommands.Add("029", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Questions));
                 FDictCommands.Add("030", new Action<byte[], GlobalClass, NetworkStream>(command.Del_Questions));
                 FDictCommands.Add("031", new Action<byte[], GlobalClass, NetworkStream>(command.Get_QuestionsList));
+
                 FDictCommands.Add("032", new Action<byte[], GlobalClass, NetworkStream>(command.Create_TestQuestions));
                 FDictCommands.Add("033", new Action<byte[], GlobalClass, NetworkStream>(command.Update_TestQuestions));
                 FDictCommands.Add("034", new Action<byte[], GlobalClass, NetworkStream>(command.Del_TestQuestions));
                 FDictCommands.Add("035", new Action<byte[], GlobalClass, NetworkStream>(command.Get_TestQuestionsList));
+
                 FDictCommands.Add("036", new Action<byte[], GlobalClass, NetworkStream>(command.Create_QuestionAnswer));
                 FDictCommands.Add("037", new Action<byte[], GlobalClass, NetworkStream>(command.Update_QuestionAnswer));
                 FDictCommands.Add("038", new Action<byte[], GlobalClass, NetworkStream>(command.Del_QuestionAnswer));
                 FDictCommands.Add("039", new Action<byte[], GlobalClass, NetworkStream>(command.Get_QuestionAnswerList));
+
+                FDictCommands.Add("040", new Action<byte[], GlobalClass, NetworkStream>(command.Create_Answer));
+                FDictCommands.Add("041", new Action<byte[], GlobalClass, NetworkStream>(command.Update_Answer));
+                FDictCommands.Add("042", new Action<byte[], GlobalClass, NetworkStream>(command.Del_Answer));
+                FDictCommands.Add("043", new Action<byte[], GlobalClass, NetworkStream>(command.Get_AnswerList));
+
 
 
 

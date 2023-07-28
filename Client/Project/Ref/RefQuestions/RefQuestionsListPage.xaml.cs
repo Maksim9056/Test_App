@@ -64,15 +64,13 @@ namespace Client.Project
                 return;
 
             var selectedQuestion = (Questions)e.SelectedItem;
-            //await DisplayAlert("Выбранный вопрос", selectedQuestion.Question.QuestionName, "OK");
-            await Navigation.PushAsync(new DocQuestionAnswerListPage(selectedQuestion.Question));
-
+            await DisplayAlert("Выбранный вопрос", selectedQuestion.Question.QuestionName, "OK");
             ((ListView)sender).SelectedItem = null;
 
-            //vSelectedItem = selectedQuestion.Question;
+            vSelectedItem = selectedQuestion.Question;
 
             // Закройте форму RefQuestionsListPage
-            //Navigation.PopModalAsync();
+            Navigation.PopModalAsync();
         }
 
 
@@ -116,7 +114,31 @@ namespace Client.Project
 
         private void CreateButtonClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new QuestionsCreate());
+        //    var refAnswerListPage = new RefAnswerListPage();
+
+        //    refAnswerListPage.Disappearing += (s, args) =>
+        //    {
+        //        if (refAnswerListPage.vSelectedItem != null)
+        //        {
+        //            var selectedItem = refAnswerListPage.vSelectedItem;
+
+        //            TestQuestion aTestQ = new TestQuestion();
+        //            aTestQ.IdQuestions = selectedItem;
+        //            aTestQ.IdTest = CurrrentTest;
+        //            viewModelManager.CreateQuestionData(aTestQ);
+
+        //            // Clear the selected item in RefQuestionsListPage
+        //            refAnswerListPage.vSelectedItem = null;
+
+        //            // Send a message to update the current form
+        //            MessagingCenter.Send(this, "UpdateForm");
+        //        }
+        //    };
+
+        //    await Navigation.PushModalAsync(refAnswerListPage);
+        //}
+
+           Navigation.PushAsync(new QuestionsCreate());
         }
 
 

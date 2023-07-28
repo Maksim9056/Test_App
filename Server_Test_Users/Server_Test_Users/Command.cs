@@ -366,6 +366,45 @@ namespace Server_Test_Users
             }
         }
 
+        // For the Answers directory
+
+        public void Create_Answer(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Answer? CrAnswers = JsonSerializer.Deserialize<Answer>(arg1);
+            @class.Create_Answers_ds(CrAnswers);
+        }
+
+        public void Update_Answer(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Answer? UpAnswers = JsonSerializer.Deserialize<Answer>(arg1);
+            @class.Update_Answers_ds(UpAnswers);
+        }
+
+        public void Del_Answer(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Answer? DelAnswers = JsonSerializer.Deserialize<Answer>(arg1);
+            @class.Del_Answers_ds(DelAnswers.Id);
+        }
+
+        public void Get_AnswerList(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            @class.Check_Answers_ds();
+            if (@class.AnswerListTest == null)
+            {
+                // Handle the case when AnswersListTest is null
+            }
+            else
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    AnswerList regis_Answers = new AnswerList { };
+                    regis_Answers.ListAnswer = @class.AnswerListTest;
+                    JsonSerializer.Serialize<AnswerList>(ms, regis_Answers);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+        }
+
 
         // Для справочника TestQuestions
 

@@ -24,19 +24,32 @@ namespace Client.Project
             viewModel = new QuestionAnswerEditorViewModel();
             viewModelManager = new QuestionAnswerManager();
             CurrrentTest = questions;
-            QuestionList.ItemsSource = GetTestQuestions(questions);
-            Title = "Вопросы для теста: " + questions.QuestionName;
-            MessagingCenter.Subscribe<DocTestQuestionListPage>(this, "UpdateForm", (sender) =>
+            QuestionList.ItemsSource = GetQuestionAnswer(questions);
+            Title = "Ответы для вопроса: " + questions.QuestionName;
+            MessagingCenter.Subscribe<DocQuestionAnswerListPage>(this, "UpdateForm", (sender) =>
             {
                 // Perform the necessary updates to the form here 
                 // For example, update the fields, refresh data, etc. 
-                QuestionList.ItemsSource = GetTestQuestions(questions);
+                QuestionList.ItemsSource = GetQuestionAnswer(questions);
             });
         }
 
+        //void OnUpdateForm(DocQuestionAnswerListPage sender)
+        //{
+        //    // Выполните необходимые обновления формы здесь
+        //    // Например, обновите поля, обновите данные и т. д.
+        //    QuestionList.ItemsSource = GetQuestionAnswer(CurrrentTest);
+        //}
+
+        //// Подписка на событие
+        //DocQuestionAnswerListPage.UpdateForm += OnUpdateForm;
+
+        //// Отписка от события (не забудьте отписаться, когда оно больше не нужно)
+        //DocQuestionAnswerListPage.UpdateForm -= OnUpdateForm;
+
         private void UpdateForm(Class_interaction_Users.Questions test)
         {
-            QuestionList.ItemsSource = GetTestQuestions(test);
+            QuestionList.ItemsSource = GetQuestionAnswer(test);
         }
 
         private void ContentPage_Loaded(object sender, EventArgs e)
@@ -44,14 +57,14 @@ namespace Client.Project
             // Your code here 
         }
 
-        private List<RefQuestionAnswer> GetTestQuestions(Class_interaction_Users.Questions questions)
+        private List<RefQuestionAnswer> GetQuestionAnswer(Class_interaction_Users.Questions questions)
         {
             List<RefQuestionAnswer> testQuestionList = new List<RefQuestionAnswer>();
 
             CommandCL.ExamsListGet = null;
             viewModelManager.GetQuestionAnswerList(questions);
 
-            if (CommandCL.TestQuestionListGet == null)
+            if (CommandCL.QuestionAnswerListGet == null)
             {
                 // Handle the case when the test list is null 
             }
@@ -115,6 +128,29 @@ namespace Client.Project
 
         private void CreateButtonClicked(object sender, EventArgs e)
         {
+            var refAnswerListPage = new RefAnswerListPage();
+
+            refAnswerListPage.Disappearing += (s, args) =>
+            {
+                if (refAnswerListPage.vSelectedItem != null)
+                {
+                    var selectedItem = refAnswerListPage.vSelectedItem;
+
+                    QuestionAnswer aTestQ = new QuestionAnswer();
+                    //aTestQ.AllAnswers = selectedItem;
+                    //aTestQ.AllAnswers = selectedItem;
+                    //aTestQ.IdTest = CurrrentTest;
+                    viewModelManager.CreateQuestionAnswerData(aTestQ);
+
+                    // Clear the selected item in RefQuestionsListPage
+                    refAnswerListPage.vSelectedItem = null;
+
+                    // Send a message to update the current form
+                    MessagingCenter.Send(this, "UpdateForm");
+                }
+            };
+
+            Navigation.PushModalAsync(refAnswerListPage);
 
         }
     } 

@@ -74,6 +74,7 @@ namespace Server_Test_Users
         public List<Test> TestListTest { get; set; }
         public List<Exams> ExamsListTest { get; set; }
         public List<Questions> QuestionsListTest { get; set; }
+        public List<Answer> AnswerListTest { get; set; }
         public List<TestQuestion> TestQuestionListTest { get; set; }
         public List<QuestionAnswer> QuestionAnswerListTest { get; set; }
 
@@ -97,7 +98,7 @@ namespace Server_Test_Users
 
             public DbSet<TestQuestion> TestQuestion { get; set; } = null!;
             public DbSet<QuestionAnswer> QuestionAnswer { get; set; } = null!;
-            public DbSet<Answer> Answers { get; set; } = null!;
+            public DbSet<Answer> Answer { get; set; } = null!;
             public DbSet<Options> Options { get; set; } = null!;
 
             public DbSet<Test> Test { get; set; } = null!;
@@ -1111,6 +1112,83 @@ namespace Server_Test_Users
                     else
                     {
                         QuestionsListTest = questions;
+                    }
+                }
+            }
+        }
+
+        // For the Answers class
+        public void Create_Answers_ds(Answer newAnswers)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Questions question = null;
+                if (newAnswers.IdQuestions != null)
+                {
+                    question = db.Questions.Find(newAnswers.IdQuestions);
+                }
+
+                Answer answer = new Answer
+                {
+                    AnswerOptions = newAnswers.AnswerOptions,
+                    CorrectAnswers = newAnswers.CorrectAnswers,
+                    IdQuestions = question
+                };
+                db.Answer.Add(answer);
+                db.SaveChanges();
+            }
+        }
+
+        public void Del_Answers_ds(int AnswersId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Answer answers = db.Answer.FirstOrDefault(t => t.Id == AnswersId);
+                if (answers != null)
+                {
+                    db.Answer.Remove(answers);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void Update_Answers_ds(Answer updatedAnswers)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Answer existingAnswers = db.Answer.FirstOrDefault(t => t.Id == updatedAnswers.Id);
+                if (existingAnswers != null)
+                {
+                    existingAnswers.AnswerOptions = updatedAnswers.AnswerOptions;
+                    existingAnswers.CorrectAnswers = updatedAnswers.CorrectAnswers;
+                    existingAnswers.IdQuestions = updatedAnswers.IdQuestions;
+                    db.SaveChanges();
+                }
+            }
+        }
+        public void Check_Answers_ds()
+        {
+            int Count = 0;
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Count = db.Answer.Count();
+            }
+            if (Count == 0)
+            {
+                // Handle the case when there are no answers
+            }
+            else
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    var answers = db.Answer.ToList();
+                    if (answers == null)
+                    {
+                        // Handle the case when the answers list is null
+                    }
+                    else
+                    {
+                        AnswerListTest = answers;
                     }
                 }
             }

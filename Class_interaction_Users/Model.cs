@@ -519,6 +519,128 @@ namespace Class_interaction_Users
         }
     }
 
+    public class AnswerEditorViewModel : INotifyPropertyChanged
+    {
+        private int newId;
+        private string newAnswerOptions;
+        private bool newCorrectAnswers;
+        private Questions newIdQuestions;
+
+        public int Id
+        {
+            get { return newId; }
+            set
+            {
+                if (newId != value)
+                {
+                    newId = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string AnswerOptions
+        {
+            get { return newAnswerOptions; }
+            set
+            {
+                if (newAnswerOptions != value)
+                {
+                    newAnswerOptions = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public bool CorrectAnswers
+        {
+            get { return newCorrectAnswers; }
+            set
+            {
+                if (newCorrectAnswers != value)
+                {
+                    newCorrectAnswers = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public Questions IdQuestions
+        {
+            get { return newIdQuestions; }
+            set
+            {
+                if (newIdQuestions != value)
+                {
+                    newIdQuestions = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        private PropertyChangedEventHandler propertyChanged;
+
+        public event PropertyChangedEventHandler PropertyChanged
+        {
+            add => propertyChanged += value;
+            remove => propertyChanged -= value;
+        }
+
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            propertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class AnswerManager
+    {
+        private CommandCL.AnswerCommand command = new CommandCL.AnswerCommand();
+
+        public void CreateAnswerData(Answer answer)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Answer>(memoryStream, answer);
+                Task.Run(async () => await command.CreateAnswer(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "040")).Wait();
+            }
+        }
+
+        public void UpdateAnswerData(Answer answer)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Answer>(memoryStream, answer);
+                Task.Run(async () => await command.UpdateAnswer(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "041")).Wait();
+            }
+        }
+
+        public void DeleteAnswerData(Answer answer)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Answer>(memoryStream, answer);
+                Task.Run(async () => await command.DelAnswer(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "042")).Wait();
+            }
+        }
+
+        public List<Answer> GetAnswerList()
+        {
+            List<Answer> answerList = new List<Answer>();
+
+            Task.Run(async () => await command.GetAnswerList(Ip_adress.Ip_adresss, "", "043")).Wait();
+
+            if (CommandCL.AnswerListGet == null)
+            {
+                answerList = null;
+            }
+            else
+            {
+                answerList = CommandCL.AnswerListGet.ListAnswer;
+            }
+            return answerList;
+        }
+    }
+
     public class TestQuestionEditorViewModel 
     {
         private int id;
@@ -605,7 +727,7 @@ namespace Class_interaction_Users
                 Task.Run(async () => await command.GetTestQuestionList(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "035")).Wait();
             }
 
-            if (CommandCL.QuestionsListGet == null)
+            if (CommandCL.TestQuestionListGet == null)
             {
                 testQuestionList = null;
             }

@@ -321,6 +321,13 @@ namespace Class_interaction_Users
         public Questions IdQuestions { get; set; }
     }
 
+    [Serializable]
+    public class AnswerList
+    {
+        public List<Answer> ListAnswer { get; set; } = new List<Answer>();
+    }
+
+
     /// <summary>
     /// Параметры
     /// </summary>

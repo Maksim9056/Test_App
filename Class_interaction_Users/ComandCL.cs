@@ -76,6 +76,8 @@ namespace Class_interaction_Users
         public static TestList TestListGet { get; set; }
         public static ExamsList ExamsListGet { get; set; }
         public static QuestionsList QuestionsListGet { get; set; }
+        public static AnswerList AnswerListGet { get; set; }
+
         public static TestQuestionList TestQuestionListGet { get; set; }
         public static QuestionAnswerList QuestionAnswerListGet { get; set; }
 
@@ -1458,6 +1460,60 @@ namespace Class_interaction_Users
                 }
             }
 
+        }
+
+        public class AnswerCommand
+        {
+            /// <summary>
+            /// Процедура отправки 28
+            /// </summary>
+            /// <param name="server"></param>
+            /// <param name="fs"></param>
+            /// <param name="command"></param>
+            /// <returns></returns>
+            async public Task<bool> CreateAnswer(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<bool> UpdateAnswer(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<bool> DelAnswer(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<AnswerList> GetAnswerList(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                if (string.IsNullOrEmpty(responseDat))
+                {
+                    return null;
+                }
+                else
+                {
+                    AnswerList msgAnswerList = JsonSerializer.Deserialize<AnswerList>(responseDat);
+                    if (msgAnswerList == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        AnswerListGet = msgAnswerList;
+                        return msgAnswerList;
+                    }
+                }
+            }
         }
 
         public class TestQuestionCommand
