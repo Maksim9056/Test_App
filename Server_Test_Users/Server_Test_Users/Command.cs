@@ -471,7 +471,7 @@ namespace Server_Test_Users
         {
             Questions CrTest = JsonSerializer.Deserialize<Questions>(arg1);
             @class.CheckQuestionAnswer_ds(CrTest);
-            if (@class.TestQuestionListTest == null)
+            if (@class.QuestionAnswerListTest == null)
             {
                 // Handle the case when TestQuestionListTest is null 
             }

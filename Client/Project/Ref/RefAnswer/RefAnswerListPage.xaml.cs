@@ -65,9 +65,12 @@ namespace Client.Project
 
             var selectedAnswer = (Answer)e.SelectedItem;
             await DisplayAlert("Выбранный вопрос", selectedAnswer.Answers.AnswerOptions, "OK");
-            //await Navigation.PushAsync(new DocQuestionAnswerListPage(selectedAnswer.Answers));
-
             ((ListView)sender).SelectedItem = null;
+
+            vSelectedItem = selectedAnswer.Answers;
+
+            // Закройте форму RefQuestionsListPage
+            Navigation.PopModalAsync();
         }
 
         private void Edit(object answer)

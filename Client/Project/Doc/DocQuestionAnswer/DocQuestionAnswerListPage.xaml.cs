@@ -16,14 +16,14 @@ namespace Client.Project
         public CommandCL command = new CommandCL();
         private QuestionAnswerEditorViewModel viewModel;
         private QuestionAnswerManager viewModelManager;
-        private Class_interaction_Users.Questions CurrrentTest;
+        private Class_interaction_Users.Questions CurrrentQuestions;
 
         public DocQuestionAnswerListPage(Class_interaction_Users.Questions questions)
         {
             InitializeComponent();
             viewModel = new QuestionAnswerEditorViewModel();
             viewModelManager = new QuestionAnswerManager();
-            CurrrentTest = questions;
+            CurrrentQuestions = questions;
             QuestionList.ItemsSource = GetQuestionAnswer(questions);
             Title = "Ответы для вопроса: " + questions.QuestionName;
             MessagingCenter.Subscribe<DocQuestionAnswerListPage>(this, "UpdateForm", (sender) =>
@@ -102,8 +102,8 @@ namespace Client.Project
 
             viewModelManager.DeleteQuestionAnswerData(selectedTestQuestion.QuestionAnswer);
 
-            DisplayAlert("Удаляется вопрос", selectedTestQuestion.QuestionAnswer.Questions.QuestionName, "OK");
-            UpdateForm(CurrrentTest);
+            DisplayAlert("Удаляется ответ", selectedTestQuestion.QuestionAnswer.Questions.QuestionName, "OK");
+            UpdateForm(CurrrentQuestions);
         }
 
         private void GoBack(object sender, EventArgs e)
@@ -129,18 +129,16 @@ namespace Client.Project
         private void CreateButtonClicked(object sender, EventArgs e)
         {
             var refAnswerListPage = new RefAnswerListPage();
-
             refAnswerListPage.Disappearing += (s, args) =>
             {
                 if (refAnswerListPage.vSelectedItem != null)
                 {
                     var selectedItem = refAnswerListPage.vSelectedItem;
-
-                    QuestionAnswer aTestQ = new QuestionAnswer();
-                    //aTestQ.AllAnswers = selectedItem;
-                    //aTestQ.AllAnswers = selectedItem;
-                    //aTestQ.IdTest = CurrrentTest;
-                    viewModelManager.CreateQuestionAnswerData(aTestQ);
+                    QuestionAnswer aQuestionQ = new QuestionAnswer();
+                    aQuestionQ.AllAnswers = new List<Answer>(); // Create a new list before adding the item
+                    aQuestionQ.AllAnswers.Add(selectedItem);
+                    aQuestionQ.Questions = CurrrentQuestions;
+                    viewModelManager.CreateQuestionAnswerData(aQuestionQ);
 
                     // Clear the selected item in RefQuestionsListPage
                     refAnswerListPage.vSelectedItem = null;
@@ -149,9 +147,7 @@ namespace Client.Project
                     MessagingCenter.Send(this, "UpdateForm");
                 }
             };
-
             Navigation.PushModalAsync(refAnswerListPage);
-
         }
     } 
 }

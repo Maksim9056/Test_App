@@ -266,7 +266,12 @@ namespace Class_interaction_Users
     /// </summary>
     public class QuestionAnswer
     {
-        public QuestionAnswer() { }
+        public QuestionAnswer()
+        {
+            AllAnswers = new List<Answer>();
+        }
+
+        //public QuestionAnswer() { }
 
         /// <summary>
         /// Id вопроса

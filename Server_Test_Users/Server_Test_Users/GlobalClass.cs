@@ -1279,14 +1279,29 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                QuestionAnswer question = new QuestionAnswer();
-                question.Questions = newQuestionAnswer.Questions;
-                question.CorrectAnswers = newQuestionAnswer.CorrectAnswers;
-                question.Grade = newQuestionAnswer.Grade;
-                question.AllAnswers = newQuestionAnswer.AllAnswers;
-                question.CorrectAnswers = newQuestionAnswer.CorrectAnswers;
+                QuestionAnswer questionAnswer = new QuestionAnswer();
 
-                db.Set<QuestionAnswer>().Add(question);
+                Questions questions = db.Questions.Find(newQuestionAnswer.Questions.Id);
+                questionAnswer.Questions = questions;
+                questionAnswer.CorrectAnswers = newQuestionAnswer.CorrectAnswers;
+                questionAnswer.Grade = newQuestionAnswer.Grade;
+
+                // Generate new unique primary key values for Answer objects
+                List<Answer> uniqueAnswers = newQuestionAnswer.AllAnswers.Select(a =>
+                {
+                    Answer newAnswer = new Answer
+                    {
+                        AnswerOptions = a.AnswerOptions,
+                        CorrectAnswers = a.CorrectAnswers,
+                        IdQuestions = a.IdQuestions
+                    };
+                    db.Answer.Add(newAnswer); // Add the new Answer object to the context
+                    return newAnswer;
+                }).ToList();
+
+                questionAnswer.AllAnswers = uniqueAnswers;
+
+                db.QuestionAnswer.Add(questionAnswer);
                 db.SaveChanges();
             }
         }
