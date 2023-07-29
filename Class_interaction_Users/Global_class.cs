@@ -360,29 +360,84 @@ namespace Class_interaction_Users
         public List<Test> ListTest { get; set; }
     }
 
-
+    [Serializable]
     /// <summary>
     /// Экзамен
     /// </summary>
     public class Exam
     {
         public int Id { get; set; }
-
-        public string Name_Quesrts { get; set; }
-
+        public string Name_Exam { get; set; }
         public User User { get; set; }
         public Questions Questtion { get; set; }
-
-        public User Users_Id_Name { get; set; }
-
+        public Exams Exams { get; set; }
         public DateTime Data_of_Exam { get; set; }
+        /// <summary>
+        /// Оценка экзамена
+        /// </summary>
         public int Grade_Exam { get; set; }
-        public Exams Name_exam { get; set; }
     }
 
-   /// <summary>
-   /// Справочник экзаменов
-   /// </summary>
+    [Serializable]
+    /// <summary>
+    /// Класс  для Exam запоковываем в List
+    /// </summary>
+    public class ExamList
+    {
+        public List<Exam> ListExams { get; set; }
+    }
+    
+    //public class Model
+    //{
+
+    //}
+
+    [Serializable]
+    /// <summary>
+    /// Взаимосвязь экзамена и тестов которые в него входят
+    /// </summary>
+    public class ExamsTest
+    {
+        public int Id { get; set; }
+        public Exams Exams { get; set; }
+        public Test Test { get; set; }
+    }
+
+    [Serializable]
+    /// <summary>
+    /// Класс  для ExamsTest запоковываем в List
+    /// </summary>
+    public class ExamsTestList
+    {
+        public List<ExamsTest> ListExamsTest { get; set; }
+    }
+
+    [Serializable]
+    /// <summary>
+    /// Взаимосвязь Пользователй и назначенных экзаменов
+    /// </summary>
+    public class UserExams
+    {
+        public int Id { get; set; }
+        public User User { get; set; }
+        public Exams Exams { get; set; }
+    }
+
+    [Serializable]
+    /// <summary>
+    /// Класс  для UserExams запоковываем в List
+    /// </summary>
+    public class UserExamsList
+    {
+        public List<UserExams> ListUserExams { get; set; }
+    }
+
+
+
+    [Serializable]
+    /// <summary>
+    /// Справочник экзаменов
+    /// </summary>
     public class Exams
     {
         public int Id { get; set; }

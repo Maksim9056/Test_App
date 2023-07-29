@@ -80,6 +80,8 @@ namespace Class_interaction_Users
 
         public static TestQuestionList TestQuestionListGet { get; set; }
         public static QuestionAnswerList QuestionAnswerListGet { get; set; }
+        public static ExamsTestList ExamsTestListGet { get; set; }
+        public static UserExamsList UserExamsListGet { get; set; }
 
         public static QuestionssList QuestionssList { get; set; }
         /// <summary>
@@ -1605,6 +1607,100 @@ namespace Class_interaction_Users
                     {
                         QuestionAnswerListGet = questionAnswerList;
                         return questionAnswerList;
+                    }
+                }
+            }
+        }
+
+        public class ExamsTestCommand
+        {
+            async public Task<bool> CreateExamsTest(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<bool> UpdateExamsTest(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<bool> DelExamsTest(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<ExamsTestList> GetExamsTestList(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                if (string.IsNullOrEmpty(responseDat))
+                {
+                    return null;
+                }
+                else
+                {
+                    ExamsTestList examsTestList = JsonSerializer.Deserialize<ExamsTestList>(responseDat);
+                    if (examsTestList == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        ExamsTestListGet = examsTestList;
+                        return examsTestList;
+                    }
+                }
+            }
+        }
+
+        public class UserExamsCommand
+        {
+            async public Task<bool> CreateUserExams(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<bool> UpdateUserExams(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<bool> DelUserExams(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                return !string.IsNullOrEmpty(responseDat);
+            }
+
+            async public Task<UserExamsList> GetUserExamsList(string server, string fs, string command)
+            {
+                CommandCL ClassInstance = new CommandCL();
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                if (string.IsNullOrEmpty(responseDat))
+                {
+                    return null;
+                }
+                else
+                {
+                    UserExamsList userExamsList = JsonSerializer.Deserialize<UserExamsList>(responseDat);
+                    if (userExamsList == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        UserExamsListGet = userExamsList;
+                        return userExamsList;
                     }
                 }
             }

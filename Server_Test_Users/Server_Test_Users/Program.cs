@@ -148,6 +148,16 @@ namespace Server_Test_Users
                 FDictCommands.Add("042", new Action<byte[], GlobalClass, NetworkStream>(command.Del_Answer));
                 FDictCommands.Add("043", new Action<byte[], GlobalClass, NetworkStream>(command.Get_AnswerList));
 
+                FDictCommands.Add("044", new Action<byte[], GlobalClass, NetworkStream>(command.Create_ExamsTest));
+                FDictCommands.Add("045", new Action<byte[], GlobalClass, NetworkStream>(command.Update_ExamsTest));
+                FDictCommands.Add("046", new Action<byte[], GlobalClass, NetworkStream>(command.Del_ExamsTest));
+                FDictCommands.Add("047", new Action<byte[], GlobalClass, NetworkStream>(command.Get_ExamsTestList));
+
+                FDictCommands.Add("048", new Action<byte[], GlobalClass, NetworkStream>(command.Create_UserExams));
+                FDictCommands.Add("049", new Action<byte[], GlobalClass, NetworkStream>(command.Update_UserExams));
+                FDictCommands.Add("050", new Action<byte[], GlobalClass, NetworkStream>(command.Del_UserExams));
+                FDictCommands.Add("051", new Action<byte[], GlobalClass, NetworkStream>(command.Get_UserExamsList));
+
 
 
 

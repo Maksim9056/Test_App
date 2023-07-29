@@ -825,6 +825,198 @@ namespace Class_interaction_Users
         }
     }
 
+    public class ExamsTestEditorViewModel : INotifyPropertyChanged
+    {
+        private int id;
+        private Exams exams;
+        private Test test;
+
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
+        }
+
+        public Exams Exams
+        {
+            get => exams;
+            set => SetProperty(ref exams, value);
+        }
+
+        public Test Test
+        {
+            get => test;
+            set => SetProperty(ref test, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return false;
+            }
+
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class ExamsTestManager
+    {
+        private CommandCL.ExamsTestCommand command = new CommandCL.ExamsTestCommand();
+
+        public void CreateExamsTestData(ExamsTest examsTest)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<ExamsTest>(memoryStream, examsTest);
+                Task.Run(async () => await command.CreateExamsTest(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "044")).Wait();
+            }
+        }
+
+        public void UpdateExamsTestData(ExamsTest examsTest)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<ExamsTest>(memoryStream, examsTest);
+                Task.Run(async () => await command.UpdateExamsTest(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "045")).Wait();
+            }
+        }
+
+        public void DeleteExamsTestData(ExamsTest examsTest)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<ExamsTest>(memoryStream, examsTest);
+                Task.Run(async () => await command.DelExamsTest(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "046")).Wait();
+            }
+        }
+
+        public List<ExamsTest> GetExamsTestList(Exams exams)
+        {
+            List<ExamsTest> examsTestList = new List<ExamsTest>();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Exams>(memoryStream, exams);
+                Task.Run(async () => await command.GetExamsTestList(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "047")).Wait();
+            }
+
+            if (CommandCL.ExamsTestListGet == null)
+            {
+                examsTestList = null;
+            }
+            else
+            {
+                examsTestList = CommandCL.ExamsTestListGet.ListExamsTest;
+            }
+            return examsTestList;
+        }
+    }
+
+    public class UserExamsViewModel : INotifyPropertyChanged
+    {
+        private int id;
+        private User user;
+        private Exams exams;
+
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
+        }
+
+        public User User
+        {
+            get => user;
+            set => SetProperty(ref user, value);
+        }
+
+        public Exams Exams
+        {
+            get => exams;
+            set => SetProperty(ref exams, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return false;
+            }
+
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class UserExamsManager
+    {
+        private CommandCL.UserExamsCommand command = new CommandCL.UserExamsCommand();
+
+        public void CreateExamsTestData(UserExams userExams)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<UserExams>(memoryStream, userExams);
+                Task.Run(async () => await command.CreateUserExams(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "048")).Wait();
+            }
+        }
+
+        public void UpdateExamsTestData(UserExams userExams)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<UserExams>(memoryStream, userExams);
+                Task.Run(async () => await command.UpdateUserExams(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "049")).Wait();
+            }
+        }
+
+        public void DeleteExamsTestData(UserExams userExams)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<UserExams>(memoryStream, userExams);
+                Task.Run(async () => await command.DelUserExams(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "050")).Wait();
+            }
+        }
+
+        public List<UserExams> GetUserExamsList(Exams exams)
+        {
+            List<UserExams> userExamsList = new List<UserExams>();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Exams>(memoryStream, exams);
+                Task.Run(async () => await command.GetUserExamsList(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "051")).Wait();
+            }
+
+            if (CommandCL.UserExamsListGet == null)
+            {
+                userExamsList = null;
+            }
+            else
+            {
+                userExamsList = CommandCL.UserExamsListGet.ListUserExams;
+            }
+            return userExamsList;
+        }
+    }
+
     public class BooleanToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

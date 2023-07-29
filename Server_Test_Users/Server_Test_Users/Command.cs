@@ -487,6 +487,92 @@ namespace Server_Test_Users
             }
         }
 
+        // For the ExamsTest directory
+
+        public void Create_ExamsTest(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            ExamsTest CrExamsTest = JsonSerializer.Deserialize<ExamsTest>(arg1);
+            @class.CreateExamsTest_ds(CrExamsTest);
+        }
+
+        public void Update_ExamsTest(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            ExamsTest UpExamsTest = JsonSerializer.Deserialize<ExamsTest>(arg1);
+            @class.UpdateExamsTest_ds(UpExamsTest);
+        }
+
+        public void Del_ExamsTest(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            ExamsTest DelExamsTest = JsonSerializer.Deserialize<ExamsTest>(arg1);
+            @class.DeleteExamsTest_ds(DelExamsTest.Id);
+        }
+
+        public void Get_ExamsTestList(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Exams CrTest = JsonSerializer.Deserialize<Exams>(arg1);
+            @class.CheckExamsTest_ds(CrTest);
+            if (@class.ExamsTestListTest == null)
+            {
+                // Handle the case when ExamsTestListTest is null
+            }
+            else
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    ExamsTestList regis_ExamsTests = new ExamsTestList { };
+                    regis_ExamsTests.ListExamsTest = @class.ExamsTestListTest;
+                    JsonSerializer.Serialize<ExamsTestList>(ms, regis_ExamsTests);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+        }
+
+
+        // For the UserExams directory
+
+        public void Create_UserExams(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            UserExams CrUserExams = JsonSerializer.Deserialize<UserExams>(arg1);
+            @class.CreateUserExams_ds(CrUserExams);
+        }
+
+        public void Update_UserExams(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            UserExams UpUserExams = JsonSerializer.Deserialize<UserExams>(arg1);
+            @class.UpdateUserExams_ds(UpUserExams);
+        }
+
+        public void Del_UserExams(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            UserExams DelUserExams = JsonSerializer.Deserialize<UserExams>(arg1);
+            @class.DeleteUserExams_ds(DelUserExams.Id);
+        }
+
+        public void Get_UserExamsList(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            User CrTest = JsonSerializer.Deserialize<User>(arg1);
+            @class.CheckUserExams_ds(CrTest);
+            if (@class.UserExamsListTest == null)
+            {
+                // Handle the case when UserExamsListTest is null
+            }
+            else
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    UserExamsList regis_UserExams = new UserExamsList { };
+                    regis_UserExams.ListUserExams = @class.UserExamsListTest;
+                    JsonSerializer.Serialize<UserExamsList>(ms, regis_UserExams);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+        }
+
+
+
+
+
+
         public void Searh_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             try

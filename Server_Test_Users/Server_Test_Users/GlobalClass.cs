@@ -77,6 +77,8 @@ namespace Server_Test_Users
         public List<Answer> AnswerListTest { get; set; }
         public List<TestQuestion> TestQuestionListTest { get; set; }
         public List<QuestionAnswer> QuestionAnswerListTest { get; set; }
+        public List<ExamsTest> ExamsTestListTest { get; set; }
+        public List<UserExams> UserExamsListTest { get; set; }
 
 
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
@@ -99,6 +101,8 @@ namespace Server_Test_Users
             public DbSet<TestQuestion> TestQuestion { get; set; } = null!;
 
             public DbSet<QuestionAnswer> QuestionAnswer { get; set; } = null!;
+            public DbSet<ExamsTest> ExamsTest { get; set; } = null!;
+            public DbSet<UserExams> UserExams { get; set; } = null!;
 
             public DbSet<Answer> Answer { get; set; } = null!;
             public DbSet<Options> Options { get; set; } = null!;
@@ -1328,6 +1332,117 @@ namespace Server_Test_Users
                 QuestionAnswerListTest = testQuestions;
             }
         }
+
+
+        // For the ExamsTest class
+        public void CreateExamsTest_ds(ExamsTest newExamsTest)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                ExamsTest examsTest = new ExamsTest();
+                Exams exams = db.Exams.Find(newExamsTest.Exams.Id);
+                examsTest.Exams = exams;
+                Test test = db.Test.Find(newExamsTest.Test.Id);
+                examsTest.Test = test;
+                db.ExamsTest.Add(examsTest);
+                db.SaveChanges();
+            }
+        }
+
+        public void DeleteExamsTest_ds(int testId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                ExamsTest examsTest = db.ExamsTest.FirstOrDefault(et => et.Id == testId);
+                if (examsTest != null)
+                {
+                    db.ExamsTest.Remove(examsTest);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void UpdateExamsTest_ds(ExamsTest updatedExamsTest)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                ExamsTest existingExamsTest = db.ExamsTest.FirstOrDefault(et => et.Id == updatedExamsTest.Id);
+                if (existingExamsTest != null)
+                {
+                    existingExamsTest.Exams.Id = updatedExamsTest.Exams.Id;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void CheckExamsTest_ds(Exams exams)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var examsTests = db.ExamsTest
+                    .Include(et => et.Exams)
+                    .Include(et => et.Test)
+                    .Where(et => et.Exams != null && et.Exams.Id == exams.Id)
+                    .ToList();
+                ExamsTestListTest = examsTests;
+            }
+        }
+
+
+        // For the UserExams class
+        public void CreateUserExams_ds(UserExams newUserExams)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                UserExams userExams = new UserExams();
+                User user = db.Users.Find(newUserExams.User.Id);
+                userExams.User = user;
+                Exams exams = db.Exams.Find(newUserExams.Exams.Id);
+                userExams.Exams = exams;
+                db.UserExams.Add(userExams);
+                db.SaveChanges();
+            }
+        }
+
+        public void DeleteUserExams_ds(int userExamsId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                UserExams userExams = db.UserExams.FirstOrDefault(ue => ue.Id == userExamsId);
+                if (userExams != null)
+                {
+                    db.UserExams.Remove(userExams);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void UpdateUserExams_ds(UserExams updatedUserExams)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                UserExams existingUserExams = db.UserExams.FirstOrDefault(ue => ue.Id == updatedUserExams.Id);
+                if (existingUserExams != null)
+                {
+                    existingUserExams.User.Id = updatedUserExams.User.Id;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void CheckUserExams_ds(User user)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var userExams = db.UserExams
+                    .Include(ue => ue.User)
+                    .Include(ue => ue.Exams)
+                    .Where(ue => ue.Exams != null && ue.Exams.Id == user.Id)
+                    .ToList();
+                UserExamsListTest = userExams;
+            }
+        }
+
 
     }
 }
