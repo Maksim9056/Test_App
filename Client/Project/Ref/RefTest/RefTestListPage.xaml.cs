@@ -15,19 +15,25 @@ public partial class RefTestListPage : ContentPage
     public CommandCL command = new CommandCL();
     private TestEditorViewModel viewModel;
 
-    public RefTestListPage()
-    {
-        InitializeComponent();
-        viewModel = new TestEditorViewModel();
-        TestList.ItemsSource = GetTest();
-    }
+        public RefTestListPage()
+        {
+            InitializeComponent();
+            viewModel = new TestEditorViewModel();
+            TestList.ItemsSource = GetTest();
+        }
 
-    private void UpdateForm()
-    {
-        TestList.ItemsSource = GetTest();
-    }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateForm();
+        }
 
-    private void ContentPage_Loaded(object sender, EventArgs e)
+        private void UpdateForm()
+        {
+            TestList.ItemsSource = GetTest();
+        }
+
+        private void ContentPage_Loaded(object sender, EventArgs e)
     {
         // Your code here
     }

@@ -47,7 +47,6 @@ namespace Client.Project
                 int id = viewModel.Id;
                 string answerOptions = viewModel.AnswerOptions;
                 bool correctAnswers = viewModel.CorrectAnswers;
-                Questions idQuestions = viewModel.IdQuestions;
 
                 // Create a new AnswerEditorViewModel instance or update the existing instance with the retrieved values
                 Answer answer = new Answer
@@ -55,7 +54,6 @@ namespace Client.Project
                     Id = id,
                     AnswerOptions = answerOptions,
                     CorrectAnswers = correctAnswers,
-                    IdQuestions = idQuestions
                 };
 
                 // Call the appropriate method to save the answer data

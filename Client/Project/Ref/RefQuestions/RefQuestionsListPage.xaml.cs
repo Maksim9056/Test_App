@@ -24,6 +24,12 @@ namespace Client.Project
             QuestionsList1.ItemsSource = GetQuestions();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateForm();
+        }
+
         private void UpdateForm()
         {
             QuestionsList1.ItemsSource = GetQuestions();
@@ -64,7 +70,7 @@ namespace Client.Project
                 return;
 
             var selectedQuestion = (Questions)e.SelectedItem;
-            await DisplayAlert("Выбранный вопрос", selectedQuestion.Question.QuestionName, "OK");
+            //await DisplayAlert("Выбранный вопрос", selectedQuestion.Question.QuestionName, "OK");
             ((ListView)sender).SelectedItem = null;
             //Добавляется для выбора ответа
             await Navigation.PushAsync(new DocQuestionAnswerListPage(selectedQuestion.Question));

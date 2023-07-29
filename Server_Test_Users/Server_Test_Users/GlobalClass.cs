@@ -97,7 +97,9 @@ namespace Server_Test_Users
             public DbSet<Questions> Questions { get; set; } = null!;
 
             public DbSet<TestQuestion> TestQuestion { get; set; } = null!;
+
             public DbSet<QuestionAnswer> QuestionAnswer { get; set; } = null!;
+
             public DbSet<Answer> Answer { get; set; } = null!;
             public DbSet<Options> Options { get; set; } = null!;
 
@@ -1123,16 +1125,11 @@ namespace Server_Test_Users
             using (ApplicationContext db = new ApplicationContext())
             {
                 Questions question = null;
-                if (newAnswers.IdQuestions != null)
-                {
-                    question = db.Questions.Find(newAnswers.IdQuestions);
-                }
 
                 Answer answer = new Answer
                 {
                     AnswerOptions = newAnswers.AnswerOptions,
                     CorrectAnswers = newAnswers.CorrectAnswers,
-                    IdQuestions = question
                 };
                 db.Answer.Add(answer);
                 db.SaveChanges();
@@ -1161,7 +1158,6 @@ namespace Server_Test_Users
                 {
                     existingAnswers.AnswerOptions = updatedAnswers.AnswerOptions;
                     existingAnswers.CorrectAnswers = updatedAnswers.CorrectAnswers;
-                    existingAnswers.IdQuestions = updatedAnswers.IdQuestions;
                     db.SaveChanges();
                 }
             }
@@ -1285,21 +1281,9 @@ namespace Server_Test_Users
                 questionAnswer.Questions = questions;
                 questionAnswer.CorrectAnswers = newQuestionAnswer.CorrectAnswers;
                 questionAnswer.Grade = newQuestionAnswer.Grade;
+                Answer answer = db.Answer.Find(newQuestionAnswer.Answer.Id);
 
-                // Generate new unique primary key values for Answer objects
-                List<Answer> uniqueAnswers = newQuestionAnswer.AllAnswers.Select(a =>
-                {
-                    Answer newAnswer = new Answer
-                    {
-                        AnswerOptions = a.AnswerOptions,
-                        CorrectAnswers = a.CorrectAnswers,
-                        IdQuestions = a.IdQuestions
-                    };
-                    db.Answer.Add(newAnswer); // Add the new Answer object to the context
-                    return newAnswer;
-                }).ToList();
-
-                questionAnswer.AllAnswers = uniqueAnswers;
+                questionAnswer.Answer = answer;
 
                 db.QuestionAnswer.Add(questionAnswer);
                 db.SaveChanges();
@@ -1338,11 +1322,12 @@ namespace Server_Test_Users
             {
                 var testQuestions = db.QuestionAnswer
                     .Include(tq => tq.Questions)
-                    .Where(tq => tq.Questions.Id != null && tq.Questions.Id == questions.Id)
+                    .Include(tq => tq.Answer)
+                    .Where(tq => tq.Questions != null && tq.Questions.Id == questions.Id)
                     .ToList();
-
                 QuestionAnswerListTest = testQuestions;
             }
         }
+
     }
 }

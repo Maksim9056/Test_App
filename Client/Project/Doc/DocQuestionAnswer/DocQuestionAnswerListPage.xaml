@@ -25,7 +25,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding QuestionAnswer.Questions.QuestionName}" Grid.Column="0"  
+                                <Label Text="{Binding QuestionAnswer.Answer.AnswerOptions}" Grid.Column="0"  
                                         FontSize="16"  
                                         FontFamily="Arial"  
                                         FontAttributes="Bold"  

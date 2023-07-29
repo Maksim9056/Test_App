@@ -7,10 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Class_interaction_Users;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace Client.Project
 {
-    public partial class RefAnswerListPage : ContentPage
+
+public partial class RefAnswerListPage : ContentPage
     {
         public CommandCL command = new CommandCL();
         private AnswerEditorViewModel viewModel;
@@ -22,6 +24,12 @@ namespace Client.Project
             viewModel = new AnswerEditorViewModel();
             viewModelManager = new AnswerManager();
             AnswerList1.ItemsSource = GetAnswers();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateForm();
         }
 
         private void UpdateForm()
@@ -64,7 +72,7 @@ namespace Client.Project
                 return;
 
             var selectedAnswer = (Answer)e.SelectedItem;
-            await DisplayAlert("Выбранный вопрос", selectedAnswer.Answers.AnswerOptions, "OK");
+            //await DisplayAlert("Выбранный вопрос", selectedAnswer.Answers.AnswerOptions, "OK");
             ((ListView)sender).SelectedItem = null;
 
             vSelectedItem = selectedAnswer.Answers;

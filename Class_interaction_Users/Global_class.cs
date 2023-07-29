@@ -266,11 +266,6 @@ namespace Class_interaction_Users
     /// </summary>
     public class QuestionAnswer
     {
-        public QuestionAnswer()
-        {
-            AllAnswers = new List<Answer>();
-        }
-
         //public QuestionAnswer() { }
 
         /// <summary>
@@ -292,11 +287,11 @@ namespace Class_interaction_Users
         /// Оценка
         /// </summary>
         public int Grade { get; set; }
-
         /// <summary>
-        /// Выбранные ответы
+        /// Один из ответов
         /// </summary>
-        public List<Answer> AllAnswers { get; set; }
+        public Answer Answer { get; set; }
+
     }
 
     [Serializable]
@@ -314,16 +309,15 @@ namespace Class_interaction_Users
         public int Id { get; set; }
 
         /// <summary>
-        /// Ответ
+        /// Ответ описание
         /// </summary>
         public string AnswerOptions { get; set; }
 
         /// <summary>
-        /// Правильные ответы
+        /// Признак правильного ответа
         /// </summary>
         public bool CorrectAnswers { get; set; }
 
-        public Questions IdQuestions { get; set; }
     }
 
     [Serializable]

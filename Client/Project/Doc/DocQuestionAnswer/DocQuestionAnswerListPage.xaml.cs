@@ -61,7 +61,7 @@ namespace Client.Project
         {
             List<RefQuestionAnswer> testQuestionList = new List<RefQuestionAnswer>();
 
-            CommandCL.ExamsListGet = null;
+            CommandCL.QuestionAnswerListGet = null;
             viewModelManager.GetQuestionAnswerList(questions);
 
             if (CommandCL.QuestionAnswerListGet == null)
@@ -86,7 +86,7 @@ namespace Client.Project
                 return;
 
             var selectedTestQuestion = (RefQuestionAnswer)e.SelectedItem;
-            await DisplayAlert("Выбранный вопрос", selectedTestQuestion.QuestionAnswer.Questions.QuestionName, "OK");
+            await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
             ((ListView)sender).SelectedItem = null;
         }
 
@@ -135,9 +135,8 @@ namespace Client.Project
                 {
                     var selectedItem = refAnswerListPage.vSelectedItem;
                     QuestionAnswer aQuestionQ = new QuestionAnswer();
-                    aQuestionQ.AllAnswers = new List<Answer>(); // Create a new list before adding the item
-                    aQuestionQ.AllAnswers.Add(selectedItem);
                     aQuestionQ.Questions = CurrrentQuestions;
+                    aQuestionQ.Answer = selectedItem;
                     viewModelManager.CreateQuestionAnswerData(aQuestionQ);
 
                     // Clear the selected item in RefQuestionsListPage

@@ -73,7 +73,7 @@
                     HorizontalOptions="CenterAndExpand" 
                     HeightRequest="50" 
                     WidthRequest="320" 
-                    Margin="0,200,0,0" 
+                    Margin="0,260,0,0" 
                     Padding="10" />
                 <Button 
                     x:Name="CounterLogExams" 
@@ -84,7 +84,7 @@
                     HorizontalOptions="CenterAndExpand" 
                     HeightRequest="50" 
                     WidthRequest="320" 
-                    Margin="0,260,0,0" 
+                    Margin="0,200,0,0" 
                     Padding="10" />
                 <Button 
                     x:Name="CounterLogQuestions" 

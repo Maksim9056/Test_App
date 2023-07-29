@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace Class_interaction_Users
 {
@@ -565,18 +567,6 @@ namespace Class_interaction_Users
             }
         }
 
-        public Questions IdQuestions
-        {
-            get { return newIdQuestions; }
-            set
-            {
-                if (newIdQuestions != value)
-                {
-                    newIdQuestions = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
 
         private PropertyChangedEventHandler propertyChanged;
 
@@ -835,4 +825,21 @@ namespace Class_interaction_Users
         }
     }
 
+    public class BooleanToStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool boolValue)
+            {
+                return boolValue ? "Да" : "Нет";
+            }
+
+            return string.Empty;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

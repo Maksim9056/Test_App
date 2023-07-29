@@ -25,6 +25,12 @@ namespace Client.Project
             UserList.ItemsSource = GetUser();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateForm();
+        }
+
         private void UpdateForm()
         {
             UserList.ItemsSource = GetUser();

@@ -24,7 +24,13 @@ public partial class RefExamsListPage : ContentPage
             ExamsList1.ItemsSource = GetExams();
     }
 
-    private void UpdateForm()
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateForm();
+        }
+
+        private void UpdateForm()
     {
          ExamsList1.ItemsSource = GetExams();
     }
