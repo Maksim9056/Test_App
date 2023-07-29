@@ -1390,59 +1390,59 @@ namespace Server_Test_Users
 
 
         // For the UserExams class
-        public void CreateUserExams_ds(UserExams newUserExams)
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                UserExams userExams = new UserExams();
-                User user = db.Users.Find(newUserExams.User.Id);
-                userExams.User = user;
-                Exams exams = db.Exams.Find(newUserExams.Exams.Id);
-                userExams.Exams = exams;
-                db.UserExams.Add(userExams);
-                db.SaveChanges();
-            }
-        }
 
-        public void DeleteUserExams_ds(int userExamsId)
-        {
-            using (ApplicationContext db = new ApplicationContext())
+            public void CreateUserExams_ds(UserExams newUserExams)
             {
-                UserExams userExams = db.UserExams.FirstOrDefault(ue => ue.Id == userExamsId);
-                if (userExams != null)
+                using (ApplicationContext db = new ApplicationContext())
                 {
-                    db.UserExams.Remove(userExams);
+                    UserExams userExams = new UserExams();
+                    User user = db.Users.Find(newUserExams.User.Id);
+                    userExams.User = user;
+                    Exams exams = db.Exams.Find(newUserExams.Exams.Id);
+                    userExams.Exams = exams;
+                    db.UserExams.Add(userExams);
                     db.SaveChanges();
                 }
             }
-        }
 
-        public void UpdateUserExams_ds(UserExams updatedUserExams)
-        {
-            using (ApplicationContext db = new ApplicationContext())
+            public void DeleteUserExams_ds(int userExamsId)
             {
-                UserExams existingUserExams = db.UserExams.FirstOrDefault(ue => ue.Id == updatedUserExams.Id);
-                if (existingUserExams != null)
+                using (ApplicationContext db = new ApplicationContext())
                 {
-                    existingUserExams.User.Id = updatedUserExams.User.Id;
-                    db.SaveChanges();
+                    UserExams userExams = db.UserExams.FirstOrDefault(ue => ue.Id == userExamsId);
+                    if (userExams != null)
+                    {
+                        db.UserExams.Remove(userExams);
+                        db.SaveChanges();
+                    }
                 }
             }
-        }
 
-        public void CheckUserExams_ds(User user)
-        {
-            using (ApplicationContext db = new ApplicationContext())
+            public void UpdateUserExams_ds(UserExams updatedUserExams)
             {
-                var userExams = db.UserExams
-                    .Include(ue => ue.User)
-                    .Include(ue => ue.Exams)
-                    .Where(ue => ue.Exams != null && ue.Exams.Id == user.Id)
-                    .ToList();
-                UserExamsListTest = userExams;
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    UserExams existingUserExams = db.UserExams.FirstOrDefault(ue => ue.Id == updatedUserExams.Id);
+                    if (existingUserExams != null)
+                    {
+                        existingUserExams.User.Id = updatedUserExams.User.Id;
+                        db.SaveChanges();
+                    }
+                }
             }
-        }
 
+            public void CheckUserExams_ds(User user)
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    var userExams = db.UserExams
+                        .Include(ue => ue.User)
+                        .Include(ue => ue.Exams)
+                        .Where(ue => ue.Exams != null && ue.Exams.Id == user.Id)
+                        .ToList();
+                    UserExamsListTest = userExams;
+                }
+            }
 
     }
 }
