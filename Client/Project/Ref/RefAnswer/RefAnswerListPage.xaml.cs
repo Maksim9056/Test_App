@@ -84,7 +84,7 @@ public partial class RefAnswerListPage : ContentPage
         private void Edit(object answer)
         {
             var selectedAnswer = (Answer)answer;
-            //Navigation.PushAsync(new AnswerEditor(selectedAnswer.Question));
+            Navigation.PushAsync(new AnswerEditor(selectedAnswer.Answers));
         }
 
         private void Del(object answer)

@@ -90,6 +90,9 @@
 	  <Compile Update="Project\Ref\RefAnswer\AnswerCreate.xaml.cs">
 	    <DependentUpon>AnswerCreate.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Project\Ref\RefAnswer\AnswerEditor.xaml.cs">
+	    <DependentUpon>AnswerEditor.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Project\Ref\RefAnswer\RefAnswerListPage.xaml.cs">
 	    <DependentUpon>RefAnswerListPage.xaml</DependentUpon>
 	  </Compile>
@@ -139,6 +142,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefAnswer\AnswerCreate.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Project\Ref\RefAnswer\AnswerEditor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefAnswer\RefAnswerListPage.xaml">
