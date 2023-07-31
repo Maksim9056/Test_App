@@ -71,7 +71,7 @@ public partial class RefExamsListPage : ContentPage
         var selectedTest = (RefExams)e.SelectedItem;
         //await DisplayAlert("Выбранный тест", selectedTest.Exams.Name_exam, "OK");
         ((ListView)sender).SelectedItem = null;
-            //await Navigation.PushAsync(new DocUserExamsListPage(selectedTest.Exams));
+         await Navigation.PushAsync(new DocExamTestListPage(selectedTest.Exams));
 
             vSelectedItem = selectedTest.Exams;
 

@@ -13,7 +13,10 @@ namespace Client.Project
 public partial class RefTestListPage : ContentPage
 {
     public CommandCL command = new CommandCL();
-    private TestEditorViewModel viewModel;
+    private TestEditorViewModel viewModel; 
+    public Class_interaction_Users.Test vSelectedItem { get; set; }
+
+
 
         public RefTestListPage()
         {
@@ -71,8 +74,10 @@ public partial class RefTestListPage : ContentPage
             await Navigation.PushAsync(new DocTestQuestionListPage(selectedTest.Test));
 
             ((ListView)sender).SelectedItem = null;
+            vSelectedItem = selectedTest.Test;
 
-            //await Navigation.PopAsync();
+
+            Navigation.PopModalAsync();
         }
 
         private void EditTest(object test)
