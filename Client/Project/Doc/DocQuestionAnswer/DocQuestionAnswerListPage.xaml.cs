@@ -26,12 +26,14 @@ namespace Client.Project
             CurrrentQuestions = questions;
             QuestionList.ItemsSource = GetQuestionAnswer(questions);
             Title = "Ответы для вопроса: " + questions.QuestionName;
+#pragma warning disable CS0618 // Тип или член устарел
             MessagingCenter.Subscribe<DocQuestionAnswerListPage>(this, "UpdateForm", (sender) =>
             {
                 // Perform the necessary updates to the form here 
                 // For example, update the fields, refresh data, etc. 
                 QuestionList.ItemsSource = GetQuestionAnswer(questions);
             });
+#pragma warning restore CS0618 // Тип или член устарел
         }
 
         //void OnUpdateForm(DocQuestionAnswerListPage sender)
@@ -143,7 +145,9 @@ namespace Client.Project
                     refAnswerListPage.vSelectedItem = null;
 
                     // Send a message to update the current form
+#pragma warning disable CS0618 // Тип или член устарел
                     MessagingCenter.Send(this, "UpdateForm");
+#pragma warning restore CS0618 // Тип или член устарел
                 }
             };
             Navigation.PushModalAsync(refAnswerListPage);

@@ -75,7 +75,7 @@ public partial class Администратор : ContentPage
             var navigationPage = new NavigationPage(mainPage);
             await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
         }
-        catch (Exception ex)
+        catch (Exception )
         {
             // Обработка исключения, если необходимо
         }
@@ -97,8 +97,14 @@ public partial class Администратор : ContentPage
         Application.Current.MainPage = navigationPage;
     }
 
-    private async void CounterLog4_Clicked(object sender, EventArgs e)
+#pragma warning disable CS1998 // В асинхронном методе отсутствуют операторы await, будет выполнен синхронный метод
+    private  void CounterLog4_Clicked(object sender, EventArgs e)
+#pragma warning restore CS1998 // В асинхронном методе отсутствуют операторы await, будет выполнен синхронный метод
     {
+        //if (Application.Current.MainPage is NavigationPage navigationPage)
+        //{
+        //    navigationPage.Navigation.PopAsync();
+        //}
         var mainPage = new Project.RefUserListPage();
         var navigationPage = new NavigationPage(mainPage);
         Application.Current.MainPage = navigationPage;
@@ -111,30 +117,36 @@ public partial class Администратор : ContentPage
 
     //    Application.Current.MainPage = navigationPage;
     //}
+
+    //Для авторизации учетной записи
     private void GoBack(object sender, EventArgs e)
     {
-        if (Application.Current.MainPage is NavigationPage navigationPage)
-        {
-            navigationPage.Navigation.PopAsync();
-        }
+        var mainPage = new MainPage();
+        var navigationPage = new NavigationPage(mainPage);
+        Application.Current.MainPage = navigationPage;
+
+        //if (Application.Current.MainPage is NavigationPage navigationPage)
+        //{
+        //    navigationPage.Navigation.PopAsync();
+        //}
     }
 
 
-    private async void CounterLogTest_Clicked(object sender, EventArgs e)
+    private  void CounterLogTest_Clicked(object sender, EventArgs e)
     {
         var mainPage = new Project.RefTestListPage();
         var navigationPage = new NavigationPage(mainPage);
         Application.Current.MainPage = navigationPage;
     }
 
-    private async void CounterLogExamsClicked(object sender, EventArgs e)
+    private  void CounterLogExamsClicked(object sender, EventArgs e)
     {
         var mainPage = new Project.RefExamsListPage();
         var navigationPage = new NavigationPage(mainPage);
         Application.Current.MainPage = navigationPage;
     }
 
-    private async void CounterLogQuestionsClicked(object sender, EventArgs e)
+    private  void CounterLogQuestionsClicked(object sender, EventArgs e)
     {
         var mainPage = new Project.RefQuestionsListPage();
         var navigationPage = new NavigationPage(mainPage);
