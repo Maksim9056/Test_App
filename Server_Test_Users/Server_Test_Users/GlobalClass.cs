@@ -1514,7 +1514,7 @@ namespace Server_Test_Users
                     var userExams = db.UserExams
                         .Include(ue => ue.User)
                         .Include(ue => ue.Exams)
-                        .Where(ue => ue.Exams != null && ue.Exams.Id == user.Id)
+                        .Where(ue => ue.User != null && ue.User.Id == user.Id)
                         .ToList();
                     UserExamsListTest = userExams;
                 }

@@ -923,7 +923,7 @@ namespace Class_interaction_Users
         }
     }
 
-    public class UserExamsViewModel : INotifyPropertyChanged
+    public class UserExamsEditorViewModel : INotifyPropertyChanged
     {
         private int id;
         private User user;
@@ -971,7 +971,7 @@ namespace Class_interaction_Users
     {
         private CommandCL.UserExamsCommand command = new CommandCL.UserExamsCommand();
 
-        public void CreateExamsTestData(UserExams userExams)
+        public void CreateUserExamsData(UserExams userExams)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -980,7 +980,7 @@ namespace Class_interaction_Users
             }
         }
 
-        public void UpdateExamsTestData(UserExams userExams)
+        public void UpdateUserExamsData(UserExams userExams)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -989,7 +989,7 @@ namespace Class_interaction_Users
             }
         }
 
-        public void DeleteExamsTestData(UserExams userExams)
+        public void DeleteUserExamsData(UserExams userExams)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -998,12 +998,12 @@ namespace Class_interaction_Users
             }
         }
 
-        public List<UserExams> GetUserExamsList(Exams exams)
+        public List<UserExams> GetUserExamsList(User user)
         {
             List<UserExams> userExamsList = new List<UserExams>();
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                JsonSerializer.Serialize<Exams>(memoryStream, exams);
+                JsonSerializer.Serialize<User>(memoryStream, user);
                 Task.Run(async () => await command.GetUserExamsList(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "051")).Wait();
             }
 

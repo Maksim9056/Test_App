@@ -15,7 +15,7 @@ public partial class RefExamsListPage : ContentPage
     public CommandCL command = new CommandCL();
         private ExamsEditorViewModel viewModel;
         private ExamManager viewModelManager;
-
+        public Class_interaction_Users.Exams vSelectedItem { get; set; }
         public RefExamsListPage()
     {
         InitializeComponent();
@@ -69,11 +69,21 @@ public partial class RefExamsListPage : ContentPage
             return;
 
         var selectedTest = (RefExams)e.SelectedItem;
-        await DisplayAlert("Выбранный тест", selectedTest.Exams.Name_exam, "OK");
+        //await DisplayAlert("Выбранный тест", selectedTest.Exams.Name_exam, "OK");
         ((ListView)sender).SelectedItem = null;
-    }
+            //await Navigation.PushAsync(new DocUserExamsListPage(selectedTest.Exams));
 
-    private void EditExams(object test)
+            vSelectedItem = selectedTest.Exams;
+
+            // Закройте форму RefQuestionsListPage
+            // Исключается для выбора ответа
+#pragma warning disable CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
+            Navigation.PopModalAsync();
+#pragma warning restore CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
+
+        }
+
+        private void EditExams(object test)
     {
         var selectedTest = (RefExams)test;
         Navigation.PushAsync(new ExamsEditor(selectedTest.Exams));

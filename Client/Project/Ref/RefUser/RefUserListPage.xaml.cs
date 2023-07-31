@@ -17,7 +17,7 @@ namespace Client.Project
 
 
         private UserEditorViewModel viewModel;
-
+        public Class_interaction_Users.User vSelectedItem { get; set; }
         public RefUserListPage()
         {
             InitializeComponent();
@@ -73,8 +73,18 @@ namespace Client.Project
                 return;
 
             var selectedUser = (RefUser)e.SelectedItem;
-            await DisplayAlert("Выбранный пользователь", selectedUser.User.Name_Employee, "OK");
+            //await DisplayAlert("Выбранный пользователь", selectedUser.User.Name_Employee, "OK");
             ((ListView)sender).SelectedItem = null;
+            await Navigation.PushAsync(new DocUserExamsListPage(selectedUser.User));
+
+            vSelectedItem = selectedUser.User;
+
+            // Закройте форму RefQuestionsListPage
+            // Исключается для выбора ответа
+#pragma warning disable CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
+            Navigation.PopModalAsync();
+#pragma warning restore CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
+
         }
 
         // Метод для редактирования вопроса
