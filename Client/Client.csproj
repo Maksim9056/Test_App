@@ -78,6 +78,9 @@
 	  <Compile Update="Project\Doc\DocTestQuestion\DocTestQuestionListPage.xaml.cs">
 	    <DependentUpon>DocTestQuestionListPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Project\Doc\DocUserExam\DocQuestionAnswerListPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="Project\Main\Admin.xaml.cs">
 	    <DependentUpon>Admin.xaml</DependentUpon>
 	  </Compile>
@@ -139,6 +142,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Doc\DocTestQuestion\DocTestQuestionListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Project\Doc\DocUserExam\DocQuestionAnswerListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefAnswer\AnswerCreate.xaml">
@@ -216,6 +222,10 @@
 	  <MauiXaml Update="Project\Old\Тест название.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Project\Doc\DocExamTest\" />
 	</ItemGroup>
 
 </Project>
