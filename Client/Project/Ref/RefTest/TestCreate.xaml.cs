@@ -1,4 +1,5 @@
 using Class_interaction_Users;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,6 +64,17 @@ namespace Client.Project
             {
                 navigationPage.Navigation.PopAsync();
             }
+        }
+
+        private void Questing(object sender, EventArgs e)
+        {
+            var mainPage = new TestAdd();
+            var navigationPage = new NavigationPage(mainPage);
+            Application.Current.MainPage = navigationPage;
+
+            //// Close the user editor page without saving any changes
+            //Navigation.PopModalAsync();
+            //GoBack(sender, e);
         }
 
     }

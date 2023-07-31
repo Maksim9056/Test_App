@@ -321,7 +321,9 @@ namespace Server_Test_Users
         public void Del_Exams(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Exams? DelExams = JsonSerializer.Deserialize<Exams>(arg1);
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
             @class.Del_Exams_ds(DelExams.Id);
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
         }
 
         public void Get_ExamsList(byte[] arg1, GlobalClass @class, NetworkStream stream)
@@ -348,19 +350,25 @@ namespace Server_Test_Users
         public void Create_Questions(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Questions? CrQuestions = JsonSerializer.Deserialize<Questions>(arg1);
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Create_Questions_ds(CrQuestions);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Update_Questions(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Questions? UpQuestions = JsonSerializer.Deserialize<Questions>(arg1);
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Update_Questions_ds(UpQuestions);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Del_Questions(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Questions? DelQuestions = JsonSerializer.Deserialize<Questions>(arg1);
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
             @class.Del_Questions_ds(DelQuestions.Id);
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
         }
 
         public void Get_QuestionsList(byte[] arg1, GlobalClass @class, NetworkStream stream)
@@ -387,19 +395,25 @@ namespace Server_Test_Users
         public void Create_Answer(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Answer? CrAnswers = JsonSerializer.Deserialize<Answer>(arg1);
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Create_Answers_ds(CrAnswers);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Update_Answer(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Answer? UpAnswers = JsonSerializer.Deserialize<Answer>(arg1);
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Update_Answers_ds(UpAnswers);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Del_Answer(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Answer? DelAnswers = JsonSerializer.Deserialize<Answer>(arg1);
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
             @class.Del_Answers_ds(DelAnswers.Id);
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
         }
 
         public void Get_AnswerList(byte[] arg1, GlobalClass @class, NetworkStream stream)
@@ -427,25 +441,33 @@ namespace Server_Test_Users
         public void Create_TestQuestions(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             TestQuestion? CrTestQuestions = JsonSerializer.Deserialize<TestQuestion>(arg1);
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Create_TestQuestions_ds(CrTestQuestions);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Update_TestQuestions(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             TestQuestion? UpTestQuestions = JsonSerializer.Deserialize<TestQuestion>(arg1);
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Update_TestQuestions_ds(UpTestQuestions);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Del_TestQuestions(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             TestQuestion? DelTestQuestions = JsonSerializer.Deserialize<TestQuestion>(arg1);
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
             @class.Del_TestQuestions_ds(DelTestQuestions.Id);
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
         }
 
         public void Get_TestQuestionsList(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Test? CrQuestions = JsonSerializer.Deserialize<Test>(arg1);
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Check_TestQuestions_ds(CrQuestions);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             if (@class.TestQuestionListTest == null)
             {
                 // Handle the case when TestQuestionsListTest is null
@@ -467,26 +489,42 @@ namespace Server_Test_Users
 
         public void Create_QuestionAnswer(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             QuestionAnswer CrQuestionAnswer = JsonSerializer.Deserialize<QuestionAnswer>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.CreateQuestionAnswer_ds(CrQuestionAnswer);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Update_QuestionAnswer(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             QuestionAnswer UpQuestionAnswer = JsonSerializer.Deserialize<QuestionAnswer>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.UpdateQuestionAnswer_ds(UpQuestionAnswer);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Del_QuestionAnswer(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             QuestionAnswer DelQuestionAnswer = JsonSerializer.Deserialize<QuestionAnswer>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
             @class.DeleteQuestionAnswer_ds(DelQuestionAnswer.Id);
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
         }
 
         public void Get_QuestionAnswerList(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             Questions CrTest = JsonSerializer.Deserialize<Questions>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.CheckQuestionAnswer_ds(CrTest);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             if (@class.QuestionAnswerListTest == null)
             {
                 // Handle the case when TestQuestionListTest is null 
@@ -507,26 +545,42 @@ namespace Server_Test_Users
 
         public void Create_ExamsTest(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             ExamsTest CrExamsTest = JsonSerializer.Deserialize<ExamsTest>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.CreateExamsTest_ds(CrExamsTest);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Update_ExamsTest(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             ExamsTest UpExamsTest = JsonSerializer.Deserialize<ExamsTest>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.UpdateExamsTest_ds(UpExamsTest);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Del_ExamsTest(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             ExamsTest DelExamsTest = JsonSerializer.Deserialize<ExamsTest>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
             @class.DeleteExamsTest_ds(DelExamsTest.Id);
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
         }
 
         public void Get_ExamsTestList(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             Exams CrTest = JsonSerializer.Deserialize<Exams>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.CheckExamsTest_ds(CrTest);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             if (@class.ExamsTestListTest == null)
             {
                 // Handle the case when ExamsTestListTest is null
@@ -548,26 +602,42 @@ namespace Server_Test_Users
 
         public void Create_UserExams(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             UserExams CrUserExams = JsonSerializer.Deserialize<UserExams>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.CreateUserExams_ds(CrUserExams);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Update_UserExams(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             UserExams UpUserExams = JsonSerializer.Deserialize<UserExams>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.UpdateUserExams_ds(UpUserExams);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Del_UserExams(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             UserExams DelUserExams = JsonSerializer.Deserialize<UserExams>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
             @class.DeleteUserExams_ds(DelUserExams.Id);
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
         }
 
         public void Get_UserExamsList(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             User CrTest = JsonSerializer.Deserialize<User>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.CheckUserExams_ds(CrTest);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             if (@class.UserExamsListTest == null)
             {
                 // Handle the case when UserExamsListTest is null

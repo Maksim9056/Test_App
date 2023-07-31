@@ -342,7 +342,9 @@ namespace Class_interaction_Users
                         //Функция получения
                         Byte[] readingData = new Byte[256];
                         StringBuilder completeMessage = new StringBuilder();
-                        int numberOfBytesRead = 0;
+#pragma warning disable CS0219 // Переменная назначена, но ее значение не используется
+                    int numberOfBytesRead = 0;
+#pragma warning restore CS0219 // Переменная назначена, но ее значение не используется
                     responseData = await Task<string>.Run(() =>
                     {
                         return Func_Read(stream, data.Length, client);

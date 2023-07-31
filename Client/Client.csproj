@@ -120,6 +120,9 @@
 	  <Compile Update="Project\Ref\RefTest\TestCreate.xaml.cs">
 	    <DependentUpon>TestCreate.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Project\Ref\RefTest\TestAdd.xaml.cs">
+	    <DependentUpon>TestAdd.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Project\Ref\RefTest\TestEditor.xaml.cs">
 	    <DependentUpon>TestEditor.xaml</DependentUpon>
 	  </Compile>
@@ -172,6 +175,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefTest\TestCreate.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Project\Ref\RefTest\TestAdd.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefTest\TestEditor.xaml">

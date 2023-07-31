@@ -526,7 +526,9 @@ namespace Class_interaction_Users
         private int newId;
         private string newAnswerOptions;
         private bool newCorrectAnswers;
+#pragma warning disable CS0169 // Поле "AnswerEditorViewModel.newIdQuestions" никогда не используется.
         private Questions newIdQuestions;
+#pragma warning restore CS0169 // Поле "AnswerEditorViewModel.newIdQuestions" никогда не используется.
 
         public int Id
         {

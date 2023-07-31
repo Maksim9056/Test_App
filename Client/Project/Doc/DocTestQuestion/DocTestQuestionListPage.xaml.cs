@@ -26,12 +26,14 @@ namespace Client.Project
             CurrrentTest = test;
             QuestionList1.ItemsSource = GetTestQuestions(test);
             Title = "Вопросы для теста: "+ test.Name_Test;
+#pragma warning disable CS0618 // Тип или член устарел
             MessagingCenter.Subscribe<DocTestQuestionListPage>(this, "UpdateForm", (sender) =>
             {
                 // Perform the necessary updates to the form here
                 // For example, update the fields, refresh data, etc.
                 QuestionList1.ItemsSource = GetTestQuestions(test);
             });
+#pragma warning restore CS0618 // Тип или член устарел
         }
 
         private void UpdateForm(Class_interaction_Users.Test test)
@@ -127,7 +129,9 @@ namespace Client.Project
                     refQuestionsListPage.vSelectedItem = null;
 
                     // Send a message to update the current form
+#pragma warning disable CS0618 // Тип или член устарел
                     MessagingCenter.Send(this, "UpdateForm");
+#pragma warning restore CS0618 // Тип или член устарел
                 }
             };
 
