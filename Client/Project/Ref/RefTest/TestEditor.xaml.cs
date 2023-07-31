@@ -74,6 +74,7 @@ namespace Client.Project
         //    Application.Current.MainPage = navigationPage;
         //}
 
+        //Навигация от формы
         private void GoBack(object sender, EventArgs e)
         {
             if (Application.Current.MainPage is NavigationPage navigationPage)

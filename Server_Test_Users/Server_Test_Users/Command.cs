@@ -224,21 +224,27 @@ namespace Server_Test_Users
         {
             User? UpUser = JsonSerializer.Deserialize<User>(arg1);
 
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Update_Users_ds(UpUser);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Create_Users(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             User? CrUser = JsonSerializer.Deserialize<User>(arg1);
 
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Create_Users_ds(CrUser);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Del_Users(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             User? DelUser = JsonSerializer.Deserialize<User>(arg1);
 
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
             @class.Del_Users_ds(DelUser.Id);
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
         }
 
         //Для справочника test
@@ -247,21 +253,27 @@ namespace Server_Test_Users
         {
             Test? CrTest = JsonSerializer.Deserialize<Test>(arg1);
 
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Create_Test_ds(CrTest);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Update_Test(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Test? UpTest = JsonSerializer.Deserialize<Test>(arg1);
 
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Update_Test_ds(UpTest);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Del_Test(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Test? DelTest = JsonSerializer.Deserialize<Test>(arg1);
 
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
             @class.Del_Test_ds(DelTest.Id);
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
         }
 
         public void Get_TestList(byte[] arg1, GlobalClass @class, NetworkStream stream)
@@ -293,13 +305,17 @@ namespace Server_Test_Users
         public void Create_Exams(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Exams? CrExams = JsonSerializer.Deserialize<Exams>(arg1);
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Create_Exams_ds(CrExams);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Update_Exams(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
             Exams? UpExams = JsonSerializer.Deserialize<Exams>(arg1);
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.Update_Exams_ds(UpExams);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
         }
 
         public void Del_Exams(byte[] arg1, GlobalClass @class, NetworkStream stream)

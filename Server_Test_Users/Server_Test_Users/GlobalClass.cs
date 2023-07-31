@@ -69,16 +69,36 @@ namespace Server_Test_Users
         public Regis_users? Travel { get; set; }
 
 
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public Regis_users[] Travels { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public List<User> UserListTest { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public List<Test> TestListTest { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public List<Exams> ExamsListTest { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public List<Questions> QuestionsListTest { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public List<Answer> AnswerListTest { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public List<TestQuestion> TestQuestionListTest { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public List<QuestionAnswer> QuestionAnswerListTest { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public List<ExamsTest> ExamsTestListTest { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public List<UserExams> UserExamsListTest { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
 
 
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
@@ -854,7 +874,9 @@ namespace Server_Test_Users
             using (ApplicationContext db = new ApplicationContext())
             {
                 // Retrieve the existing user from the database based on the user's ID
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 User existingUser = db.Users.FirstOrDefault(u => u.Id == updatedUser.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
 
                 if (existingUser != null)
                 {
@@ -893,7 +915,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 User user = db.Users.FirstOrDefault(u => u.Id == userId);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (user != null)
                 {
                     db.Users.Remove(user);
@@ -922,7 +946,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Test test = db.Test.FirstOrDefault(t => t.Id == testId);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (test != null)
                 {
                     db.Test.Remove(test);
@@ -936,7 +962,9 @@ namespace Server_Test_Users
             using (ApplicationContext db = new ApplicationContext())
             {
                 // Retrieve the existing test from the database based on the test's ID
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Test existingTest = db.Test.FirstOrDefault(t => t.Id == updatedTest.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (existingTest != null)
                 {
                     // Update the properties of the existing test with the new values
@@ -999,7 +1027,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Exams exams = db.Exams.FirstOrDefault(t => t.Id == ExamsId);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (exams != null)
                 {
                     db.Exams.Remove(exams);
@@ -1012,7 +1042,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Exams existingExams = db.Exams.FirstOrDefault(t => t.Id == updatedExams.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (existingExams != null)
                 {
                     existingExams.Name_exam = updatedExams.Name_exam;
@@ -1071,7 +1103,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Questions questions = db.Questions.FirstOrDefault(t => t.Id == QuestionsId);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (questions != null)
                 {
                     db.Questions.Remove(questions);
@@ -1084,7 +1118,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Questions existingQuestions = db.Questions.FirstOrDefault(t => t.Id == updatedQuestions.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (existingQuestions != null)
                 {
                     existingQuestions.QuestionName = updatedQuestions.QuestionName;
@@ -1128,7 +1164,11 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS0219 // Переменная назначена, но ее значение не используется
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Questions question = null;
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning restore CS0219 // Переменная назначена, но ее значение не используется
 
                 Answer answer = new Answer
                 {
@@ -1144,7 +1184,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Answer answers = db.Answer.FirstOrDefault(t => t.Id == AnswersId);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (answers != null)
                 {
                     db.Answer.Remove(answers);
@@ -1157,7 +1199,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Answer existingAnswers = db.Answer.FirstOrDefault(t => t.Id == updatedAnswers.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (existingAnswers != null)
                 {
                     existingAnswers.AnswerOptions = updatedAnswers.AnswerOptions;
@@ -1203,8 +1247,12 @@ namespace Server_Test_Users
                 TestQuestion questions = new TestQuestion();
 
                 // Retrieve the Test and Questions objects from the database
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Test test = db.Test.Find(newTestQuestions.IdTest.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Questions questions1 = db.Questions.Find(newTestQuestions.IdQuestions.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
 
                 // Assign the retrieved objects to the TestQuestion properties
                 questions.IdTest = test;
@@ -1219,7 +1267,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 TestQuestion testQuestions = db.TestQuestion.FirstOrDefault(t => t.Id == TestQuestionsId);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (testQuestions != null)
                 {
                     db.TestQuestion.Remove(testQuestions);
@@ -1232,7 +1282,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 TestQuestion existingTestQuestions = db.TestQuestion.FirstOrDefault(t => t.Id == updatedTestQuestions.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (existingTestQuestions != null)
                 {
                     existingTestQuestions.IdTest = updatedTestQuestions.IdTest;
@@ -1281,11 +1333,15 @@ namespace Server_Test_Users
             {
                 QuestionAnswer questionAnswer = new QuestionAnswer();
 
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Questions questions = db.Questions.Find(newQuestionAnswer.Questions.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 questionAnswer.Questions = questions;
                 questionAnswer.CorrectAnswers = newQuestionAnswer.CorrectAnswers;
                 questionAnswer.Grade = newQuestionAnswer.Grade;
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Answer answer = db.Answer.Find(newQuestionAnswer.Answer.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
 
                 questionAnswer.Answer = answer;
 
@@ -1298,7 +1354,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 QuestionAnswer testQuestion = db.QuestionAnswer.FirstOrDefault(tq => tq.Id == testQuestionId);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (testQuestion != null)
                 {
                     db.QuestionAnswer.Remove(testQuestion);
@@ -1311,7 +1369,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 QuestionAnswer existingQuestionAnswer = db.QuestionAnswer.FirstOrDefault(tq => tq.Id == updatedQuestionAnswer.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (existingQuestionAnswer != null)
                 {
                     existingQuestionAnswer.Questions.Id = updatedQuestionAnswer.Questions.Id;
@@ -1340,9 +1400,13 @@ namespace Server_Test_Users
             using (ApplicationContext db = new ApplicationContext())
             {
                 ExamsTest examsTest = new ExamsTest();
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Exams exams = db.Exams.Find(newExamsTest.Exams.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 examsTest.Exams = exams;
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 Test test = db.Test.Find(newExamsTest.Test.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 examsTest.Test = test;
                 db.ExamsTest.Add(examsTest);
                 db.SaveChanges();
@@ -1353,7 +1417,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 ExamsTest examsTest = db.ExamsTest.FirstOrDefault(et => et.Id == testId);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (examsTest != null)
                 {
                     db.ExamsTest.Remove(examsTest);
@@ -1366,7 +1432,9 @@ namespace Server_Test_Users
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 ExamsTest existingExamsTest = db.ExamsTest.FirstOrDefault(et => et.Id == updatedExamsTest.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (existingExamsTest != null)
                 {
                     existingExamsTest.Exams.Id = updatedExamsTest.Exams.Id;
@@ -1396,10 +1464,14 @@ namespace Server_Test_Users
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     UserExams userExams = new UserExams();
-                    User user = db.Users.Find(newUserExams.User.Id);
-                    userExams.User = user;
-                    Exams exams = db.Exams.Find(newUserExams.Exams.Id);
-                    userExams.Exams = exams;
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+                User user = db.Users.Find(newUserExams.User.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+                userExams.User = user;
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+                Exams exams = db.Exams.Find(newUserExams.Exams.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+                userExams.Exams = exams;
                     db.UserExams.Add(userExams);
                     db.SaveChanges();
                 }
@@ -1409,8 +1481,10 @@ namespace Server_Test_Users
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    UserExams userExams = db.UserExams.FirstOrDefault(ue => ue.Id == userExamsId);
-                    if (userExams != null)
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+                UserExams userExams = db.UserExams.FirstOrDefault(ue => ue.Id == userExamsId);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+                if (userExams != null)
                     {
                         db.UserExams.Remove(userExams);
                         db.SaveChanges();
@@ -1422,8 +1496,10 @@ namespace Server_Test_Users
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    UserExams existingUserExams = db.UserExams.FirstOrDefault(ue => ue.Id == updatedUserExams.Id);
-                    if (existingUserExams != null)
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+                UserExams existingUserExams = db.UserExams.FirstOrDefault(ue => ue.Id == updatedUserExams.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+                if (existingUserExams != null)
                     {
                         existingUserExams.User.Id = updatedUserExams.User.Id;
                         db.SaveChanges();
