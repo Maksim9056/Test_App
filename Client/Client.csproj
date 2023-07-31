@@ -114,9 +114,6 @@
 	  <Compile Update="Project\Ref\RefQuestions\RefQuestionsListPage.xaml.cs">
 	    <DependentUpon>RefQuestionsListPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Project\Ref\RefTest\RefTestListPageS.xaml.cs">
-	    <DependentUpon>RefTestListPageS.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Project\Ref\RefTest\RefTestListPage.xaml.cs">
 	    <DependentUpon>RefTestListPage.xaml</DependentUpon>
 	  </Compile>
@@ -169,9 +166,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefQuestions\RefQuestionsListPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Project\Ref\RefTest\RefTestListPageS.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefTest\RefTestListPage.xaml">

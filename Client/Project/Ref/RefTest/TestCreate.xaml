@@ -28,9 +28,7 @@
                 <Button Text="Отмена" Clicked="CancelButton_Click" />
             </StackLayout>
 
-            <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" Margin="10">
-                <Button Text="Вопросы" Clicked="Questing" />
-            </StackLayout>
+          
         </Grid>
     </ContentPage.Content>
 </ContentPage>

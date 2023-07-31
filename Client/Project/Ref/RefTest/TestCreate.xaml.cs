@@ -66,23 +66,23 @@ namespace Client.Project
             }
         }
 
-        /// <summary>
-        /// Форма для выборки вопросов и их список для теста
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Questing(object sender, EventArgs e)
-        {
-            var mainPage = new Project.RefTestListPageS();
-            var navigationPage = new NavigationPage(mainPage);
-            Application.Current.MainPage = navigationPage;
-            //Navigation.PopModalAsync();
-            //GoBack(sender, e);
+        ///// <summary>
+        ///// Форма для выборки вопросов и их список для теста
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void Questing(object sender, EventArgs e)
+        //{
+        //    var mainPage = new Project.RefTestListPageS();
+        //    var navigationPage = new NavigationPage(mainPage);
+        //    Application.Current.MainPage = navigationPage;
+        //    //Navigation.PopModalAsync();
+        //    //GoBack(sender, e);
 
-            //// Close the user editor page without saving any changes
-            //Navigation.PopModalAsync();
-            //GoBack(sender, e);
-        }
+        //    //// Close the user editor page without saving any changes
+        //    //Navigation.PopModalAsync();
+        //    //GoBack(sender, e);
+        //}
 
     }
 }
