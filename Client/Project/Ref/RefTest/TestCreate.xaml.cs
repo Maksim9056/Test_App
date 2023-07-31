@@ -66,6 +66,11 @@ namespace Client.Project
             }
         }
 
+        /// <summary>
+        /// Форма для выборки вопросов и их список для теста
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Questing(object sender, EventArgs e)
         {
             var mainPage = new TestAdd();
