@@ -73,9 +73,11 @@ namespace Client.Project
         /// <param name="e"></param>
         private void Questing(object sender, EventArgs e)
         {
-            var mainPage = new TestAdd();
+            var mainPage = new Project.RefTestListPageS();
             var navigationPage = new NavigationPage(mainPage);
             Application.Current.MainPage = navigationPage;
+            //Navigation.PopModalAsync();
+            //GoBack(sender, e);
 
             //// Close the user editor page without saving any changes
             //Navigation.PopModalAsync();

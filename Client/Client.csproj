@@ -114,14 +114,14 @@
 	  <Compile Update="Project\Ref\RefQuestions\RefQuestionsListPage.xaml.cs">
 	    <DependentUpon>RefQuestionsListPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Project\Ref\RefTest\RefTestListPageS.xaml.cs">
+	    <DependentUpon>RefTestListPageS.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Project\Ref\RefTest\RefTestListPage.xaml.cs">
 	    <DependentUpon>RefTestListPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Project\Ref\RefTest\TestCreate.xaml.cs">
 	    <DependentUpon>TestCreate.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Project\Ref\RefTest\TestAdd.xaml.cs">
-	    <DependentUpon>TestAdd.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Project\Ref\RefTest\TestEditor.xaml.cs">
 	    <DependentUpon>TestEditor.xaml</DependentUpon>
@@ -171,13 +171,13 @@
 	  <MauiXaml Update="Project\Ref\RefQuestions\RefQuestionsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Project\Ref\RefTest\RefTestListPageS.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefTest\RefTestListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefTest\TestCreate.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Project\Ref\RefTest\TestAdd.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefTest\TestEditor.xaml">
