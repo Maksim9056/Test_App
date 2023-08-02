@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:Client.Project"
+       x:Class="Client.Project.HamburgerMenu">
+
+    <!--<FlyoutItem Title="Page 1" FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent Route="page1" ContentTemplate="{DataTemplate local:Page1}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Page 2" FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent Route="page2" ContentTemplate="{DataTemplate local:Page2}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Page 3" FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent Route="page3" ContentTemplate="{DataTemplate local:Page3}" />
+    </FlyoutItem>-->
+
+</Shell>
