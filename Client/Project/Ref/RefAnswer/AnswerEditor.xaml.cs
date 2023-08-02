@@ -19,17 +19,23 @@ namespace Client.Project
 
         public AnswerEditor(Class_interaction_Users.Answer answer)
         {
-            InitializeComponent();
-
-            viewModel = new AnswerEditorViewModel
+            try
             {
-                Id = answer.Id,
-                AnswerOptions = answer.AnswerOptions,
-                CorrectAnswers = answer.CorrectAnswers
-            };
+                InitializeComponent();
 
-            viewModelManager = new AnswerManager();
-            BindingContext = viewModel;
+                viewModel = new AnswerEditorViewModel
+                {
+                    Id = answer.Id,
+                    AnswerOptions = answer.AnswerOptions,
+                    CorrectAnswers = answer.CorrectAnswers
+                };
+
+                viewModelManager = new AnswerManager();
+                BindingContext = viewModel;
+            }catch (Exception ex)
+            {
+               DisplayAlert("Ошибка ответ!",ex.Message ,"ОК");
+            }
         }
 
         private void SaveButton_Click(object sender, EventArgs e)

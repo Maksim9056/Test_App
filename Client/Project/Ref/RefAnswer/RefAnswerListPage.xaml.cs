@@ -20,10 +20,19 @@ public partial class RefAnswerListPage : ContentPage
         public Class_interaction_Users.Answer vSelectedItem { get; set; }
         public RefAnswerListPage()
         {
-            InitializeComponent();
-            viewModel = new AnswerEditorViewModel();
-            viewModelManager = new AnswerManager();
-            AnswerList1.ItemsSource = GetAnswers();
+            try
+            {
+
+
+                InitializeComponent();
+                viewModel = new AnswerEditorViewModel();
+                viewModelManager = new AnswerManager();
+                AnswerList1.ItemsSource = GetAnswers();
+            }
+            catch(Exception ex) 
+            {
+                DisplayAlert("Ошибка", ex.Message, "ОК");
+            }
         }
 
         protected override void OnAppearing()
@@ -66,7 +75,7 @@ public partial class RefAnswerListPage : ContentPage
             return answerList;
         }
 
-        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
                 return;
@@ -114,7 +123,14 @@ public partial class RefAnswerListPage : ContentPage
 
         private void CreateButtonClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new AnswerCreate());
+            try
+            {
+                Navigation.PushAsync(new AnswerCreate());
+            }
+            catch(Exception ex) 
+            {
+                DisplayAlert("Ошибка перехода на вопрос создать!", ex.Message, "ОК");
+            }
         }
     }
 }

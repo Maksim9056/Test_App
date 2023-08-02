@@ -11,7 +11,7 @@ namespace Class_interaction_Users
 
     public class Ip_adress
     {
-        public static string Ip_adresss { get; set; } = "192.168.0.112";
+        public static string Ip_adresss { get; set; } = "192.168.182.90";
     }
 
     /// <summary>

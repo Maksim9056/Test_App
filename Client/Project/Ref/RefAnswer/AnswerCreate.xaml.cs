@@ -18,10 +18,16 @@ namespace Client.Project
 
         public AnswerCreate()
         {
-            InitializeComponent();
-            viewModel = new AnswerEditorViewModel();
-            viewModelManager = new AnswerManager();
-            BindingContext = viewModel;
+            try
+            {
+                InitializeComponent();
+                viewModel = new AnswerEditorViewModel();
+                viewModelManager = new AnswerManager();
+                BindingContext = viewModel;
+            }catch (Exception ex)
+            {
+                DisplayAlert("Ошибка создания!", ex.Message,"ОК");
+            }
         }
 
         private void GoBack(object sender, EventArgs e)
