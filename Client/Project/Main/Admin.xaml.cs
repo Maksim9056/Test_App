@@ -1,18 +1,22 @@
 using Class_interaction_Users;
 using Microsoft.Maui.Controls;
+using System.Windows.Input;
 
-namespace Client;
+namespace Client.Main;
 
-public partial class Администратор : ContentPage
+public partial class Admin : ContentPage
 {
-   
+    public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
-    public Администратор()
+
+    public Admin()
 	{
 		InitializeComponent();
-	}
+        BindingContext = this;
 
-     /// <summary>
+    }
+
+    /// <summary>
     /// Экземпляр класса CommandCL
     /// </summary>
     public CommandCL command = new CommandCL();
@@ -105,9 +109,10 @@ public partial class Администратор : ContentPage
         //{
         //    navigationPage.Navigation.PopAsync();
         //}
-        var mainPage = new Project.RefUserListPage();
-        var navigationPage = new NavigationPage(mainPage);
-        Application.Current.MainPage = navigationPage;
+        //var mainPage = new Project.RefUserListPage();
+        //var navigationPage = new NavigationPage(mainPage);
+        //Application.Current.MainPage = navigationPage;
+        Shell.Current.GoToAsync("user");
     }
 
     //private void GoBack(object sender, EventArgs e)

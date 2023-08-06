@@ -103,7 +103,7 @@ namespace Client.Project
 
         private void GoBack(object sender, EventArgs e)
         {
-            var mainPage = new Администратор();
+            var mainPage = new Client.Main.Admin();
             var navigationPage = new NavigationPage(mainPage);
 
             Application.Current.MainPage = navigationPage;

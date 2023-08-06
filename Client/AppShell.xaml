@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:Client"
+       xmlns:sys="clr-namespace:System;assembly=netstandard"
+       xmlns:controls="clr-namespace:Client.Controls"
+       x:Class="Client.AppShell">
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="0.2*,0.8*">
+                <Image Source="{Binding FlyoutIcon}" 
+                       Margin="5" 
+                       HeightRequest="45" />
+                <Label Grid.Column="1" 
+                       Text="{Binding Title}" 
+                       FontAttributes="Italic" 
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <Shell.FlyoutHeader>
+        <controls:FlyoutHeader />
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Администрирование" 
+                Route="Admin" 
+                Icon="dotnet_bot.png">
+        <Tab>
+            <ShellContent  
+                Route="MainPage" 
+                ContentTemplate="{DataTemplate views:MainPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Пользователь" 
+                Route="User" 
+                Icon="dotnet_bot.png">
+        <Tab>
+            <ShellContent  
+                Route="MainPage" 
+                ContentTemplate="{DataTemplate views:MainPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Помощь" 
+                Route="Help" 
+                Icon="dotnet_bot.png">
+        <Tab>
+            <ShellContent  
+                Route="MainPage" 
+                ContentTemplate="{DataTemplate views:MainPage}" />
+        </Tab>
+    </FlyoutItem>
+
+</Shell>
+
+
+<!--<Shell
     x:Class="Client.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -11,4 +67,4 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
-</Shell>
+</Shell>-->

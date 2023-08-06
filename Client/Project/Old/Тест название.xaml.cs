@@ -9,7 +9,7 @@ public partial class Тест_название : ContentPage
 
     private void CounterLog3_Clicked(object sender, EventArgs e)
     {
-        var mainPage = new Администратор();
+        var mainPage = new Client.Main.Admin();
         var navigationPage = new NavigationPage(mainPage);
 
         Application.Current.MainPage = navigationPage;

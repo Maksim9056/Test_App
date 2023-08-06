@@ -267,7 +267,7 @@ public partial class Questin : ContentPage
                 Вопросы_вывод.Clear();
             }
         }
-        var mainPage = new Администратор();
+        var mainPage = new Client.Main.Admin();
         var navigationPage = new NavigationPage(mainPage);
 
         Application.Current.MainPage = navigationPage;

@@ -9,86 +9,35 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui;
 using Microsoft.Maui.Platform;
 using Client.Main;
+using System.Windows.Input;
 
 namespace Client
 {
     public partial class MainPage : ContentPage
     {
+        public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = this;
+
         }
-        /// <summary>
-        /// Экземпляр класса CommandCL
-        /// </summary>
         public CommandCL command = new CommandCL();
-
-
-        /// <summary>
-        ///Почта пользователя
-        /// </summary>
         public string Mail { get; set; }
-
-
-        /// <summary>
-        ///Пароль пользователя
-        /// </summary>
         public string Password { get; set; }
 
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
-            //Entry entry = new Entry
-            //{
-            //    Placeholder = "Введите Email",
-            //    //FontFamily = "Helvetica",
-            //    FontSize = 22,
-            //    MaxLength = 20,
-            //    Margin = 20,
-            //    Keyboard = Keyboard.Text
-            //};
-
-            //Entry entry1 = new Entry
-            //{
-            //    Placeholder = "Введите пароль",
-            //    //FontFamily = "Helvetica",
-            //    FontSize = 22,
-            //    MaxLength = 20,
-            //    Margin = 20,
-
-            //    Keyboard = Keyboard.Text
-            //};
-            //Button button = new Button
-            //{
-            //    Text = "Регестрация",
-            //      Margin =30,
-            //        FontSize = 22,
-            //        BorderWidth = 1,
-            //        BackgroundColor = Colors.LightPink,
-            //        TextColor = Colors.DarkRed,
-            //        HorizontalOptions = LayoutOptions.Center,
-            //        VerticalOptions = LayoutOptions.Center
-            //    };
-            //button.Clicked += OnButtonClicked;
-            //Content = new StackLayout
-            //{
-            //    Children = { entry, entry1, button }
-            //};
         }
 
-    
 
         private void OnButtonClicked(object sender, EventArgs e)
         {
 
         }
 
-      /// <summary>
-      /// Почта 
-      /// </summary>
-      /// <param name="sender"></param>
-      /// <param name="e"></param>
         void nameEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
            
@@ -191,42 +140,20 @@ namespace Client
                                                 else
                                                 {
                                                     var regis_Users = command.Travel_logout;
-                                                    //switch (regis_Users.Rechte)
-                                                    //{
-                                                    //    case 0:
-                                                    //        await DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
-                                                    //        var mainPage = new Главная_страница();
-                                                    //        var navigationPage = new NavigationPage(mainPage);
-
-                                                    //        Application.Current.MainPage = navigationPage;
-                                                    //    //    await Navigation.PushAsync(new ());
-                                                    //        break;
-                                                    //    case 1:
-                                                    //        await DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
-                                                    //        var mainPage1 = new Администратор();
-                                                    //        var navigationPage2 = new NavigationPage(mainPage1);
-
-                                                    //        Application.Current.MainPage = navigationPage2;
-                                                    //       // await Navigation.PushAsync(new ());
-                                                    //        break;
-
-                                                    //}
                                                     switch (regis_Users.Rechte)
                                                     {
                                                         case 0:
-                                                            await DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
-                                                            var mainPage = new Главная_страница();
+                                                            await Application.Current.MainPage.DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
+                                                            var mainPage = new MainPage();
                                                             var navigationPage = new NavigationPage(mainPage);
                                                             Application.Current.MainPage = navigationPage;
                                                             break;
                                                         case 1:
-                                                            await DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
-
-                                                            var mainPage1 = new Администратор();
-                                                            var navigationPage2 = new NavigationPage(mainPage1);
-
-                                                            Application.Current.MainPage = navigationPage2;
-                                                            //Application.Current.MainPage.Navigation.PushAsync(navigationPage2);
+                                                            await Application.Current.MainPage.DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
+                                                            var adminPage = new Admin();
+                                                            var navigationPage2 = new NavigationPage(adminPage);
+                                                            await Shell.Current.GoToAsync("admin");
+                                                            //Application.Current.MainPage = navigationPage2;
                                                             break;
                                                     }
                                                 }

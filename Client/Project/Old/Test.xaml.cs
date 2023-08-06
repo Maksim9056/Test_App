@@ -19,7 +19,7 @@ public partial class Test : ContentPage
 
     private void CounterLog13_Clicked(object sender, EventArgs e)
     {
-        var mainPage = new Администратор();
+        var mainPage = new Client.Main.Admin();
         var navigationPage = new NavigationPage(mainPage);
 
         Application.Current.MainPage = navigationPage;
@@ -43,7 +43,7 @@ public partial class Test : ContentPage
 
     private void CounterLog14_Clicked(object sender, EventArgs e)
     {
-        var mainPage = new Администратор();
+        var mainPage = new Client.Main.Admin();
         var navigationPage = new NavigationPage(mainPage);
 
         Application.Current.MainPage = navigationPage;
@@ -92,7 +92,7 @@ public partial class Test : ContentPage
     {
         //Проверить и обнулить значения 
 
-        var mainPage = new Администратор();
+        var mainPage = new Client.Main.Admin();
         var navigationPage = new NavigationPage(mainPage);
 
         Application.Current.MainPage = navigationPage;

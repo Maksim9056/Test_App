@@ -88,10 +88,11 @@ namespace Client.Project
         //}
         private void GoBack(object sender, EventArgs e)
         {
-            if (Application.Current.MainPage is NavigationPage navigationPage)
-            {
-                navigationPage.Navigation.PopAsync();
-            }
+            //if (Application.Current.MainPage is NavigationPage navigationPage)
+            //{
+            //    navigationPage.Navigation.PopAsync();
+            //}
+            Shell.Current.Navigation.PopAsync();
         }
 
 

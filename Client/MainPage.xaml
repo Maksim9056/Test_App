@@ -2,8 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Client.MainPage" 
+             xmlns:views="clr-namespace:Client"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             xmlns:controls="clr-namespace:Client.Controls"
              Title="Вход в учетную запись" 
              Loaded="ContentPage_Loaded">
+    
+    
     <ScrollView>
         <Grid Padding="20">
             <Grid.RowDefinitions>
