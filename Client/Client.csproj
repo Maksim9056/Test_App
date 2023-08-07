@@ -138,6 +138,18 @@
 	  <Compile Update="Project\Ref\RefUser\RefUserListPage.xaml.cs">
 	    <DependentUpon>RefUserListPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Users\Ref\RefExamFromTests\RefExamFromTests.xaml.cs">
+	    <DependentUpon>RefExamFromTests.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Users\Ref\RefPersonalAchievement\RefPersonalAchievement.xaml.cs">
+	    <DependentUpon>RefPersonalAchievement.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Users\Ref\RefPersonalCabinet\RefPersonalCabinet.xaml.cs">
+	    <DependentUpon>RefPersonalCabinet.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Users\Ref\RefTheExamisPersonal\RefTheExamisPersonal.xaml.cs">
+	    <DependentUpon>RefTheExamisPersonal.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -229,6 +241,36 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Old\Тест название.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Doc\DocExamFromTests\DocExamFromTests.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Doc\DocPersonalAchievement\DocPersonalAchievement.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Doc\DocPersonalCabinet\DocPersonalCabinet.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Doc\DocTestsFromQuestions\DocTestsFromQuestions.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Doc\DocTheExamisPersonal\DocTheExamisPersonal.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Ref\RefExamFromTests\RefExamFromTests.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Ref\RefPersonalAchievement\RefPersonalAchievement.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Ref\RefPersonalCabinet\RefPersonalCabinet.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Ref\RefTestsFromQuestions\RefTestsFromQuestions.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Ref\RefTheExamisPersonal\RefTheExamisPersonal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
