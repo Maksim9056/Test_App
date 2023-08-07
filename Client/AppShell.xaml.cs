@@ -17,7 +17,11 @@ namespace Client
         void RegisterRoutes()
         {
             Routes.Add("admin", typeof(Client.Main.Admin));
-            Routes.Add("user", typeof(Client.Project.RefUserListPage));
+            Routes.Add("user", typeof(Client.Users.Doc.DocExamFromTests.DocExamFromTests));
+            Routes.Add("logout", typeof(Client.MainPage));
+            Routes.Add("achievement", typeof(Client.Users.Doc.DocPersonalAchievement.DocPersonalAchievement));
+            Routes.Add("examispersonal", typeof(Client.Users.Doc.DocTheExamisPersonal.DocTheExamisPersonal));
+            Routes.Add("examfromtests", typeof(Client.Users.Doc.DocExamFromTests.DocExamFromTests));
 
             foreach (var item in Routes)
             {

@@ -144,14 +144,15 @@ namespace Client
                                                     {
                                                         case 0:
                                                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
-                                                            var mainPage = new MainPage();
-                                                            var navigationPage = new NavigationPage(mainPage);
-                                                            Application.Current.MainPage = navigationPage;
+                                                            //var mainPage = new Users.Doc.DocExamFromTests.DocExamFromTests();
+                                                            //var navigationPage = new NavigationPage(mainPage);
+                                                            await Shell.Current.GoToAsync("user");
+                                                            //Application.Current.MainPage = navigationPage;
                                                             break;
                                                         case 1:
                                                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
-                                                            var adminPage = new Admin();
-                                                            var navigationPage2 = new NavigationPage(adminPage);
+                                                            //var adminPage = new Admin();
+                                                            //var navigationPage2 = new NavigationPage(adminPage);
                                                             await Shell.Current.GoToAsync("admin");
                                                             //Application.Current.MainPage = navigationPage2;
                                                             break;
@@ -245,8 +246,8 @@ namespace Client
                 Application.Current.MainPage.Window.MaximumWidth = 530.8d;
                 Application.Current.MainPage.Window.MaximumHeight = 650.8d;
 
-                nameEntry9.Text = "Admin@Admin.ru";
-                nameEntry1.Text = "Admin";
+                nameEntry9.Text = "maks_nt@list.ru";
+                nameEntry1.Text = "1";
 
             }
             catch
