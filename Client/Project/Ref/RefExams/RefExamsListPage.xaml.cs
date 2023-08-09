@@ -16,12 +16,12 @@ public partial class RefExamsListPage : ContentPage
         private ExamsEditorViewModel viewModel;
         private ExamManager viewModelManager;
         public Class_interaction_Users.Exams vSelectedItem { get; set; }
-        public RefExamsListPage()
+    public RefExamsListPage()
     {
-        InitializeComponent();
-            viewModel = new ExamsEditorViewModel();
-            viewModelManager = new ExamManager();
-            ExamsList1.ItemsSource = GetExams();
+     InitializeComponent();
+     viewModel = new ExamsEditorViewModel();
+     viewModelManager = new ExamManager();
+     ExamsList1.ItemsSource = GetExams();
     }
 
         protected override void OnAppearing()
@@ -30,7 +30,7 @@ public partial class RefExamsListPage : ContentPage
             UpdateForm();
         }
 
-        private void UpdateForm()
+    private void UpdateForm()
     {
          ExamsList1.ItemsSource = GetExams();
     }
@@ -83,7 +83,7 @@ public partial class RefExamsListPage : ContentPage
 
         }
 
-        private void EditExams(object test)
+    private void EditExams(object test)
     {
         var selectedTest = (RefExams)test;
         Navigation.PushAsync(new ExamsEditor(selectedTest.Exams));
@@ -120,7 +120,7 @@ public partial class RefExamsListPage : ContentPage
         public Class_interaction_Users.Exams Exams { get; set; }
         public Command EditCommand { get; set; }
         public Command DelCommand { get; set; }
-    }
+        }
 
     private void CreateButtonClicked(object sender, EventArgs e)
     {

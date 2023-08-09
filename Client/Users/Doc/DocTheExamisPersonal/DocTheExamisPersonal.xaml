@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.Users.Doc.DocTheExamisPersonal.DocTheExamisPersonal"
-             Title="DocTheExamisPersonal">
-    
-    <ContentPage.Content>
+             Title="Выбор экзамена">
+    <StackLayout>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <ListView x:Name="TestList" 
-                      ItemSelected="TestList_ItemSelected" 
-                      ItemsSource="{Binding ExamsTest}">
-                <ListView.ItemTemplate>
+            
+            <ListView x:Name="myListView" RowHeight="50"
+                      ItemSelected="OnItemSelected"
+                     
+                      ItemsSource="{Binding myListView}"
+                      >
+            
+            <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
@@ -24,37 +27,22 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding ExamsTest.Test.Name_Test}" Grid.Column="0" 
-                                        FontSize="16" 
-                                        FontFamily="Arial" 
-                                        FontAttributes="Bold" 
-                                        TextColor="Red" 
-                                        HorizontalTextAlignment="Center" 
+
+                                <Label Text="{Binding UserExams.Exams.Name_exam}" Grid.Column="0"
+                                        FontSize="16"
+                                        FontFamily="Arial"
+                                        FontAttributes="Bold"
+                                        TextColor="Red"
+                                        HorizontalTextAlignment="Center"
                                         VerticalTextAlignment="Center" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Button Text="Назад" 
-                    Clicked="GoBack" Grid.Row="2" />
-
-            <!-- Добавление таблицы -->
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-
-            </Grid>
-        </Grid>
-    </ContentPage.Content>
+                                
+                                <!--<Label Text="Дата" Grid.Column="1" />
+                            <Label Text="{Binding}" Grid.Column="2" />-->
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+       </Grid>
+    </StackLayout>
 </ContentPage>

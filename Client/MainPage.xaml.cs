@@ -11,6 +11,7 @@ using Microsoft.Maui.Platform;
 using Client.Main;
 using System.Windows.Input;
 
+
 namespace Client
 {
     public partial class MainPage : ContentPage
@@ -146,8 +147,12 @@ namespace Client
                                                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
                                                             //var mainPage = new Users.Doc.DocExamFromTests.DocExamFromTests();
                                                             //var navigationPage = new NavigationPage(mainPage);
+
+                                                            Client.Users.Doc.DocExamFromTests.DocExamFromTests Name_user = new Client.Users.Doc.DocExamFromTests.DocExamFromTests();
+                                                           Name_user.User_NAME(regis_Users);
+                                                            //    await Navigation.PushModalAsync(Name_user);
+
                                                             await Shell.Current.GoToAsync("user");
-                                                            //Application.Current.MainPage = navigationPage;
                                                             break;
                                                         case 1:
                                                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
@@ -248,7 +253,8 @@ namespace Client
 
                 nameEntry9.Text = "maks_nt@list.ru";
                 nameEntry1.Text = "1";
-
+                //nameEntry9.Text = "Admin@Admin.ru";
+                //nameEntry1.Text = "Admin";
             }
             catch
             {

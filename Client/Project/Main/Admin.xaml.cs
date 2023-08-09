@@ -109,10 +109,10 @@ public partial class Admin : ContentPage
         //{
         //    navigationPage.Navigation.PopAsync();
         //}
-        //var mainPage = new Project.RefUserListPage();
-        //var navigationPage = new NavigationPage(mainPage);
-        //Application.Current.MainPage = navigationPage;
-        Shell.Current.GoToAsync("user");
+        var mainPage = new Project.RefUserListPage();
+        var navigationPage = new NavigationPage(mainPage);
+        Application.Current.MainPage = navigationPage;
+        // Shell.Current.GoToAsync("user");
     }
 
     //private void GoBack(object sender, EventArgs e)
