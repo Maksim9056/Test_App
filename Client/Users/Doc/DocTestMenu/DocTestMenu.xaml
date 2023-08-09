@@ -6,9 +6,9 @@
     <ScrollView>
         <Grid Padding="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Border Stroke="Gray" BackgroundColor="White" HorizontalOptions="CenterAndExpand" Grid.Row="1">
@@ -28,12 +28,12 @@
                             </Trigger>
                         </Label.Triggers>
                     </Label>-->
-                    <Frame Padding="10" BackgroundColor="Red" CornerRadius="3">
+                    <Frame Padding="10" BackgroundColor="White" CornerRadius="3">
                         <Label x:Name="TestName" HorizontalOptions="Center" FontSize="24" />
                     </Frame>
 
                     <Label x:Name="Question"   Margin="0,200,0,0" HorizontalOptions="Center" FontSize="18" />
-            
+
                     <Button 
                     x:Name="TestStart" 
                     Text="Начать тест" 

@@ -10,14 +10,14 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <ListView x:Name="myListView" RowHeight="50"
                       ItemSelected="OnItemSelected"
                      
                       ItemsSource="{Binding myListView}"
                       >
-            
-            <ListView.ItemTemplate>
+
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
@@ -35,14 +35,14 @@
                                         TextColor="Red"
                                         HorizontalTextAlignment="Center"
                                         VerticalTextAlignment="Center" />
-                                
+
                                 <!--<Label Text="Дата" Grid.Column="1" />
                             <Label Text="{Binding}" Grid.Column="2" />-->
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-       </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </StackLayout>
 </ContentPage>
