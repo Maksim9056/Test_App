@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.Users.Doc.DocTestMenu.DocTestMenu"
+             Title="Тест">
+    <ScrollView>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border Stroke="Gray" BackgroundColor="White" HorizontalOptions="CenterAndExpand" Grid.Row="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+                <StackLayout VerticalOptions="Start">
+
+                    <!--<Label x:Name="TestName" HorizontalOptions="Center" FontSize="24" />-->
+                    <!--<Label x:Name="TestName" HorizontalOptions="Center" FontSize="24">
+                        <Label.Triggers>
+                            <Trigger TargetType="Label" Property="" Value="True">
+                                <Setter Property="BackgroundColor" Value="Red" />
+                            </Trigger>
+                            <Trigger TargetType="Label" Property="IsMouseOver" Value="False">
+                                <Setter Property="BackgroundColor" Value="Green" />
+                            </Trigger>
+                        </Label.Triggers>
+                    </Label>-->
+                    <Frame Padding="10" BackgroundColor="Red" CornerRadius="3">
+                        <Label x:Name="TestName" HorizontalOptions="Center" FontSize="24" />
+                    </Frame>
+
+                    <Label x:Name="Question"   Margin="0,200,0,0" HorizontalOptions="Center" FontSize="18" />
+            
+                    <Button 
+                    x:Name="TestStart" 
+                    Text="Начать тест" 
+                    SemanticProperties.Hint="Counts the number of times you click" 
+                    Clicked="TestStart_Clicked" 
+                    
+                    HorizontalOptions="Center" 
+                    HeightRequest="50" 
+                    WidthRequest="320" 
+                    Margin="0,250,0,0" 
+                    Padding="10" />
+
+                    <ListView x:Name="myListView" RowHeight="50">
+                        <!-- Остальной код списка и обработчика нажатия -->
+                    </ListView>
+                </StackLayout>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

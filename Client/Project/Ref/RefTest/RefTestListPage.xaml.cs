@@ -77,7 +77,7 @@ public partial class RefTestListPage : ContentPage
             vSelectedItem = selectedTest.Test;
 
 
-            Navigation.PopModalAsync();
+         await   Navigation.PopModalAsync();
         }
 
         private void EditTest(object test)

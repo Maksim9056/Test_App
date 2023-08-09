@@ -36,12 +36,15 @@ public partial class DocTestsFromQuestions : ContentPage
             return;
 
         var selectedExamsTest = (RefExamsTest)e.SelectedItem;
-        await DisplayAlert("Выбранный тест", selectedExamsTest.ExamsTest.Exams.Name_exam, "OK");
-        ((ListView)sender).SelectedItem = null;
+        await DisplayAlert("Выбранный тест", selectedExamsTest.ExamsTest.Test.Name_Test, "OK");
+
+       await Navigation.PushAsync(new Doc.DocTestMenu.DocTestMenu(selectedExamsTest.ExamsTest.Test));
+               ((ListView)sender).SelectedItem = null;
+
     }
 
-    private List<RefExamsTest> GetExamsTest(Class_interaction_Users.Exams exams)
-        {
+    private List<RefExamsTest> GetExamsTest(Class_interaction_Users.Exams exams)  
+    {
             List<RefExamsTest> testExamsTestList = new List<RefExamsTest>();
 
             CommandCL.ExamsTestListGet = null;
@@ -60,7 +63,16 @@ public partial class DocTestsFromQuestions : ContentPage
                 }
             }
             return testExamsTestList;
-        }
+    }
+
+
+    public class RefTest
+    {
+        public Class_interaction_Users.Test Test { get; set; }
+        public Command EditCommand { get; set; }
+        public Command DelCommand { get; set; }
+    }
+
     private void GoBack(object sender, EventArgs e)
     {
         //if (Application.Current.MainPage is NavigationPage navigationPage)

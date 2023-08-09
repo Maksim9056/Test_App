@@ -90,9 +90,9 @@ public partial class DocTheExamisPersonal : ContentPage
         await DisplayAlert("Выбранный экзамен", selectedTest.UserExams.Exams.Name_exam, "OK");
         ((ListView)sender).SelectedItem = null;
         await Navigation.PushAsync(new Doc.DocTestsFromQuestions.DocTestsFromQuestions(selectedTest.UserExams.Exams));
-       // vSelectedItem = selectedTest.Exams;
+        // vSelectedItem = selectedTest.Exams;
 
-   
+
 
 
         // Закройте форму RefQuestionsListPage

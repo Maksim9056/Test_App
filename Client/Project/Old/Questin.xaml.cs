@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Maui.Controls;
-using System.Collections.ObjectModel;
 
 namespace Client;
 
@@ -123,7 +122,7 @@ public partial class Questin : ContentPage
 
                                 bool Вопрос_уникальный = false;
                                 Task.Run(async () => await command.Get_Image_Friends(Ip_adress.Ip_adresss, FileFS, "007")).Wait();
-                                string Team = "";
+                              //  string Team = "";
                                 //вопросы
                                 for (int i = 0; i < CommandCL.Roles_Accept.Quest.Length; i++)
                                 {
