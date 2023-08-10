@@ -243,6 +243,9 @@
 	  <MauiXaml Update="Project\Old\Тест название.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Users\Doc\DocAnswerQuestins\DocAnswerQuestins.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Users\Doc\DocExamFromTests\DocExamFromTests.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -253,6 +256,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Users\Doc\DocTestMenu\DocTestMenu.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Doc\DocTestQuestionsTheAnswersMark\DocTestQuestionsTheAnswersMark.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Users\Doc\DocTestQuestionsTheAnswers\DocTestQuestionsTheAnswers.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Users\Doc\DocTestsFromQuestions\DocTestsFromQuestions.xaml">

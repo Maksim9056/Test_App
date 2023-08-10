@@ -9,7 +9,7 @@ public partial class DocTestMenu : ContentPage
     private TestQuestionManager viewModelManager;
     private Class_interaction_Users.Test CurrrentTest;
 
-
+    public  List<RefTestQuestion> refTestQuestions = new List<RefTestQuestion>();
     public DocTestMenu(Class_interaction_Users.Test test)
 	{
 		InitializeComponent();
@@ -18,10 +18,12 @@ public partial class DocTestMenu : ContentPage
         TestName.Text = test.Name_Test;
         CurrrentTest = test;
        var Result =   GetTestQuestions(test);
+        refTestQuestions = Result;
        Question.Text = "Количество вопросов :" +  Result.Count().ToString();
     
 
     }
+
     private List<RefTestQuestion> GetTestQuestions(Class_interaction_Users.Test test)
     {
         List<RefTestQuestion> testQuestionList = new List<RefTestQuestion>();
@@ -44,6 +46,7 @@ public partial class DocTestMenu : ContentPage
 
         return testQuestionList;
     }
+
     public class RefTestQuestion
     {
         public Class_interaction_Users.TestQuestion TestQuestion { get; set; }
@@ -52,8 +55,9 @@ public partial class DocTestMenu : ContentPage
     }
 
 
-    private void TestStart_Clicked(object sender, EventArgs e)
+    private async void TestStart_Clicked(object sender, EventArgs e)
     {
-
+        await Navigation.PushAsync(new Doc.DocTestQuestionsTheAnswers.DocTestQuestionsTheAnswers(CurrrentTest));
+     
     }
 }

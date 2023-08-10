@@ -122,7 +122,7 @@ namespace Client.Project
         public Class_interaction_Users.QuestionAnswer QuestionAnswer { get; set; }
         public Command EditCommand { get; set; }
         public Command DelCommand { get; set; }
-    }
+         }
 
         private void ContentPageLoaded(object sender, EventArgs e)
         {

@@ -251,10 +251,10 @@ namespace Client
                 Application.Current.MainPage.Window.MaximumWidth = 530.8d;
                 Application.Current.MainPage.Window.MaximumHeight = 650.8d;
 
-                nameEntry9.Text = "maks_nt@list.ru";
-                nameEntry1.Text = "1";
-                //nameEntry9.Text = "Admin@Admin.ru";
-                //nameEntry1.Text = "Admin";
+                //nameEntry9.Text = "maks_nt@list.ru";
+                //nameEntry1.Text = "1";
+                nameEntry9.Text = "Admin@Admin.ru";
+                nameEntry1.Text = "Admin";
             }
             catch
             {
