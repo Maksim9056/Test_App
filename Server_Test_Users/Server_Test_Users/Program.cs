@@ -158,6 +158,9 @@ namespace Server_Test_Users
                 FDictCommands.Add("050", new Action<byte[], GlobalClass, NetworkStream>(command.Del_UserExams));
                 FDictCommands.Add("051", new Action<byte[], GlobalClass, NetworkStream>(command.Get_UserExamsList));
 
+                FDictCommands.Add("052", new Action<byte[], GlobalClass, NetworkStream>(command.SaveTestUsers));//Сохраняет Тест
+
+
 
 
 

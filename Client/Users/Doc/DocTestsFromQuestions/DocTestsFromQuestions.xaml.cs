@@ -38,7 +38,7 @@ public partial class DocTestsFromQuestions : ContentPage
         var selectedExamsTest = (RefExamsTest)e.SelectedItem;
         await DisplayAlert("Выбранный тест", selectedExamsTest.ExamsTest.Test.Name_Test, "OK");
 
-       await Navigation.PushAsync(new Doc.DocTestMenu.DocTestMenu(selectedExamsTest.ExamsTest.Test));
+       await Navigation.PushAsync(new Doc.DocTestMenu.DocTestMenu(CurrrentExams ,selectedExamsTest.ExamsTest.Test));
                ((ListView)sender).SelectedItem = null;
 
     }

@@ -4,43 +4,52 @@
              x:Class="Client.Users.Doc.DocTestQuestionsTheAnswers.DocTestQuestionsTheAnswers"
              Title="DocTestQuestionsTheAnswers">
     <ContentPage.Content>
-        <Grid>
+          <Border Stroke="Gray" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Start" Grid.Row="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape> 
+              <Grid>   
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label x:Name="TestName"/>
-            <ListView x:Name="TestList"
+                                    <!--<Label x:Name="TestName"/>-->
+
+
+
+
+                <ListView x:Name="TestList"
                       ItemSelected="OnItemSelected"
                       ItemsSource="{Binding ExamsTest}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="{Binding ExamsTest.Test.Name_Test}" Grid.Column="0"
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding TestQuestion.IdQuestions.QuestionName}" Grid.Column="0"
                                         FontSize="16"
                                         FontFamily="Arial"
-                                        FontAttributes="Bold"
-                                        TextColor="Red"
-                                        HorizontalTextAlignment="Center"
-                                        VerticalTextAlignment="Center" />
+                                        FontAttributes="Bold"    />
 
-                                <Label Text="Галочка" Grid.Column="1"
+
+
+                                    <Label  Grid.Column="1"
                                         FontSize="16"
                                         FontFamily="Arial"
                                         FontAttributes="Bold"
-                                        TextColor="Red"
-                                        HorizontalTextAlignment="Center"
-                                        VerticalTextAlignment="Center" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+                                        TextColor="Red "  />
+
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView  >
+            </Grid>   
+          </Border>
     </ContentPage.Content>
 </ContentPage>

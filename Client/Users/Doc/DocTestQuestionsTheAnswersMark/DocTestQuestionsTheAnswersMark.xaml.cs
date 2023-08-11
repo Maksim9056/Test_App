@@ -10,16 +10,20 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
     private TestQuestionEditorViewModel viewModel;
     private TestQuestionManager viewModelManager;
     private Class_interaction_Users.Test CurrrentTest;
-
+    public Class_interaction_Users.Questions Questions { get; set; }
     public Class_interaction_Users.Test Test { get; set; }
-    public DocTestQuestionsTheAnswersMark()
+    private Class_interaction_Users.Exams Exams;
+    public DocTestQuestionsTheAnswersMark(Class_interaction_Users.Test refTestQuestions, Class_interaction_Users.Questions questions, Class_interaction_Users.Exams exams)
 	{
 		InitializeComponent();
         viewModel = new TestQuestionEditorViewModel();
         viewModelManager = new TestQuestionManager();
         //CurrrentTest = refTestQuestions;
+        Test = refTestQuestions;
+           Questions = questions;
         TestList.ItemsSource = GetTestQuestions(Test);
         TestName.Text = Test.Name_Test;
+        Exams = exams;
 #pragma warning disable CS0618 // Тип или член устарел
         MessagingCenter.Subscribe<DocTestQuestionsTheAnswersMark>(this, "UpdateForm", (sender) =>
         {
@@ -31,10 +35,11 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
     }
 
 
-    public void Update(Class_interaction_Users.Test refTestQuestions)
-    {
-        Test = refTestQuestions;
-    }
+    //public void Update()
+    //{
+    //    Test = refTestQuestions;
+    //    Questions = questions;
+    //}
 
     private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
@@ -43,7 +48,7 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
 
         var selectedTestQuestion = (RefTestQuestion)e.SelectedItem;
         await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
-        await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, Test));
+        await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, Test, Exams));
 
         // var selectedTestQuestion = (RefQuestionAnswer)e.SelectedItem;
         //await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");

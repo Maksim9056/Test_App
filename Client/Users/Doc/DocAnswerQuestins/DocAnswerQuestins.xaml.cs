@@ -1,4 +1,5 @@
 using Class_interaction_Users;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Client.Users.Doc.DocAnswerQuestins;
 
@@ -8,10 +9,11 @@ public partial class DocAnswerQuestins : ContentPage
     private QuestionAnswerEditorViewModel viewModel;
     private QuestionAnswerManager viewModelManager;
     private Class_interaction_Users.Questions CurrrentQuestions;
-    DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark docTestQuestionsTheAnswersMark = new DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark();
+       Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark docTestQuestionsTheAnswersMark;
     private Class_interaction_Users.Test CurrrentTest;
 
-    public DocAnswerQuestins(Class_interaction_Users.Questions questions, Class_interaction_Users.Test test)
+    private Class_interaction_Users.Exams Exams;
+    public DocAnswerQuestins(Class_interaction_Users.Questions questions, Class_interaction_Users.Test test, Class_interaction_Users.Exams exams)
 	{
 		InitializeComponent();
 
@@ -19,6 +21,7 @@ public partial class DocAnswerQuestins : ContentPage
         viewModelManager = new QuestionAnswerManager();
         CurrrentQuestions = questions;
         CurrrentTest = test;
+        Exams = exams;
         QuestionList.ItemsSource = GetQuestionAnswer(questions);
 
 #pragma warning disable CS0618 // Тип или член устарел
@@ -31,6 +34,7 @@ public partial class DocAnswerQuestins : ContentPage
 #pragma warning restore CS0618 // Тип или член устарел
 
     }
+
     private List<RefQuestionAnswer> GetQuestionAnswer(Class_interaction_Users.Questions questions)
     {
         List<RefQuestionAnswer> testQuestionList = new List<RefQuestionAnswer>();
@@ -54,20 +58,32 @@ public partial class DocAnswerQuestins : ContentPage
         return testQuestionList;
     }
 
+
+
+    //private void Edit(object testQuestion)
+    //{
+    //    var selectedTestQuestion = (RefQuestionAnswer)testQuestion;
+    //    Navigation.PushAsync(new QuestionsEditor(selectedTestQuestion.QuestionAnswer.Questions));
+    //}
+
     private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (e.SelectedItem == null)
             return;
 
         var selectedTestQuestion = (RefQuestionAnswer)e.SelectedItem;
-        await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
+    //    await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
 
-        //
-        docTestQuestionsTheAnswersMark.Update(CurrrentTest);
-        var navigationPage = new NavigationPage(docTestQuestionsTheAnswersMark);
-         //await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions));
+            await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
 
-         ((ListView)sender).SelectedItem = null;
+        // docTestQuestionsTheAnswersMark.Update();
+        // var navigationPage = new NavigationPage(docTestQuestionsTheAnswersMark );
+        ((ListView)sender).SelectedItem = null;
+
+        //  Exams
+        //  selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions
+        docTestQuestionsTheAnswersMark = new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions,Exams);
+       // await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins( ));
     }
 
     public class RefQuestionAnswer

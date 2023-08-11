@@ -1520,5 +1520,32 @@ namespace Server_Test_Users
                 }
             }
 
+
+
+
+        public void SaveTestResultsAnswers(UserExams newUserExams)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Save_results userExams = new Save_results();
+
+
+//#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+//                User user = db.Users.Find(newUserExams.User.Id);
+//#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+//                userExams.User = user;
+//#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+//                Exams exams = db.Exams.Find(newUserExams.Exams.Id);
+//#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+    //            userExams.Exams = exams;
+
+
+
+
+                db.Save_Results.Add(userExams);
+                db.SaveChanges();
+            }
+        }
+
     }
 }

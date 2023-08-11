@@ -656,6 +656,12 @@ namespace Server_Test_Users
 
 
 
+        public void SaveTestUsers(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            //User CrTest = JsonSerializer.Deserialize<User>(arg1);
+           // @class.
+
+        }
 
 
 

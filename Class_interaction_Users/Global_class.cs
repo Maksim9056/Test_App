@@ -585,6 +585,26 @@ namespace Class_interaction_Users
         }
     }
 
+    [Serializable]
+   class TravelServerTest
+   {
+      public  Questions Questions1 {  get; set; }
+      public   Test Test1 { get; set; }
+      public  QuestionAnswer QuestionAnswer { get; set; }
+      public   string AnswerDocUser { get; set; }
+
+        public Exam Exam { get; set; }
+ 
+        public TravelServerTest(Questions questions1, Test test1, QuestionAnswer questionAnswer, string answerDocUser)
+        {
+            Questions1 = questions1;
+            Test1 = test1;
+            QuestionAnswer = questionAnswer;
+            AnswerDocUser = answerDocUser;
+        }
+        TravelServerTest() { }
+
+    }
 
 
 

@@ -5,14 +5,14 @@ namespace Client.Users.Doc.DocTestQuestionsTheAnswers;
 
 public partial class DocTestQuestionsTheAnswers : ContentPage
 {
-    private List<DocTestMenu.DocTestMenu.RefTestQuestion> refTestQuestions;
+   // private List<DocTestMenu.DocTestMenu.RefTestQuestion> refTestQuestions;
 
     public CommandCL command = new CommandCL();
     private TestQuestionEditorViewModel viewModel;
     private TestQuestionManager viewModelManager;
     private Class_interaction_Users.Test CurrrentTest;
-
-    public DocTestQuestionsTheAnswers(Class_interaction_Users.Test refTestQuestions)
+    private Class_interaction_Users.Exams Exams;
+    public DocTestQuestionsTheAnswers(Class_interaction_Users.Test refTestQuestions , Class_interaction_Users.Exams exams)
 	{
        
 
@@ -20,8 +20,11 @@ public partial class DocTestQuestionsTheAnswers : ContentPage
         viewModel = new TestQuestionEditorViewModel();
         viewModelManager = new TestQuestionManager();
         CurrrentTest = refTestQuestions;
+        Exams = exams;
         TestList.ItemsSource = GetTestQuestions(refTestQuestions);
-        TestName.Text = refTestQuestions.Name_Test;
+        Title = refTestQuestions.Name_Test;
+
+        //TestName.Text = refTestQuestions.Name_Test;
 #pragma warning disable CS0618 // Тип или член устарел
         MessagingCenter.Subscribe<DocTestQuestionsTheAnswers>(this, "UpdateForm", (sender) =>
         {
@@ -39,11 +42,11 @@ public partial class DocTestQuestionsTheAnswers : ContentPage
             return;
 
         var selectedTestQuestion = (RefTestQuestion)e.SelectedItem;
-        await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
-        await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, CurrrentTest));
+    //    await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
+        await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, CurrrentTest, Exams));
 
         // var selectedTestQuestion = (RefQuestionAnswer)e.SelectedItem;
-        //await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
+        await DisplayAlert("Выбранный ответ", selectedTestQuestion.TestQuestion.IdQuestions.AnswerTrue, "OK");
         ((ListView)sender).SelectedItem = null;
 
     }

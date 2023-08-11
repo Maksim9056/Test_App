@@ -1017,6 +1017,22 @@ namespace Class_interaction_Users
             }
             return userExamsList;
         }
+
+    }
+    
+    public class Test_Save
+    {
+        private CommandCL.SaveTest command = new CommandCL.SaveTest();
+
+        public void SaveTest()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+            //    JsonSerializer.Serialize<User>(memoryStream,);
+
+                Task.Run(async () => await command.SaveClass(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "052")).Wait();
+            }
+        }
     }
 
     public class BooleanToStringConverter : IValueConverter
