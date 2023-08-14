@@ -15,6 +15,7 @@ public partial class DocTheExamisPersonal : ContentPage
            viewModel = new UserExamsEditorViewModel();
         viewModelManager = new UserExamsManager();
        CurrrentUser = user;
+    
         myListView.ItemsSource = GetUserExams(user);
 
 #pragma warning disable CS0618 // Тип или член устарел
@@ -89,7 +90,7 @@ public partial class DocTheExamisPersonal : ContentPage
         var selectedTest = (RefUserExams)e.SelectedItem;
         await DisplayAlert("Выбранный экзамен", selectedTest.UserExams.Exams.Name_exam, "OK");
         ((ListView)sender).SelectedItem = null;
-        await Navigation.PushAsync(new Doc.DocTestsFromQuestions.DocTestsFromQuestions(selectedTest.UserExams.Exams));
+        await Navigation.PushAsync(new Doc.DocTestsFromQuestions.DocTestsFromQuestions(selectedTest.UserExams.Exams, CurrrentUser));
         // vSelectedItem = selectedTest.Exams;
 
 

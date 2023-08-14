@@ -1749,21 +1749,27 @@ namespace Class_interaction_Users
         public class SaveTest
         {
             public async Task<string> SaveClass(string server, string fs, string command)
-            {
+            {                    
+
                 try
-                {
-
+                {   
                     CommandCL ClassInstance = new CommandCL();
-                    string responseDat = await ClassInstance.SendClass(server, fs, command);
-                    if (string.IsNullOrEmpty(responseDat))
-                    {
-                        return null;
-                    }
-                    else
-                    {
+                    using (TcpClient client = new TcpClient(server, 9595))
 
-                        return responseDat;
+                    using (NetworkStream stream = client.GetStream())
+                    {
+                        string responseDat = await ClassInstance.SendClass(server, fs, command);
+                        if (string.IsNullOrEmpty(responseDat))
+                        {
+                            return null;
+                        }
+                        else
+                        {
+
+                            return responseDat;
+                        }
                     }
+
                 }
                 catch (SocketException e)
                 {

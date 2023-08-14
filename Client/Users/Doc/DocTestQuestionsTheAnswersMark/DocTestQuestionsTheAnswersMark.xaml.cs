@@ -13,7 +13,8 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
     public Class_interaction_Users.Questions Questions { get; set; }
     public Class_interaction_Users.Test Test { get; set; }
     private Class_interaction_Users.Exams Exams;
-    public DocTestQuestionsTheAnswersMark(Class_interaction_Users.Test refTestQuestions, Class_interaction_Users.Questions questions, Class_interaction_Users.Exams exams)
+    private Class_interaction_Users.User CurrrentUser;
+    public DocTestQuestionsTheAnswersMark(Class_interaction_Users.Test refTestQuestions, Class_interaction_Users.Questions questions, Class_interaction_Users.Exams exams, Class_interaction_Users.User user)
 	{
 		InitializeComponent();
         viewModel = new TestQuestionEditorViewModel();
@@ -23,6 +24,7 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
            Questions = questions;
         TestList.ItemsSource = GetTestQuestions(Test);
         TestName.Text = Test.Name_Test;
+        CurrrentUser = user;
         Exams = exams;
 #pragma warning disable CS0618 // Тип или член устарел
         MessagingCenter.Subscribe<DocTestQuestionsTheAnswersMark>(this, "UpdateForm", (sender) =>
@@ -48,7 +50,7 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
 
         var selectedTestQuestion = (RefTestQuestion)e.SelectedItem;
         await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
-        await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, Test, Exams));
+        await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, Test, Exams,CurrrentUser));
 
         // var selectedTestQuestion = (RefQuestionAnswer)e.SelectedItem;
         //await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");

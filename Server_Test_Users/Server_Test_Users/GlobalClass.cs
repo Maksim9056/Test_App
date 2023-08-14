@@ -1496,6 +1496,7 @@ namespace Server_Test_Users
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
+       
 #pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 UserExams existingUserExams = db.UserExams.FirstOrDefault(ue => ue.Id == updatedUserExams.Id);
 #pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
@@ -1523,29 +1524,131 @@ namespace Server_Test_Users
 
 
 
-        public void SaveTestResultsAnswers(UserExams newUserExams)
+
+        public void SaveTestResultsAnswers(TravelServerTest newUserExams)
         {
-            using (ApplicationContext db = new ApplicationContext())
+            try
             {
-                Save_results userExams = new Save_results();
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    List<QuestionAnswer> questionAnswers = db.QuestionAnswer
+                        .Where(tq => tq.Answer.Id == newUserExams.AnswerDocUser.Answer.Id && tq.Answer.CorrectAnswers == newUserExams.AnswerDocUser.Answer.CorrectAnswers)
+                        .ToList();
+                    
+                    Exams exam = db.Exams.FirstOrDefault(e => e.Id == newUserExams.Exam.Id);
+                    Questions questions = db.Questions.FirstOrDefault(e => e.Id == newUserExams.Questions1.Id);
+                    DateTime dateTime = DateTime.Now;
+                    string data = dateTime.ToString("F");
 
+                    Test test = db.Test.FirstOrDefault(e =>e.Name_Test == e.Name_Test);
 
-//#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
-//                User user = db.Users.Find(newUserExams.User.Id);
-//#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
-//                userExams.User = user;
-//#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
-//                Exams exams = db.Exams.Find(newUserExams.Exams.Id);
-//#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
-    //            userExams.Exams = exams;
+                    QuestionAnswer questionAnswer =db.QuestionAnswer.FirstOrDefault(u =>u.Answer.CorrectAnswers == newUserExams.AnswerDocUser.Answer.CorrectAnswers && u.Answer.Id == newUserExams.AnswerDocUser.Answer.Id);
+                    Save_results userExams = new Save_results();
+                    if (questionAnswers.Count() == 0)
+                    {
+                        userExams.Name_Test = test;
+                        userExams.Exam_id = exam;
+                        userExams.Date_of_Result_Exam_Endings = data;
+                        userExams.Questions = questions;
+                        userExams.Users_Answers_Questions = questionAnswer.Questions.AnswerTrue;
+                        userExams.Name_Users = newUserExams.Users.Name_Employee;
+                        userExams.Resukts_exam =  0;
 
+                    }
+                    else
+                    {
+                        userExams.Name_Test = test;
+                        userExams.Exam_id = exam;
+                        userExams.Date_of_Result_Exam_Endings = data;
+                        userExams.Questions = questions;
+                        userExams.Users_Answers_Questions = questionAnswer.Questions.AnswerTrue;
+                        userExams.Name_Users = newUserExams.Users.Name_Employee;
+                        userExams.Resukts_exam = newUserExams.AnswerDocUser.Grade;
 
+                    }
+                    //            {
+                    //            
+                    //userExams.Name_Test = test;
+                    //userExams.Exam_id = exam;
+                    //userExams.Date_of_Result_Exam_Endings = data;
+                    //userExams.Questions = questions;
+                    //userExams.Users_Answers_Questions = questionAnswer.Questions.AnswerTrue;
+                    //userExams.Name_Users = newUserExams.Users.Name_Employee;
+                    //userExams.Resukts_exam = questionAnswers.Count > 0 newUserExams.AnswerDocUser.Grade : 0;
 
-
-                db.Save_Results.Add(userExams);
-                db.SaveChanges();
+                    db.Save_Results.Add(userExams);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine(e.Message.ToString());
             }
         }
+        //public void SaveTestResultsAnswers(TravelServerTest newUserExams)
+        //{
+        //    try
+        //    {
+        //       List< QuestionAnswer > questionAnswers = new List< QuestionAnswer >();
+        //        using (ApplicationContext db = new ApplicationContext())
+        //        {
+        //            questionAnswers = db.QuestionAnswer.Where(tq => tq.Answer.Id == newUserExams.AnswerDocUser.Answer.Id && tq.Answer.CorrectAnswers == newUserExams.AnswerDocUser.Answer.CorrectAnswers).ToList();
+
+        //        }
+        //        using (ApplicationContext db = new ApplicationContext())
+        //        {
+        //            Exam exam = new Exam();
+
+        //            exam.Id = newUserExams.Exam.Id;
+
+
+
+        //            //var testQuestions = db.QuestionAnswer
+        //            //  .Include(tq => tq.Questions)
+        //            //  .Include(tq => tq.Answer)
+        //            //  .Where(tq => tq.Questions != null && tq.Questions.Id == questions.Id)
+        //            //  .ToList();
+
+        //            //  db.Exams.Where(ue => ue.Name_exam = newUserExams.Exam.)
+        //            DateTime dateTime = DateTime.Now ;
+        //            var data = $"{dateTime:F}";
+        //            if (questionAnswers.Count() == 0)
+        //            {
+        //                Save_results userExams = new Save_results();
+
+        //                userExams.Name_Test = newUserExams.Test1;
+        //                userExams.Exam_id = exam;
+        //                userExams.Date_of_Result_Exam_Endings = data;
+        //                userExams.Questions = newUserExams.Questions1;
+        //                userExams.Users_Answers_Questions = newUserExams.AnswerDocUser.Answer.AnswerOptions;
+        //                userExams.Name_Users = newUserExams.Users;
+        //                userExams.Resukts_exam = 0;
+        //                db.Save_Results.Add(userExams);
+
+        //            }
+        //            else
+        //            {
+        //                Save_results userExams = new Save_results();
+        //                userExams.Name_Test = newUserExams.Test1;
+        //                userExams.Exam_id = exam;
+        //                userExams.Date_of_Result_Exam_Endings = data;
+        //                userExams.Questions = newUserExams.Questions1;
+        //                userExams.Users_Answers_Questions = newUserExams.AnswerDocUser.Answer.AnswerOptions;
+        //                userExams.Name_Users = newUserExams.Users;
+        //                userExams.Resukts_exam = newUserExams.AnswerDocUser.Grade;
+        //                db.Save_Results.Add(userExams);
+
+        //            }
+
+        //            db.SaveChanges();
+
+        //        }
+        //    }
+        //    catch(Exception e)
+        //    {
+        //        Console.WriteLine(e.Message.ToString());
+        //    }
+        //}
 
     }
 }

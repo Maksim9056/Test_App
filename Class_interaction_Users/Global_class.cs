@@ -463,9 +463,9 @@ namespace Class_interaction_Users
         public Questions Questions { get; set; }
         public Test Name_Test { get; set; }
         public string Users_Answers_Questions { get; set; }
-        public Exam Exam_id { get; set; }
-        public DateTime Date_of_Result_Exam_Endings { get; set; }
-        public User Name_Users { get; set; }
+        public Exams Exam_id { get; set; }
+        public string Date_of_Result_Exam_Endings { get; set; }
+        public string Name_Users { get; set; }
         public int Resukts_exam { get; set; }
     }
 
@@ -586,21 +586,22 @@ namespace Class_interaction_Users
     }
 
     [Serializable]
-   class TravelServerTest
+ public  class TravelServerTest
    {
+        public Class_interaction_Users.User Users { get; set; }
       public  Questions Questions1 {  get; set; }
       public   Test Test1 { get; set; }
-      public  QuestionAnswer QuestionAnswer { get; set; }
-      public   string AnswerDocUser { get; set; }
+      public Class_interaction_Users.QuestionAnswer AnswerDocUser { get; set; }
 
-        public Exam Exam { get; set; }
+        public Exams Exam { get; set; }
  
-        public TravelServerTest(Questions questions1, Test test1, QuestionAnswer questionAnswer, string answerDocUser)
+        public TravelServerTest(Class_interaction_Users.User users, Questions questions1, Test test1, Class_interaction_Users.QuestionAnswer answerDocUser, Exams exam)
         {
+            Users = users;
             Questions1 = questions1;
             Test1 = test1;
-            QuestionAnswer = questionAnswer;
             AnswerDocUser = answerDocUser;
+            Exam = exam;
         }
         TravelServerTest() { }
 

@@ -10,6 +10,8 @@ using Microsoft.Maui;
 using Microsoft.Maui.Platform;
 using Client.Main;
 using System.Windows.Input;
+using System.Web;
+//using Microsoft.AspNetCore.Components.Navigation;
 
 
 namespace Client
@@ -23,7 +25,12 @@ namespace Client
             InitializeComponent();
             BindingContext = this;
 
-        }
+        
+        //var rt = Shell.Current.CurrentState.Location.OriginalString;
+        //var parameters = System.Web.HttpUtility.ParseQueryString(rt);
+        //var sellValue = parameters.Get("sell");
+
+    }
         public CommandCL command = new CommandCL();
         public string Mail { get; set; }
         public string Password { get; set; }
@@ -253,8 +260,24 @@ namespace Client
 
                 //nameEntry9.Text = "maks_nt@list.ru";
                 //nameEntry1.Text = "1";
-                nameEntry9.Text = "Admin@Admin.ru";
-                nameEntry1.Text = "Admin";
+                //nameEntry9.Text = "Admin@Admin.ru";
+                //nameEntry1.Text = "Admin";
+                if (Shell.Current.CurrentState.Location.OriginalString.Contains("sell=admin"))
+                {
+                    nameEntry9.Text = "Admin@Admin.ru";
+                    nameEntry1.Text = "Admin";
+                }
+                else if (Shell.Current.CurrentState.Location.OriginalString.Contains("sell=user"))
+                {
+                    // Handle user parameter
+                    nameEntry9.Text = "maks_nt@list.ru";
+                    nameEntry1.Text = "1";
+                }
+                else if (Shell.Current.CurrentState.Location.OriginalString.Contains("sell=help"))
+                {
+                    // Handle help parameter
+                }
+
             }
             catch
             {

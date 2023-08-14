@@ -24,34 +24,35 @@
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Администрирование" 
-                Route="Admin" 
-                Icon="dotnet_bot.png">
+    <FlyoutItem Title="Администрирование"   
+            Route="Admin?sell=admin"   
+            Icon="dotnet_bot.png">
         <Tab>
-            <ShellContent  
-                Route="MainPage" 
-                ContentTemplate="{DataTemplate views:MainPage}" />
-        </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Пользователь" 
-                Route="User" 
-                Icon="dotnet_bot.png">
-        <Tab>
-            <ShellContent  
-                Route="MainPage" 
-                ContentTemplate="{DataTemplate views:MainPage}" />
-        </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Помощь" 
-                Route="Help" 
-                Icon="dotnet_bot.png">
-        <Tab>
-            <ShellContent  
-                Route="MainPage" 
-                ContentTemplate="{DataTemplate views:MainPage}" />
+            <ShellContent    
+            Route="MainPage"   
+            ContentTemplate="{DataTemplate views:MainPage}" />
         </Tab>
     </FlyoutItem>
 
+    <FlyoutItem Title="Пользователь"   
+            Route="User?sell=user"   
+            Icon="dotnet_bot.png">
+        <Tab>
+            <ShellContent    
+            Route="MainPage"   
+            ContentTemplate="{DataTemplate views:MainPage}" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Помощь"   
+            Route="Help?sell=help"   
+            Icon="dotnet_bot.png">
+        <Tab>
+            <ShellContent    
+            Route="MainPage"   
+            ContentTemplate="{DataTemplate views:MainPage}" />
+        </Tab>
+    </FlyoutItem>
 </Shell>
 
 

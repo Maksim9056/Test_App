@@ -13,14 +13,17 @@ public partial class DocAnswerQuestins : ContentPage
     private Class_interaction_Users.Test CurrrentTest;
 
     private Class_interaction_Users.Exams Exams;
-    public DocAnswerQuestins(Class_interaction_Users.Questions questions, Class_interaction_Users.Test test, Class_interaction_Users.Exams exams)
+    private Class_interaction_Users.User CurrrentUser;
+    private Test_Save test_Save;
+    public DocAnswerQuestins(Class_interaction_Users.Questions questions, Class_interaction_Users.Test test, Class_interaction_Users.Exams exams, Class_interaction_Users.User  user)
 	{
 		InitializeComponent();
-
+        test_Save = new Test_Save();    
         viewModel = new QuestionAnswerEditorViewModel();
         viewModelManager = new QuestionAnswerManager();
         CurrrentQuestions = questions;
         CurrrentTest = test;
+       CurrrentUser =  user;
         Exams = exams;
         QuestionList.ItemsSource = GetQuestionAnswer(questions);
 
@@ -76,13 +79,18 @@ public partial class DocAnswerQuestins : ContentPage
 
             await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
 
+       TravelServerTest travelServerTest = new TravelServerTest(CurrrentUser,CurrrentQuestions, CurrrentTest, selectedTestQuestion.QuestionAnswer,Exams);
+
+        test_Save.SaveTest(travelServerTest);  
+
+
         // docTestQuestionsTheAnswersMark.Update();
         // var navigationPage = new NavigationPage(docTestQuestionsTheAnswersMark );
         ((ListView)sender).SelectedItem = null;
 
         //  Exams
         //  selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions
-        docTestQuestionsTheAnswersMark = new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions,Exams);
+        docTestQuestionsTheAnswersMark = new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions,Exams,CurrrentUser);
        // await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins( ));
     }
 

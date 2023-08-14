@@ -9,12 +9,15 @@ public partial class DocTestsFromQuestions : ContentPage
     private ExamsTestEditorViewModel viewModel;
     private ExamsTestManager viewModelManager;
     private Class_interaction_Users.Exams CurrrentExams;
-    public DocTestsFromQuestions(Class_interaction_Users.Exams exams)
+    private Class_interaction_Users.User CurrrentUser;
+
+    public DocTestsFromQuestions(Class_interaction_Users.Exams exams, Class_interaction_Users.User currrentUser)
     {
         InitializeComponent();
         viewModel = new ExamsTestEditorViewModel();
         viewModelManager = new ExamsTestManager();
         CurrrentExams = exams;
+        CurrrentUser = currrentUser;
         TestList.ItemsSource = GetExamsTest(exams);
         Title = "Тесты для экзамена: " + exams.Name_exam;
 
@@ -38,7 +41,7 @@ public partial class DocTestsFromQuestions : ContentPage
         var selectedExamsTest = (RefExamsTest)e.SelectedItem;
         await DisplayAlert("Выбранный тест", selectedExamsTest.ExamsTest.Test.Name_Test, "OK");
 
-       await Navigation.PushAsync(new Doc.DocTestMenu.DocTestMenu(CurrrentExams ,selectedExamsTest.ExamsTest.Test));
+       await Navigation.PushAsync(new Doc.DocTestMenu.DocTestMenu(CurrrentExams ,selectedExamsTest.ExamsTest.Test,CurrrentUser));
                ((ListView)sender).SelectedItem = null;
 
     }
