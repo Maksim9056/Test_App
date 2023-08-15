@@ -1,4 +1,4 @@
-using Class_interaction_Users;
+п»їusing Class_interaction_Users;
 
 namespace Client.Users.Doc.DocTheExamisPersonal;
 
@@ -18,18 +18,18 @@ public partial class DocTheExamisPersonal : ContentPage
     
         myListView.ItemsSource = GetUserExams(user);
 
-#pragma warning disable CS0618 // Тип или член устарел
+#pragma warning disable CS0618 // РўРёРї РёР»Рё С‡Р»РµРЅ СѓСЃС‚Р°СЂРµР»
         MessagingCenter.Subscribe<DocTheExamisPersonal>(this, "UpdateForm", (sender) =>
         {
             // Perform the necessary updates to the form here  
             // For example, update the fields, refresh data, etc.  
             myListView.ItemsSource = GetUserExams(user);
         });
-#pragma warning restore CS0618 // Тип или член устарел
+#pragma warning restore CS0618 // РўРёРї РёР»Рё С‡Р»РµРЅ СѓСЃС‚Р°СЂРµР»
                               //  ExamsList.ItemsSource = GetUserExams(user);
-                              //    Title = "Экзамены для пользователя: " + user.Name_Employee;
+                              //    Title = "Р­РєР·Р°РјРµРЅС‹ РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ: " + user.Name_Employee;
 
-#pragma warning disable CS0618 // Тип или член устарел
+#pragma warning disable CS0618 // РўРёРї РёР»Рё С‡Р»РµРЅ СѓСЃС‚Р°СЂРµР»
         //MessagingCenter.Subscribe<DocTheExamisPersonal>(this, "UpdateForm", (sender) =>
         //{
         //    // Perform the necessary updates to the form here  
@@ -54,9 +54,28 @@ public partial class DocTheExamisPersonal : ContentPage
         {
             for (int i = 0; i < CommandCL.UserExamsListGet.ListUserExams.Count; i++)
             {
-                var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i]};
-                testUserExamsList.Add(refUserExams);
-            }
+                var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " };
+                 testUserExamsList.Add(refUserExams);
+
+               // //if (CommandCL.TestQuestionListGet.ListTestQuestion[i].IdTest.QuestionName == questions.QuestionName)
+               // //{
+               // //      var refTestQuestion = new RefTestQuestion { TestQuestion = CommandCL.TestQuestionListGet.ListTestQuestion[i], EditCommand = " вњ”" };
+               // //    testQuestionList.Add(refTestQuestion);
+               // var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " вњ”" };
+               //     testUserExamsList.Add(refUserExams);
+
+               // }
+               // else
+               // {
+               //     var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = "" };
+
+               //  //   var refTestQuestion = new RefTestQuestion { TestQuestion = CommandCL.TestQuestionListGet.ListTestQuestion[i], EditCommand = "" };
+               ////     testQuestionList.Add(refTestQuestion);
+               //     testUserExamsList.Add(refUserExams);
+
+               // }
+            //   testUserExamsList.Add(refUserExams);
+        }
         }
         return testUserExamsList;
     }
@@ -65,7 +84,7 @@ public partial class DocTheExamisPersonal : ContentPage
     public class RefUserExams
     {
         public Class_interaction_Users.UserExams UserExams { get; set; }
-        public Command EditCommand { get; set; }
+        public string EditCommand { get; set; }
         public Command DelCommand { get; set; }
     }
 
@@ -88,7 +107,7 @@ public partial class DocTheExamisPersonal : ContentPage
             return;
 
         var selectedTest = (RefUserExams)e.SelectedItem;
-        await DisplayAlert("Выбранный экзамен", selectedTest.UserExams.Exams.Name_exam, "OK");
+        await DisplayAlert("Р’С‹Р±СЂР°РЅРЅС‹Р№ СЌРєР·Р°РјРµРЅ", selectedTest.UserExams.Exams.Name_exam, "OK");
         ((ListView)sender).SelectedItem = null;
         await Navigation.PushAsync(new Doc.DocTestsFromQuestions.DocTestsFromQuestions(selectedTest.UserExams.Exams, CurrrentUser));
         // vSelectedItem = selectedTest.Exams;
@@ -96,16 +115,16 @@ public partial class DocTheExamisPersonal : ContentPage
 
 
 
-        // Закройте форму RefQuestionsListPage
-        // Исключается для выбора ответа
-#pragma warning disable CS4014 // Так как 
+        // Р—Р°РєСЂРѕР№С‚Рµ С„РѕСЂРјСѓ RefQuestionsListPage
+        // РСЃРєР»СЋС‡Р°РµС‚СЃСЏ РґР»СЏ РІС‹Р±РѕСЂР° РѕС‚РІРµС‚Р°
+#pragma warning disable CS4014 // РўР°Рє РєР°Рє 
 
 
         //if (e.SelectedItem == null)
         //    return;
 
         //var selectedUserExams = (RefUserExams)e.SelectedItem;
-        //await DisplayAlert("Выбранный экзамен", selectedUserExams.UserExams.Exams.Name_exam, "OK");
+        //await DisplayAlert("Р’С‹Р±СЂР°РЅРЅС‹Р№ СЌРєР·Р°РјРµРЅ", selectedUserExams.UserExams.Exams.Name_exam, "OK");
         //((ListView)sender).SelectedItem = null;
 
     }
@@ -123,7 +142,7 @@ public partial class DocTheExamisPersonal : ContentPage
     //        return;
     //    Shell.Current.GoToAsync("examfromtests");
     ////    var selectedExamsTest = (RefExamsTest)e.SelectedItem;
-    //// await DisplayAlert("Выбранный тест", selectedExamsTest.ExamsTest.Exams.Name_exam, "OK");
+    //// await DisplayAlert("Р’С‹Р±СЂР°РЅРЅС‹Р№ С‚РµСЃС‚", selectedExamsTest.ExamsTest.Exams.Name_exam, "OK");
     ////  ((ListView)sender).SelectedItem = null;
     //}
 

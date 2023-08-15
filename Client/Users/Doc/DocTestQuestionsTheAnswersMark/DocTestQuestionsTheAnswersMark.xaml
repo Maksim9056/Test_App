@@ -10,7 +10,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label x:Name="TestName"/>
+            <!--<Label x:Name="TestName"/>-->
             <ListView x:Name="TestList"
                       ItemSelected="OnItemSelected"
                       ItemsSource="{Binding ExamsTest}">
@@ -20,8 +20,9 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding ExamsTest.Test.Name_Test}" Grid.Column="0"
+                                <Label Text="{Binding TestQuestion.IdQuestions.QuestionName}" Grid.Column="0"
                                         FontSize="16"
                                         FontFamily="Arial"
                                         FontAttributes="Bold"
@@ -29,7 +30,7 @@
                                         HorizontalTextAlignment="Center"
                                         VerticalTextAlignment="Center" />
 
-                                <Label Text="{Binding ExamsTest.Test.Name_Test}" Grid.Column="1" 
+                                <Label  Text="{Binding EditCommand}" Grid.Column="1" 
                                        FontSize="16"
                                        FontFamily="Arial"
                                        FontAttributes="Bold"
@@ -41,6 +42,17 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button 
+                    x:Name="TestStart" 
+                    Text="Закончить тест" 
+                    SemanticProperties.Hint="Counts the number of times you click" 
+                    Clicked="TestStart_Clicked" 
+                    
+                    HorizontalOptions="Center" 
+                    HeightRequest="50" 
+                    WidthRequest="320" 
+                    Margin="0,250,0,0" 
+                    Padding="10" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

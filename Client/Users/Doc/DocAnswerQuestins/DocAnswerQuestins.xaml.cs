@@ -15,6 +15,7 @@ public partial class DocAnswerQuestins : ContentPage
     private Class_interaction_Users.Exams Exams;
     private Class_interaction_Users.User CurrrentUser;
     private Test_Save test_Save;
+   
     public DocAnswerQuestins(Class_interaction_Users.Questions questions, Class_interaction_Users.Test test, Class_interaction_Users.Exams exams, Class_interaction_Users.User  user)
 	{
 		InitializeComponent();
@@ -53,7 +54,7 @@ public partial class DocAnswerQuestins : ContentPage
         {
             for (int i = 0; i < CommandCL.QuestionAnswerListGet.ListQuestionAnswer.Count; i++)
             {
-                var refQuestionAnswer = new RefQuestionAnswer { QuestionAnswer = CommandCL.QuestionAnswerListGet.ListQuestionAnswer[i] };
+                var refQuestionAnswer = new RefQuestionAnswer { QuestionAnswer = CommandCL.QuestionAnswerListGet.ListQuestionAnswer[i],};
                 testQuestionList.Add(refQuestionAnswer);
             }
         }
@@ -90,7 +91,9 @@ public partial class DocAnswerQuestins : ContentPage
 
         //  Exams
         //  selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions
-        docTestQuestionsTheAnswersMark = new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions,Exams,CurrrentUser);
+        await Navigation.PushAsync(new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions, Exams, CurrrentUser));
+     //   docTestQuestionsTheAnswersMark = new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions,Exams,CurrrentUser);
+//   await   docTestQuestionsTheAnswersMark.Navigation.PushAsync(new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest,  CurrrentQuestions, Exams, CurrrentUser));
        // await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins( ));
     }
 

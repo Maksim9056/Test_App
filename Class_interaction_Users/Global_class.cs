@@ -609,6 +609,15 @@ namespace Class_interaction_Users
 
 
 
-
+    public class Галочка
+    {
+       public int Index {  get; set; }
+        public string Value { get; set; }
+        public Галочка(int index, string value)
+        {
+            Index = index;
+            Value = value;
+        }
+    }
 
 }
