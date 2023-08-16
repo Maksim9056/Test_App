@@ -65,6 +65,7 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
     {
         if (e.SelectedItem == null)
             return;
+        //Сдесь проверку  на выбраный вопрос ввиде списка массивов и выяснить
 
         var selectedTestQuestion = (RefTestQuestion)e.SelectedItem;
         await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");

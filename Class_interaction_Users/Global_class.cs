@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -619,5 +620,19 @@ namespace Class_interaction_Users
             Value = value;
         }
     }
+
+    public class CheckExam 
+    {
+
+      public  Class_interaction_Users.UserExams UserExams { get; set; }
+
+        public CheckExam() { }
+        public CheckExam(UserExams userExams)
+        {
+            UserExams = userExams;
+        }
+    }
+
+
 
 }

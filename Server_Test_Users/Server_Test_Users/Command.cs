@@ -1,5 +1,6 @@
 ﻿using Class_interaction_Users;
 using System.Diagnostics;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -723,6 +724,17 @@ namespace Server_Test_Users
 
         public void Update_Message(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+        }
+
+        public void CheckExamUsers(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            CheckExam CheckExams = JsonSerializer.Deserialize<CheckExam>(arg1);
+            @class.CheckExam(CheckExams);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
+           // @class.CheckUserExams_ds(CrTest);
+            //CheckExam checkExam = new CheckExam(UserExams);
+            //JsonSerializer.Serialize<CheckExam>(memoryStream, checkExam);
         }
     }
 }

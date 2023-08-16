@@ -1580,75 +1580,49 @@ namespace Server_Test_Users
                     db.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 //Console.WriteLine(e.Message.ToString());
             }
         }
-        //public void SaveTestResultsAnswers(TravelServerTest newUserExams)
-        //{
-        //    try
-        //    {
-        //       List< QuestionAnswer > questionAnswers = new List< QuestionAnswer >();
-        //        using (ApplicationContext db = new ApplicationContext())
-        //        {
-        //            questionAnswers = db.QuestionAnswer.Where(tq => tq.Answer.Id == newUserExams.AnswerDocUser.Answer.Id && tq.Answer.CorrectAnswers == newUserExams.AnswerDocUser.Answer.CorrectAnswers).ToList();
+     
+        public void CheckExam(CheckExam checkExam)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                bool CheckSave = false;
+                var userExams = db.Save_Results.Where(ue => ue.Exam_id.Id == checkExam.UserExams.Exams.Id && ue.Name_Users == checkExam.UserExams.User.Name_Employee)
+                    .ToList();
 
-        //        }
-        //        using (ApplicationContext db = new ApplicationContext())
-        //        {
-        //            Exam exam = new Exam();
+                for (int i = 0; i < userExams.Count; i++)
+                {
+                    if (userExams[i].Exam_id.Id == checkExam.UserExams.Exams.Id)
+                    {
+                        CheckSave = true;
+                    }
+                }
+                List<ExamsTest> ExamsTest = new List<ExamsTest>();
+                if (CheckSave == true)
+                {
+                    var examsTests = db.ExamsTest.Where(et => et.Exams.Id == checkExam.UserExams.Exams.Id).ToList();
 
-        //            exam.Id = newUserExams.Exam.Id;
+                    ExamsTest = examsTests;
 
 
+                }
 
-        //            //var testQuestions = db.QuestionAnswer
-        //            //  .Include(tq => tq.Questions)
-        //            //  .Include(tq => tq.Answer)
-        //            //  .Where(tq => tq.Questions != null && tq.Questions.Id == questions.Id)
-        //            //  .ToList();
+                Test  [] test = new Test[ExamsTest.Count()];
+                bool CheckTest = false;
+                for (int i = 0; i < ExamsTest.Count(); i++)
+                {
+                    if (ExamsTest[i].Exams.Id == checkExam.UserExams.Exams.Id)
+                    {
+                        test[i] = ExamsTest[i].Test;
+                        CheckTest = true;
+                    }
+                }
 
-        //            //  db.Exams.Where(ue => ue.Name_exam = newUserExams.Exam.)
-        //            DateTime dateTime = DateTime.Now ;
-        //            var data = $"{dateTime:F}";
-        //            if (questionAnswers.Count() == 0)
-        //            {
-        //                Save_results userExams = new Save_results();
-
-        //                userExams.Name_Test = newUserExams.Test1;
-        //                userExams.Exam_id = exam;
-        //                userExams.Date_of_Result_Exam_Endings = data;
-        //                userExams.Questions = newUserExams.Questions1;
-        //                userExams.Users_Answers_Questions = newUserExams.AnswerDocUser.Answer.AnswerOptions;
-        //                userExams.Name_Users = newUserExams.Users;
-        //                userExams.Resukts_exam = 0;
-        //                db.Save_Results.Add(userExams);
-
-        //            }
-        //            else
-        //            {
-        //                Save_results userExams = new Save_results();
-        //                userExams.Name_Test = newUserExams.Test1;
-        //                userExams.Exam_id = exam;
-        //                userExams.Date_of_Result_Exam_Endings = data;
-        //                userExams.Questions = newUserExams.Questions1;
-        //                userExams.Users_Answers_Questions = newUserExams.AnswerDocUser.Answer.AnswerOptions;
-        //                userExams.Name_Users = newUserExams.Users;
-        //                userExams.Resukts_exam = newUserExams.AnswerDocUser.Grade;
-        //                db.Save_Results.Add(userExams);
-
-        //            }
-
-        //            db.SaveChanges();
-
-        //        }
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        Console.WriteLine(e.Message.ToString());
-        //    }
-        //}
-
+            }
+        }
     }
 }

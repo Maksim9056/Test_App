@@ -1036,6 +1036,26 @@ namespace Class_interaction_Users
         }
     }
 
+    public class CheckUsers
+    {
+        private CommandCL.Check command = new CommandCL.Check();
+
+        public void CheckExams( Class_interaction_Users.UserExams UserExams )
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+
+                CheckExam checkExam = new CheckExam(UserExams);
+                JsonSerializer.Serialize<CheckExam>(memoryStream, checkExam);
+
+
+                Task.Run(async () => await command.CheckClass(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "053")).Wait();
+            }
+        }
+
+
+    }
+
     public class BooleanToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

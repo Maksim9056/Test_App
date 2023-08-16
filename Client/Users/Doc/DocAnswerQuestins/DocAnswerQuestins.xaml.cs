@@ -18,6 +18,7 @@ public partial class DocAnswerQuestins : ContentPage
    
     public DocAnswerQuestins(Class_interaction_Users.Questions questions, Class_interaction_Users.Test test, Class_interaction_Users.Exams exams, Class_interaction_Users.User  user)
 	{
+        //Сделать проверку на  выбраный вопрос есть ли ответ и поставить галочку
 		InitializeComponent();
         test_Save = new Test_Save();    
         viewModel = new QuestionAnswerEditorViewModel();
@@ -76,9 +77,9 @@ public partial class DocAnswerQuestins : ContentPage
             return;
 
         var selectedTestQuestion = (RefQuestionAnswer)e.SelectedItem;
-    //    await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
-
-            await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
+        //    await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
+     
+        await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
 
        TravelServerTest travelServerTest = new TravelServerTest(CurrrentUser,CurrrentQuestions, CurrrentTest, selectedTestQuestion.QuestionAnswer,Exams);
 

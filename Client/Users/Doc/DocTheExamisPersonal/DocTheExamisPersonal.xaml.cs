@@ -9,12 +9,15 @@ public partial class DocTheExamisPersonal : ContentPage
     private UserExamsManager viewModelManager;
     private Class_interaction_Users.User CurrrentUser;
     public Class_interaction_Users.Exams vSelectedItem { get; set; }
+    private CheckUsers command = new CheckUsers();
+
     public DocTheExamisPersonal(Class_interaction_Users.User user)
 	{
+        //Запросить все тесты из экзамена и посматреть какой пользователь прошел
 		InitializeComponent();
            viewModel = new UserExamsEditorViewModel();
         viewModelManager = new UserExamsManager();
-       CurrrentUser = user;
+        CurrrentUser = user;
     
         myListView.ItemsSource = GetUserExams(user);
 
@@ -52,6 +55,18 @@ public partial class DocTheExamisPersonal : ContentPage
         }
         else
         {
+
+            // Здесь вызвать  функцию что пришло 
+            for (int i = 0; i < CommandCL.UserExamsListGet.ListUserExams.Count; i++)
+            {
+
+                var userExams = CommandCL.UserExamsListGet.ListUserExams[i];
+                command.CheckExams(userExams);
+                //Запоминает проверку 
+
+            }
+        
+
             for (int i = 0; i < CommandCL.UserExamsListGet.ListUserExams.Count; i++)
             {
                 var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " };
@@ -106,9 +121,15 @@ public partial class DocTheExamisPersonal : ContentPage
        if (e.SelectedItem == null)
             return;
 
+       
+       //Сдесь проверку то что екзамен  и все тесты сданы 
+
         var selectedTest = (RefUserExams)e.SelectedItem;
+
         await DisplayAlert("Выбранный экзамен", selectedTest.UserExams.Exams.Name_exam, "OK");
+
         ((ListView)sender).SelectedItem = null;
+
         await Navigation.PushAsync(new Doc.DocTestsFromQuestions.DocTestsFromQuestions(selectedTest.UserExams.Exams, CurrrentUser));
         // vSelectedItem = selectedTest.Exams;
 

@@ -1,4 +1,4 @@
-using Class_interaction_Users;
+    using Class_interaction_Users;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Client.Users.Doc.DocTestQuestionsTheAnswers;
@@ -44,6 +44,7 @@ public partial class DocTestQuestionsTheAnswers : ContentPage
             return;
 
         var selectedTestQuestion = (RefTestQuestion)e.SelectedItem;
+       
     //    await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
 
         // var selectedTestQuestion = (RefQuestionAnswer)e.SelectedItem;

@@ -13,6 +13,7 @@ public partial class DocTestsFromQuestions : ContentPage
 
     public DocTestsFromQuestions(Class_interaction_Users.Exams exams, Class_interaction_Users.User currrentUser)
     {
+        //Проверить тест для экзамена который сдан 
         InitializeComponent();
         viewModel = new ExamsTestEditorViewModel();
         viewModelManager = new ExamsTestManager();
@@ -39,9 +40,11 @@ public partial class DocTestsFromQuestions : ContentPage
             return;
 
         var selectedExamsTest = (RefExamsTest)e.SelectedItem;
+        //Сделать проверку что тест уже пройден или нет
+
         await DisplayAlert("Выбранный тест", selectedExamsTest.ExamsTest.Test.Name_Test, "OK");
 
-       await Navigation.PushAsync(new Doc.DocTestMenu.DocTestMenu(CurrrentExams ,selectedExamsTest.ExamsTest.Test,CurrrentUser));
+        await Navigation.PushAsync(new Doc.DocTestMenu.DocTestMenu(CurrrentExams ,selectedExamsTest.ExamsTest.Test,CurrrentUser));
                ((ListView)sender).SelectedItem = null;
 
     }
