@@ -1024,11 +1024,12 @@ namespace Class_interaction_Users
     {
         private CommandCL.SaveTest command = new CommandCL.SaveTest();
 
-        public void SaveTest(TravelServerTest travelServerTest )
+        public void SaveTest(Save_results travelServerTest)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                  JsonSerializer.Serialize<TravelServerTest>(memoryStream, travelServerTest);
+                //JsonSerializer.Serialize<TravelServerTest>(memoryStream, travelServerTest);
+                JsonSerializer.Serialize<Save_results>(memoryStream, travelServerTest);
 
 
                 Task.Run(async () => await command.SaveClass(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "052")).Wait();

@@ -15,6 +15,7 @@ namespace Class_interaction_Users
         public static string Ip_adresss { get; set; } = "192.168.0.112";
     }
 
+    [Serializable]
     /// <summary>
     /// Справочник Пользователей
     /// </summary>
@@ -455,6 +456,7 @@ namespace Class_interaction_Users
     }
 
 
+    [Serializable]
     /// <summary>
     /// Сохраняет результат экзамена
     /// </summary>
@@ -468,6 +470,7 @@ namespace Class_interaction_Users
         public string Date_of_Result_Exam_Endings { get; set; }
         public string Name_Users { get; set; }
         public int Resukts_exam { get; set; }
+        public User User_id { get; set; }
     }
 
 
@@ -586,27 +589,27 @@ namespace Class_interaction_Users
         }
     }
 
-    [Serializable]
- public  class TravelServerTest
-   {
-        public Class_interaction_Users.User Users { get; set; }
-      public  Questions Questions1 {  get; set; }
-      public   Test Test1 { get; set; }
-      public Class_interaction_Users.QuestionAnswer AnswerDocUser { get; set; }
+ //   [Serializable]
+ //public  class TravelServerTest
+ //  {
+ //       public Class_interaction_Users.User Users { get; set; }
+ //     public  Questions Questions1 {  get; set; }
+ //     public   Test Test1 { get; set; }
+ //     public Class_interaction_Users.QuestionAnswer AnswerDocUser { get; set; }
 
-        public Exams Exam { get; set; }
+ //       public Exams Exam { get; set; }
  
-        public TravelServerTest(Class_interaction_Users.User users, Questions questions1, Test test1, Class_interaction_Users.QuestionAnswer answerDocUser, Exams exam)
-        {
-            Users = users;
-            Questions1 = questions1;
-            Test1 = test1;
-            AnswerDocUser = answerDocUser;
-            Exam = exam;
-        }
-        TravelServerTest() { }
+ //       public TravelServerTest(Class_interaction_Users.User users, Questions questions1, Test test1, Class_interaction_Users.QuestionAnswer answerDocUser, Exams exam)
+ //       {
+ //           Users = users;
+ //           Questions1 = questions1;
+ //           Test1 = test1;
+ //           AnswerDocUser = answerDocUser;
+ //           Exam = exam;
+ //       }
+ //       TravelServerTest() { }
 
-    }
+ //   }
 
 
 

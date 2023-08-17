@@ -84,7 +84,13 @@ public partial class DocAnswerQuestins : ContentPage
      
         await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
 
-       TravelServerTest travelServerTest = new TravelServerTest(CurrrentUser,CurrrentQuestions, CurrrentTest, selectedTestQuestion.QuestionAnswer,Exams);
+        //TravelServerTest travelServerTest = new TravelServerTest(CurrrentUser, CurrrentQuestions, CurrrentTest, selectedTestQuestion.QuestionAnswer, Exams);
+        Save_results travelServerTest = new Save_results();
+        travelServerTest.User_id = CurrrentUser;
+        travelServerTest.Questions = CurrrentQuestions;
+        travelServerTest.Name_Test = CurrrentTest;
+        travelServerTest.Exam_id = Exams;
+        travelServerTest.Users_Answers_Questions = selectedTestQuestion.QuestionAnswer.Id.ToString();
 
         test_Save.SaveTest(travelServerTest);  
 

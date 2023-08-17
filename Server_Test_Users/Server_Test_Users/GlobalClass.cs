@@ -1523,58 +1523,124 @@ namespace Server_Test_Users
 
 
 
+        //public void SaveTestResultsAnswers(Save_results newUserExams)
+        //{
+        //    try
+        //    {
+        //        using (ApplicationContext db = new ApplicationContext())
+        //        {
+        //            List<QuestionAnswer> questionAnswers = db.QuestionAnswer
+        //                .Where(tq => tq.Answer.Id == newUserExams.AnswerDocUser.Answer.Id && tq.Answer.CorrectAnswers == newUserExams.AnswerDocUser.Answer.CorrectAnswers)
+        //                .ToList();
+
+        //            Exams exam = db.Exams.FirstOrDefault(e => e.Id == newUserExams.Exam.Id);
+        //            Questions questions = db.Questions.FirstOrDefault(e => e.Id == newUserExams.Questions1.Id);
+        //            DateTime dateTime = DateTime.Now;
+        //            string data = dateTime.ToString("F");
+
+        //            Test test = db.Test.FirstOrDefault(e => e.Name_Test == e.Name_Test);
+
+        //            User user = db.Users.FirstOrDefault(e => e.Id == newUserExams.Users.Id);
+
+        //            QuestionAnswer questionAnswer = db.QuestionAnswer.FirstOrDefault(u => u.Answer.CorrectAnswers == newUserExams.AnswerDocUser.Answer.CorrectAnswers && u.Answer.Id == newUserExams.AnswerDocUser.Answer.Id);
+        //            Save_results userExams = new Save_results();
+
+        //            userExams.Name_Test = test;
+        //            userExams.Exam_id = exam;
+        //            userExams.Date_of_Result_Exam_Endings = data;
+        //            userExams.Questions = questions;
+        //            userExams.Users_Answers_Questions = questionAnswer.Questions.AnswerTrue;
+        //            userExams.Name_Users = newUserExams.Users.Name_Employee;
+
+        //            if (questionAnswers.Count() == 0)
+        //            {
+        //                userExams.Resukts_exam = 0;
+        //            }
+        //            else
+        //            {
+        //                userExams.Resukts_exam = newUserExams.AnswerDocUser.Grade;
+        //            }
+        //            //            {
+        //            //            
+        //            //userExams.Name_Test = test;
+        //            //userExams.Exam_id = exam;
+        //            //userExams.Date_of_Result_Exam_Endings = data;
+        //            //userExams.Questions = questions;
+        //            //userExams.Users_Answers_Questions = questionAnswer.Questions.AnswerTrue;
+        //            //userExams.Name_Users = newUserExams.Users.Name_Employee;
+        //            //userExams.Resukts_exam = questionAnswers.Count > 0 newUserExams.AnswerDocUser.Grade : 0;
+
+        //            db.Save_Results.Add(userExams);
+        //            db.SaveChanges();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        //Console.WriteLine(e.Message.ToString());
+        //    }
+        //}
 
 
-        public void SaveTestResultsAnswers(TravelServerTest newUserExams)
+        public void SaveTestResultsAnswers(Save_results newUserExams)
         {
             try
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
+                    //QuestionAnswer tt = db.QuestionAnswer.FirstOrDefault(e => e.Id == Convert.ToInt32(newUserExams.Users_Answers_Questions));
+                    var tt = db.QuestionAnswer
+                     .Include(ue => ue.Questions)
+                     .Include(ue => ue.Answer)
+                     .FirstOrDefault(ue => ue.Id == Convert.ToInt32(newUserExams.Users_Answers_Questions));
+                    //var tt = db.QuestionAnswer.Where(ue => ue.Answer.Id == Convert.ToInt32(newUserExams.Users_Answers_Questions));
+
+
+                    //.Include(ue => ue.Questions)
+                    //.Include(ue => ue.Answer)
+
+                    //QuestionAnswer TT = tt;
+
                     List<QuestionAnswer> questionAnswers = db.QuestionAnswer
-                        .Where(tq => tq.Answer.Id == newUserExams.AnswerDocUser.Answer.Id && tq.Answer.CorrectAnswers == newUserExams.AnswerDocUser.Answer.CorrectAnswers)
+                        .Where(tq => tq.Answer.Id == tt.Id && tq.Answer.CorrectAnswers == tt.Answer.CorrectAnswers)
                         .ToList();
-                    
-                    Exams exam = db.Exams.FirstOrDefault(e => e.Id == newUserExams.Exam.Id);
-                    Questions questions = db.Questions.FirstOrDefault(e => e.Id == newUserExams.Questions1.Id);
+
+                    Exams exam = db.Exams.FirstOrDefault(e => e.Id == newUserExams.Exam_id.Id);
+                    Questions questions = db.Questions.FirstOrDefault(e => e.Id == newUserExams.Questions.Id);
                     DateTime dateTime = DateTime.Now;
                     string data = dateTime.ToString("F");
 
-                    Test test = db.Test.FirstOrDefault(e =>e.Name_Test == e.Name_Test);
+                    Test test = db.Test.FirstOrDefault(e => e.Name_Test == e.Name_Test);
 
-                    QuestionAnswer questionAnswer =db.QuestionAnswer.FirstOrDefault(u =>u.Answer.CorrectAnswers == newUserExams.AnswerDocUser.Answer.CorrectAnswers && u.Answer.Id == newUserExams.AnswerDocUser.Answer.Id);
+                    User user = db.Users.FirstOrDefault(e => e.Id == newUserExams.User_id.Id);
+
+                    QuestionAnswer questionAnswer = db.QuestionAnswer.FirstOrDefault(u => u.Answer.CorrectAnswers == tt.Answer.CorrectAnswers && u.Answer.Id == tt.Answer.Id);
                     Save_results userExams = new Save_results();
+
+                    userExams.Name_Test = test;
+                    userExams.Exam_id = exam;
+                    userExams.Date_of_Result_Exam_Endings = data;
+                    userExams.Questions = questions;
+                    userExams.Users_Answers_Questions = questionAnswer.Questions.AnswerTrue;
+                    userExams.Name_Users = newUserExams.User_id.Name_Employee;
+                    userExams.User_id = user;
+
                     if (questionAnswers.Count() == 0)
                     {
-                        userExams.Name_Test = test;
-                        userExams.Exam_id = exam;
-                        userExams.Date_of_Result_Exam_Endings = data;
-                        userExams.Questions = questions;
-                        userExams.Users_Answers_Questions = questionAnswer.Questions.AnswerTrue;
-                        userExams.Name_Users = newUserExams.Users.Name_Employee;
-                        userExams.Resukts_exam =  0;
-
+                        userExams.Resukts_exam = 0;
                     }
                     else
                     {
-                        userExams.Name_Test = test;
-                        userExams.Exam_id = exam;
-                        userExams.Date_of_Result_Exam_Endings = data;
-                        userExams.Questions = questions;
-                        userExams.Users_Answers_Questions = questionAnswer.Questions.AnswerTrue;
-                        userExams.Name_Users = newUserExams.Users.Name_Employee;
-                        userExams.Resukts_exam = newUserExams.AnswerDocUser.Grade;
-
+                        userExams.Resukts_exam = tt.Grade;
                     }
-                    //            {
-                    //            
-                    //userExams.Name_Test = test;
-                    //userExams.Exam_id = exam;
-                    //userExams.Date_of_Result_Exam_Endings = data;
-                    //userExams.Questions = questions;
-                    //userExams.Users_Answers_Questions = questionAnswer.Questions.AnswerTrue;
-                    //userExams.Name_Users = newUserExams.Users.Name_Employee;
-                    //userExams.Resukts_exam = questionAnswers.Count > 0 newUserExams.AnswerDocUser.Grade : 0;
+                    ////            {
+                    ////            
+                    ////userExams.Name_Test = test;
+                    ////userExams.Exam_id = exam;
+                    ////userExams.Date_of_Result_Exam_Endings = data;
+                    ////userExams.Questions = questions;
+                    ////userExams.Users_Answers_Questions = questionAnswer.Questions.AnswerTrue;
+                    ////userExams.Name_Users = newUserExams.Users.Name_Employee;
+                    ////userExams.Resukts_exam = questionAnswers.Count > 0 newUserExams.AnswerDocUser.Grade : 0;
 
                     db.Save_Results.Add(userExams);
                     db.SaveChanges();

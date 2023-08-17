@@ -659,7 +659,7 @@ namespace Server_Test_Users
 
         public void SaveTestUsers(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
-            TravelServerTest TravelServerTest = JsonSerializer.Deserialize<TravelServerTest>(arg1);
+            Save_results TravelServerTest = JsonSerializer.Deserialize<Save_results>(arg1);
             @class.SaveTestResultsAnswers(TravelServerTest);
 
         }
