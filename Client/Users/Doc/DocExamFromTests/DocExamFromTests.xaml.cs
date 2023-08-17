@@ -1,4 +1,5 @@
 using Class_interaction_Users;
+using System.Windows.Input;
 
 namespace Client.Users.Doc.DocExamFromTests;
 
@@ -7,7 +8,11 @@ public partial class DocExamFromTests : ContentPage
     //public static string NameUsers { get; set; }
     //public static int id { get; set; }
     public static User user {  get; set; }
-	public DocExamFromTests()
+
+    public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
+
+
+    public DocExamFromTests()
 	{
 		InitializeComponent();
 

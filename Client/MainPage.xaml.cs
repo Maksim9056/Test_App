@@ -154,19 +154,16 @@ namespace Client
                                                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
                                                             //var mainPage = new Users.Doc.DocExamFromTests.DocExamFromTests();
                                                             //var navigationPage = new NavigationPage(mainPage);
-
                                                             Client.Users.Doc.DocExamFromTests.DocExamFromTests Name_user = new Client.Users.Doc.DocExamFromTests.DocExamFromTests();
-                                                           Name_user.User_NAME(regis_Users);
-                                                            //    await Navigation.PushModalAsync(Name_user);
-
-                                                            await Shell.Current.GoToAsync("user");
+                                                            Name_user.User_NAME(regis_Users);
+                                                            await Shell.Current.GoToAsync("user"); // Используйте URI для перехода к пользовательской странице
                                                             break;
                                                         case 1:
                                                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
                                                             //var adminPage = new Admin();
                                                             //var navigationPage2 = new NavigationPage(adminPage);
-                                                            await Shell.Current.GoToAsync("admin");
-                                                            //Application.Current.MainPage = navigationPage2;
+                                                            await Shell.Current.GoToAsync("admin"); // Используйте URI для перехода к административной странице
+                                                                                                      //Application.Current.MainPage = navigationPage2;
                                                             break;
                                                     }
                                                 }
