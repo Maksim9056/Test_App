@@ -1588,41 +1588,41 @@ namespace Server_Test_Users
      
         public void CheckExam(CheckExam checkExam)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                bool CheckSave = false;
-                var userExams = db.Save_Results.Where(ue => ue.Exam_id.Id == checkExam.UserExams.Exams.Id && ue.Name_Users == checkExam.UserExams.User.Name_Employee)
-                    .ToList();
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    bool CheckSave = false;
+            //    var userExams = db.Save_Results.Where(ue => ue.Exam_id.Id == checkExam.UserExams.Exams.Id && ue.Name_Users == checkExam.UserExams.User.Name_Employee)
+            //        .ToList();
 
-                for (int i = 0; i < userExams.Count; i++)
-                {
-                    if (userExams[i].Exam_id.Id == checkExam.UserExams.Exams.Id)
-                    {
-                        CheckSave = true;
-                    }
-                }
-                List<ExamsTest> ExamsTest = new List<ExamsTest>();
-                if (CheckSave == true)
-                {
-                    var examsTests = db.ExamsTest.Where(et => et.Exams.Id == checkExam.UserExams.Exams.Id).ToList();
+            //    for (int i = 0; i < userExams.Count; i++)
+            //    {
+            //        if (userExams[i].Exam_id.Id == checkExam.UserExams.Exams.Id)
+            //        {
+            //            CheckSave = true;
+            //        }
+            //    }
+            //    List<ExamsTest> ExamsTest = new List<ExamsTest>();
+            //    if (CheckSave == true)
+            //    {
+            //        var examsTests = db.ExamsTest.Where(et => et.Exams.Id == checkExam.UserExams.Exams.Id).ToList();
 
-                    ExamsTest = examsTests;
+            //        ExamsTest = examsTests;
 
 
-                }
+            //    }
 
-                Test  [] test = new Test[ExamsTest.Count()];
-                bool CheckTest = false;
-                for (int i = 0; i < ExamsTest.Count(); i++)
-                {
-                    if (ExamsTest[i].Exams.Id == checkExam.UserExams.Exams.Id)
-                    {
-                        test[i] = ExamsTest[i].Test;
-                        CheckTest = true;
-                    }
-                }
+            //    Test  [] test = new Test[ExamsTest.Count()];
+            //    bool CheckTest = false;
+            //    for (int i = 0; i < ExamsTest.Count(); i++)
+            //    {
+            //        if (ExamsTest[i].Exams.Id == checkExam.UserExams.Exams.Id)
+            //        {
+            //            test[i] = ExamsTest[i].Test;
+            //            CheckTest = true;
+            //        }
+            //    }
 
-            }
+           // }
         }
     }
 }

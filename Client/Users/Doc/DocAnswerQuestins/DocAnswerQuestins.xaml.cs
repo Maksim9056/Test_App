@@ -1,5 +1,4 @@
 using Class_interaction_Users;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Client.Users.Doc.DocAnswerQuestins;
 
@@ -9,23 +8,27 @@ public partial class DocAnswerQuestins : ContentPage
     private QuestionAnswerEditorViewModel viewModel;
     private QuestionAnswerManager viewModelManager;
     private Class_interaction_Users.Questions CurrrentQuestions;
+
        Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark docTestQuestionsTheAnswersMark;
     private Class_interaction_Users.Test CurrrentTest;
 
     private Class_interaction_Users.Exams Exams;
     private Class_interaction_Users.User CurrrentUser;
     private Test_Save test_Save;
-   
-    public DocAnswerQuestins(Class_interaction_Users.Questions questions, Class_interaction_Users.Test test, Class_interaction_Users.Exams exams, Class_interaction_Users.User  user)
+    List<Class_interaction_Users.Questions> Questions = new List<Questions>();
+    public DocAnswerQuestins(Class_interaction_Users.Questions questions, Class_interaction_Users.Test test, Class_interaction_Users.Exams exams, Class_interaction_Users.User  user, List<Class_interaction_Users.Questions> questions1s)
 	{
         //Сделать проверку на  выбраный вопрос есть ли ответ и поставить галочку
 		InitializeComponent();
+
+        Questions = questions1s;
         test_Save = new Test_Save();    
         viewModel = new QuestionAnswerEditorViewModel();
         viewModelManager = new QuestionAnswerManager();
         CurrrentQuestions = questions;
+        Users.Text = "Ответьте на вопрос:"+questions.QuestionName;
         CurrrentTest = test;
-       CurrrentUser =  user;
+        CurrrentUser =  user;
         Exams = exams;
         QuestionList.ItemsSource = GetQuestionAnswer(questions);
 
@@ -88,14 +91,17 @@ public partial class DocAnswerQuestins : ContentPage
 
         // docTestQuestionsTheAnswersMark.Update();
         // var navigationPage = new NavigationPage(docTestQuestionsTheAnswersMark );
+      //  await   docTestQuestionsTheAnswersMark.Navigation.PushAsync();
+        await Navigation.PushAsync(new  Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions, Exams, CurrrentUser, Questions));
+
         ((ListView)sender).SelectedItem = null;
 
         //  Exams
         //  selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions
-        await Navigation.PushAsync(new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions, Exams, CurrrentUser));
-     //   docTestQuestionsTheAnswersMark = new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions,Exams,CurrrentUser);
-//   await   docTestQuestionsTheAnswersMark.Navigation.PushAsync(new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest,  CurrrentQuestions, Exams, CurrrentUser));
-       // await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins( ));
+        //  new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions, Exams, CurrrentUser
+        //  await   Navigation.PushModalAsync());
+        //    await Navigation.PushAsync( );
+        //   docTestQuestionsTheAnswersMark = new Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark(CurrrentTest, CurrrentQuestions,Exams,CurrrentUser);
     }
 
     public class RefQuestionAnswer

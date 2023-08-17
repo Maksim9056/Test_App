@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.Users.Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark"
              Title="DocTestQuestionsTheAnswersMark">
+    
+    
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -12,6 +14,7 @@
             </Grid.RowDefinitions>
             <!--<Label x:Name="TestName"/>-->
             <ListView x:Name="TestList"
+                      RowHeight="50"
                       ItemSelected="OnItemSelected"
                       ItemsSource="{Binding ExamsTest}">
                 <ListView.ItemTemplate>

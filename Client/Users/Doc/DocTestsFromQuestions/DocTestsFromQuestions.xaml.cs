@@ -10,7 +10,7 @@ public partial class DocTestsFromQuestions : ContentPage
     private ExamsTestManager viewModelManager;
     private Class_interaction_Users.Exams CurrrentExams;
     private Class_interaction_Users.User CurrrentUser;
-
+    
     public DocTestsFromQuestions(Class_interaction_Users.Exams exams, Class_interaction_Users.User currrentUser)
     {
         //Проверить тест для экзамена который сдан 

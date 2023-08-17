@@ -2,44 +2,57 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.Users.Doc.DocAnswerQuestins.DocAnswerQuestins"
-             Title="DocAnswerQuestins">
+             Title="Ответы">
 
+    
     <ContentPage.Content>
-        <Grid>
+        <Grid >
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!-- Добавленная строка для label -->
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
+            <Label x:Name="Users" Text="Мой Label" Grid.Row="0" 
+                                        FontSize="16"   
+                                        FontFamily="Arial"   
+                                        FontAttributes="Bold"   
+                                        TextColor="Green"   
+                                            />
+            <!-- Добавленная label -->
+            <!--<Frame Padding="10" BackgroundColor="White" CornerRadius="3" Margin="0,-20,0,0"> 
+            </Frame>-->
             <ListView x:Name="QuestionList"    
-                      ItemSelected="OnItemSelected"  
-                      ItemsSource="{Binding QuestionAnswers}">
+                      RowHeight="30"
+                      ItemSelected="OnItemSelected"   
+                      ItemsSource="{Binding QuestionAnswers}" Margin="0,20,0,0" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
                                     <!-- Ширина в 2/3 -->
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
+                                    <!--<ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />-->
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding QuestionAnswer.Answer.AnswerOptions}" Grid.Column="0"  
-                                        FontSize="16"  
-                                        FontFamily="Arial"  
-                                        FontAttributes="Bold"  
-                                        TextColor="Red"  
-                                        HorizontalTextAlignment="Center"  
+                                <Label Text="{Binding QuestionAnswer.Answer.AnswerOptions}" Grid.Column="0"   
+                                        FontSize="16"   
+                                        FontFamily="Arial"   
+                                        FontAttributes="Bold"   
+                                        TextColor="Red"   
+                                        HorizontalTextAlignment="Center"   
                                         VerticalTextAlignment="Center" />
-                          
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        
-            <Button Text="Назад"    
-                    Clicked="GoBack" Grid.Row="2" />
+
+            <Button Text="Назад"     
+                    Clicked="GoBack" Grid.Row="3" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

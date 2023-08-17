@@ -13,10 +13,8 @@
 
             <ListView x:Name="myListView" RowHeight="50"
                       ItemSelected="OnItemSelected"
-                     
                       ItemsSource="{Binding myListView}"
                       >
-
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -24,8 +22,8 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*" />
                                     <!-- Ширина в 2/3 -->
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
+                                    <!--<ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />-->
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="{Binding UserExams.Exams.Name_exam}" Grid.Column="0"

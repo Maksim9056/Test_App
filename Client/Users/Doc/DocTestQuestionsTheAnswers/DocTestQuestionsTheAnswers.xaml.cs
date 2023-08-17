@@ -13,6 +13,8 @@ public partial class DocTestQuestionsTheAnswers : ContentPage
     private Class_interaction_Users.Test CurrrentTest;
     private Class_interaction_Users.Exams Exams;
     private Class_interaction_Users.User CurrrentUser;
+    public List<Class_interaction_Users.Questions> questions1 = new List<Questions>();
+
     public DocTestQuestionsTheAnswers(Class_interaction_Users.Test refTestQuestions , Class_interaction_Users.Exams exams, Class_interaction_Users.User curentUsers)
 	{
        
@@ -48,8 +50,15 @@ public partial class DocTestQuestionsTheAnswers : ContentPage
     //    await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
 
         // var selectedTestQuestion = (RefQuestionAnswer)e.SelectedItem;
-        await DisplayAlert("Выбранный ответ", selectedTestQuestion.TestQuestion.IdQuestions.AnswerTrue, "OK");      
-        await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, CurrrentTest, Exams,CurrrentUser));
+        await DisplayAlert("Выбранный ответ", selectedTestQuestion.TestQuestion.IdQuestions.AnswerTrue, "OK");
+      //  questions1.Add(selectedTestQuestion.TestQuestion.IdQuestions);
+
+        if (!questions1.Any(q => q.QuestionName == selectedTestQuestion.TestQuestion.IdQuestions.QuestionName))
+        {
+            questions1.Add(selectedTestQuestion.TestQuestion.IdQuestions);
+        }
+
+        await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, CurrrentTest, Exams, CurrrentUser,questions1));
 
         ((ListView)sender).SelectedItem = null;
 

@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.Users.Doc.DocTestQuestionsTheAnswers.DocTestQuestionsTheAnswers"
              Title="DocTestQuestionsTheAnswers">
+    
+    
     <ContentPage.Content>
           <Border Stroke="Gray" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Start" Grid.Row="1">
                 <Border.StrokeShape>
@@ -16,12 +18,9 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
                                     <!--<Label x:Name="TestName"/>-->
-
-
-
-
                 <ListView x:Name="TestList"
-                      ItemSelected="OnItemSelected"
+                          RowHeight="50"
+                          ItemSelected="OnItemSelected"
                       ItemsSource="{Binding ExamsTest}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -29,21 +28,20 @@
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*" />
+                                        <!--<ColumnDefinition Width="*" />-->
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding TestQuestion.IdQuestions.QuestionName}" Grid.Column="0"
                                         FontSize="16"
                                         FontFamily="Arial"
-                                        FontAttributes="Bold"    />
-
-
-
+                                        FontAttributes="Bold"
+                                        TextColor="Red"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center" />
                                     <Label  Grid.Column="1"
                                         FontSize="16"
                                         FontFamily="Arial"
                                         FontAttributes="Bold"
                                         TextColor="Red "  />
-
-
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

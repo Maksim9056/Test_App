@@ -11,6 +11,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <ListView x:Name="TestList"
+                      RowHeight="50"
                       ItemSelected="OnItemSelected"
                       ItemsSource="{Binding ExamsTest}">
                 <ListView.ItemTemplate>

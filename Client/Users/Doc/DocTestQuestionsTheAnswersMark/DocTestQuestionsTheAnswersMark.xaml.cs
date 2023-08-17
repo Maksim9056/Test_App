@@ -18,23 +18,119 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
     List<RefTestQuestion> refTestQuestions1 = new List<RefTestQuestion>();
     Class_interaction_Users.TestQuestion[] testQuestions { get; set; }
     static Dictionary<int,string>keyValuePairs = new Dictionary<int,string>();
+    public Class_interaction_Users.Questions [] Questionsss   { get; set; }
 
-
+    public List<Class_interaction_Users.Questions> questions1 { get; set; } 
     Галочка[] Ставить;
 
-    public DocTestQuestionsTheAnswersMark(Class_interaction_Users.Test refTestQuestions, Class_interaction_Users.Questions questions, Class_interaction_Users.Exams exams, Class_interaction_Users.User user)
+    public DocTestQuestionsTheAnswersMark(Class_interaction_Users.Test refTestQuestions, Class_interaction_Users.Questions questions, Class_interaction_Users.Exams exams, Class_interaction_Users.User user, List<Class_interaction_Users.Questions> questions1s)
     {
 
-        InitializeComponent();
+        InitializeComponent(); 
+        
+        
+        if (questions1 == null)
+        {
+            questions1 = new List<Questions>();
+            questions1 = questions1s;
+        }
         //int Locat ;
         viewModel = new TestQuestionEditorViewModel();
         viewModelManager = new TestQuestionManager();
         //CurrrentTest = refTestQuestions;
         Test = refTestQuestions;
         Title = Test.Name_Test;
-           Questions = questions;
-     
+        Questions = questions;
+        //  bool fALSE = false;
 
+        //      questions1
+        //if (questions1.SequenceEqual(questions1s))
+        //{
+
+        //} // Проверка совпадения с использованием SequenceEqual()
+
+        //bool areEqualы = questions1.Equals(questions2);
+
+        //// Проверка совпадения с использованием Equals()
+        //if (!questions1.Any(q => q == questions1s))
+        //{
+        //    questions1.Add(questions);
+        //}
+      
+
+        if (!questions1.Any(q => q.QuestionName == questions.QuestionName))
+        {
+            questions1.Add(questions);
+        }
+
+        //if (questions1 == null)
+        //{        
+        // questions1.Add(questions);
+        //}
+        //else
+        //{
+        //    for(int i = 0; i < questions1.Count(); i++) 
+        //    {
+        //        if (questions1[i] == questions)
+        //        {
+        //            fALSE = true;
+        //        }
+        //        else
+        //        {
+             
+        //        }
+            
+        //    }
+
+        //    if(fALSE == false)
+        //    {
+        //        questions1.Add (questions);
+        //    }
+
+
+        //}
+      //  Class_interaction_Users.Questions[] Questionss = new Questions[questions1.Count()];
+
+      //bool add = false;
+      //  for (int i = 0;i < questions1.Count(); i++)
+      //  {
+      //      if (questions1[i] == Questionss[i])
+      //      {
+      //          add= true;
+      //      }
+      //      else
+      //      {
+
+      //      }
+      //  }
+
+      //  if(add == false)
+      //  {
+      //      for (int i = 0; i < questions1.Count(); i++)
+      //      {
+      //          Questionss[i] = questions1[i];
+      //      }
+
+      //  }
+      //  if(Questionsss == null)
+      //  {
+      //   Questionsss = Questionss;
+
+      //  }
+      //  else
+      //  {
+      //      for (int i = 0; i < Questionsss.Length; i++)
+      //      {
+      //          if (Questionsss[i] == Questionss[i])
+      //          {
+      //              add = true;
+      //          }
+      //          else
+      //          {
+                  
+      //          }
+      //      }
+        
         //Галочка.Add("v");
         TestList.ItemsSource = GetTestQuestions(Test, questions); 
         Ставить = new Галочка[refTestQuestions1.Count()];
@@ -68,8 +164,17 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
         //Сдесь проверку  на выбраный вопрос ввиде списка массивов и выяснить
 
         var selectedTestQuestion = (RefTestQuestion)e.SelectedItem;
-        await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
-        await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, Test, Exams,CurrrentUser));
+ 
+        if (!questions1.Any(q => q.QuestionName == selectedTestQuestion.TestQuestion.IdQuestions.QuestionName))
+        {     
+            await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
+            await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, Test, Exams,CurrrentUser, questions1));
+
+        }
+        else
+        {
+            await DisplayAlert("Вы уже ответили на вопрос !", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
+        }
 
         // var selectedTestQuestion = (RefQuestionAnswer)e.SelectedItem;
         //await DisplayAlert("Выбранный ответ", selectedTestQuestion.QuestionAnswer.Answer.AnswerOptions, "OK");
@@ -95,22 +200,33 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
             // Handle the case when the test list is null
         }
         else
-        {
+        {                  //  questions1.Add(questions);
+
             for (int i = 0; i < CommandCL.TestQuestionListGet.ListTestQuestion.Count; i++)
             {
 
-                if (CommandCL.TestQuestionListGet.ListTestQuestion[i].IdQuestions.QuestionName == questions.QuestionName)
+                if (!questions1.Any(q => q.QuestionName == CommandCL.TestQuestionListGet.ListTestQuestion[i].IdQuestions.QuestionName))
                 {
-                    var refTestQuestion = new RefTestQuestion { TestQuestion = CommandCL.TestQuestionListGet.ListTestQuestion[i] , EditCommand = " ✔" };
-                    testQuestionList.Add(refTestQuestion);
-                
+                    var refTestQuestion = new RefTestQuestion { TestQuestion = CommandCL.TestQuestionListGet.ListTestQuestion[i], EditCommand = "" };
+                    testQuestionList.Add(refTestQuestion); 
                 }
                 else
                 {
-                    var refTestQuestion = new RefTestQuestion { TestQuestion = CommandCL.TestQuestionListGet.ListTestQuestion[i],EditCommand = "" };
+                   
+                    var refTestQuestion = new RefTestQuestion { TestQuestion = CommandCL.TestQuestionListGet.ListTestQuestion[i], EditCommand = " ✔" };
                     testQuestionList.Add(refTestQuestion);
-         
                 }
+
+                //if (CommandCL.TestQuestionListGet.ListTestQuestion[i].IdQuestions.QuestionName == questions.QuestionName)
+                //{
+                 
+                
+                //}
+                //else
+                //{
+             
+         
+                //}
       
             
             }
