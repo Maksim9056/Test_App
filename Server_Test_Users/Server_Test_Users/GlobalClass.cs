@@ -106,6 +106,20 @@ namespace Server_Test_Users
 #pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
 
 
+
+
+
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+        public List<Save_results> save_Results { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+
+
+#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+        public List<Save_results> Test_Results { get; set; }
+#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+
+
+
         /// <summary>
         /// https://metanit.com/sharp/efcore/1.2.php
         /// </summary>
@@ -1539,12 +1553,18 @@ namespace Server_Test_Users
                         .Where(tq => tq.Answer.Id == tt.Id && tq.Answer.CorrectAnswers == tt.Answer.CorrectAnswers)
                         .ToList();
 
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                     Exams exam = db.Exams.FirstOrDefault(e => e.Id == newUserExams.Exam_id.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                     Questions questions = db.Questions.FirstOrDefault(e => e.Id == newUserExams.Questions.Id);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                     DateTime dateTime = DateTime.Now;
                     string data = dateTime.ToString("F");
 
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                     Test test = db.Test.FirstOrDefault(e => e.Name_Test == e.Name_Test);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
 
                     User user = db.Users.FirstOrDefault(e => e.Id == newUserExams.User_id.Id);
 
@@ -1573,41 +1593,192 @@ namespace Server_Test_Users
         }
         public void CheckExam(CheckExam checkExam)
         {
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    bool CheckSave = false;
-            //    var userExams = db.Save_Results.Where(ue => ue.Exam_id.Id == checkExam.UserExams.Exams.Id && ue.Name_Users == checkExam.UserExams.User.Name_Employee)
-            //        .ToList();
 
-            //    for (int i = 0; i < userExams.Count; i++)
-            //    {
-            //        if (userExams[i].Exam_id.Id == checkExam.UserExams.Exams.Id)
-            //        {
-            //            CheckSave = true;
-            //        }
-            //    }
-            //    List<ExamsTest> ExamsTest = new List<ExamsTest>();
-            //    if (CheckSave == true)
-            //    {
-            //        var examsTests = db.ExamsTest.Where(et => et.Exams.Id == checkExam.UserExams.Exams.Id).ToList();
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                bool CheckSave = false;
 
-            //        ExamsTest = examsTests;
+                Exams exam = db.Exams.FirstOrDefault(e => e.Id == checkExam.UserExams.Id);
 
 
-            //    }
+                User user = db.Users.FirstOrDefault(e => e.Id == checkExam.UserExams.User.Id);
 
-            //    Test  [] test = new Test[ExamsTest.Count()];
-            //    bool CheckTest = false;
-            //    for (int i = 0; i < ExamsTest.Count(); i++)
-            //    {
-            //        if (ExamsTest[i].Exams.Id == checkExam.UserExams.Exams.Id)
-            //        {
-            //            test[i] = ExamsTest[i].Test;
-            //            CheckTest = true;
-            //        }
-            //    }
+                Questions questions = db.Questions.FirstOrDefault();
 
-           // }
+                var examsTests = db.ExamsTest.FirstOrDefault(et => et.Exams.Id == checkExam.UserExams.Exams.Id);
+                Test tests = db.Test.FirstOrDefault();
+
+                //Test tests = db.Test.FirstOrDefault(e => e.Name_Test == examsTests.Test.Name_Test);
+
+
+                List<Save_results> userExams = db.Save_Results.Where(ue =>ue.Exam_id == exam && ue.User_id == user     &&  ue.Name_Test == tests &&   ue.Questions == questions).ToList();
+
+                //for(int i = 0;i< userExams.Count(); i++)
+                //{
+                //     if (userExams[i].Exam_id.Id == checkExam.UserExams.Exams.Id)
+                //     {
+                //         CheckSave = true;
+                //     }
+
+                //}
+
+                save_Results = new List<Save_results>();
+
+                save_Results = userExams;
+
+                //ExamsTest  ExamsTest = new ExamsTest();
+                //if (CheckSave == true)
+                //{  
+                //    var examsTestss = db.ExamsTest.FirstOrDefault(et => et.Exams.Id == checkExam.UserExams.Exams.Id);
+
+                //    ExamsTest = examsTestss;
+                 
+
+
+                //}
+
+                //Test[] test = new Test[ExamsTest.Id];
+
+                //bool CheckTest = false;
+                //for (int i = 0; i < ExamsTest.Id; i++)
+                //{
+                //    if (ExamsTest.Exams.Id == checkExam.UserExams.Exams.Id)
+                //    {
+                //        test[i] = ExamsTest.Test;
+                //        CheckTest = true;
+                //    }
+                //}
+
+                //int count = db.TestQuestion.Count();
+                //TestQuestion[] testQuestions1 = new TestQuestion[] {}; 
+
+                //if (count == 0)
+                //{
+                //    // Обработка случая, когда нет вопросов в тесте
+                //}
+                //else
+                //{
+                //    for (int i = 0; i < test.Length; i++)
+                //    {
+                //        //var testQuestions = db.TestQuestion
+                //        //    .Include(tq => tq.IdTest)
+                //        //    .Include(tq => tq.IdQuestions)
+                //        var testQuestions = db.TestQuestion.FirstOrDefault(tq => tq.IdTest != null && tq.IdTest.Id == test[i].Id)   ;
+                       
+                //        testQuestions1[i] = testQuestions;
+                //    }
+
+                   
+                //}
+
+                //if (CheckTest == true) 
+                //{
+                //    for(int i = 0;i < test.Length; i++)
+                //    {
+
+                //        var NAME = db.Save_Results.FirstOrDefault(ue => ue.Name_Test.Id == test[i].Id );
+
+                //    }
+
+                //}
+
+            }
         }
+
+
+        public void CheckTest(CheckUserTest CheckExams)
+        {
+
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                bool CheckSave = false;
+
+                Exams exam = db.Exams.FirstOrDefault(e => e.Id == CheckExams.Exams.Id);
+
+         
+               User user = db.Users.FirstOrDefault(e => e.Id == CheckExams.CurrrentUser.Id);
+
+               Questions questions = db.Questions.FirstOrDefault();
+
+                var examsTests = db.ExamsTest.FirstOrDefault(et => et.Exams.Id == CheckExams.Exams.Id);
+                Test tests = db.Test.FirstOrDefault();
+
+                //Test tests = db.Test.FirstOrDefault(e => e.Name_Test == examsTests.Test.Name_Test);
+
+
+                List<Save_results> userExams = db.Save_Results.Where(ue => ue.Exam_id == exam && ue.User_id == user && ue.Name_Test == tests && ue.Questions == questions).ToList();
+
+                //for(int i = 0;i< userExams.Count(); i++)
+                //{
+                //     if (userExams[i].Exam_id.Id == checkExam.UserExams.Exams.Id)
+                //     {
+                //         CheckSave = true;
+                //     }
+
+                //}
+
+                Test_Results = new List<Save_results>();
+
+                Test_Results = userExams;
+
+                //ExamsTest  ExamsTest = new ExamsTest();
+                //if (CheckSave == true)
+                //{  
+                //    var examsTestss = db.ExamsTest.FirstOrDefault(et => et.Exams.Id == checkExam.UserExams.Exams.Id);
+
+                //    ExamsTest = examsTestss;
+
+
+
+                //}
+
+                //Test[] test = new Test[ExamsTest.Id];
+
+                //bool CheckTest = false;
+                //for (int i = 0; i < ExamsTest.Id; i++)
+                //{
+                //    if (ExamsTest.Exams.Id == checkExam.UserExams.Exams.Id)
+                //    {
+                //        test[i] = ExamsTest.Test;
+                //        CheckTest = true;
+                //    }
+                //}
+
+                //int count = db.TestQuestion.Count();
+                //TestQuestion[] testQuestions1 = new TestQuestion[] {}; 
+
+                //if (count == 0)
+                //{
+                //    // Обработка случая, когда нет вопросов в тесте
+                //}
+                //else
+                //{
+                //    for (int i = 0; i < test.Length; i++)
+                //    {
+                //        //var testQuestions = db.TestQuestion
+                //        //    .Include(tq => tq.IdTest)
+                //        //    .Include(tq => tq.IdQuestions)
+                //        var testQuestions = db.TestQuestion.FirstOrDefault(tq => tq.IdTest != null && tq.IdTest.Id == test[i].Id)   ;
+
+                //        testQuestions1[i] = testQuestions;
+                //    }
+
+
+                //}
+
+                //if (CheckTest == true) 
+                //{
+                //    for(int i = 0;i < test.Length; i++)
+                //    {
+
+                //        var NAME = db.Save_Results.FirstOrDefault(ue => ue.Name_Test.Id == test[i].Id );
+
+                //    }
+
+                //}
+
+            }
+        }
+
     }
 }

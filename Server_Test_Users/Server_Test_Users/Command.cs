@@ -659,8 +659,13 @@ namespace Server_Test_Users
 
         public void SaveTestUsers(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             Save_results TravelServerTest = JsonSerializer.Deserialize<Save_results>(arg1);
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.SaveTestResultsAnswers(TravelServerTest);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
 
         }
 
@@ -724,15 +729,64 @@ namespace Server_Test_Users
 
         public void Update_Message(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+
         }
+
+
 
         public void CheckExamUsers(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             CheckExam CheckExams = JsonSerializer.Deserialize<CheckExam>(arg1);
-            @class.CheckExam(CheckExams);
 #pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+
 #pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-           // @class.CheckUserExams_ds(CrTest);
+            @class.CheckExam(CheckExams);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
+
+            
+
+       
+
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Exams_Check exams_Check = new Exams_Check();
+                exams_Check.save_Results = @class.save_Results;
+              
+                JsonSerializer.Serialize<Exams_Check>(ms, exams_Check);
+                stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+            }
+            // @class.CheckUserExams_ds(CrTest);
+            //CheckExam checkExam = new CheckExam(UserExams);
+            //JsonSerializer.Serialize<CheckExam>(memoryStream, checkExam);
+        }
+
+
+
+
+        public void CheckTestUsers(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.  
+            CheckUserTest CheckExams = JsonSerializer.Deserialize<CheckUserTest>(arg1);
+            //    JsonSerializer.Serialize<>(memoryStream, userExams);
+
+#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
+
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
+            @class.CheckTest(CheckExams);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Exams_Check exams_Check = new Exams_Check();
+                exams_Check.save_Results = @class.Test_Results;
+
+                JsonSerializer.Serialize<Exams_Check>(ms, exams_Check);
+                stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+            }
+
+            // @class.CheckUserExams_ds(CrTest);
             //CheckExam checkExam = new CheckExam(UserExams);
             //JsonSerializer.Serialize<CheckExam>(memoryStream, checkExam);
         }

@@ -22,8 +22,8 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*" />
                                     <!-- Ширина в 2/3 -->
-                                    <!--<ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />-->
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="{Binding UserExams.Exams.Name_exam}" Grid.Column="0"
@@ -33,6 +33,15 @@
                                         TextColor="Red"
                                         HorizontalTextAlignment="Center"
                                         VerticalTextAlignment="Center" />
+
+
+                                <Label  Text="{Binding EditCommand}" Grid.Column="1" 
+                                       FontSize="16"
+                                       FontFamily="Arial"
+                                       FontAttributes="Bold"
+                                       TextColor="Red"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center" />
 
                                 <!--<Label Text="Дата" Grid.Column="1" />
                             <Label Text="{Binding}" Grid.Column="2" />-->

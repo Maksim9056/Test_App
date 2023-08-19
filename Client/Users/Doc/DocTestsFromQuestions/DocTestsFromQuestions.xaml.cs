@@ -1,4 +1,4 @@
-using Class_interaction_Users;
+п»їusing Class_interaction_Users;
 using static Client.Project.DocExamTestListPage;
 
 namespace Client.Users.Doc.DocTestsFromQuestions;
@@ -10,26 +10,28 @@ public partial class DocTestsFromQuestions : ContentPage
     private ExamsTestManager viewModelManager;
     private Class_interaction_Users.Exams CurrrentExams;
     private Class_interaction_Users.User CurrrentUser;
-    
+    private CheckUsers commandS = new CheckUsers();
+    public List<string> Commands = new List<string>();
+
     public DocTestsFromQuestions(Class_interaction_Users.Exams exams, Class_interaction_Users.User currrentUser)
     {
-        //Проверить тест для экзамена который сдан 
+        //РџСЂРѕРІРµСЂРёС‚СЊ С‚РµСЃС‚ РґР»СЏ СЌРєР·Р°РјРµРЅР° РєРѕС‚РѕСЂС‹Р№ СЃРґР°РЅ 
         InitializeComponent();
         viewModel = new ExamsTestEditorViewModel();
         viewModelManager = new ExamsTestManager();
         CurrrentExams = exams;
         CurrrentUser = currrentUser;
-        TestList.ItemsSource = GetExamsTest(exams);
-        Title = "Тесты для экзамена: " + exams.Name_exam;
+        TestList.ItemsSource = GetExamsTest(exams, currrentUser);
+        Title = "РўРµСЃС‚С‹ РґР»СЏ СЌРєР·Р°РјРµРЅР°: " + exams.Name_exam;
 
-#pragma warning disable CS0618 // Тип или член устарел
+#pragma warning disable CS0618 // РўРёРї РёР»Рё С‡Р»РµРЅ СѓСЃС‚Р°СЂРµР»
         MessagingCenter.Subscribe<DocTestsFromQuestions>(this, "UpdateForm", (sender) =>
         {
             // Perform the necessary updates to the form here   
             // For example, update the fields, refresh data, etc.   
-            TestList.ItemsSource = GetExamsTest(exams);
+            TestList.ItemsSource = GetExamsTest(exams, currrentUser);
         });
-#pragma warning restore CS0618 // Тип или член устарел
+#pragma warning restore CS0618 // РўРёРї РёР»Рё С‡Р»РµРЅ СѓСЃС‚Р°СЂРµР»
 
     }
 
@@ -40,16 +42,33 @@ public partial class DocTestsFromQuestions : ContentPage
             return;
 
         var selectedExamsTest = (RefExamsTest)e.SelectedItem;
-        //Сделать проверку что тест уже пройден или нет
+        //РЎРґРµР»Р°С‚СЊ РїСЂРѕРІРµСЂРєСѓ С‡С‚Рѕ С‚РµСЃС‚ СѓР¶Рµ РїСЂРѕР№РґРµРЅ РёР»Рё РЅРµС‚
 
-        await DisplayAlert("Выбранный тест", selectedExamsTest.ExamsTest.Test.Name_Test, "OK");
+        //     Commands 
+        //await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, Test, Exams, CurrrentUser, questions1));
+        // await Navigation.PushAsync(new Doc.DocTestsFromQuestions.DocTestsFromQuestions(selectedTest.UserExams.Exams, CurrrentUser));
+       //await DisplayAlert("Р’С‹Р±СЂР°РЅРЅС‹Р№ РІРѕРїСЂРѕСЃ", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
 
-        await Navigation.PushAsync(new Doc.DocTestMenu.DocTestMenu(CurrrentExams ,selectedExamsTest.ExamsTest.Test,CurrrentUser));
+        if (!Commands.Any(q => q == selectedExamsTest.ExamsTest.Test.Name_Test))
+        {
+            await DisplayAlert("Р’С‹Р±СЂР°РЅРЅС‹Р№ СЌРєР·Р°РјРµРЅ", selectedExamsTest.ExamsTest.Test.Name_Test, "OK");
+           
+            await Navigation.PushAsync(new Doc.DocTestMenu.DocTestMenu(CurrrentExams, selectedExamsTest.ExamsTest.Test, CurrrentUser));
+
+        }
+        else
+        {
+            await DisplayAlert("Р’С‹ СѓР¶Рµ cРґР°Р»Рё РўРµСЃС‚!", selectedExamsTest.ExamsTest.Test.Name_Test, "OK");
+        }
+
+      //  await DisplayAlert("Р’С‹Р±СЂР°РЅРЅС‹Р№ С‚РµСЃС‚", selectedExamsTest.ExamsTest.Test.Name_Test, "OK");
+
+     //   await Navigation.PushAsync(new Doc.DocTestMenu.DocTestMenu(CurrrentExams ,selectedExamsTest.ExamsTest.Test,CurrrentUser));
                ((ListView)sender).SelectedItem = null;
 
     }
 
-    private List<RefExamsTest> GetExamsTest(Class_interaction_Users.Exams exams)  
+    private List<RefExamsTest> GetExamsTest(Class_interaction_Users.Exams exams, Class_interaction_Users.User currrentUser)  
     {
             List<RefExamsTest> testExamsTestList = new List<RefExamsTest>();
 
@@ -62,20 +81,63 @@ public partial class DocTestsFromQuestions : ContentPage
             }
             else
             {
+
+            Exams_Check[] exams_Check = new Exams_Check[CommandCL.UserExamsListGet.ListUserExams.Count()];
+            // Р—РґРµСЃСЊ РІС‹Р·РІР°С‚СЊ  С„СѓРЅРєС†РёСЋ С‡С‚Рѕ РїСЂРёС€Р»Рѕ 
+            for (int i = 0; i < CommandCL.ExamsTestListGet.ListExamsTest.Count(); i++)
+            {
+
+                ExamsTest userExams = CommandCL.ExamsTestListGet.ListExamsTest[i];
+                CheckUserTest checkUserTest = new CheckUserTest(userExams , currrentUser);
+               //     userExams.
+                exams_Check[i] = commandS.Check(checkUserTest);
+                //Р—Р°РїРѕРјРёРЅР°РµС‚ РїСЂРѕРІРµСЂРєСѓ 
+            }
+
+
+
                 for (int i = 0; i < CommandCL.ExamsTestListGet.ListExamsTest.Count; i++)
                 {
-                    var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i] };
+
+
+
+
+                if (CommandCL.UserExamsListGet.ListUserExams[i].Exams.Id == exams_Check[i].save_Results[i].Exam_id.Id)
+                {
+
+                   var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = " вњ”" };
                     testExamsTestList.Add(refExamsTest);
+                    Commands.Add(CommandCL.ExamsTestListGet.ListExamsTest[i].Test.Name_Test);
+                }
+                else
+                {
+                 
+                
+                    var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
+                    testExamsTestList.Add(refExamsTest);
+                }
+
+                //var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i] ,EditCommand = ""};
+                //    testExamsTestList.Add(refExamsTest);
+                
+            
+            
                 }
             }
             return testExamsTestList;
     }
 
+    public class RefExamsTest
+    {
+        public Class_interaction_Users.ExamsTest ExamsTest { get; set; }
+        public string EditCommand { get; set; }
+        public Command DelCommand { get; set; }
+    }
 
     public class RefTest
     {
         public Class_interaction_Users.Test Test { get; set; }
-        public Command EditCommand { get; set; }
+        public string EditCommand { get; set; }
         public Command DelCommand { get; set; }
     }
 

@@ -62,7 +62,7 @@ namespace Client.Project
             {
                 for (int i = 0; i < CommandCL.ExamsTestListGet.ListExamsTest.Count; i++)
                 {
-                    var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = new Command(Edit), DelCommand = new Command(Del) };
+                    var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = new  (Edit), DelCommand = new Command(Del) };
                     testExamsTestList.Add(refExamsTest);
                 }
             }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -112,6 +113,14 @@ namespace Class_interaction_Users
 
         public static JToken Questionss { get; set; }
         public static JToken Answe { get; set; }
+
+
+
+
+
+
+
+
         //Функция считывания байт из потока и формирование единой строки
         public string Func_Read(Stream str, int length, TcpClient client)
         {
@@ -1785,6 +1794,13 @@ namespace Class_interaction_Users
         }
         public class Check
         {
+
+
+
+            public Exams_Check exams_Check1 { get; set; }
+            public Exams_Check exams_Check { get; set; }
+
+
             public async Task<string> CheckClass(string server, string fs, string command)
             {
 
@@ -1800,9 +1816,46 @@ namespace Class_interaction_Users
                         else
                         {
 
-                            return responseDat;
+                        Exams_Check exams_Check =  JsonSerializer.Deserialize<Exams_Check>(responseDat);
+                        exams_Check1 = exams_Check;
                         }
+
                     
+                }
+                catch (SocketException e)
+                {
+                    Console.WriteLine($"SocketException: {e.Message}");
+
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine($"Exception: {e.Message}");
+                }
+                return string.Empty;
+            }
+
+            public async Task<string> CheckTest(string server, string fs, string command)
+            {
+
+                try
+                {
+                    CommandCL ClassInstance = new CommandCL();
+
+                    string responseDat = await ClassInstance.SendClass(server, fs, command);
+                    if (string.IsNullOrEmpty(responseDat))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        //    JsonSerializer.Serialize<ExamsTest>(memoryStream, userExams);
+
+                        //    JsonSerializer.Serialize<ExamsTest>(memoryStream, userExams);
+
+                        Exams_Check exams_Checkы = JsonSerializer.Deserialize<Exams_Check>(responseDat);
+                        exams_Check = exams_Checkы;
+                    }
+
 
                 }
                 catch (SocketException e)

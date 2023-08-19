@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
-    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="Client.Users.Doc.DocPersonalCabinet.DocPersonalCabinet" 
-              xmlns:controls="clr-namespace:Client.Controls"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.Users.Doc.DocPersonalCabinet.DocPersonalCabinet"
+             xmlns:controls="clr-namespace:Client.Controls"
              Title="DocPersonalCabinet">
 
-        <StackLayout>
+    <StackLayout>
         <Label
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center"
             HorizontalOptions="Center" />
 
+        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+            <Label
+                x:Name="Users"
+                Text="{Binding Username}"
+                FontSize="16"
+                VerticalOptions="Start"
+                HorizontalOptions="End" />
+        </StackLayout>
+
         <CollectionView ItemsSource="{Binding Data}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding Label}" 
+                        <Label Text="{Binding Label}"
                                FontSize="16"
                                VerticalOptions="Center"/>
 
@@ -27,10 +36,11 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
         <controls:RadialBarChart
                 BarSpacing="16"
-                BarThickness="10" 
-                HeightRequest="300"   
+                BarThickness="10"
+                HeightRequest="300"
                 FontSize="12"
                 BarBackgroundColor="Transparent"
                 ShowLabels="True"

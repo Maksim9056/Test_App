@@ -255,6 +255,6 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
     {
          DisplayAlert("Сохранен тест","Завершен тест !" , "Oк");
 
-        Navigation.PushAsync(new Doc.DocPersonalCabinet.DocPersonalCabinet());
+        Navigation.PushAsync(new Doc.DocPersonalCabinet.DocPersonalCabinet    (CurrrentUser, Test, Exams));
     }
 }

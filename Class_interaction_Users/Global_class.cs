@@ -543,6 +543,7 @@ namespace Class_interaction_Users
         public class  Tests_Travel
         {
             public List<Tests> Test { get; set; } = new List<Tests>();
+
         }
 
     [Serializable]
@@ -637,5 +638,26 @@ namespace Class_interaction_Users
     }
 
 
+    [Serializable]
+    public class Exams_Check
+    {
+        public List<Save_results> save_Results { get; set; } = new List<Save_results>();
 
+    }
+
+    [Serializable]
+    public class CheckUserTest
+    {      
+        public CheckUserTest() { }
+
+        public    ExamsTest Exams { get; set; }
+
+        public Class_interaction_Users.User CurrrentUser { get; set; }
+    
+        public CheckUserTest(ExamsTest exams, User currrentUser)
+        {
+            Exams = exams;
+            CurrrentUser = currrentUser;
+        }
+    }
 }

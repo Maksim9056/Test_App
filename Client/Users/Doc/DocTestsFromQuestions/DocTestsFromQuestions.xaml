@@ -20,6 +20,8 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Text="{Binding ExamsTest.Test.Name_Test}" Grid.Column="0"
                                         FontSize="16"
@@ -28,6 +30,14 @@
                                         TextColor="Red"
                                         HorizontalTextAlignment="Center"
                                         VerticalTextAlignment="Center" />
+                                
+                                <Label  Text="{Binding EditCommand}" Grid.Column="1" 
+                                       FontSize="16"
+                                       FontFamily="Arial"
+                                       FontAttributes="Bold"
+                                       TextColor="Red"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

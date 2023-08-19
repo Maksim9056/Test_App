@@ -9,8 +9,10 @@ public partial class DocTheExamisPersonal : ContentPage
     private UserExamsManager viewModelManager;
     private Class_interaction_Users.User CurrrentUser;
     public Class_interaction_Users.Exams vSelectedItem { get; set; }
+
     private CheckUsers command = new CheckUsers();
 
+    public List<string> Commands = new List<string>();  
     public DocTheExamisPersonal(Class_interaction_Users.User user)
 	{
         //Запросить все тесты из экзамена и посматреть какой пользователь прошел
@@ -55,23 +57,38 @@ public partial class DocTheExamisPersonal : ContentPage
         }
         else
         {
-
+             Exams_Check [] exams_Check = new Exams_Check[CommandCL.UserExamsListGet.ListUserExams.Count()] ;
             // Здесь вызвать  функцию что пришло 
-            for (int i = 0; i < CommandCL.UserExamsListGet.ListUserExams.Count; i++)
+            for (int i = 0; i < CommandCL.UserExamsListGet.ListUserExams.Count(); i++)
             {
 
                 var userExams = CommandCL.UserExamsListGet.ListUserExams[i];
-                command.CheckExams(userExams);
-                //Запоминает проверку 
 
+                exams_Check[i] = command.CheckExams(userExams);
+                //Запоминает проверку 
             }
         
 
-            for (int i = 0; i < CommandCL.UserExamsListGet.ListUserExams.Count; i++)
+            for (int i = 0; i < CommandCL.UserExamsListGet.ListUserExams.Count(); i++)
             {
-                var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " };
-                 testUserExamsList.Add(refUserExams);
+                if (CommandCL.UserExamsListGet.ListUserExams[i].Exams.Id == exams_Check[i].save_Results[i].Exam_id.Id)
+                {
 
+                    var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = "✔" };
+                    Commands.Add(refUserExams.UserExams.Exams.Name_exam);
+
+                    testUserExamsList.Add(refUserExams);
+
+                }
+                else
+                {
+                  var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " };
+                    testUserExamsList.Add(refUserExams);
+                }
+            }
+                //exams_Check[i]
+
+            //    var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " }; 
                // //if (CommandCL.TestQuestionListGet.ListTestQuestion[i].IdTest.QuestionName == questions.QuestionName)
                // //{
                // //      var refTestQuestion = new RefTestQuestion { TestQuestion = CommandCL.TestQuestionListGet.ListTestQuestion[i], EditCommand = " ✔" };
@@ -90,7 +107,7 @@ public partial class DocTheExamisPersonal : ContentPage
 
                // }
             //   testUserExamsList.Add(refUserExams);
-        }
+     
         }
         return testUserExamsList;
     }
@@ -126,11 +143,24 @@ public partial class DocTheExamisPersonal : ContentPage
 
         var selectedTest = (RefUserExams)e.SelectedItem;
 
-        await DisplayAlert("Выбранный экзамен", selectedTest.UserExams.Exams.Name_exam, "OK");
+   
 
         ((ListView)sender).SelectedItem = null;
+       
 
-        await Navigation.PushAsync(new Doc.DocTestsFromQuestions.DocTestsFromQuestions(selectedTest.UserExams.Exams, CurrrentUser));
+            if (!Commands.Any(q => q  == selectedTest.UserExams.Exams.Name_exam))
+            {
+                //await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
+                await DisplayAlert("Выбранный экзамен", selectedTest.UserExams.Exams.Name_exam, "OK");
+                //await Navigation.PushAsync(new Doc.DocAnswerQuestins.DocAnswerQuestins(selectedTestQuestion.TestQuestion.IdQuestions, Test, Exams, CurrrentUser, questions1));
+                await Navigation.PushAsync(new Doc.DocTestsFromQuestions.DocTestsFromQuestions(selectedTest.UserExams.Exams, CurrrentUser));
+
+
+            }
+            else
+            {
+                await DisplayAlert("Вы  cдали экзамен  !", selectedTest.UserExams.Exams.Name_exam, "OK");
+            }
         // vSelectedItem = selectedTest.Exams;
 
 

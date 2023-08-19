@@ -1041,7 +1041,8 @@ namespace Class_interaction_Users
     {
         private CommandCL.Check command = new CommandCL.Check();
 
-        public void CheckExams( Class_interaction_Users.UserExams UserExams )
+
+        public Exams_Check CheckExams( Class_interaction_Users.UserExams UserExams )
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -1050,7 +1051,27 @@ namespace Class_interaction_Users
                 JsonSerializer.Serialize<CheckExam>(memoryStream, checkExam);
 
 
-                Task.Run(async () => await command.CheckClass(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "053")).Wait();
+            Task.Run(async () => await command.CheckClass(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "053")).Wait();
+
+
+                return command.exams_Check1;
+            }
+        }
+
+        public Exams_Check Check(CheckUserTest userExams)
+        {
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+
+              //  CheckExam checkExam = new CheckExam(userExams);
+                JsonSerializer.Serialize<CheckUserTest>(memoryStream, userExams);
+
+
+                Task.Run(async () => await command.CheckTest(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "054")).Wait();
+
+
+                return command.exams_Check;
             }
         }
 

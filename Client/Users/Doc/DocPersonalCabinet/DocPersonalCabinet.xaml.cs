@@ -9,19 +9,32 @@ namespace Client.Users.Doc.DocPersonalCabinet
     //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DocPersonalCabinet : ContentPage
     {
-     //   public List<ChartData> Data { get; set; }
-
-        public DocPersonalCabinet()
+        //   public List<ChartData> Data { get; set; }
+        private Class_interaction_Users.User CurrrentUser;
+        public Class_interaction_Users.Test Test { get; set; }
+        private Class_interaction_Users.Exams Exams;
+        public DocPersonalCabinet(  Class_interaction_Users.User currrentUser, Class_interaction_Users.Test Test,Class_interaction_Users.Exams Exams)
         {
             InitializeComponent();
+            CurrrentUser = currrentUser;
 
+            Users.Text = CurrrentUser.Name_Employee;
+
+
+            //ChartEntry[] chartEntries= new ChartEntry[] {};
+        
+
+            //for(int i = 0; i < ; i++)
+            //{
+
+            //}
             BindingContext = new ChartEntry[]
-{
+            {
             new ChartEntry
             {
-                Value = 71,
+                Value = Test.Options_Id,
                 Color = Color.FromArgb("#6023FF"),
-                Text = "Visual Studio Code"
+                Text = Exams.Name_exam  +  Test.Name_Test
             },
             new ChartEntry
             {
@@ -41,7 +54,7 @@ namespace Client.Users.Doc.DocPersonalCabinet
                 Color = Color.FromArgb("#F8426E"),
                 Text = "IntelliJ"
             }
-};
+          };
 
 
             //Data = new List<ChartData>()
