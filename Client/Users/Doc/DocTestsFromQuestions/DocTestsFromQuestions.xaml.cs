@@ -100,29 +100,37 @@ public partial class DocTestsFromQuestions : ContentPage
                 {
 
 
+                   if (exams_Check[i].save_Results.Count() == 0)
+                   {
+                     var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
+                     testExamsTestList.Add(refExamsTest);
 
+                   }
+                   else
+                   {
+                      if (CommandCL.UserExamsListGet.ListUserExams[i].Exams.Id == exams_Check[i].save_Results[i].Exam_id.Id)
+                      {
+                         var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = " ✔" };
+                         testExamsTestList.Add(refExamsTest);
+                         Commands.Add(CommandCL.ExamsTestListGet.ListExamsTest[i].Test.Name_Test);
+                      }
+                      else
+                      {
+                         var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
+                         testExamsTestList.Add(refExamsTest);
+                      }
+                   }
 
-                if (CommandCL.UserExamsListGet.ListUserExams[i].Exams.Id == exams_Check[i].save_Results[i].Exam_id.Id)
-                {
-
-                   var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = " ✔" };
-                    testExamsTestList.Add(refExamsTest);
-                    Commands.Add(CommandCL.ExamsTestListGet.ListExamsTest[i].Test.Name_Test);
                 }
-                else
-                {
-                 
-                
-                    var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
-                    testExamsTestList.Add(refExamsTest);
-                }
+
+              
 
                 //var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i] ,EditCommand = ""};
                 //    testExamsTestList.Add(refExamsTest);
                 
             
             
-                }
+               
             }
             return testExamsTestList;
     }
