@@ -117,7 +117,7 @@ namespace Client.Project
 
         private void CreateButtonClicked(object sender, EventArgs e)
         {
-                        var refTestListPage = new RefTestListPage();
+            var refTestListPage = new Ref.RefTest.RefTestListPageExams();
             refTestListPage.Disappearing += (s, args) =>
             {
                 if (refTestListPage.vSelectedItem != null)

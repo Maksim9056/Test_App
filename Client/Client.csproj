@@ -198,6 +198,9 @@
 	  <MauiXaml Update="Project\Ref\RefTest\RefTestListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Project\Ref\RefTest\RefTestListPageExams.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefTest\TestCreate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

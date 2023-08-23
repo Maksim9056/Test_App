@@ -18,10 +18,15 @@ public partial class DocTestsFromQuestions : ContentPage
         //Проверить тест для экзамена который сдан 
         InitializeComponent();
         viewModel = new ExamsTestEditorViewModel();
+
         viewModelManager = new ExamsTestManager();
+
         CurrrentExams = exams;
+
         CurrrentUser = currrentUser;
+
         TestList.ItemsSource = GetExamsTest(exams, currrentUser);
+
         Title = "Тесты для экзамена: " + exams.Name_exam;
 
 #pragma warning disable CS0618 // Тип или член устарел
@@ -96,42 +101,89 @@ public partial class DocTestsFromQuestions : ContentPage
 
 
 
-                for (int i = 0; i < CommandCL.ExamsTestListGet.ListExamsTest.Count; i++)
+            int j = 0;
+              for (int i = 0; i < CommandCL.ExamsTestListGet.ListExamsTest.Count; i++)
+              {
+                if (exams_Check[i].save_Results == null || exams_Check[i].save_Results.Count() == 0)
                 {
-
-
-                   if (exams_Check[i].save_Results.Count() == 0)
-                   {
-                     var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
-                     testExamsTestList.Add(refExamsTest);
-
-                   }
-                   else
-                   {
-                      if (CommandCL.UserExamsListGet.ListUserExams[i].Exams.Id == exams_Check[i].save_Results[i].Exam_id.Id)
-                      {
-                         var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = " ✔" };
-                         testExamsTestList.Add(refExamsTest);
-                         Commands.Add(CommandCL.ExamsTestListGet.ListExamsTest[i].Test.Name_Test);
-                      }
-                      else
-                      {
-                         var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
-                         testExamsTestList.Add(refExamsTest);
-                      }
-                   }
-
+                    var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
+                    testExamsTestList.Add(refExamsTest);
                 }
-
-              
-
-                //var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i] ,EditCommand = ""};
-                //    testExamsTestList.Add(refExamsTest);
-                
-            
-            
-               
+                else
+                {
+                    if ( string.IsNullOrEmpty(exams_Check[i].save_Results[j].Name_Test?.ToString()))
+                    {
+                        var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
+                        testExamsTestList.Add(refExamsTest);
+                    }
+                    else
+                    {
+                        if (CommandCL.ExamsTestListGet.ListExamsTest[i].Test.Id == exams_Check[i].save_Results[j].Name_Test.Id)
+                        {
+                            var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = " ✔" };
+                            testExamsTestList.Add(refExamsTest);
+                            Commands.Add(CommandCL.ExamsTestListGet.ListExamsTest[i].Test.Name_Test);
+                        }
+                        else
+                        {
+                            var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
+                            testExamsTestList.Add(refExamsTest);
+                        }
+                    }
+                }
             }
+
+
+
+
+
+            //for (int i = 0; i < CommandCL.ExamsTestListGet.ListExamsTest.Count; i++)
+            //{
+
+
+            //   if (exams_Check[i].save_Results.Count() == 0)
+            //   {
+            //     var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
+            //     testExamsTestList.Add(refExamsTest);
+
+            //   }
+            //   else
+            //   {
+
+            //    if (string.IsNullOrEmpty( exams_Check[i].save_Results[i].Name_Test.ToString()))
+            //    {
+
+            //        var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
+            //        testExamsTestList.Add(refExamsTest);
+            //    }
+            //    else
+            //    {
+            //        if (CommandCL.ExamsTestListGet.ListExamsTest[i].Test.Id == exams_Check[i].save_Results[i].Name_Test.Id)
+            //        {
+            //            var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = " ✔" };
+            //            testExamsTestList.Add(refExamsTest);
+            //            Commands.Add(CommandCL.ExamsTestListGet.ListExamsTest[i].Test.Name_Test);
+            //        }
+            //        else
+            //        {
+            //            var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
+            //            testExamsTestList.Add(refExamsTest);
+            //        }
+            //    }
+
+            //   }
+
+            //}
+
+
+
+            //var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i] ,EditCommand = ""};
+            //    testExamsTestList.Add(refExamsTest);
+
+
+
+
+        }
             return testExamsTestList;
     }
 

@@ -22,6 +22,7 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
 
     public List<Class_interaction_Users.Questions> questions1 { get; set; } 
     Галочка[] Ставить;
+    List<RefTestQuestion> testQuestionListS = new List<RefTestQuestion>();
 
     public DocTestQuestionsTheAnswersMark(Class_interaction_Users.Test refTestQuestions, Class_interaction_Users.Questions questions, Class_interaction_Users.Exams exams, Class_interaction_Users.User user, List<Class_interaction_Users.Questions> questions1s)
     {
@@ -208,13 +209,15 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
                 if (!questions1.Any(q => q.QuestionName == CommandCL.TestQuestionListGet.ListTestQuestion[i].IdQuestions.QuestionName))
                 {
                     var refTestQuestion = new RefTestQuestion { TestQuestion = CommandCL.TestQuestionListGet.ListTestQuestion[i], EditCommand = "" };
-                    testQuestionList.Add(refTestQuestion); 
+                    testQuestionList.Add(refTestQuestion);
+                    testQuestionListS.Add(refTestQuestion);
                 }
                 else
                 {
                    
                     var refTestQuestion = new RefTestQuestion { TestQuestion = CommandCL.TestQuestionListGet.ListTestQuestion[i], EditCommand = " ✔" };
                     testQuestionList.Add(refTestQuestion);
+                    testQuestionListS.Add(refTestQuestion);
                 }
 
                 //if (CommandCL.TestQuestionListGet.ListTestQuestion[i].IdQuestions.QuestionName == questions.QuestionName)
@@ -253,8 +256,17 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
 
     private  void TestStart_Clicked(object sender, EventArgs e)
     {
-         DisplayAlert("Сохранен тест","Завершен тест !" , "Oк");
 
-        Navigation.PushAsync(new Doc.DocPersonalCabinet.DocPersonalCabinet    (CurrrentUser, Test, Exams));
+        if(testQuestionListS.Count() == questions1.Count())
+        {
+            DisplayAlert("Сохранен тест", "Завершен тест !", "Oк");
+
+            Navigation.PushAsync(new Doc.DocPersonalCabinet.DocPersonalCabinet(CurrrentUser, Test, Exams));
+        }
+        else
+        {
+            DisplayAlert("Тест не завершен!", "Ответили не на все вопросы !", "Oк");
+        }
+        
     }
 }

@@ -68,8 +68,9 @@ public partial class DocTheExamisPersonal : ContentPage
                 exams_Check[i] = command.CheckExams(userExams);
                 //Запоминает проверку 
             }
-        
+
             //Здесь 
+            int j = 0;
             for (int i = 0; i < CommandCL.UserExamsListGet.ListUserExams.Count(); i++)
             {
 
@@ -81,21 +82,32 @@ public partial class DocTheExamisPersonal : ContentPage
                 }
                 else
                 {
-                    if (CommandCL.UserExamsListGet.ListUserExams[i].Exams.Id == exams_Check[i].save_Results[i].Exam_id.Id)
+
+                    if (exams_Check[i].save_Results[j] == null )
                     {
+                        //var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " };
 
-                        var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = "✔" };
-                        testUserExamsList.Add(refUserExams);
-                        Commands.Add(refUserExams.UserExams.Exams.Name_exam);
-
-
-
+                        //testUserExamsList.Add(refUserExams);
                     }
                     else
                     {
-                        var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " };
-                        testUserExamsList.Add(refUserExams);
+                        if (CommandCL.UserExamsListGet.ListUserExams[i].Exams.Id == exams_Check[i].save_Results[j].Exam_id.Id)
+                        {
+
+                            var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = "✔" };
+                            testUserExamsList.Add(refUserExams);
+                            Commands.Add(refUserExams.UserExams.Exams.Name_exam);
+
+
+
+                        }
+                        else
+                        {
+                            var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " };
+                            testUserExamsList.Add(refUserExams);
+                        }
                     }
+                  
                 }
                 //Здесь exams_Check[i].save_Results[i].Exam_id.Id 2 значения нету
             
