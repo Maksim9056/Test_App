@@ -94,12 +94,9 @@ namespace Client.Project
             UpdateForm(CurrrentUser);
         }
 
-        private void GoBack(object sender, EventArgs e)
+        private async void GoBack(object sender, EventArgs e)
         {
-            if (Application.Current.MainPage is NavigationPage navigationPage)
-            {
-                navigationPage.Navigation.PopAsync();
-            }
+            await Shell.Current.Navigation.PopAsync();
         }
 
         public class RefUserExams

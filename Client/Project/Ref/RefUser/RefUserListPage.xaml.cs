@@ -112,15 +112,12 @@ namespace Client.Project
             UpdateForm();
         }
 
-        private void GoBack(object sender, EventArgs e)
+        private async void GoBack(object sender, EventArgs e)
         {
-            //var mainPage = new Client.Main.Admin();
-            //var navigationPage = new NavigationPage(mainPage);
-
-            //Application.Current.MainPage = navigationPage;
-            Shell.Current.GoToAsync("admin");
-
+            await Shell.Current.Navigation.PopAsync();
         }
+
+
         //private void GoBack(object sender, EventArgs e)
         //{
         //    if (Application.Current.MainPage is NavigationPage navigationPage)

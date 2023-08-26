@@ -5,7 +5,9 @@
              xmlns:views="clr-namespace:Client"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              xmlns:controls="clr-namespace:Client.Controls"
-             x:Class="Client.Main.Admin">
+             x:Class="Client.Main.Admin"
+             Loaded="ContentPage_Loaded">
+
 
     <Shell.TitleView>
         <Image Source="dotnet_bot.png"
