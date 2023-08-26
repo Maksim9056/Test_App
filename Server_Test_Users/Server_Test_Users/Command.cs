@@ -764,7 +764,12 @@ namespace Server_Test_Users
 
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="class"></param>
+        /// <param name="stream"></param>
         public void CheckTestUsers(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
 #pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.  

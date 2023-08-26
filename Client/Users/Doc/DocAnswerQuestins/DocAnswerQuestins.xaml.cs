@@ -42,7 +42,10 @@ public partial class DocAnswerQuestins : ContentPage
 #pragma warning restore CS0618 // Тип или член устарел
 
     }
-
+//
+//
+//какк
+//
     private List<RefQuestionAnswer> GetQuestionAnswer(Class_interaction_Users.Questions questions)
     {
         List<RefQuestionAnswer> testQuestionList = new List<RefQuestionAnswer>();

@@ -40,12 +40,17 @@ namespace Client
         {
         }
 
-
+        //
         private void OnButtonClicked(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// //////////
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void nameEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
            

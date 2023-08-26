@@ -126,9 +126,7 @@ public partial class Admin : ContentPage
     //Для авторизации учетной записи
     private void GoBack(object sender, EventArgs e)
     {
-        var mainPage = new MainPage();
-        var navigationPage = new NavigationPage(mainPage);
-        Application.Current.MainPage = navigationPage;
+         Shell.Current.GoToAsync("../admin");
 
         //if (Application.Current.MainPage is NavigationPage navigationPage)
         //{

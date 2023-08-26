@@ -98,10 +98,12 @@ public partial class RefTestListPage : ContentPage
 
         private void GoBack(object sender, EventArgs e)
         {
-            var mainPage = new Client.Main.Admin();
-            var navigationPage = new NavigationPage(mainPage);
+            //var mainPage = new Client.Main.Admin();
+            //var navigationPage = new NavigationPage(mainPage);
 
-            Application.Current.MainPage = navigationPage;
+            //Application.Current.MainPage = navigationPage;
+            Shell.Current.GoToAsync("..");
+
         }
         //private void GoBack(object sender, EventArgs e)
         //{

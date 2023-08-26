@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-       xmlns:views="clr-namespace:Client" 
-       xmlns:views1="clr-namespace:Client.Users.Doc.DocExamFromTests" 
-       xmlns:sys="clr-namespace:System;assembly=netstandard" 
-       xmlns:controls="clr-namespace:Client.Controls" 
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:Client"
+       xmlns:views1="clr-namespace:Client.Users.Doc.DocExamFromTests"
+       xmlns:sys="clr-namespace:System;assembly=netstandard"
+       xmlns:controls="clr-namespace:Client.Controls"
        x:Class="Client.AppShell">
 
     <Shell.ItemTemplate>
         <DataTemplate>
             <Grid ColumnDefinitions="0.2*,0.8*">
-                <Image Source="{Binding FlyoutIcon}"  
-                       Margin="5"  
+                <Image Source="{Binding FlyoutIcon}"
+                       Margin="5"
                        HeightRequest="45" />
-                <Label Grid.Column="1"  
-                       Text="{Binding Title}"  
-                       FontAttributes="Italic"  
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       FontAttributes="Italic"
                        VerticalTextAlignment="Center" />
             </Grid>
         </DataTemplate>
@@ -25,17 +25,17 @@
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Администрирование"    
-                Route="Admin?sell=admin"    
-                Icon="dotnet_bot.png">
+    <FlyoutItem Title="Администрирование"
+                Route="Project:sell=admin"
+                Icon="dotnet_bot.png" >
         <Tab>
             <!-- Удалены лишние строки -->
             <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem Title="Пользователь"    
-                Route="User?sell=user"    
+    <FlyoutItem Title="Пользователь"
+                Route="User?sell=user"
                 Icon="dotnet_bot.png">
         <Tab>
             <!-- Удалены лишние строки -->
@@ -43,8 +43,8 @@
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem Title="Помощь"    
-                Route="Help?sell=help"    
+    <FlyoutItem Title="Помощь"
+                Route="Help?sell=help"
                 Icon="dotnet_bot.png">
         <Tab>
             <!-- Удалены лишние строки -->
@@ -53,12 +53,13 @@
         </Tab>
     </FlyoutItem>
 
-    <MenuItem Text="Help" 
-              IconImageSource="help.png" 
-              Command="{Binding HelpCommand}" 
+    <MenuItem Text="Help"
+              IconImageSource="help.png"
+              Command="{Binding HelpCommand}"
               CommandParameter="https://docs.microsoft.com/dotnet/maui/fundamentals/shell" />
 
 </Shell>
+
 
 
 <!--<Shell
