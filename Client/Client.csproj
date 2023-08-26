@@ -138,6 +138,9 @@
 	  <Compile Update="Project\Ref\RefUser\RefUserListPage.xaml.cs">
 	    <DependentUpon>RefUserListPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Users\Main\Users.xaml.cs">
+	    <DependentUpon>Users.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Users\Ref\RefExamFromTests\RefExamFromTests.xaml.cs">
 	    <DependentUpon>RefExamFromTests.xaml</DependentUpon>
 	  </Compile>
@@ -249,7 +252,7 @@
 	  <MauiXaml Update="Users\Doc\DocAnswerQuestins\DocAnswerQuestins.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Users\Doc\DocExamFromTests\DocExamFromTests.xaml">
+	  <MauiXaml Update="Users\Main\Users.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Users\Doc\DocPersonalAchievement\DocPersonalAchievement.xaml">

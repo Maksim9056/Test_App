@@ -1,6 +1,6 @@
 ﻿using Class_interaction_Users;
 
-namespace Client.Users.Doc.DocTheExamisPersonal;
+namespace Client.Users;
 
 public partial class DocTheExamisPersonal : ContentPage
 {

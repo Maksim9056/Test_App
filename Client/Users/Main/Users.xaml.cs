@@ -1,9 +1,10 @@
 using Class_interaction_Users;
+using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using System.Windows.Input;
 
-namespace Client.Users.Doc.DocExamFromTests;
+namespace Client.Users;
 
-public partial class DocExamFromTests : ContentPage
+public partial class Users : ContentPage
 {
     //public static string NameUsers { get; set; }
     //public static int id { get; set; }
@@ -12,7 +13,7 @@ public partial class DocExamFromTests : ContentPage
     public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
 
-    public DocExamFromTests()
+    public Users()
 	{
 		InitializeComponent();
 
@@ -39,12 +40,21 @@ public partial class DocExamFromTests : ContentPage
         //((ListView)sender).SelectedItem = null;
     }
 
-    private  async void ExamButtonClicked(object sender, EventArgs e)
+    private async void ExamButtonClicked(object sender, EventArgs e)
     {
         // User User =new  User() 
 
         //      Shell.Current.GoToAsync("examispersonal");
-        await Navigation.PushAsync(new Doc.DocTheExamisPersonal.DocTheExamisPersonal(user));
+        await Navigation.PushAsync(new DocTheExamisPersonal(user));
+        //await Shell.Current.GoToAsync(nameof(DocTheExamisPersonal), new Dictionary<string, object>
+        //{
+        //    { "user", user }
+        //});
+        //await Shell.Current.GoToAsync($"{nameof(DocTheExamisPersonal)}", new Dictionary<string, object>
+        //{
+        //     { nameof(User), user }
+        //});
+
         // User
         //  Class_interaction_Users.User user
     }
@@ -69,7 +79,27 @@ public partial class DocExamFromTests : ContentPage
 
     private void ContentPage_Loaded(object sender, EventArgs e)
     {
+        //var flyoutItemUser = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("User"));
+        //if (flyoutItemUser != null)
+        //{
+        //    flyoutItemUser.IsVisible = true;
+        //}
+
         NameUser.Text = user.Name_Employee;
+
+
+        var flyoutItemUser = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_user2"));
+        if (flyoutItemUser == null)
+        {
+            // Создание пунктов меню класса
+            var main = new ShellContent { Content = new Client.Users.Users() };
+            // Добавление пунктов меню в класс
+            Shell.Current.Items.Add(new ShellSection { Title = "Пользователь", Items = { main }, Icon = "dotnet_bot.png", Route = "user2" });
+
+        }
+
+
+
 
     }
 }

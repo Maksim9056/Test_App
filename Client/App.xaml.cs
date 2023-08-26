@@ -4,16 +4,9 @@
     {
         public App()
         {
-            try
-            {
-                InitializeComponent();
+            InitializeComponent();
 
-                MainPage = new AppShell();
-            }
-            catch
-            {
-
-            }
+            MainPage = new AppShell();
         }
     }
 }

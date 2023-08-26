@@ -25,12 +25,12 @@ namespace Client
             InitializeComponent();
             BindingContext = this;
 
-        
-        //var rt = Shell.Current.CurrentState.Location.OriginalString;
-        //var parameters = System.Web.HttpUtility.ParseQueryString(rt);
-        //var sellValue = parameters.Get("sell");
 
-    }
+            //var rt = Shell.Current.CurrentState.Location.OriginalString;
+            //var parameters = System.Web.HttpUtility.ParseQueryString(rt);
+            //var sellValue = parameters.Get("sell");
+
+        }
         public CommandCL command = new CommandCL();
         public string Mail { get; set; }
         public string Password { get; set; }
@@ -159,7 +159,7 @@ namespace Client
                                                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
                                                             //var mainPage = new Users.Doc.DocExamFromTests.DocExamFromTests();
                                                             //var navigationPage = new NavigationPage(mainPage);
-                                                            Client.Users.Doc.DocExamFromTests.DocExamFromTests Name_user = new Client.Users.Doc.DocExamFromTests.DocExamFromTests();
+                                                            Client.Users.Users Name_user = new Client.Users.Users();
                                                             Name_user.User_NAME(regis_Users);
                                                             await Shell.Current.GoToAsync("user"); // Используйте URI для перехода к пользовательской странице
                                                             break;
@@ -281,6 +281,29 @@ namespace Client
                 {
                     // Handle help parameter
                 }
+                else if (Shell.Current.CurrentState.Location.OriginalString.Contains("//login"))
+                {
+                    var flyoutItem = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("admin"));
+                    if (flyoutItem != null)
+                    {
+                        flyoutItem.IsVisible = false;
+                    }
+                    var flyoutItemUser = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("User"));
+                    if (flyoutItemUser != null)
+                    {
+                        flyoutItemUser.IsVisible = false;
+                    }
+                    var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("help"));
+                    if (flyoutItemhelp != null)
+                    {
+                        flyoutItemhelp.IsVisible = false;
+                    }
+
+                    nameEntry9.Text = "maks_nt@list.ru";
+                    nameEntry1.Text = "1";
+
+                }
+
 
             }
             catch

@@ -2,7 +2,7 @@
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:Client"
-       xmlns:views1="clr-namespace:Client.Users.Doc.DocExamFromTests"
+       xmlns:views1="clr-namespace:Client.Users"
        xmlns:sys="clr-namespace:System;assembly=netstandard"
        xmlns:controls="clr-namespace:Client.Controls"
        x:Class="Client.AppShell">
@@ -25,33 +25,37 @@
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Администрирование"
-                Route="Project:sell=admin"
-                Icon="dotnet_bot.png" >
+    <FlyoutItem Title="Логин"
+                Route="login"
+                Icon="dotnet_bot.png">
         <Tab>
-            <!-- Удалены лишние строки -->
             <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
+        </Tab>
+    </FlyoutItem>
+
+    <!--<FlyoutItem Title="Администрирование"
+                Route="admin"
+                Icon="dotnet_bot.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:Main.Admin}" />
         </Tab>
     </FlyoutItem>
 
     <FlyoutItem Title="Пользователь"
-                Route="User?sell=user"
+                Route="User"
                 Icon="dotnet_bot.png">
         <Tab>
-            <!-- Удалены лишние строки -->
-            <ShellContent ContentTemplate="{DataTemplate views1:DocExamFromTests}" />
+            <ShellContent ContentTemplate="{DataTemplate views1:Users}" />
         </Tab>
     </FlyoutItem>
 
     <FlyoutItem Title="Помощь"
-                Route="Help?sell=help"
+                Route="help"
                 Icon="dotnet_bot.png">
         <Tab>
-            <!-- Удалены лишние строки -->
-            <!-- Возможно, здесь следует использовать другой шаблон контента -->
             <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
         </Tab>
-    </FlyoutItem>
+    </FlyoutItem>-->
 
     <MenuItem Text="Help"
               IconImageSource="help.png"
@@ -59,19 +63,3 @@
               CommandParameter="https://docs.microsoft.com/dotnet/maui/fundamentals/shell" />
 
 </Shell>
-
-
-
-<!--<Shell
-    x:Class="Client.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Client"
-    Shell.FlyoutBehavior="Disabled">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
-</Shell>-->
