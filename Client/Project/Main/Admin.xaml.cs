@@ -185,7 +185,32 @@ public partial class Admin : ContentPage
         //        }
         //    };
         //}
+        var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("login"));
+        if (flyoutItemhelp != null)
+        {
+            flyoutItemhelp.IsVisible = false;
+        }
 
+
+        var flyoutItemAdmin = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_admin"));
+        if (flyoutItemAdmin == null)
+        {
+            // Создание пунктов меню класса
+            var main = new ShellContent { Content = new Client.Main.Admin(), Route = "admin" };
+
+            // Добавление пунктов меню в класс
+            Shell.Current.Items.Add(new ShellSection { Title = "Админская панель", Icon = "dotnet_bot.png", Route = "admin", Items = { main } });
+
+            // Обработчик события при нажатии на пункт меню
+            main.PropertyChanged += async (sender, e) =>
+            {
+                if (e.PropertyName == nameof(ShellContent.IsEnabled) && !main.IsEnabled)
+                {
+                    // Переход обратно
+                    await Shell.Current.GoToAsync("//IMPL_user");
+                }
+            };
+        }
 
         var flyoutItemUser = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_user"));
         if (flyoutItemUser == null)
