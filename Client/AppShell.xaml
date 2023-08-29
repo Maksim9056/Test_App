@@ -9,7 +9,7 @@
 
     <Shell.ItemTemplate>
         <DataTemplate>
-            <Grid ColumnDefinitions="0.2*,0.8*">
+            <Grid ColumnDefinitions="0.9*,3*">
                 <Image Source="{Binding FlyoutIcon}"
                        Margin="5"
                        HeightRequest="45" />

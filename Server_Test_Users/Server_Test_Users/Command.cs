@@ -72,8 +72,10 @@ namespace Server_Test_Users
                     using (MemoryStream ms = new MemoryStream())
                     {
                         Regis_users regis_Users = new Regis_users(0,"","",0,"");
+
                         JsonSerializer.Serialize<Regis_users>(ms, regis_Users);
                         //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+                       
                         stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                     }
                 }
@@ -151,9 +153,12 @@ namespace Server_Test_Users
             {
                 
                 Questionss List_Quest = new Questionss(@class.questionss);
+
                 JsonSerializer.Serialize<Questionss>(ms, List_Quest);
+
                 stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
             }
+
             /// person3;
            // @class.Regis_user(person3);
         }

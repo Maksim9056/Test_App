@@ -225,6 +225,7 @@ namespace Server_Test_Users
                     db.SaveChanges();
                 }
             }
+
             // получение данных
             //using (ApplicationContext db = new ApplicationContext())
             //{

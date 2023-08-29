@@ -12,7 +12,7 @@ public partial class Admin : ContentPage
     public Admin()
 	{
 		InitializeComponent();
-        BindingContext = this;
+    
 
     }
 
@@ -273,10 +273,22 @@ public partial class Admin : ContentPage
 
         }
 
+        var flyoutItemEnd = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_End"));
+        if (flyoutItemEnd == null)
+        {
+            // Создание пунктов меню класса
+            var main = new ShellContent { Content = new Client.MainPage() };
+            // Добавление пунктов меню в класс
+            Shell.Current.Items.Add(new ShellSection { Title = "Выход", Items = { main }, Icon = "dotnet_bot.png", Route = "End" });
+
+        }
 
 
+        BindingContext = this;
 
     }
+
+
 }
 
 
