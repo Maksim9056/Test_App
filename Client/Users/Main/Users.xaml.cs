@@ -1,4 +1,5 @@
 using Class_interaction_Users;
+//using HealthKit;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using System.Windows.Input;
 
@@ -8,29 +9,35 @@ public partial class Users : ContentPage
 {
     //public static string NameUsers { get; set; }
     //public static int id { get; set; }
-    public static User user {  get; set; }
+    public static User user { get; set; }
 
     public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
 
     public Users()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
-    }   
+    }
 
     public void User_NAME(Regis_users name)
     {
 
-        user = new User {Id= name.Id,Password = name.Password ,Name_Employee = name.Name_Employee
-            ,Employee_Mail = name.Employee_Mail
-          ,Id_roles_users = name.Rechte
-        
+        user = new User
+        {
+            Id = name.Id,
+            Password = name.Password,
+            Name_Employee = name.Name_Employee
+            ,
+            Employee_Mail = name.Employee_Mail
+          ,
+            Id_roles_users = name.Rechte
+
 
         }
         ;
     }
-    private  void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (e.SelectedItem == null)
             return;
@@ -100,6 +107,13 @@ public partial class Users : ContentPage
 
 
 
+
+    }
+    private  async void Statictick_Users(object sender, EventArgs e)
+    {
+
+      //  Shell.Current.GoToAsync("statistics");
+        await Navigation.PushAsync(new Client.Users.Doc.DocStatisticsUserResult.DocStatisticsUserResult (user));
 
     }
 }

@@ -26,6 +26,7 @@ namespace Client
             Routes.Add("examfromtests", typeof(Client.Users.Users));
             Routes.Add("DocTheExamisPersonal", typeof(Client.Users.DocTheExamisPersonal));
             Routes.Add("RefUserListPage", typeof(Project.RefUserListPage));
+            Routes.Add("statistics", typeof(Client.Users.Doc.DocStatisticsUserResult.DocStatisticsUserResult));
 
 
             foreach (var item in Routes)

@@ -252,6 +252,9 @@
 	  <MauiXaml Update="Users\Doc\DocAnswerQuestins\DocAnswerQuestins.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Users\Doc\DocStatisticsUserResult\DocStatisticsUserResult.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Users\Main\Users.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

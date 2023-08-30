@@ -132,8 +132,26 @@ public partial class Admin : ContentPage
     //Для авторизации учетной записи
     private void GoBack(object sender, EventArgs e)
     {
+
+        //var flyoutItem = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("admin"));
+        //if (flyoutItem != null)
+        //{
+        //    flyoutItem.IsVisible = false;
+        //}
+        //var flyoutItemUser = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("User"));
+        //if (flyoutItemUser != null)
+        //{
+        //    flyoutItemUser.IsVisible = false;
+        //}
+        //var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_admin"));
+        //if (flyoutItemhelp != null)
+        //{
+        //    flyoutItemhelp.IsVisible = false;
+        //}
+
         if (Application.Current.MainPage is NavigationPage navigationPage)
         {
+             Shell.Current.GoToAsync("//admin");
             navigationPage.Navigation.PopAsync();
         }
     }
@@ -273,18 +291,21 @@ public partial class Admin : ContentPage
 
         }
 
-        var flyoutItemEnd = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_End"));
-        if (flyoutItemEnd == null)
+        //var flyoutItemEnd = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_End"));
+        //if (flyoutItemEnd == null)
+        //{
+        //    // Создание пунктов меню класса
+        //    var main = new ShellContent { Content = new Client.MainPage() };
+        //    // Добавление пунктов меню в класс
+        //    Shell.Current.Items.Add(new ShellSection { Title = "Выход", Items = { main }, Icon = "dotnet_bot.png", Route = "End" });
+
+        //}
+
+        if(BindingContext == null)
         {
-            // Создание пунктов меню класса
-            var main = new ShellContent { Content = new Client.MainPage() };
-            // Добавление пунктов меню в класс
-            Shell.Current.Items.Add(new ShellSection { Title = "Выход", Items = { main }, Icon = "dotnet_bot.png", Route = "End" });
+         BindingContext = this;
 
         }
-
-
-        BindingContext = this;
 
     }
 
