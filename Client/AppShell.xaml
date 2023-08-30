@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:views="clr-namespace:Client"
-       xmlns:views1="clr-namespace:Client.Users"
-       xmlns:sys="clr-namespace:System;assembly=netstandard"
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+       xmlns:views="clr-namespace:Client"  
+       xmlns:sys="clr-namespace:System;assembly=netstandard"  
        xmlns:controls="clr-namespace:Client.Controls"
        x:Class="Client.AppShell">
+    
 
     <Shell.ItemTemplate>
         <DataTemplate>
             <Grid ColumnDefinitions="0.9*,3*">
-                <Image Source="{Binding FlyoutIcon}"
-                       Margin="5"
+                <Image Source="{Binding FlyoutIcon}"  
+                       Margin="5"  
                        HeightRequest="45" />
-                <Label Grid.Column="1"
-                       Text="{Binding Title}"
-                       FontAttributes="Italic"
+                <Label Grid.Column="1"  
+                       Text="{Binding Title}"  
+                       FontAttributes="Italic"  
                        VerticalTextAlignment="Center" />
             </Grid>
         </DataTemplate>
@@ -25,41 +25,33 @@
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Логин"
-                Route="login"
-                Icon="dotnet_bot.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
-        </Tab>
+    <FlyoutItem Title="Логин"  
+                Route="login"  
+                FlyoutIcon="dotnet_bot.png">
+        <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
     </FlyoutItem>
 
-    <!--<FlyoutItem Title="Администрирование"
-                Route="admin"
-                Icon="dotnet_bot.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:Main.Admin}" />
-        </Tab>
-    </FlyoutItem>
+    <!--<FlyoutItem Title="Администрирование"  
+                Route="admin"  
+                FlyoutIcon="dotnet_bot.png">  
+        <ShellContent ContentTemplate="{DataTemplate views:Main.Admin}" />  
+    </FlyoutItem>  
 
-    <FlyoutItem Title="Пользователь"
-                Route="User"
-                Icon="dotnet_bot.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views1:Users}" />
-        </Tab>
-    </FlyoutItem>
+    <FlyoutItem Title="Пользователь"  
+                Route="User"  
+                FlyoutIcon="dotnet_bot.png">  
+        <ShellContent ContentTemplate="{DataTemplate views1:Users}" />  
+    </FlyoutItem>  
 
-    <FlyoutItem Title="Помощь"
-                Route="help"
-                Icon="dotnet_bot.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
-        </Tab>
+    <FlyoutItem Title="Помощь"  
+                Route="help"  
+                FlyoutIcon="dotnet_bot.png">  
+        <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />  
     </FlyoutItem>-->
 
-    <!--<MenuItem Text="Help"
-              IconImageSource="help.png"
-              Command="{Binding HelpCommand}"
+    <!--<MenuItem Text="Help"  
+              IconImageSource="help.png"  
+              Command="{Binding HelpCommand}"  
               CommandParameter="https://docs.microsoft.com/dotnet/maui/fundamentals/shell" />-->
 
 </Shell>
