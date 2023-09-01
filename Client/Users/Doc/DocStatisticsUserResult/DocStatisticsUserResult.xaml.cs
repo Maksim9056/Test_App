@@ -1,6 +1,7 @@
 ﻿using Class_interaction_Users;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Compatibility;
+using System.Windows.Input;
 
 namespace Client.Users.Doc.DocStatisticsUserResult;
 
@@ -17,6 +18,7 @@ public partial class DocStatisticsUserResult : ContentPage
     public List<string> Commands = new List<string>();
     CheckStatickUserResult checkStatickUserResult = new CheckStatickUserResult();
 
+    public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
     public CommandCL commands = new CommandCL();
     private ExamsTestEditorViewModel viewModels;
@@ -39,7 +41,8 @@ public partial class DocStatisticsUserResult : ContentPage
     public DocStatisticsUserResult(User user)
     {
         InitializeComponent();
-    
+
+        Title = "Статистика экзаменов";
 
         CurrrentUser = user;
       List<Statictics> Result = GetUserExams(user);
@@ -301,150 +304,25 @@ public partial class DocStatisticsUserResult : ContentPage
         //DataTable.Add(janeAgeLabel, 1, 2);
         //DataTable.Add(janeGenderLabel, 2, 2);
     }
-
+    private async void GoBack(object sender, EventArgs e)
+    {
+        //if (Application.Current.MainPage is NavigationPage navigationPage)
+        //{
+        //    navigationPage.Navigation.PopAsync();
+        //}
+        await Shell.Current.Navigation.PopAsync();
+    }
 
     private List<Statictics> GetUserExams(Class_interaction_Users.User user)
     {
 
-        //List<RefUserExams> testUserExamsList = new List<RefUserExams>();
-
-       // CommandCL.UserExamsListGet = null;
+   
      var Result =    checkStatickUserResult.CheckStatickUserResults(user);
-
-        //if (CommandCL.UserExamsListGet == null)
-        //{
-        //    // Handle the case when the test list is null  
-        //}
-        //else
-        //{
-        //    Exams_Check[] exams_Check = new Exams_Check[CommandCL.UserExamsListGet.ListUserExams.Count()];
-        //    // Здесь вызвать  функцию что пришло 
-        //    for (int i = 0; i < CommandCL.UserExamsListGet.ListUserExams.Count(); i++)
-        //    {
-
-        //        var userExams = CommandCL.UserExamsListGet.ListUserExams[i];
-
-        //        exams_Check[i] = command.CheckExams(userExams);
-        //        //Запоминает проверку 
-        //    }
-
-        //    //Здесь 
-        //    int j = 0;
-        //    for (int i = 0; i < CommandCL.UserExamsListGet.ListUserExams.Count(); i++)
-        //    {
-
-        //        if (exams_Check[i].save_Results.Count() == 0)
-        //        {
-
-        //            var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " };
-        //            testUserExamsList.Add(refUserExams);
-        //        }
-        //        else
-        //        {
-
-        //            if (exams_Check[i].save_Results[j] == null)
-        //            {
-        //                //var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " };
-
-        //                //testUserExamsList.Add(refUserExams);
-        //            }
-        //            else
-        //            {
-        //                if (CommandCL.UserExamsListGet.ListUserExams[i].Exams.Id == exams_Check[i].save_Results[j].Exam_id.Id)
-        //                {
-
-        //                    var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = "✔" };
-        //                    testUserExamsList.Add(refUserExams);
-        //                    Commands.Add(refUserExams.UserExams.Exams.Name_exam);
-
-
-
-        //                }
-        //                else
-        //                {
-        //                    var refUserExams = new RefUserExams { UserExams = CommandCL.UserExamsListGet.ListUserExams[i], EditCommand = " " };
-        //                    testUserExamsList.Add(refUserExams);
-        //                }
-        //            }
-
-        //        }
-        //        //Здесь exams_Check[i].save_Results[i].Exam_id.Id 2 значения нету
-
-        //    }
-
-        //}
+    
         return Result;
 
     }
-
-    //private List<RefExamsTest> GetExamsTest(Class_interaction_Users.Exams exams, Class_interaction_Users.User currrentUser)
-    //{
-    //    List<RefExamsTest> testExamsTestList = new List<RefExamsTest>();
-
-    //    CommandCL.ExamsTestListGet = null;
-    //    viewModelManagers.GetExamsTestList(exams);
-
-    //    if (CommandCL.ExamsTestListGet == null)
-    //    {
-    //        // Handle the case when the test list is null   
-    //    }
-    //    else
-    //    {
-
-    //        Exams_Check[] exams_Check = new Exams_Check[CommandCL.UserExamsListGet.ListUserExams.Count()];
-    //        // Здесь вызвать  функцию что пришло 
-    //        for (int i = 0; i < CommandCL.ExamsTestListGet.ListExamsTest.Count(); i++)
-    //        {
-
-    //            ExamsTest userExams = CommandCL.ExamsTestListGet.ListExamsTest[i];
-    //            CheckUserTest checkUserTest = new CheckUserTest(userExams, currrentUser);
-    //            //     userExams.
-    //            exams_Check[i] = commandS.Check(checkUserTest);
-    //            //Запоминает проверку 
-    //        }
-
-    //        int j = 0;
-    //        for (int i = 0; i < CommandCL.ExamsTestListGet.ListExamsTest.Count; i++)
-    //        {
-    //            if (exams_Check[i].save_Results == null || exams_Check[i].save_Results.Count() == 0)
-    //            {
-    //                var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
-    //                testExamsTestList.Add(refExamsTest);
-    //            }
-    //            else
-    //            {
-    //                if (string.IsNullOrEmpty(exams_Check[i].save_Results[j].Name_Test?.ToString()))
-    //                {
-    //                    var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
-    //                    testExamsTestList.Add(refExamsTest);
-    //                }
-    //                else
-    //                {
-    //                    if (CommandCL.ExamsTestListGet.ListExamsTest[i].Test.Id == exams_Check[i].save_Results[j].Name_Test.Id)
-    //                    {
-    //                        var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = " ✔" };
-    //                        testExamsTestList.Add(refExamsTest);
-    //                        Commands.Add(CommandCL.ExamsTestListGet.ListExamsTest[i].Test.Name_Test);
-    //                    }
-    //                    else
-    //                    {
-    //                        var refExamsTest = new RefExamsTest { ExamsTest = CommandCL.ExamsTestListGet.ListExamsTest[i], EditCommand = "" };
-    //                        testExamsTestList.Add(refExamsTest);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //    return testExamsTestList;
-
-    //}
-
-
-
-
-
-
-
+  
     public class RefExamsTest
     {
         public Class_interaction_Users.ExamsTest ExamsTest { get; set; }

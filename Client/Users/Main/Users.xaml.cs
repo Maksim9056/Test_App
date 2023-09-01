@@ -1,4 +1,5 @@
 using Class_interaction_Users;
+using Client.Users.Doc.DocPersonalAchievement;
 //using HealthKit;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using System.Windows.Input;
@@ -17,7 +18,6 @@ public partial class Users : ContentPage
     public Users()
     {
         InitializeComponent();
-
     }
 
     public void User_NAME(Regis_users name)
@@ -74,9 +74,11 @@ public partial class Users : ContentPage
         Shell.Current.GoToAsync("logout");
     }
 
-    private void AchievementsButtonClicked(object sender, EventArgs e)
+    private async void AchievementsButtonClicked(object sender, EventArgs e)
     {
-        Shell.Current.GoToAsync("achievement");
+        //      Shell.Current.GoToAsync("achievement");
+        await Navigation.PushAsync(new DocPersonalAchievement(user));
+
     }
 
     private void SettingsButtonClicked(object sender, EventArgs e)

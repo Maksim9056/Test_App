@@ -12,12 +12,14 @@ using System.Globalization;
 namespace Client.Project
 {
 
-public partial class RefAnswerListPage : ContentPage
+    public partial class RefAnswerListPage : ContentPage
     {
         public CommandCL command = new CommandCL();
         private AnswerEditorViewModel viewModel;
         private AnswerManager viewModelManager;
         public Class_interaction_Users.Answer vSelectedItem { get; set; }
+        public int Mode { get; set; }
+
         public RefAnswerListPage()
         {
             try
@@ -29,7 +31,7 @@ public partial class RefAnswerListPage : ContentPage
                 viewModelManager = new AnswerManager();
                 AnswerList1.ItemsSource = GetAnswers();
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 DisplayAlert("Ошибка", ex.Message, "ОК");
             }
@@ -75,7 +77,7 @@ public partial class RefAnswerListPage : ContentPage
             return answerList;
         }
 
-        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
                 return;
@@ -86,8 +88,11 @@ public partial class RefAnswerListPage : ContentPage
 
             vSelectedItem = selectedAnswer.Answers;
 
-            // Закройте форму RefQuestionsListPage
-            Navigation.PopModalAsync();
+            if (Mode == 1)
+            {
+                // Закрытие формы RefExamsListPage
+                await Navigation.PopModalAsync();
+            }
         }
 
         private void Edit(object answer)
@@ -106,12 +111,15 @@ public partial class RefAnswerListPage : ContentPage
             UpdateForm();
         }
 
-        private void GoBack(object sender, EventArgs e)
+        private async void GoBack(object sender, EventArgs e)
         {
-            var mainPage = new Client.Main.Admin();
-            var navigationPage = new NavigationPage(mainPage);
+            //var mainPage = new Client.Main.Admin();
+            //var navigationPage = new NavigationPage(mainPage);
 
-            Application.Current.MainPage = navigationPage;
+            //Application.Current.MainPage = navigationPage;
+
+            await Navigation.PopAsync();
+
         }
 
         public class Answer

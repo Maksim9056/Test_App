@@ -51,14 +51,14 @@ namespace Client.Project
             viewModel.CreateUserData(user);
 
             // Close the user editor page
-            Navigation.PopModalAsync();
+            //Navigation.PopModalAsync();
             GoBack(sender, e);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
             // Close the user editor page without saving any changes
-            Navigation.PopModalAsync();
+            //Navigation.PopModalAsync();
             GoBack(sender, e);
         }
 
@@ -69,12 +69,14 @@ namespace Client.Project
 
         //    Application.Current.MainPage = navigationPage;
         //}
-        private void GoBack(object sender, EventArgs e)
+        private async void GoBack(object sender, EventArgs e)
         {
-            if (Application.Current.MainPage is NavigationPage navigationPage)
-            {
-                navigationPage.Navigation.PopAsync();
-            }
+            //if (Application.Current.MainPage is NavigationPage navigationPage)
+            //{
+            //    navigationPage.Navigation.PopAsync();
+            //}
+            await Navigation.PopAsync();
+
         }
 
 

@@ -134,6 +134,7 @@ namespace Client.Project
         private void CreateButtonClicked(object sender, EventArgs e)
         {
             var refAnswerListPage = new RefAnswerListPage();
+            refAnswerListPage.Mode = 1;
             refAnswerListPage.Disappearing += (s, args) =>
             {
                 if (refAnswerListPage.vSelectedItem != null)

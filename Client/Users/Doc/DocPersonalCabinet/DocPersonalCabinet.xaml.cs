@@ -28,33 +28,7 @@ namespace Client.Users.Doc.DocPersonalCabinet
             //{
 
             //}
-            BindingContext = new ChartEntry[]
-            {
-            new ChartEntry
-            {
-                Value = Test.Options_Id,
-                Color = Color.FromArgb("#6023FF"),
-                Text = Exams.Name_exam  +  Test.Name_Test
-            },
-            new ChartEntry
-            {
-                Value = 33,
-                Color = Color.FromArgb("#3059FE"),
-                Text = "Visual Studio"
-            },
-            new ChartEntry
-            {
-                Value = 29,
-                Color = Color.FromArgb("#2EF1D2"),
-                Text = "Notepad++"
-            },
-            new ChartEntry
-            {
-                Value = 28,
-                Color = Color.FromArgb("#F8426E"),
-                Text = "IntelliJ"
-            }
-          };
+          
 
 
             //Data = new List<ChartData>()

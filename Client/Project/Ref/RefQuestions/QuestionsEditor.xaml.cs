@@ -59,7 +59,7 @@ namespace Client.Project
             DisplayAlert("Изменения сохранены", "", "OK");
 
             // Close the window after saving
-            Navigation.PopModalAsync();
+            //Navigation.PopModalAsync();
             GoBack(sender, e);
         }
 
@@ -70,7 +70,7 @@ namespace Client.Project
             // Пример использования DisplayAlert для отображения сообщения
             //DisplayAlert("Закрыл без сохранения", "", "OK");
             // Закрыть окно без сохранения
-            Navigation.PopModalAsync();
+            //Navigation.PopModalAsync();
             GoBack(sender, e);
         }
 
@@ -81,12 +81,14 @@ namespace Client.Project
         //        navigationPage.Navigation.PopAsync();
         //    }
         //}
-        private void GoBack(object sender, EventArgs e)
+        private async void GoBack(object sender, EventArgs e)
         {
-            if (Application.Current.MainPage is NavigationPage navigationPage)
-            {
-                navigationPage.Navigation.PopAsync();
-            }
+            //if (Application.Current.MainPage is NavigationPage navigationPage)
+            //{
+            //    navigationPage.Navigation.PopAsync();
+            //}
+            await Navigation.PopAsync();
+
         }
 
     }

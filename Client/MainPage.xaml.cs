@@ -164,11 +164,22 @@ namespace Client
                                                             await Shell.Current.GoToAsync("user"); // Используйте URI для перехода к пользовательской странице
                                                             break;
                                                         case 1:
+
+
+                                                            var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("login"));
+                                                            if (flyoutItemhelp != null)
+                                                            {
+                                                                flyoutItemhelp.IsVisible = false;
+                                                            }
                                                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
-                                                            //var adminPage = new Admin();
+                                                            Admin admin = new Admin();
+                                                            await Navigation.PushAsync(new Admin( ));
+
+                                                            //var adminPage = new ();
                                                             //var navigationPage2 = new NavigationPage(adminPage);
-                                                            await Shell.Current.GoToAsync("admin"); // Используйте URI для перехода к административной странице
-                                                                                                      //Application.Current.MainPage = navigationPage2;
+                                                            //   await Shell.Current.GoToAsync("admin");
+                                                            // Используйте URI для перехода к административной странице
+                                                            //Application.Current.MainPage = navigationPage2;
                                                             break;
                                                     }
                                                 }
@@ -266,10 +277,10 @@ namespace Client
                 //nameEntry1.Text = "Admin";
                 if (Shell.Current.CurrentState.Location.OriginalString.Contains("sell=admin"))
                 {
-                    //nameEntry9.Text = "Admin@Admin.ru";
-                    //nameEntry1.Text = "Admin";
-                    nameEntry9.Text = "maks_nt@list.ru";
-                    nameEntry1.Text = "1";
+                    nameEntry9.Text = "Admin@Admin.ru";
+                    nameEntry1.Text = "Admin";
+                    //nameEntry9.Text = "maks_nt@list.ru";
+                    //nameEntry1.Text = "1";
                 }
                 else if (Shell.Current.CurrentState.Location.OriginalString.Contains("sell=user"))
                 {
@@ -299,8 +310,8 @@ namespace Client
                         flyoutItemhelp.IsVisible = false;
                     }
 
-                    nameEntry9.Text = "maks_nt@list.ru";
-                    nameEntry1.Text = "1";
+                    nameEntry9.Text = "Admin@Admin.ru";
+                    nameEntry1.Text = "Admin";
 
                 }
 

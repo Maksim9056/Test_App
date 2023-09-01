@@ -11,12 +11,11 @@ using System.Collections.ObjectModel;
 namespace Client.Project
 {
 public partial class RefTestListPage : ContentPage
-{
-    public CommandCL command = new CommandCL();
-    private TestEditorViewModel viewModel; 
-    public Class_interaction_Users.Test vSelectedItem { get; set; }
-
-
+    {
+        public CommandCL command = new CommandCL();
+        private TestEditorViewModel viewModel;
+        public Class_interaction_Users.Test vSelectedItem { get; set; }
+        public int Mode { get; set; }
 
         public RefTestListPage()
         {
@@ -37,11 +36,11 @@ public partial class RefTestListPage : ContentPage
         }
 
         private void ContentPage_Loaded(object sender, EventArgs e)
-    {
-        // Your code here
-    }
+        {
+            // Your code here
+        }
 
-    private List<RefTest> GetTest()
+        private List<RefTest> GetTest()
         {
             List<RefTest> aTestList = new List<RefTest>();
 
@@ -71,13 +70,13 @@ public partial class RefTestListPage : ContentPage
 
             var selectedTest = (RefTest)e.SelectedItem;
             //await DisplayAlert("Выбранный тест", selectedTest.Test.Name_Test, "OK");
-            await Navigation.PushAsync(new DocTestQuestionListPage(selectedTest.Test));
 
             ((ListView)sender).SelectedItem = null;
             vSelectedItem = selectedTest.Test;
 
+            if (Mode == 1) { await Navigation.PopModalAsync(); }
 
-        //  await   Navigation.PopModalAsync();
+            await Navigation.PushAsync(new DocTestQuestionListPage(selectedTest.Test));
         }
 
         private void EditTest(object test)
@@ -96,13 +95,15 @@ public partial class RefTestListPage : ContentPage
             UpdateForm();
         }
 
-        private void GoBack(object sender, EventArgs e)
+        private async void GoBack(object sender, EventArgs e)
         {
             //var mainPage = new Client.Main.Admin();
             //var navigationPage = new NavigationPage(mainPage);
 
             //Application.Current.MainPage = navigationPage;
-            Shell.Current.GoToAsync("..");
+            //Shell.Current.GoToAsync("..");
+            await Navigation.PopAsync();
+
 
         }
         //private void GoBack(object sender, EventArgs e)

@@ -75,36 +75,47 @@ public partial class Admin : ContentPage
     {
         try
         {
-            var mainPage = new Questin();
-            var navigationPage = new NavigationPage(mainPage);
-            await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
+        //    var mainPage = new ();
+            await Navigation.PushAsync(new Questin());
+
+            //var navigationPage = new NavigationPage(mainPage);
+          //  await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
         }
         catch (Exception )
         {
             // Обработка исключения, если необходимо
         }
     }
-    private void CounterLog2_Clicked(object sender, EventArgs e)
+    private async void CounterLog2_Clicked(object sender, EventArgs e)
     {
-        var mainPage = new MainPage();
-        var navigationPage = new NavigationPage(mainPage);
+        //var mainPage = new ();
+        //var navigationPage = new NavigationPage(mainPage);
+        await Navigation.PushAsync(new MainPage());
 
-        Application.Current.MainPage = navigationPage;
+        //Application.Current.MainPage = navigationPage;
     }
 
-    private void CounterLog3_Clicked(object sender, EventArgs e)
+    private async void CounterLog3_Clicked(object sender, EventArgs e)
     {
 
-        var mainPage = new Тест_название();
-        var navigationPage = new NavigationPage(mainPage);
+  //      var mainPage = new ();
 
-        Application.Current.MainPage = navigationPage;
+        await Navigation.PushAsync(new Тест_название());
+
+       // var navigationPage = new NavigationPage(mainPage);
+
+     //   Application.Current.MainPage = navigationPage;
     }
 
 #pragma warning disable CS1998 // В асинхронном методе отсутствуют операторы await, будет выполнен синхронный метод
     private async void CounterLog4_Clicked(object sender, EventArgs e)
 #pragma warning restore CS1998 // В асинхронном методе отсутствуют операторы await, будет выполнен синхронный метод
     {
+
+
+        await Navigation.PushAsync(new Project.RefUserListPage());
+
+
         //if (Application.Current.MainPage is NavigationPage navigationPage)
         //{
         //    navigationPage.Navigation.PopAsync();
@@ -117,7 +128,7 @@ public partial class Admin : ContentPage
         //var mainPage = new Project.RefUserListPage();
         //var navigationPage = new NavigationPage(mainPage);
         //Application.Current.MainPage = navigationPage;
-        await Shell.Current.GoToAsync("RefUserListPage");
+        // await Shell.Current.GoToAsync("RefUserListPage");
 
     }
 
@@ -130,7 +141,7 @@ public partial class Admin : ContentPage
     //}
 
     //Для авторизации учетной записи
-    private void GoBack(object sender, EventArgs e)
+    private  async void GoBack(object sender, EventArgs e)
     {
 
         //var flyoutItem = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("admin"));
@@ -149,39 +160,53 @@ public partial class Admin : ContentPage
         //    flyoutItemhelp.IsVisible = false;
         //}
 
-        if (Application.Current.MainPage is NavigationPage navigationPage)
-        {
-             Shell.Current.GoToAsync("//admin");
-            navigationPage.Navigation.PopAsync();
-        }
+
+        // await Shell.Current.Navigation.PopAsync();
+
+        //  Navigation.PopAsync();
+        await Navigation.PushAsync(new MainPage());
+
+        //if (Application.Current.MainPage is NavigationPage navigationPage)
+        //{
+        //     Shell.Current.GoToAsync("//admin");
+        //    navigationPage.Navigation.PopAsync();
+        //}
     }
 
     private async void CounterLogTest_Clicked(object sender, EventArgs e)
     {
-        var mainPage = new Project.RefTestListPage();
-        var navigationPage = new NavigationPage(mainPage);
-        await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
+        //var mainPage = new ;
+        //var navigationPage = new NavigationPage(mainPage);
+        //await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
+        await Navigation.PushAsync(new Project.RefTestListPage());
+
     }
 
     private async void CounterLogExamsClicked(object sender, EventArgs e)
     {
-        var mainPage = new Project.RefExamsListPage();
-        var navigationPage = new NavigationPage(mainPage);
-        await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
+       // var mainPage = new ;
+       // var navigationPage = new NavigationPage(mainPage);
+        await Navigation.PushAsync(new Project.RefExamsListPage());
+
+       // await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
     }
 
     private async void CounterLogQuestionsClicked(object sender, EventArgs e)
     {
-        var mainPage = new Project.RefQuestionsListPage();
-        var navigationPage = new NavigationPage(mainPage);
-        await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
+        //var mainPage = new ;
+        //var navigationPage = new NavigationPage(mainPage);
+        await Navigation.PushAsync(new Project.RefQuestionsListPage());
+
+     //   await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
     }
 
     private async void CounterLogAnswerClicked(object sender, EventArgs e)
     {
-        var mainPage = new Project.RefAnswerListPage();
-        var navigationPage = new NavigationPage(mainPage);
-        await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
+        //var mainPage = new ;
+        //var navigationPage = new NavigationPage(mainPage);
+        await Navigation.PushAsync(new Project.RefAnswerListPage());
+
+      //  await Application.Current.MainPage.Navigation.PushAsync(navigationPage);
     }
 
     private void ContentPage_Loaded(object sender, EventArgs e)
@@ -203,11 +228,8 @@ public partial class Admin : ContentPage
         //        }
         //    };
         //}
-        var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("login"));
-        if (flyoutItemhelp != null)
-        {
-            flyoutItemhelp.IsVisible = false;
-        }
+
+      
 
 
         var flyoutItemAdmin = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_admin"));

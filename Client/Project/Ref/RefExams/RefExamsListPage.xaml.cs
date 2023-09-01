@@ -7,22 +7,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Class_interaction_Users;
 using System.Collections.ObjectModel;
+using Client.Main;
 
 namespace Client.Project
 {
 public partial class RefExamsListPage : ContentPage
 {
-    public CommandCL command = new CommandCL();
+        public CommandCL command = new CommandCL();
         private ExamsEditorViewModel viewModel;
         private ExamManager viewModelManager;
         public Class_interaction_Users.Exams vSelectedItem { get; set; }
-    public RefExamsListPage()
-    {
-     InitializeComponent();
-     viewModel = new ExamsEditorViewModel();
-     viewModelManager = new ExamManager();
-     ExamsList1.ItemsSource = GetExams();
-    }
+        public int Mode { get; set; }
+
+        public RefExamsListPage()
+        {
+            InitializeComponent();
+            viewModel = new ExamsEditorViewModel();
+            viewModelManager = new ExamManager();
+            ExamsList1.ItemsSource = GetExams();
+        }
 
         protected override void OnAppearing()
         {
@@ -63,48 +66,51 @@ public partial class RefExamsListPage : ContentPage
         return aExamsList;
     }
 
-    private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        if (e.SelectedItem == null)
-            return;
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null)
+                return;
 
-        var selectedTest = (RefExams)e.SelectedItem;
-        //await DisplayAlert("Выбранный тест", selectedTest.Exams.Name_exam, "OK");
-        ((ListView)sender).SelectedItem = null;
-         await Navigation.PushAsync(new DocExamTestListPage(selectedTest.Exams));
+            var selectedTest = (RefExams)e.SelectedItem;
+            ((ListView)sender).SelectedItem = null;
 
             vSelectedItem = selectedTest.Exams;
 
-            // Закройте форму RefQuestionsListPage
-            // Исключается для выбора ответа
-#pragma warning disable CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
-            Navigation.PopModalAsync();
-#pragma warning restore CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
+            if (Mode == 1)
+            {
+                // Закрытие формы RefExamsListPage
+                await Navigation.PopModalAsync();
+            }
 
+            // Переход на страницу DocExamTestListPage    
+            await Navigation.PushAsync(new DocExamTestListPage(selectedTest.Exams));
         }
 
-    private void EditExams(object test)
-    {
-        var selectedTest = (RefExams)test;
-        Navigation.PushAsync(new ExamsEditor(selectedTest.Exams));
-    }
 
-    private void DelExams(object test)
-    {
-        var selectedTest = (RefExams)test;
-
-        viewModelManager.DeleteExamsData(selectedTest.Exams);
-
-        DisplayAlert("Удаляется тест", selectedTest.Exams.Name_exam, "OK");
-        UpdateForm();
-    }
-
-        private void GoBack(object sender, EventArgs e)
+        private async void EditExams(object test)
         {
-            var mainPage = new Client.Main.Admin();
-            var navigationPage = new NavigationPage(mainPage);
+            var selectedTest = (RefExams)test;
+            await Navigation.PushAsync(new ExamsEditor(selectedTest.Exams));
+        }
 
-            Application.Current.MainPage = navigationPage;
+        private void DelExams(object test)
+        {
+            var selectedTest = (RefExams)test;
+
+            viewModelManager.DeleteExamsData(selectedTest.Exams);
+
+            DisplayAlert("Удаляется тест", selectedTest.Exams.Name_exam, "OK");
+            UpdateForm();
+        }
+
+        private async void GoBack(object sender, EventArgs e)
+        {
+            //var mainPage = new Client.Main.();
+            //var navigationPage = new NavigationPage(mainPage);
+            await Navigation.PopAsync();
+            //await Navigation.PushAsync(new Admin());
+            //Application.Current.MainPage = navigationPage;
+
         }
         //private void GoBack(object sender, EventArgs e)
         //{
@@ -122,9 +128,9 @@ public partial class RefExamsListPage : ContentPage
         public Command DelCommand { get; set; }
         }
 
-    private void CreateButtonClicked(object sender, EventArgs e)
+    private async void CreateButtonClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new ExamsCreate());
+     await     Navigation.PushAsync(new ExamsCreate());
     }
-}
+   }
 }

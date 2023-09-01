@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Class_interaction_Users;
 using System.Collections.ObjectModel;
+using Client.Main;
 
 namespace Client.Project
 {
@@ -75,25 +76,29 @@ namespace Client.Project
             var selectedUser = (RefUser)e.SelectedItem;
             //await DisplayAlert("Выбранный пользователь", selectedUser.User.Name_Employee, "OK");
             ((ListView)sender).SelectedItem = null;
+
+
+
             await Navigation.PushAsync(new DocUserExamsListPage(selectedUser.User));
+
 
             vSelectedItem = selectedUser.User;
 
             // Закройте форму RefQuestionsListPage
             // Исключается для выбора ответа
 #pragma warning disable CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
-            Navigation.PopModalAsync();
+            // Navigation.PopModalAsync();
 #pragma warning restore CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
 
         }
 
         // Метод для редактирования вопроса
-        private void EditUser(object question)
+        private async void EditUser(object question)
         {
             var selectedUser = (RefUser)question;
             // Выполните здесь необходимые действия при нажатии кнопки "Редактировать"
             // Например, откройте страницу редактирования с передачей выбранного пользователя в качестве параметра
-            Navigation.PushAsync(new UserEditor(selectedUser.User));
+         await   Navigation.PushAsync(new UserEditor(selectedUser.User));
 
             // Пример использования DisplayAlert для отображения сообщения
             //DisplayAlert("Редактируется пользователь", selectedUser.User, "OK");
@@ -114,7 +119,9 @@ namespace Client.Project
 
         private async void GoBack(object sender, EventArgs e)
         {
-            await Shell.Current.Navigation.PopAsync();
+            // await Shell.Current.Navigation.PopAsync();
+            //await Navigation.PushAsync(new Admin());
+            await Navigation.PopAsync();
         }
 
 
@@ -134,9 +141,9 @@ namespace Client.Project
             public Command DelCommand { get; set; }
         }
 
-        private void CreateButtonClicked(object sender, EventArgs e)
+        private async void CreateButtonClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new UserCreate());
+           await  Navigation.PushAsync(new UserCreate());
         }
     }
 }

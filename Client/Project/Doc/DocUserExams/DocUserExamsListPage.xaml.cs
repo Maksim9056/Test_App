@@ -78,10 +78,10 @@ namespace Client.Project
             ((ListView)sender).SelectedItem = null;
         }
 
-        private void Edit(object userExams)
+        private async void Edit(object userExams)
         {
             var selectedUserExams = (RefUserExams)userExams;
-            Navigation.PushAsync(new ExamsEditor(selectedUserExams.UserExams.Exams));
+            await   Navigation.PushAsync(new ExamsEditor(selectedUserExams.UserExams.Exams));
         }
 
         private void Del(object userExams)
@@ -96,7 +96,10 @@ namespace Client.Project
 
         private async void GoBack(object sender, EventArgs e)
         {
-            await Shell.Current.Navigation.PopAsync();
+          //  Shell.Current.Navigation.PopAsync();
+
+             await Navigation.PushAsync(new  RefUserListPage());
+            //await Shell.Current.Navigation.PopAsync();
         }
 
         public class RefUserExams
@@ -106,34 +109,31 @@ namespace Client.Project
             public Command DelCommand { get; set; }
         }
 
-            private void ContentPageLoaded(object sender, EventArgs e)
-            {
+        private void ContentPageLoaded(object sender, EventArgs e)
+        {
 
-            }
+        }
 
-            private void CreateButtonClicked(object sender, EventArgs e)
-            {
-                var refExamsListPage = new RefExamsListPage();
+        private async void CreateButtonClicked(object sender, EventArgs e)
+        {
+            var refExamsListPage = new RefExamsListPage();
+            refExamsListPage.Mode = 1; // Здесь вы можете указать нужный режим
+
             refExamsListPage.Disappearing += (s, args) =>
+            {
+                if (refExamsListPage.vSelectedItem != null)
                 {
-                    if (refExamsListPage.vSelectedItem != null)
-                    {
-                        var selectedItem = refExamsListPage.vSelectedItem;
-                        UserExams aQuestionQ = new UserExams();
-                        aQuestionQ.User = CurrrentUser;
-                        aQuestionQ.Exams = selectedItem;
-                        viewModelManager.CreateUserExamsData(aQuestionQ);
+                    var selectedItem = refExamsListPage.vSelectedItem;
+                    UserExams aQuestionQ = new UserExams();
+                    aQuestionQ.User = CurrrentUser;
+                    aQuestionQ.Exams = selectedItem;
+                    viewModelManager.CreateUserExamsData(aQuestionQ);
+                    refExamsListPage.vSelectedItem = null;
+                    MessagingCenter.Send(this, "UpdateForm");
+                }
+            };
 
-                        // Clear the selected item in RefQuestionsListPage
-                        refExamsListPage.vSelectedItem = null;
-
-                        // Send a message to update the current form
-#pragma warning disable CS0618 // Тип или член устарел
-                        MessagingCenter.Send(this, "UpdateForm");
-#pragma warning restore CS0618 // Тип или член устарел
-                    }
-                };
-                Navigation.PushModalAsync(refExamsListPage);
-            }
+            await Navigation.PushModalAsync(refExamsListPage);
+        }
     }
 }

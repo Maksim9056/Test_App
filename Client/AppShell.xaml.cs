@@ -18,7 +18,7 @@ namespace Client
         void RegisterRoutes()
         {
             Routes.Add("login", typeof(MainPage));
-            Routes.Add("admin", typeof(Client.Main.Admin));
+            //Routes.Add("admin", typeof(Client.Main.Admin));
             Routes.Add("user", typeof(Client.Users.Users));
             Routes.Add("logout", typeof(Client.MainPage));
             Routes.Add("achievement", typeof(Client.Users.Doc.DocPersonalAchievement.DocPersonalAchievement));

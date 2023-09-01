@@ -16,6 +16,9 @@ namespace Client.Project
         private QuestionsEditorViewModel viewModel;
         private QuestionManager viewModelManager;
         public Class_interaction_Users.Questions vSelectedItem { get; set; }
+        public int Mode { get; set; }
+
+
         public RefQuestionsListPage()
         {
             InitializeComponent();
@@ -72,16 +75,12 @@ namespace Client.Project
             var selectedQuestion = (Questions)e.SelectedItem;
             //await DisplayAlert("Выбранный вопрос", selectedQuestion.Question.QuestionName, "OK");
             ((ListView)sender).SelectedItem = null;
-            //Добавляется для выбора ответа
-            await Navigation.PushAsync(new DocQuestionAnswerListPage(selectedQuestion.Question));
 
             vSelectedItem = selectedQuestion.Question;
 
-            // Закройте форму RefQuestionsListPage
-            // Исключается для выбора ответа
-#pragma warning disable CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
-            Navigation.PopModalAsync();
-#pragma warning restore CS4014 // Так как этот вызов не ожидается, выполнение существующего метода продолжается до тех пор, пока вызов не будет завершен
+            if (Mode == 1) { await Navigation.PopModalAsync(); }
+
+            await Navigation.PushAsync(new DocQuestionAnswerListPage(selectedQuestion.Question));
         }
 
 
@@ -101,12 +100,14 @@ namespace Client.Project
             UpdateForm();
         }
 
-        private void GoBack(object sender, EventArgs e)
+        private async void GoBack(object sender, EventArgs e)
         {
-            var mainPage = new Client.Main.Admin();
-            var navigationPage = new NavigationPage(mainPage);
+            //var mainPage = new Client.Main.Admin();
+            //var navigationPage = new NavigationPage(mainPage);
 
-            Application.Current.MainPage = navigationPage;
+            //Application.Current.MainPage = navigationPage;
+            await Navigation.PopAsync();
+
         }
         //private void GoBack(object sender, EventArgs e)
         //{
@@ -123,33 +124,9 @@ namespace Client.Project
             public Command DelCommand { get; set; }
         }
 
-        private void CreateButtonClicked(object sender, EventArgs e)
+        private  void CreateButtonClicked(object sender, EventArgs e)
         {
-        //    var refAnswerListPage = new RefAnswerListPage();
-
-        //    refAnswerListPage.Disappearing += (s, args) =>
-        //    {
-        //        if (refAnswerListPage.vSelectedItem != null)
-        //        {
-        //            var selectedItem = refAnswerListPage.vSelectedItem;
-
-        //            TestQuestion aTestQ = new TestQuestion();
-        //            aTestQ.IdQuestions = selectedItem;
-        //            aTestQ.IdTest = CurrrentTest;
-        //            viewModelManager.CreateQuestionData(aTestQ);
-
-        //            // Clear the selected item in RefQuestionsListPage
-        //            refAnswerListPage.vSelectedItem = null;
-
-        //            // Send a message to update the current form
-        //            MessagingCenter.Send(this, "UpdateForm");
-        //        }
-        //    };
-
-        //    await Navigation.PushModalAsync(refAnswerListPage);
-        //}
-
-           Navigation.PushAsync(new QuestionsCreate());
+            Navigation.PushAsync(new QuestionsCreate());
         }
 
 

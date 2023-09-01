@@ -97,11 +97,13 @@ namespace Client.Project
 
         private async void GoBack(object sender, EventArgs e)
         {
+                   await Navigation.PushAsync(new RefExamsListPage());
+
             //if (Application.Current.MainPage is NavigationPage navigationPage)
             //{
             //    navigationPage.Navigation.PopAsync();
             //}
-            await Shell.Current.Navigation.PopAsync();
+            //await Shell.Current.Navigation.PopAsync();
 
         }
 
@@ -117,9 +119,10 @@ namespace Client.Project
 
         }
 
-        private void CreateButtonClicked(object sender, EventArgs e)
+        private async void CreateButtonClicked(object sender, EventArgs e)
         {
-            var refTestListPage = new Ref.RefTest.RefTestListPageExams();
+            var refTestListPage = new RefTestListPage();
+            refTestListPage.Mode = 1;
             refTestListPage.Disappearing += (s, args) =>
             {
                 if (refTestListPage.vSelectedItem != null)
@@ -139,8 +142,8 @@ namespace Client.Project
 #pragma warning restore CS0618 // Тип или член устарел
                 }
             };
-            Navigation.PushModalAsync(refTestListPage);
-//var refExamsListPage = new RefExamsListPage();
+            await Navigation.PushModalAsync(refTestListPage);
+            //var refExamsListPage = new RefExamsListPage();
         }
     }
 }
