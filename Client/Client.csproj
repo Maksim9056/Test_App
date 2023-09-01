@@ -40,8 +40,11 @@
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
+		<!-- App icon for Android -->
+		<MauiIcon Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'" Include="Resources\AppIcon\appicon2.png" Color="#512BD4" TintColor="#FFFFFF" AdaptiveIcon="True" ForegroundScale="0.45" />
+		
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -52,6 +55,14 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Platforms\Android\Resources\Новая папка1\**" />
+	  <EmbeddedResource Remove="Platforms\Android\Resources\Новая папка1\**" />
+	  <MauiCss Remove="Platforms\Android\Resources\Новая папка1\**" />
+	  <MauiXaml Remove="Platforms\Android\Resources\Новая папка1\**" />
+	  <None Remove="Platforms\Android\Resources\Новая папка1\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -291,6 +302,10 @@
 	  <MauiXaml Update="Users\Ref\RefTheExamisPersonal\RefTheExamisPersonal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Platforms\Android\Resources\drawable\" />
 	</ItemGroup>
 
 </Project>

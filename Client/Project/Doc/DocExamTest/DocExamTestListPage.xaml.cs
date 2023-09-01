@@ -97,13 +97,14 @@ namespace Client.Project
 
         private async void GoBack(object sender, EventArgs e)
         {
-                   await Navigation.PushAsync(new RefExamsListPage());
+            //await Navigation.PushAsync(new RefExamsListPage());
 
             //if (Application.Current.MainPage is NavigationPage navigationPage)
             //{
             //    navigationPage.Navigation.PopAsync();
             //}
             //await Shell.Current.Navigation.PopAsync();
+            await Navigation.PopAsync();
 
         }
 

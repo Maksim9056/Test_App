@@ -310,8 +310,11 @@ namespace Client
                         flyoutItemhelp.IsVisible = false;
                     }
 
-                    nameEntry9.Text = "Admin@Admin.ru";
-                    nameEntry1.Text = "Admin";
+                    //nameEntry9.Text = "Admin@Admin.ru";
+                    //nameEntry1.Text = "Admin";
+                    nameEntry9.Text = "Полина@Admin.ru";
+                    nameEntry1.Text = "12";
+
 
                 }
 

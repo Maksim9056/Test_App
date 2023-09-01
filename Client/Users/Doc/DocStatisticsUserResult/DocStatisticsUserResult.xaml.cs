@@ -70,11 +70,11 @@ public partial class DocStatisticsUserResult : ContentPage
         var Lab = new List<string> { "Экзамен", "Имя теста", "Оценка" };
         labels.Insert(0, Lab);
 
-        for (int i = 1; i < statictics.Count; i++)
+        for (int i = 0; i < statictics.Count; i++)
         {
             var tt = new List<string> { statictics[i].Exams.Name_exam, statictics[i].Test.Name_Test, statictics[i].Count.ToString() };
 
-            labels.Insert(i,tt);
+            labels.Insert(i+1,tt);
             //labels[i].Add(statictics[i].Exams.Name_exam);
             //labels[i].Add(statictics[i].Test.Name_Test);
             //labels[i].Add(statictics[i].Count.ToString());

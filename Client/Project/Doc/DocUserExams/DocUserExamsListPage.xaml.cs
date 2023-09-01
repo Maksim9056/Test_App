@@ -96,10 +96,12 @@ namespace Client.Project
 
         private async void GoBack(object sender, EventArgs e)
         {
-          //  Shell.Current.Navigation.PopAsync();
+            //  Shell.Current.Navigation.PopAsync();
 
-             await Navigation.PushAsync(new  RefUserListPage());
+            //await Navigation.PushAsync(new  RefUserListPage());
             //await Shell.Current.Navigation.PopAsync();
+            await Navigation.PopAsync();
+
         }
 
         public class RefUserExams
@@ -132,7 +134,6 @@ namespace Client.Project
                     MessagingCenter.Send(this, "UpdateForm");
                 }
             };
-
             await Navigation.PushModalAsync(refExamsListPage);
         }
     }

@@ -101,7 +101,9 @@ namespace Client.Project
             //{
             //    navigationPage.Navigation.PopAsync();
             //}
-            await Shell.Current.Navigation.PopAsync();
+            //await Shell.Current.Navigation.PopAsync();
+            await Navigation.PopAsync();
+
 
         }
 
