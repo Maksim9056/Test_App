@@ -131,7 +131,9 @@ namespace Client.Project
                     aQuestionQ.Exams = selectedItem;
                     viewModelManager.CreateUserExamsData(aQuestionQ);
                     refExamsListPage.vSelectedItem = null;
+#pragma warning disable CS0618 // Тип или член устарел
                     MessagingCenter.Send(this, "UpdateForm");
+#pragma warning restore CS0618 // Тип или член устарел
                 }
             };
             await Navigation.PushModalAsync(refExamsListPage);

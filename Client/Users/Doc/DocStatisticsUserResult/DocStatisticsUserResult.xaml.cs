@@ -102,6 +102,7 @@ public partial class DocStatisticsUserResult : ContentPage
 
             for (int j = 0; j < numCols; j++)
             {
+#pragma warning disable CS0618 // Тип или член устарел
                 var label = new Label
                 {
                     Text = labels[i][j],
@@ -110,6 +111,7 @@ public partial class DocStatisticsUserResult : ContentPage
                     HorizontalOptions = LayoutOptions.FillAndExpand,
                     Padding = new Thickness(6)
                 };
+#pragma warning restore CS0618 // Тип или член устарел
 
                 DataTable.Add(label, j, i);
             }
