@@ -660,4 +660,34 @@ namespace Class_interaction_Users
             CurrrentUser = currrentUser;
         }
     }
+
+    [Serializable]
+    public class Statictics
+    {
+        public Exams Exams { get; set; }
+        public Test Test { get; set; }
+        public int Count { get; set; }
+        public Statictics(Exams exams, Test test,int count)
+        {
+            Exams = exams;  
+            Test = test;
+            Count = count;
+        }
+    }
+
+
+    [Serializable]
+    public class Statick
+    {
+        public List<Statictics> statictics { get; set; } = new List<Statictics>();
+    }
+
+
+
+
+
+
+
+
+
 }

@@ -1870,6 +1870,43 @@ namespace Class_interaction_Users
                 return string.Empty;
             }
         }
+        public class CheckStatickUserResult
+        {
+
+            public List<Statictics> statictics { get; set; } = new List<Statictics>();
+            public async Task<string> CheckStatickUserResults(string server, string fs, string command)
+            {
+
+                try
+                {
+                    CommandCL ClassInstance = new CommandCL();
+
+                    string responseDat = await ClassInstance.SendClass(server, fs, command);
+                    if (string.IsNullOrEmpty(responseDat))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+
+                        Statick exams_Check = JsonSerializer.Deserialize<Statick>(responseDat);
+                        statictics = exams_Check.statictics;
+                    }
+
+
+                }
+                catch (SocketException e)
+                {
+                    Console.WriteLine($"SocketException: {e.Message}");
+
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine($"Exception: {e.Message}");
+                }
+                return string.Empty;
+            }
+        }
     }
 }
 

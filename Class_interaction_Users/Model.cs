@@ -1078,6 +1078,37 @@ namespace Class_interaction_Users
 
     }
 
+    public class CheckStatickUserResult
+    {
+
+        private CommandCL.CheckStatickUserResult command = new CommandCL.CheckStatickUserResult();
+
+        /// <summary>
+        /// Проверяет статистику у экзаменов и тестов
+        /// </summary>
+        /// <param name="user"></param>
+        public List<Statictics> CheckStatickUserResults(User user)
+        {
+            List<Statictics> Statisk = new List<Statictics>();
+                //List<UserExams> userExamsList = new List<UserExams>();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<User>(memoryStream, user);
+                Task.Run(async () => await command.CheckStatickUserResults(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "055")).Wait();
+            }
+
+            if (command.statictics == null)
+            {
+              //  Statisk = null;
+            }
+            else
+            {
+             //   command.statictics
+                Statisk = command.statictics;
+            }
+            return Statisk;
+        }
+    }
     public class BooleanToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

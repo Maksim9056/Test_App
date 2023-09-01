@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Net.Sockets;
 using System.Text.Json;
 using System.Collections.Generic;
+using System.Security.Claims;
+using System.Runtime.Serialization.Formatters;
 
 namespace Server_Test_Users
 {
@@ -118,6 +120,25 @@ namespace Server_Test_Users
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         public List<Save_results> Test_Results { get; set; }
 #pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      public  List<Statictics> StatickUsers { get; set; }
+
 
 
 
@@ -1475,11 +1496,11 @@ namespace Server_Test_Users
 
         // For the UserExams class
 
-            public void CreateUserExams_ds(UserExams newUserExams)
+        public void CreateUserExams_ds(UserExams newUserExams)
+        {
+            using (ApplicationContext db = new ApplicationContext())
             {
-                using (ApplicationContext db = new ApplicationContext())
-                {
-                    UserExams userExams = new UserExams();
+                UserExams userExams = new UserExams();
 #pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 User user = db.Users.Find(newUserExams.User.Id);
 #pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
@@ -1488,54 +1509,54 @@ namespace Server_Test_Users
                 Exams exams = db.Exams.Find(newUserExams.Exams.Id);
 #pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 userExams.Exams = exams;
-                    db.UserExams.Add(userExams);
-                    db.SaveChanges();
-                }
+                db.UserExams.Add(userExams);
+                db.SaveChanges();
             }
+        }
 
-            public void DeleteUserExams_ds(int userExamsId)
+        public void DeleteUserExams_ds(int userExamsId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
             {
-                using (ApplicationContext db = new ApplicationContext())
-                {
 #pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 UserExams userExams = db.UserExams.FirstOrDefault(ue => ue.Id == userExamsId);
 #pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (userExams != null)
-                    {
-                        db.UserExams.Remove(userExams);
-                        db.SaveChanges();
-                    }
+                {
+                    db.UserExams.Remove(userExams);
+                    db.SaveChanges();
                 }
             }
+        }
 
-            public void UpdateUserExams_ds(UserExams updatedUserExams)
+        public void UpdateUserExams_ds(UserExams updatedUserExams)
+        {
+            using (ApplicationContext db = new ApplicationContext())
             {
-                using (ApplicationContext db = new ApplicationContext())
-                {
-       
+
 #pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 UserExams existingUserExams = db.UserExams.FirstOrDefault(ue => ue.Id == updatedUserExams.Id);
 #pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 if (existingUserExams != null)
-                    {
-                        existingUserExams.User.Id = updatedUserExams.User.Id;
-                        db.SaveChanges();
-                    }
-                }
-            }
-
-            public void CheckUserExams_ds(User user)
-            {
-                using (ApplicationContext db = new ApplicationContext())
                 {
-                    var userExams = db.UserExams
-                        .Include(ue => ue.User)
-                        .Include(ue => ue.Exams)
-                        .Where(ue => ue.User != null && ue.User.Id == user.Id)
-                        .ToList();
-                    UserExamsListTest = userExams;
+                    existingUserExams.User.Id = updatedUserExams.User.Id;
+                    db.SaveChanges();
                 }
             }
+        }
+
+        public void CheckUserExams_ds(User user)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var userExams = db.UserExams
+                    .Include(ue => ue.User)
+                    .Include(ue => ue.Exams)
+                    .Where(ue => ue.User != null && ue.User.Id == user.Id)
+                    .ToList();
+                UserExamsListTest = userExams;
+            }
+        }
 
 
 
@@ -1571,7 +1592,7 @@ namespace Server_Test_Users
                     User user = db.Users.FirstOrDefault(e => e.Id == newUserExams.User_id.Id);
 
                     Questions questionss = db.Questions.FirstOrDefault(e => e.Id == newUserExams.Questions.Id);
-               
+
                     QuestionAnswer questionAnswer = db.QuestionAnswer.FirstOrDefault(u => u.Answer.CorrectAnswers == tt.Answer.CorrectAnswers && u.Answer.Id == tt.Answer.Id);
 
                     Save_results userExams = new Save_results
@@ -1642,7 +1663,7 @@ namespace Server_Test_Users
                 }
                 else
                 {
-                    save_Results = new List<Save_results> ();
+                    save_Results = new List<Save_results>();
                     Test = false;
                     Exams examsSS = new Exams();
                     examsSS.Id = 0;
@@ -1653,7 +1674,7 @@ namespace Server_Test_Users
                 }
 
                 var eXAMS = Test ? examsTests : new List<ExamsTest>();
-            }   
+            }
         }
 
 
@@ -1715,7 +1736,7 @@ namespace Server_Test_Users
                     save_Results.Add(save_ResultsS);
                 }
 
-               // var eXAMS = Test ? examsTests : new List<ExamsTest>();
+                // var eXAMS = Test ? examsTests : new List<ExamsTest>();
             }
 
 
@@ -1871,5 +1892,108 @@ namespace Server_Test_Users
 
         }
 
+
+        /// <summary>
+        /// Для статистике сразу сделай новую функцию чем каждый раз в клиенте   сделав сразу в одном блоке и  присылать результат полный 
+        /// </summary>
+        /// <param name="user"></param>
+        public void CheckStatickUserResult(User user)
+        {
+            List<Statictics> statictics1 = new List<Statictics>();
+            List<UserExams> UserExamsListTests = new List<UserExams>();
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var userExams = db.UserExams
+                    .Include(ue => ue.User)
+                    .Include(ue => ue.Exams)
+                    .Where(ue => ue.User != null && ue.User.Id == user.Id)
+                    .ToList();
+                UserExamsListTests = userExams;
+            }
+
+            //Проверяем через цикл один экзамен
+            for (int i = 0; i < UserExamsListTests.Count; i++)
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    var examsTests = db.ExamsTest
+                        .Include(et => et.Exams)
+                        .Include(et => et.Test)
+                        .Where(et => et.Exams != null && et.Exams.Id == UserExamsListTests[i].Exams.Id)
+                        .ToList();
+
+
+
+                    //Здесь надо посмотреть к тесту вопросы 
+                    for (int j = 0; j < examsTests.Count; j++)
+                    {
+                        //Здесь падает
+                        int count = db.TestQuestion.Count();
+                        if (count == 0)
+                        {
+                            // Обработка случая, когда нет вопросов в тесте
+                        }
+                        else
+                        {
+                            var testQuestions = db.TestQuestion
+                                .Include(tq => tq.IdTest)
+                                .Include(tq => tq.IdQuestions)
+                                .Where(tq => tq.IdTest != null && tq.IdTest.Id == examsTests[j].Test.Id)
+                                .ToList();
+
+                            if (testQuestions == null)
+                            {
+                                // Обработка случая, когда список вопросов равен null
+                            }
+                            else
+                            {
+                                TestQuestionListTest = new List<TestQuestion>();
+                                // Используйте список testQuestions по мере необходимости
+                                TestQuestionListTest = testQuestions;
+                                 int Result = 0;
+                               //Здесь проверяем 1 экзамен и тесты и вопросы TestQuestionListTest
+                               for (int l = 0; l < TestQuestionListTest.Count; l++)
+                               {
+
+                                    User user1 = db.Users.FirstOrDefault(u => u.Id == user.Id);
+
+                                var userExams = db.Save_Results.FirstOrDefault(ue => ue.Exam_id == examsTests[j].Exams && ue.User_id == user1 &&
+                                ue.Name_Test == examsTests[j].Test && ue.Questions == TestQuestionListTest[l].IdQuestions);
+
+                                    Result = Result + userExams.Resukts_exam;
+                               }
+
+                                int Средний_балл = 0;
+                                if (Result == 0)
+                                {
+                                   Средний_балл = 0;
+
+                                     Statictics statictics = new Statictics(examsTests[j].Exams, examsTests[j].Test, Средний_балл);
+
+                                    statictics1.Add(statictics);
+
+                                }
+                                else
+                                {
+                                    Средний_балл = Result / TestQuestionListTest.Count();
+                                    Statictics statictics = new Statictics(examsTests[j].Exams, examsTests[j].Test, Средний_балл);
+
+                                    statictics1.Add(statictics);
+
+                                }
+
+                                for(int d = 0; d < TestQuestionListTest.Count; d++)
+                                {
+                                    TestQuestionListTest.Clear();
+                                }
+
+                            }
+                        }
+                    }
+                }  
+            }
+               
+            StatickUsers = statictics1;
+        }
     }
 }

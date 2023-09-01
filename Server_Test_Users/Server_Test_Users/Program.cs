@@ -161,7 +161,7 @@ namespace Server_Test_Users
                 FDictCommands.Add("052", new Action<byte[], GlobalClass, NetworkStream>(command.SaveTestUsers));//Сохраняет Тест
                 FDictCommands.Add("053", new Action<byte[], GlobalClass, NetworkStream>(command.CheckExamUsers));//Проверяет Екзамен 
                 FDictCommands.Add("054", new Action<byte[], GlobalClass, NetworkStream>(command.CheckTestUsers));//Проверяет Екзамен 
-
+                FDictCommands.Add("055", new Action<byte[], GlobalClass, NetworkStream>(command.CheckStatickUserResult));
 
 
 

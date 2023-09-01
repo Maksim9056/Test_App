@@ -800,5 +800,24 @@ namespace Server_Test_Users
             //CheckExam checkExam = new CheckExam(UserExams);
             //JsonSerializer.Serialize<CheckExam>(memoryStream, checkExam);
         }
+
+
+
+        public void CheckStatickUserResult(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            User CrTest = JsonSerializer.Deserialize<User>(arg1);
+            @class.CheckStatickUserResult(CrTest);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Statick statick = new Statick();
+                statick.statictics = @class.StatickUsers;
+
+
+                JsonSerializer.Serialize<Statick>(ms, statick);
+                stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+            }
+            //@class.CheckExamsTest_ds(CrTest);
+
+        }
     }
 }
