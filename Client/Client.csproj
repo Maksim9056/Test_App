@@ -36,7 +36,7 @@
 	  <DefaultLanguage>ru-ru</DefaultLanguage>
 	  <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
 	  <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-	  <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+	  <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
 	  <GenerateTestArtifacts>True</GenerateTestArtifacts>
 	  <AppInstallerUri>C:\Development\1</AppInstallerUri>
 	  <HoursBetweenUpdateChecks>24</HoursBetweenUpdateChecks>
@@ -93,6 +93,10 @@
 
 	<ItemGroup>
 	  <MauiXaml Remove="NewPage1.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="client.app.keystore" />
 	</ItemGroup>
 
 	<ItemGroup>
