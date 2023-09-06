@@ -172,7 +172,7 @@ namespace Server_Test_Users
             {
                 // Database.EnsureDeleted(); // гарантируем, что бд удалена
                 Database.EnsureCreated(); // гарантируем, что бд будет созд
-                //Database.Migrate();  // миграция
+                Database.Migrate();  // миграция
             }
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {

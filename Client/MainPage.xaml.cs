@@ -81,6 +81,8 @@ namespace Client
         {
             try
             {
+                Ip_adress ip_Adress = new Ip_adress();
+                ip_Adress.CheckOS();
                 if (Mail == null)
                 {
                     await DisplayAlert("Уведомление", "Почта не пустая!", "ОK");
@@ -125,7 +127,7 @@ namespace Client
                                         //Декодировали в строку  memoryStream    класс запоаковали в json строку
                                         FileFS = Encoding.Default.GetString(memoryStream.ToArray());
                                         //Отправляем на сервер  команду 003
-                                        Task.Run(async () => await command.Check_User_Possword(Ip_adress.Ip_adresss, FileFS, "003")).Wait();
+                                        Task.Run(async () => await command.Check_User_Possword(ip_Adress.Ip_adressss, FileFS, "003")).Wait();
                                         //Значение почты пользователя  присваеваем по умолчанию почту для следущего входа пользователей
                                         Mail = null;
                                         //Значение пароля пользователя  присваеваем по умолчанию пароль для следущего входа пользователей 
