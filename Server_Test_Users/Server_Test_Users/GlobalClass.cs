@@ -168,11 +168,12 @@ namespace Server_Test_Users
             public DbSet<Exams> Exams { get; set; } = null!;
             public DbSet<Save_results> Save_Results { get; set; } = null!;
 
-            public ApplicationContext()
+            public  ApplicationContext()
             {
                 // Database.EnsureDeleted(); // гарантируем, что бд удалена
                 Database.EnsureCreated(); // гарантируем, что бд будет созд
                 Database.Migrate();  // миграция
+                 // Database.MigrateAsync(); // асинхронный метод для миграции
             }
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
