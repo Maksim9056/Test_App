@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace Server_Test_Users
 {
-    internal class Program
+    public class Program
     {
         public bool Users = false;
 #pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
@@ -33,7 +33,7 @@ namespace Server_Test_Users
 #pragma warning disable IDE0060 // Удалите неиспользуемый параметр
 
 
-        static void Main(string[] args)
+         static void Main(string[] args)
 #pragma warning restore IDE0060 // Удалите неиспользуемый параметр
         {
 
@@ -92,7 +92,7 @@ namespace Server_Test_Users
 
         static Dictionary<string, Action<byte[], GlobalClass, NetworkStream>> FDictCommands = new Dictionary<string, Action<byte[], GlobalClass, NetworkStream>>();
 
-        static void RegisterCommands()
+        public   static void RegisterCommands()
         {
             try
             {
@@ -173,7 +173,7 @@ namespace Server_Test_Users
             }
         }
 
-        static void HandleCommand(string aCommand, byte[] data, GlobalClass cls, NetworkStream ns)
+        static  void HandleCommand(string aCommand, byte[] data, GlobalClass cls, NetworkStream ns)
         {
             Action<byte[], GlobalClass, NetworkStream> actionCommand;
 #pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
@@ -185,7 +185,7 @@ namespace Server_Test_Users
             }
         }
 
-        private static void ClientProcessing(object client_obj)
+        public static void ClientProcessing(object client_obj)
         {
             try
             {
@@ -283,6 +283,10 @@ namespace Server_Test_Users
                 Console.WriteLine(ex.Message);
             }
 
+        }
+        public int Add(int a, int b)
+        {
+            return a + b;
         }
     }
 }

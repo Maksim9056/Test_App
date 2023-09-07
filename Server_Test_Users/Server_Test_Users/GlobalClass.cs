@@ -186,6 +186,10 @@ namespace Server_Test_Users
                     case 2:
                         optionsBuilder.UseSqlite("Data Source=helloapp.db");
                         break;
+                    case 3:
+                        optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
+
+                        break;
                 }
             }
         }

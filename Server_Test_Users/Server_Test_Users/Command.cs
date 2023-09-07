@@ -8,11 +8,13 @@ using static Class_interaction_Users.CheckMail_and_Password;
 
 namespace Server_Test_Users
 {
-    internal class Command
+    internal  class Command
     {
+        
 
-        public void CheckMail_and_Passwords(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        public  void CheckMail_and_Passwords(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
+          
             try
             {
                 CheckMail_and_Password? person3 = JsonSerializer.Deserialize<CheckMail_and_Password>(arg1);
@@ -819,5 +821,7 @@ namespace Server_Test_Users
             //@class.CheckExamsTest_ds(CrTest);
 
         }
+
+  
     }
 }
