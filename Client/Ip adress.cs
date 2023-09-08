@@ -82,16 +82,19 @@ namespace Client
 
                 //string[] args = Environment.GetCommandLineArgs();
                 //string assemblyPath = args[0];
-                //Path = Path.GetDirectoryName(assemblyPath);
-              //  string path = Environment.CurrentDirectory.ToString();
-                //var d = Environment.ProcessPath;
+                ////Path = Path.GetDirectoryName(assemblyPath);
+                //string path = Directory.GetCurrentDirectory();
+                ////var d = Environment.ProcessPath;
+                //string currentDirectory = Environment.CurrentDirectory;
+                //Console.WriteLine($"Текущая рабочая директория: {currentDirectory}");
+                string appDirectory = System.AppContext.BaseDirectory;
 
-                FileInfo fileInfo = new FileInfo("Client.json");
+                FileInfo fileInfo = new FileInfo(appDirectory +"\\Client.json");
 
                 // Если есть то загружаем настройки сервера если нет то создают
                 if (fileInfo.Exists)
                 {
-                    using (FileStream fs = new FileStream("Client.json", FileMode.OpenOrCreate))
+                    using (FileStream fs = new FileStream(appDirectory+"\\Client.json", FileMode.OpenOrCreate))
                     {
                         Seting _aFile = System.Text.Json.JsonSerializer.Deserialize<Seting>(fs);
                         Ip_adresss = _aFile.Ip_adress;
@@ -99,15 +102,15 @@ namespace Client
                 }
                 else
                 {
-                    using (FileStream fileStream = new FileStream("Client.json", FileMode.OpenOrCreate))
+                    using (FileStream fileStream = new FileStream(appDirectory +"\\Client.json", FileMode.OpenOrCreate))
                     {
-                        Seting connect_Server_ = new Seting("172.30.10.136", 9595, 1);
+                        Seting connect_Server_ = new Seting("192.168.0.112", 9595, 1);
 
                         System.Text.Json.JsonSerializer.Serialize<Seting>(fileStream, connect_Server_);
                     }
 
 
-                    using (FileStream fileStream = new FileStream("Client.json", FileMode.Open))
+                    using (FileStream fileStream = new FileStream(appDirectory+"\\Client.json", FileMode.OpenOrCreate))
                     {
                         Seting aFile = System.Text.Json.JsonSerializer.Deserialize<Seting>(fileStream);
                         Ip_adresss = aFile.Ip_adress;
