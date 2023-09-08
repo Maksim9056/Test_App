@@ -172,7 +172,7 @@ namespace Server_Test_Users
             {
                 // Database.EnsureDeleted(); // гарантируем, что бд удалена
                 Database.EnsureCreated(); // гарантируем, что бд будет созд
-                Database.Migrate();  // миграция
+               // Database.Migrate();  // миграция
                  // Database.MigrateAsync(); // асинхронный метод для миграции
             }
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -188,7 +188,7 @@ namespace Server_Test_Users
                         optionsBuilder.UseSqlite("Data Source=helloapp.db");
                         break;
                     case 3:
-                        optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
+                    //    optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
 
                         break;
                 }
@@ -596,6 +596,8 @@ namespace Server_Test_Users
                 //    //   Travel = new Regis_users(0,"False" ,"",1,"");
                 //}*/
 
+                //return Travel;
+
             }
             catch (Exception E)
             {
@@ -607,7 +609,7 @@ namespace Server_Test_Users
         /// <summary>
         /// Проверка  почты пароля  авторизация  и проверяет по почте есть ли пользователь  
         /// </summary>
-        public void Check_login_amail(CheckMail_and_Password checkMail_And_Password)
+        public Regis_users Check_login_amail(CheckMail_and_Password checkMail_And_Password)
         {
             try
             {
@@ -662,12 +664,13 @@ namespace Server_Test_Users
 
                 }
 
-
+               // return Travel;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            return Travel;
         }
 
         public void Check_Tests()
@@ -685,7 +688,7 @@ namespace Server_Test_Users
         }
 
         //Roles
-        public void Check_Roles()
+        public int Check_Roles()
         {
             int Count_roles = 0;
             using (ApplicationContext db = new ApplicationContext())
@@ -712,7 +715,7 @@ namespace Server_Test_Users
                 {
                     // получаем объекты из бд и выводим на консоль
                     var users = db.Roles.ToList();
-                    Console.WriteLine("Users list:");
+                   // Console.WriteLine("Users list:");
                     foreach (Roles u in users)
                     {
 
@@ -721,6 +724,7 @@ namespace Server_Test_Users
                 }
             }
             Count_Roles = Count_roles;
+            return Count_Roles;
         }
 
         public void Check_Questin()
@@ -749,7 +753,7 @@ namespace Server_Test_Users
                     {
                         // получаем объекты из бд и выводим на консоль
                         var users = db.Questions.ToList();
-                        Console.WriteLine("Users list:");
+                    //    Console.WriteLine("Users list:");
                         int i = 0;
                         foreach (Questions u in users)
                         {

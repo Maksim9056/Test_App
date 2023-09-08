@@ -22,15 +22,16 @@ namespace Client
 
         public MainPage()
         {
-            InitializeComponent();
-            BindingContext = this;
-
+          
+                InitializeComponent();
+                BindingContext = this;
+         }
 
             //var rt = Shell.Current.CurrentState.Location.OriginalString;
             //var parameters = System.Web.HttpUtility.ParseQueryString(rt);
             //var sellValue = parameters.Get("sell");
 
-        }
+        
         public CommandCL command = new CommandCL();
         public string Mail { get; set; }
         public string Password { get; set; }
@@ -79,8 +80,7 @@ namespace Client
         /// <param name="e"></param>
         private async void CounterLog_Clicked(object sender, EventArgs e)
         {
-            try
-            {
+          
                 Ip_adress ip_Adress = new Ip_adress();
                 ip_Adress.CheckOS();
                 if (Mail == null)
@@ -134,6 +134,7 @@ namespace Client
                                         Password = null;
                                         nameEntry1.Text = null;
                                         nameEntry9.Text = null;
+
                                         //Ответ с сервера получаем 
                                         if (command.Travel_logout == null)
                                         {
@@ -198,11 +199,7 @@ namespace Client
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Уведомление", ex.Message, "ОK");
-            }
+           
         }
 
         /// <summary>

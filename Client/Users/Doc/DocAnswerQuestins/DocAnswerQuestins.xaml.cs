@@ -9,7 +9,7 @@ public partial class DocAnswerQuestins : ContentPage
     private QuestionAnswerManager viewModelManager;
     private Class_interaction_Users.Questions CurrrentQuestions;
 
-       Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark docTestQuestionsTheAnswersMark;
+    private Doc.DocTestQuestionsTheAnswersMark.DocTestQuestionsTheAnswersMark docTestQuestionsTheAnswersMark;
     private Class_interaction_Users.Test CurrrentTest;
 
     private Class_interaction_Users.Exams Exams;

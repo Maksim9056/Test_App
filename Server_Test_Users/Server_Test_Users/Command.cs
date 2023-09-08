@@ -20,14 +20,14 @@ namespace Server_Test_Users
                 CheckMail_and_Password? person3 = JsonSerializer.Deserialize<CheckMail_and_Password>(arg1);
 
 #pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-                @class.Check_login_amail(person3);
+                var Value =        @class.Check_login_amail(person3);
 #pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
 
                 // @class.Regis_users
                 using (MemoryStream ms = new MemoryStream())
                 {
 #pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-                    JsonSerializer.Serialize<Regis_users>(ms, @class.Travel);
+                    JsonSerializer.Serialize<Regis_users>(ms, Value);
 #pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
                               //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
@@ -705,10 +705,10 @@ namespace Server_Test_Users
         {
             try
             {
-                @class.Check_Roles();
+         var Value=       @class.Check_Roles();
 
 
-                if (@class.Count_Roles == 1)
+                if (Value == 1)
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
@@ -750,11 +750,6 @@ namespace Server_Test_Users
 #pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             @class.CheckExam(CheckExams);
 #pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-
-            
-
-       
-
 
             using (MemoryStream ms = new MemoryStream())
             {

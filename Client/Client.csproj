@@ -34,14 +34,14 @@
 	<PropertyGroup>
 	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 	  <DefaultLanguage>ru-ru</DefaultLanguage>
-	  <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+	  <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
 	  <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
 	  <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
 	  <GenerateTestArtifacts>True</GenerateTestArtifacts>
 	  <AppInstallerUri>C:\Development\1</AppInstallerUri>
 	  <HoursBetweenUpdateChecks>24</HoursBetweenUpdateChecks>
 	  <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-	  <PackageCertificateThumbprint>BA0D0398957C09382F71DD18FEBCB5586DB05552</PackageCertificateThumbprint>
+	  <PackageCertificateThumbprint>2210116F1717A4FE45EC73F7571A4D152D2483E5</PackageCertificateThumbprint>
 	  <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	</PropertyGroup>
 
