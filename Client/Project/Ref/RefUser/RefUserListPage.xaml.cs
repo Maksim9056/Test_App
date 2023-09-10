@@ -145,5 +145,11 @@ namespace Client.Project
         {
            await  Navigation.PushAsync(new UserCreate());
         }
+
+        public void SettingsButtonClicked()
+        {
+
+        }
+
     }
 }

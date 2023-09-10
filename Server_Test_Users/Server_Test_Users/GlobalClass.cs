@@ -609,30 +609,21 @@ namespace Server_Test_Users
         /// <summary>
         /// Проверка  почты пароля  авторизация  и проверяет по почте есть ли пользователь  
         /// </summary>
-        public Regis_users Check_login_amail(CheckMail_and_Password checkMail_And_Password)
+        public void Check_login_amail(CheckMail_and_Password checkMail_And_Password)
         {
             try
             {
                 bool Check = false;
-                //     int Current_User;
-
+                // int Current_User;
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    var users = db.Users.Where(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password);
-                    if (users == null)
+                    var users = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password);
+
+                    if (users != null)
                     {
-
-                    }
-                    else
-                    {
-
-                        foreach (User user in users)
-                        {
-                            Check = true;
-                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, user.Id_roles_users, user.Employee_Mail);
-
-                            Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
-                        }
+                        Check = true;
+                        Travel = new Regis_users(users.Id, users.Name_Employee, users.Password, users.Id_roles_users, users.Employee_Mail);
+                        Console.WriteLine($"{users.Name_Employee} ({users.Employee_Mail})");
                     }
                 }
 
@@ -640,38 +631,22 @@ namespace Server_Test_Users
                 {
                     using (ApplicationContext db = new ApplicationContext())
                     {
-                        var users = db.Users.Where(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail);
+                        var users = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail);
 
-                        if (users == null)
+                        if (users != null)
                         {
-
+                            Travel = new Regis_users(0, "", "", 0, users.Employee_Mail);
+                            Console.WriteLine($"{users.Name_Employee} ({users.Employee_Mail})");
                         }
-                        else
-                        {
-                            foreach (User user in users)
-                            {
-                                // Check = true;
-                                Travel = new Regis_users(0, "", "", 0, user.Employee_Mail);
-
-                                Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
-                            }
-                        }
-
                     }
                 }
-                else
-                {
-
-                }
-
-               // return Travel;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            return Travel;
         }
+
 
         public void Check_Tests()
         {

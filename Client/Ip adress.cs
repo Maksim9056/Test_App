@@ -24,33 +24,33 @@ namespace Client
             if (DeviceInfo.Platform == DevicePlatform.iOS)
             {
                 //Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                //Console.WriteLine("Операционная система: iOS");
-                //// Создание экземпляра класса Seting
-                //Seting setting = new Seting("192.168.0.1", 8080, 1);
+                Console.WriteLine("Операционная система: iOS");
+                // Создание экземпляра класса Seting
+                Seting setting = new Seting("192.168.0.1", 8080, 1);
 
-                //// Преобразование объекта Seting в JSON строку
-                //string json = JsonConvert.SerializeObject(setting);
+                // Преобразование объекта Seting в JSON строку
+                string json = JsonConvert.SerializeObject(setting);
 
-                //// Запись JSON строки в файл
-                //File.WriteAllText("Client.json", json);
+                // Запись JSON строки в файл
+                File.WriteAllText("Client.json", json);
 
-                //// Чтение файла и преобразование JSON строки в объект Seting
-                //string jsonFromFile = File.ReadAllText("Client.json");
-                //Seting settingsFromFile = JsonConvert.DeserializeObject<Seting>(jsonFromFile);
+                // Чтение файла и преобразование JSON строки в объект Seting
+                string jsonFromFile = File.ReadAllText("Client.json");
+                Seting settingsFromFile = JsonConvert.DeserializeObject<Seting>(jsonFromFile);
 
-                //Ip_adressss = settingsFromFile.Ip_adress;
+                Ip_adressss = settingsFromFile.Ip_adress;
 
-                //// Доступ к данным
-                //string ipAddress = settingsFromFile.Ip_adress;
-                //int port = settingsFromFile.Port;
-                //int typeSQL = settingsFromFile.TypeSQL;
+                // Доступ к данным
+                string ipAddress = settingsFromFile.Ip_adress;
+                int port = settingsFromFile.Port;
+                int typeSQL = settingsFromFile.TypeSQL;
 
             }
             else if (DeviceInfo.Platform == DevicePlatform.Android)
             {
                 Console.WriteLine("Операционная система: Android");
                 //Path = FileSystem.AppDataDirectory;
-                Seting seting = new Seting("172.30.10.136", 9595, 1);
+                Seting seting = new Seting("192.168.0.112", 9595, 1);
                 // Преобразование в JSON-строку
                 string json = JsonConvert.SerializeObject(seting, Formatting.Indented);
 
@@ -97,24 +97,23 @@ namespace Client
                     using (FileStream fs = new FileStream(appDirectory+"\\Client.json", FileMode.OpenOrCreate))
                     {
                         Seting _aFile = System.Text.Json.JsonSerializer.Deserialize<Seting>(fs);
-                        Ip_adresss = _aFile.Ip_adress;
+                        Ip_adressss = _aFile.Ip_adress;
                     }
                 }
                 else
                 {
                     using (FileStream fileStream = new FileStream(appDirectory +"\\Client.json", FileMode.OpenOrCreate))
                     {
-                        Seting connect_Server_ = new Seting("192.168.0.112", 9595, 1);
-
-                        System.Text.Json.JsonSerializer.Serialize<Seting>(fileStream, connect_Server_);
+                     Seting connect_Server_ = new Seting("192.168.0.112", 9595, 1);
+                     System.Text.Json.JsonSerializer.Serialize<Seting>(fileStream, connect_Server_);
                     }
 
 
                     using (FileStream fileStream = new FileStream(appDirectory+"\\Client.json", FileMode.OpenOrCreate))
                     {
-                        Seting aFile = System.Text.Json.JsonSerializer.Deserialize<Seting>(fileStream);
-                        Ip_adresss = aFile.Ip_adress;
-                        Ip_adressss = Ip_adresss.ToString();
+                       Seting aFile = System.Text.Json.JsonSerializer.Deserialize<Seting>(fileStream);
+                       Ip_adresss = aFile.Ip_adress;
+                       Ip_adressss = Ip_adresss.ToString();
                     }
 
                 }

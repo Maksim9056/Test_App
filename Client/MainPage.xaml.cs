@@ -11,6 +11,11 @@ using Microsoft.Maui.Platform;
 using Client.Main;
 using System.Windows.Input;
 using System.Web;
+using System.Net.NetworkInformation;
+using System.Net;
+using System.IO;
+using System.Net.Mail;
+
 //using Microsoft.AspNetCore.Components.Navigation;
 
 
@@ -19,26 +24,58 @@ namespace Client
     public partial class MainPage : ContentPage
     {
         public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
-
+        CheckPing checkPing = new CheckPing();
         public MainPage()
         {
           
                 InitializeComponent();
                 BindingContext = this;
-         }
+                AddSettings();
+        }
 
-            //var rt = Shell.Current.CurrentState.Location.OriginalString;
-            //var parameters = System.Web.HttpUtility.ParseQueryString(rt);
-            //var sellValue = parameters.Get("sell");
 
-        
+        public void AddSettings()
+        {
+            try
+            {
+                var flyoutItemseting = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_seting"));
+                if (flyoutItemseting == null)
+                {
+                    // Создание пунктов меню класса
+                    var main = new ShellContent { Content = new Client.Project.Settings()};
+
+                    // Добавление пунктов меню в класс
+                    Shell.Current.Items.Add(new ShellSection { Title = "Настройки", Icon = "dotnet_bot.png", Route = "seting", Items = { main } });
+
+                    // Обработчик события при нажатии на пункт меню
+                    main.PropertyChanged += async (sender, e) =>
+                    {
+                        if (e.PropertyName == nameof(ShellContent.IsEnabled) && !main.IsEnabled)
+                        {
+                            // Переход обратно
+                            await Shell.Current.GoToAsync("admin");
+                        }
+                    };
+                }
+            }catch(Exception ex) 
+            {
+                DisplayAlert("Ошибка", ex.Message, "Ок");
+            }
+        }
+        //var rt = Shell.Current.CurrentState.Location.OriginalString;
+        //var parameters = System.Web.HttpUtility.ParseQueryString(rt);
+        //var sellValue = parameters.Get("sell");
+
+
         public CommandCL command = new CommandCL();
         public string Mail { get; set; }
         public string Password { get; set; }
 
 
+
         private void OnCounterClicked(object sender, EventArgs e)
         {
+
         }
 
         //
@@ -80,9 +117,37 @@ namespace Client
         /// <param name="e"></param>
         private async void CounterLog_Clicked(object sender, EventArgs e)
         {
-          
-                Ip_adress ip_Adress = new Ip_adress();
-                ip_Adress.CheckOS();
+        try
+        {
+          Ip_adress ip_Adress = new Ip_adress();
+         ip_Adress.CheckOS();
+
+         Ping pingSender = new Ping();
+         PingReply reply = pingSender.Send(ip_Adress.Ip_adressss,500);
+             string FileFS = "";
+           if (reply.Status == IPStatus.Success)
+           {
+                Console.WriteLine("Сервер доступен.");
+                   // await DisplayAlert("Уведомление", "Сервер выключен или недоступен!", "ОK");
+
+                    Галочка галочка1 = null;
+              using (MemoryStream stream = new MemoryStream())
+              {
+
+               Галочка галочка = new Галочка(1, $"{ip_Adress.Ip_adressss}");
+               var Result =      checkPing.CheckPingIp(галочка);
+               галочка1 = Result;
+              }
+
+              if(галочка1 == null)
+              {
+                 await DisplayAlert("Уведомление", "Сервер выключен или недоступен!", "ОK");
+
+              }
+              else
+              {
+
+
                 if (Mail == null)
                 {
                     await DisplayAlert("Уведомление", "Почта не пустая!", "ОK");
@@ -116,7 +181,7 @@ namespace Client
                                 else
                                 {
                                     //FileFS обьявляем для отправки на сервер
-                                    string FileFS = "";
+                            
                                     //Обьявляем MemoryStream 
                                     using (MemoryStream memoryStream = new MemoryStream())
                                     {
@@ -126,8 +191,11 @@ namespace Client
                                         JsonSerializer.Serialize<CheckMail_and_Password>(memoryStream, ss);
                                         //Декодировали в строку  memoryStream    класс запоаковали в json строку
                                         FileFS = Encoding.Default.GetString(memoryStream.ToArray());
-                                        //Отправляем на сервер  команду 003
-                                        Task.Run(async () => await command.Check_User_Possword(ip_Adress.Ip_adressss, FileFS, "003")).Wait();
+                                            
+
+
+                                            //Отправляем на сервер  команду 003
+                                            Task.Run(async () => await command.Check_User_Possword(ip_Adress.Ip_adressss, FileFS, "003")).Wait();
                                         //Значение почты пользователя  присваеваем по умолчанию почту для следущего входа пользователей
                                         Mail = null;
                                         //Значение пароля пользователя  присваеваем по умолчанию пароль для следущего входа пользователей 
@@ -158,35 +226,57 @@ namespace Client
                                                     var regis_Users = command.Travel_logout;
                                                     switch (regis_Users.Rechte)
                                                     {
-                                                        case 0:
-                                                            await Application.Current.MainPage.DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
-                                                            //var mainPage = new Users.Doc.DocExamFromTests.DocExamFromTests();
-                                                            //var navigationPage = new NavigationPage(mainPage);
-                                                            Client.Users.Users Name_user = new Client.Users.Users();
-                                                            Name_user.User_NAME(regis_Users);
-                                                            await Shell.Current.GoToAsync("user"); // Используйте URI для перехода к пользовательской странице
-                                                            break;
-                                                        case 1:
+                                                                case 0:
+                                                                    await Application.Current.MainPage.DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
+                                                                    //var mainPage = new Users.Doc.DocExamFromTests.DocExamFromTests();
+                                                                    //var navigationPage = new NavigationPage(mainPage);
+                                                                    // Client.Users.Users Name_user = new Client.Users.Users();
+
+                                                                    //Name_user.User_NAME(regis_Users);
+                                                                    await Navigation.PushAsync(new Client.Users.Users(regis_Users));
+                                                                    var flyoutItemhelp1 = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("login"));
+                                                                    if (flyoutItemhelp1 != null)
+                                                                    {
+                                                                        flyoutItemhelp1.IsVisible = false;
+                                                                    }
+
+                                                                    var flyoutItemseting1 = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_seting"));
+                                                                    if (flyoutItemseting1 != null)
+                                                                    {
+                                                                        flyoutItemseting1.IsVisible = false;
+                                                                    }
 
 
-                                                            var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("login"));
-                                                            if (flyoutItemhelp != null)
-                                                            {
-                                                                flyoutItemhelp.IsVisible = false;
+                                                                    //await Shell.Current.GoToAsync("user"); // Используйте URI для перехода к пользовательской странице
+                                                                    break;
+                                                                case 1:
+
+                                                                    await Navigation.PushAsync(new Admin());
+
+                                                                    await Application.Current.MainPage.DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
+                                                                    //Admin admin = new Admin();
+
+                                                                    var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("login"));
+                                                                    if (flyoutItemhelp != null)
+                                                                    {
+                                                                        flyoutItemhelp.IsVisible = false;
+                                                                    }
+
+                                                                    var flyoutItemseting = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_seting"));
+                                                                    if (flyoutItemseting != null)
+                                                                    {
+                                                                        flyoutItemseting.IsVisible = false;
+                                                                    }
+
+                                                                    //var adminPage = new ();
+                                                                    //var navigationPage2 = new NavigationPage(adminPage);
+                                                                    //   await Shell.Current.GoToAsync("admin");
+                                                                    // Используйте URI для перехода к административной странице
+                                                                    //Application.Current.MainPage = navigationPage2;
+                                                                    break;
                                                             }
-                                                            await Application.Current.MainPage.DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
-                                                            Admin admin = new Admin();
-                                                            await Navigation.PushAsync(new Admin( ));
-
-                                                            //var adminPage = new ();
-                                                            //var navigationPage2 = new NavigationPage(adminPage);
-                                                            //   await Shell.Current.GoToAsync("admin");
-                                                            // Используйте URI для перехода к административной странице
-                                                            //Application.Current.MainPage = navigationPage2;
-                                                            break;
+                                                        }
                                                     }
-                                                }
-                                            }
                                         }
                                     }
                                 }
@@ -199,8 +289,166 @@ namespace Client
                         }
                     }
                 }
-           
+
+                 
+              }
+           }
+           else
+           {
+              Галочка галочка1 = null;
+              using (MemoryStream stream = new MemoryStream())
+              {
+                Галочка галочка = new Галочка(1, $"{ip_Adress.Ip_adressss}");
+                var Result = checkPing.CheckPingIp(галочка);
+                галочка1 = Result;
+              }
+
+                 if (галочка1 == null)
+                 {
+                  await DisplayAlert("Уведомление", "Сервер выключен или недоступен!", "ОK");
+                 }
+                 else
+                 {
+
+
+                    if (Mail == null)
+                    {
+                            await DisplayAlert("Уведомление", "Почта не пустая!", "ОK");
+                    }
+                    else
+                    {
+                            //Проверяет почту пуста или нет
+                        if (string.IsNullOrEmpty(Mail))
+                        {
+                                await DisplayAlert("Уведомление", "Почта не заполнена!", "ОK");
+                        }
+                        else
+                        {
+                          //Регеулярное выражение
+                            string patern = "@.";
+                            //Регулярное выражение
+                            Regex regex = new Regex(patern);
+                           //Проверяет в Mail есть ли в строке это @ почту
+                           if (Regex.IsMatch(Mail, patern))
+                           {
+
+
+                              if (Password == null)
+                              {
+                                await DisplayAlert("Уведомление", "Пароль не заполнен!", "ОK");
+                              }
+                              else
+                              {
+                                  if (string.IsNullOrEmpty(Password))
+                                  {
+                                     await DisplayAlert("Уведомление", "Пароль не заполнен!", "ОK");
+                                  }
+                                  else
+                                  {
+                                   //FileFS обьявляем для отправки на сервер
+
+                                   //Обьявляем MemoryStream 
+                                       using (MemoryStream memoryStream = new MemoryStream())
+                                       {
+                                                //Заполняем класс CheckMail_and_Password для отправки на сервер
+                                                CheckMail_and_Password ss = new CheckMail_and_Password(Password, Mail);
+                                                //Серелизуем класс CheckMail_and_Password для отправки на сервер
+                                                JsonSerializer.Serialize<CheckMail_and_Password>(memoryStream, ss);
+                                                //Декодировали в строку  memoryStream    класс запоаковали в json строку
+                                                FileFS = Encoding.Default.GetString(memoryStream.ToArray());
+
+
+
+                                                //Отправляем на сервер  команду 003
+                                                Task.Run(async () => await command.Check_User_Possword(ip_Adress.Ip_adressss, FileFS, "003")).Wait();
+                                                //Значение почты пользователя  присваеваем по умолчанию почту для следущего входа пользователей
+                                                Mail = null;
+                                                //Значение пароля пользователя  присваеваем по умолчанию пароль для следущего входа пользователей 
+                                                Password = null;
+                                                nameEntry1.Text = null;
+                                                nameEntry9.Text = null;
+
+                                                //Ответ с сервера получаем 
+                                                if (command.Travel_logout == null)
+                                                {
+                                                    await DisplayAlert("Уведомление", "Такого пользователя нет!", "ОK");
+                                                }
+                                                else
+                                                {
+                                                    if (string.IsNullOrEmpty(command.Travel_logout.Employee_Mail))
+                                                    {
+                                                        await DisplayAlert("Уведомление", "Такого пользователя нет!", "ОK");
+
+                                                    }
+                                                    else
+                                                    {
+                                                        if (command.Travel_logout.Id == 0)
+                                                        {
+                                                            await DisplayAlert("Уведомление", "Пароль введен не верно!", "ОK");
+                                                        }
+                                                        else
+                                                        {
+                                                            var regis_Users = command.Travel_logout;
+                                                            switch (regis_Users.Rechte)
+                                                            {
+                                                                case 0:
+                                                                    await Application.Current.MainPage.DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
+                                                                    //var mainPage = new Users.Doc.DocExamFromTests.DocExamFromTests();
+                                                                    //var navigationPage = new NavigationPage(mainPage);
+                                                                    //Client.Users.Users Name_user = new Client.Users.Users();
+                                                                    //Name_user.User_NAME(regis_Users);
+
+                                                                    await Navigation.PushAsync(new Client.Users.Users (regis_Users));
+                                                                    //await Shell.Current.GoToAsync("user"); // Используйте URI для перехода к пользовательской странице
+                                                                    break;
+                                                                case 1:
+
+
+                                                                    var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("login"));
+                                                                    if (flyoutItemhelp != null)
+                                                                    {
+                                                                        flyoutItemhelp.IsVisible = false;
+                                                                    }
+
+                                                                    var flyoutItemseting = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_seting"));
+                                                                    if (flyoutItemseting != null)
+                                                                    {
+                                                                        flyoutItemseting.IsVisible = false;
+                                                                    }
+
+                                                                    await Navigation.PushAsync(new Admin());
+                                                                    await Application.Current.MainPage.DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
+
+                                                                    //var adminPage = new ();
+                                                                    //var navigationPage2 = new NavigationPage(adminPage);
+                                                                    //   await Shell.Current.GoToAsync("admin");
+                                                                    // Используйте URI для перехода к административной странице
+                                                                    //Application.Current.MainPage = navigationPage2;
+                                                                    break;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                        }
+                                    }
+                               }
+                            }
+                           else
+                           {
+                                    //Не проходит на почту действетульную
+                                    await DisplayAlert("Уведомление", "Ввели не почту!", "ОK");
+                           }
+                         }
+                        }
+                    }
+                  } //  await DisplayAlert("Ошибка", "Сервер недоступен.","Ок")
+           }
+           catch(Exception ex) 
+           {
+                await DisplayAlert("Ошибка","Сообщение" + ex.Message +"\n" + "Помощь:"+ex.HelpLink, "Ок");
+           }
         }
+
 
         /// <summary>
         /// Регистрация
@@ -298,6 +546,8 @@ namespace Client
                     {
                         flyoutItem.IsVisible = false;
                     }
+
+
                     var flyoutItemUser = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("User"));
                     if (flyoutItemUser != null)
                     {
@@ -311,8 +561,8 @@ namespace Client
 
                     //nameEntry9.Text = "Admin@Admin.ru";
                     //nameEntry1.Text = "Admin";
-                    nameEntry9.Text = "Полина@Admin.ru";
-                    nameEntry1.Text = "12";
+                    //nameEntry9.Text = "Полина@Admin.ru";
+                    //nameEntry1.Text = "12";
 
 
                 }

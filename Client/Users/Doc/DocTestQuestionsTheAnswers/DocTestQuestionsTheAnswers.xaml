@@ -46,7 +46,7 @@
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ListView  >
+                </ListView>
             </Grid>   
           </Border>
     </ContentPage.Content>

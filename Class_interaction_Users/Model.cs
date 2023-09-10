@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
+using static Class_interaction_Users.CommandCL;
 
 namespace Class_interaction_Users
 {
@@ -1090,7 +1091,7 @@ namespace Class_interaction_Users
         public List<Statictics> CheckStatickUserResults(User user)
         {
             List<Statictics> Statisk = new List<Statictics>();
-                //List<UserExams> userExamsList = new List<UserExams>();
+            //List<UserExams> userExamsList = new List<UserExams>();
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 JsonSerializer.Serialize<User>(memoryStream, user);
@@ -1099,14 +1100,43 @@ namespace Class_interaction_Users
 
             if (command.statictics == null)
             {
-              //  Statisk = null;
+                //  Statisk = null;
             }
             else
             {
-             //   command.statictics
+                //   command.statictics
                 Statisk = command.statictics;
             }
             return Statisk;
+        }
+    }
+
+    public class CheckPing
+    {
+
+        CheckPingsResult checkPing = new CheckPingsResult();
+
+        public Галочка CheckPingIp(Галочка user)
+        {
+            Галочка галочка = null;
+            //List<UserExams> userExamsList = new List<UserExams>();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                JsonSerializer.Serialize<Галочка>(memoryStream, user);
+                Task.Run(async () => await checkPing.CheckpingIpAdress(user.Value, Encoding.Default.GetString(memoryStream.ToArray()), "056")).Wait();
+            }
+
+            if (checkPing.statictics == null)
+            {
+                //  Statisk = null;
+              
+            }
+            else
+            {
+                //   command.statictics
+                галочка = checkPing.statictics;
+            }
+            return галочка;
         }
     }
     public class BooleanToStringConverter : IValueConverter

@@ -8,32 +8,32 @@ using static Class_interaction_Users.CheckMail_and_Password;
 
 namespace Server_Test_Users
 {
-    internal  class Command
+    internal class Command
     {
-        
 
-        public  void CheckMail_and_Passwords(byte[] arg1, GlobalClass @class, NetworkStream stream)
+
+        public void CheckMail_and_Passwords(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
-          
+
             try
             {
                 CheckMail_and_Password? person3 = JsonSerializer.Deserialize<CheckMail_and_Password>(arg1);
 
 #pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-                var Value =        @class.Check_login_amail(person3);
+                @class.Check_login_amail(person3);
 #pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
 
                 // @class.Regis_users
                 using (MemoryStream ms = new MemoryStream())
                 {
 #pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-                    JsonSerializer.Serialize<Regis_users>(ms, Value);
+                    JsonSerializer.Serialize<Regis_users>(ms, @class.Travel);
 #pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-                              //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+                    //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -73,11 +73,11 @@ namespace Server_Test_Users
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        Regis_users regis_Users = new Regis_users(0,"","",0,"");
+                        Regis_users regis_Users = new Regis_users(0, "", "", 0, "");
 
                         JsonSerializer.Serialize<Regis_users>(ms, regis_Users);
                         //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
-                       
+
                         stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                     }
                 }
@@ -94,12 +94,12 @@ namespace Server_Test_Users
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
 
-            
+
 
         }
 
@@ -109,7 +109,7 @@ namespace Server_Test_Users
             try
             {
                 @class.Check_Tests();
-           
+
                 if (@class.Travels_test == null)
                 {
                     using (MemoryStream ms = new MemoryStream())
@@ -128,8 +128,8 @@ namespace Server_Test_Users
                         stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                     }
                 }
-            
-            
+
+
             }
             catch (Exception ex)
             {
@@ -140,7 +140,7 @@ namespace Server_Test_Users
         public void Sampling_Users_Correspondence(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
 
-         //   Test
+            //   Test
         }
 
         public void Search_Image(byte[] arg1, GlobalClass @class, NetworkStream stream)
@@ -153,7 +153,7 @@ namespace Server_Test_Users
 
             using (MemoryStream ms = new MemoryStream())
             {
-                
+
                 Questionss List_Quest = new Questionss(@class.questionss);
 
                 JsonSerializer.Serialize<Questionss>(ms, List_Quest);
@@ -165,7 +165,7 @@ namespace Server_Test_Users
            // @class.Regis_user(person3);
         }
 
-        public  void Search_Image_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        public void Search_Image_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
         }
 
@@ -176,9 +176,9 @@ namespace Server_Test_Users
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    Regis_users [] regis_Users = new Regis_users[] {};
-        //            Regis_users regis_Users = new Regis_users(0, "", "", 0, "2");
-                    Regis_users_test regis_Users_Test = new Regis_users_test {regis = regis_Users };
+                    Regis_users[] regis_Users = new Regis_users[] { };
+                    //            Regis_users regis_Users = new Regis_users(0, "", "", 0, "2");
+                    Regis_users_test regis_Users_Test = new Regis_users_test { regis = regis_Users };
                     JsonSerializer.Serialize<Regis_users_test>(ms, regis_Users_Test);
                     //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
@@ -705,7 +705,7 @@ namespace Server_Test_Users
         {
             try
             {
-         var Value=       @class.Check_Roles();
+                var Value = @class.Check_Roles();
 
 
                 if (Value == 1)
@@ -729,7 +729,8 @@ namespace Server_Test_Users
                     }
                 }
                 //Проверяем должности  какие есть и отправляем клиенту 
-            }catch { }
+            }
+            catch { }
 
 
         }
@@ -755,7 +756,7 @@ namespace Server_Test_Users
             {
                 Exams_Check exams_Check = new Exams_Check();
                 exams_Check.save_Results = @class.save_Results;
-              
+
                 JsonSerializer.Serialize<Exams_Check>(ms, exams_Check);
                 stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
             }
@@ -817,6 +818,25 @@ namespace Server_Test_Users
 
         }
 
-  
+
+        public void CheckPingIpAdress(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            try
+            {
+
+                Галочка CrTest = JsonSerializer.Deserialize<Галочка>(arg1);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+
+                    JsonSerializer.Serialize<Галочка>(ms, CrTest);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+        }
     }
 }

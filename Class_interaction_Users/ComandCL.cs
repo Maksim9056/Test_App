@@ -1758,10 +1758,10 @@ namespace Class_interaction_Users
         public class SaveTest
         {
             public async Task<string> SaveClass(string server, string fs, string command)
-            {                    
+            {
 
                 try
-                {   
+                {
                     CommandCL ClassInstance = new CommandCL();
                     using (TcpClient client = new TcpClient(server, 9595))
 
@@ -1807,20 +1807,20 @@ namespace Class_interaction_Users
                 try
                 {
                     CommandCL ClassInstance = new CommandCL();
-                
-                        string responseDat = await ClassInstance.SendClass(server, fs, command);
-                        if (string.IsNullOrEmpty(responseDat))
-                        {
-                            return null;
-                        }
-                        else
-                        {
 
-                        Exams_Check exams_Check =  JsonSerializer.Deserialize<Exams_Check>(responseDat);
+                    string responseDat = await ClassInstance.SendClass(server, fs, command);
+                    if (string.IsNullOrEmpty(responseDat))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+
+                        Exams_Check exams_Check = JsonSerializer.Deserialize<Exams_Check>(responseDat);
                         exams_Check1 = exams_Check;
-                        }
+                    }
 
-                    
+
                 }
                 catch (SocketException e)
                 {
@@ -1894,6 +1894,45 @@ namespace Class_interaction_Users
                     }
 
 
+                }
+                catch (SocketException e)
+                {
+                    Console.WriteLine($"SocketException: {e.Message}");
+
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine($"Exception: {e.Message}");
+                }
+                return string.Empty;
+            }
+        }
+
+
+        public class CheckPingsResult
+        {
+
+            public Галочка statictics { get; set; }
+
+            public async Task<string> CheckpingIpAdress(string server, string fs, string command)
+            {
+
+                try
+                {
+                    CommandCL ClassInstance = new CommandCL();
+
+                    string responseDat = await ClassInstance.SendClass(server, fs, command);
+                    if (string.IsNullOrEmpty(responseDat))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+
+                        Галочка exams_Check = JsonSerializer.Deserialize<Галочка>(responseDat);
+
+                        statictics = exams_Check;
+                    }
                 }
                 catch (SocketException e)
                 {

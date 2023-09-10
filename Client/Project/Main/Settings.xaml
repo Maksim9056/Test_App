@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.Project.Settings"
+             Title="Настройки">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
+                <StackLayout VerticalOptions="CenterAndExpand" Margin="0,0,0,20">
+                    <Label Text="Адрес:" FontSize="18" FontAttributes="Bold" />
+                    <Entry x:Name="AddressEntry" Placeholder="Введите адрес"  Keyboard="Text"     TextChanged ="AddressEntry_TextChanged"/>
+                </StackLayout>
+
+                <StackLayout VerticalOptions="CenterAndExpand" Margin="0,-190,0,20">
+                    <Label Text="Порт:" FontSize="18" FontAttributes="Bold" />
+                    <Entry x:Name="PortEntry" Placeholder="Введите порт" Keyboard="Text"     TextChanged="PortEntry_TextChanged" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button Text="Отмена" Clicked="CancelButtonClicked" />
+                    <Button Text="Сохранить" Clicked="SaveButtonClicked" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

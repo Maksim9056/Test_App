@@ -11,31 +11,34 @@ public partial class Users : ContentPage
     //public static string NameUsers { get; set; }
     //public static int id { get; set; }
     public static User user { get; set; }
-
+    public Regis_users regis_Users { get; set; }
     public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
 
-    public Users()
+    public Users(Regis_users name )
     {
         InitializeComponent();
-    }
 
-    public void User_NAME(Regis_users name)
-    {
-
+        regis_Users = name;
         user = new User
         {
             Id = name.Id,
             Password = name.Password,
             Name_Employee = name.Name_Employee
-            ,
+              ,
             Employee_Mail = name.Employee_Mail
-          ,
+              ,
             Id_roles_users = name.Rechte
 
 
         }
-        ;
+   ;
+    }
+
+    public void User_NAME(Regis_users name)
+    {
+
+   
     }
     private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
@@ -94,14 +97,14 @@ public partial class Users : ContentPage
         //    flyoutItemUser.IsVisible = true;
         //}
 
-        NameUser.Text = user.Name_Employee;
+  
 
 
         var flyoutItemUser = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_user2"));
         if (flyoutItemUser == null)
         {
             // Создание пунктов меню класса
-            var main = new ShellContent { Content = new Client.Users.Users() };
+            var main = new ShellContent { Content = new Client.Users.Users(regis_Users) };
             // Добавление пунктов меню в класс
             Shell.Current.Items.Add(new ShellSection { Title = "Пользователь", Items = { main }, Icon = "dotnet_bot.png", Route = "user2" });
 

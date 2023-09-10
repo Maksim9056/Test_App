@@ -41,7 +41,7 @@
 	  <AppInstallerUri>C:\Development\1</AppInstallerUri>
 	  <HoursBetweenUpdateChecks>24</HoursBetweenUpdateChecks>
 	  <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-	  <PackageCertificateThumbprint>2210116F1717A4FE45EC73F7571A4D152D2483E5</PackageCertificateThumbprint>
+	  <PackageCertificateThumbprint>A34B4F10079DE25D745E5C1CA6D20F182A9CA5EF</PackageCertificateThumbprint>
 	  <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	</PropertyGroup>
 
@@ -245,6 +245,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefTest\TestEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Project\Main\Settings.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefUser\UserCreate.xaml">
