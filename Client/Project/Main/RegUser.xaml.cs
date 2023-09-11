@@ -79,131 +79,59 @@ public partial class RegUser : ContentPage
         Password1 = nameEntry2.Text;
     }
 
-    /// <summary>
-    ///Регестрация и проверки 
-    /// </summary>
-    private async void Button_Clicked(object sender, EventArgs e)
+    public async void Reg()
     {
-
-        //Пароль сравниваем если пароли одинаковые то отправляем на сервер
-   
-        if (Password == Password1)
+        if (Password1 == null || Password1 == "")
         {
-
-            if (string.IsNullOrEmpty(Password1))
-            {
-                await DisplayAlert("Уведомление", "Пароль на подтверждения не заполнен!", "ОK");
-            }
-            else
-            {
-
-                //Проверяет пароль   пустой ли или значение есть з
-                if (string.IsNullOrEmpty(Password))
-                {
-                    await DisplayAlert("Уведомление", "Пароль не заполнен!", "ОK");
-
-                }
-                else
-                {
-                    //Проверяет пароль  пустой или полный и пароль подтверждения пустой ли или значение есть
-
-                    if (string.IsNullOrEmpty(Password) && string.IsNullOrEmpty(Password1))
-                    {
-                        await DisplayAlert("Уведомление", "Пароль и пароль  подтверждения не заполнен!", "ОK");
-                    }
-                    else 
-                    {
-                        //Проверяет имя пользователя  пустой или есть имя пользователя
-                        if (string.IsNullOrEmpty(User_Name))
-                        {
-                            await DisplayAlert("Уведомление", "Имя не заполнено", "ОK");
-                        }
-                        else
-                        {
-                            //Проверяет разрешение на создания тестов
-                            if (Rechte == null)
-                            {
-                                await DisplayAlert("Уведомление", "Не заполнено разрешение!", "ОK");
-
-                            }
-                            else
-                            {
-                                //Проверяет почту пуста или нет
-                                if (string.IsNullOrEmpty(Mail))
-                                {
-                                    await DisplayAlert("Уведомление", "Почта не заполнена!", "ОK");
-                                }
-                                else
-                                {
-                                    //Регеулярное выражение
-                                    string patern = "@.";
-                                    //Регулярное выражение
-                                    Regex regex =new Regex(patern);
-                                    //      MatchCollection matches = regex.Matches(Mail);
-
-                                    //Проверяет в Mail есть ли в строке это @ почту
-                                    if (Regex.IsMatch(Mail, patern))
-                                    {
-                                        //Соберает класс
-                                        using (MemoryStream Reg_user_Dispons = new MemoryStream())
-                                        {
-                                            CommandCL command = new CommandCL();
-                                            string FileFS = "";
-                                            using (MemoryStream fs = new MemoryStream())
-                                            {
-                                                Regis_users tom = new Regis_users(0, User_Name, Password, Convert.ToInt32(Rechte), Mail);
-                                                JsonSerializer.Serialize<Regis_users>(fs, tom);
-                                                FileFS = Encoding.Default.GetString(fs.ToArray());
-                                            }
-                                            //command.Reg_User(IP_ADRES.Ip_adress, FileFS, "002");
-
-                                            //Отправляет на сервер
-                                            Task.Run(async () => await command.Reg_User(Ip_adress.Ip_adresss, FileFS, "002")).Wait();
-                                            //Получаем из сервера и фильтруем
-                                            var Message = CommandCL.Travel_Regis_users_message;
-                                            //Фильтруем по имени 
-                                            if (Message.Name_Employee == User_Name)
-                                            {
-                                                //
-                                                await DisplayAlert("Уведомление", "Пользователь зарегистровался!", "ОK");
-                                                //Выводим успешная регистрация и закрываем эту страницу и преходи на вход!
-                                                await Navigation.PushAsync(new MainPage());
-                                             
-                                   
-
-                                            }
-                                            else
-                                            {
-                                                //Есть такой Пользователь то выводим что имя занято
-                                                await DisplayAlert("Уведомление", "Пользователь такой уже есть!", "ОK");
-                                                //обрабатываем  пишем регестрация  не прошла и что он свои данные обратно данные ввел
-                                            }
-
-                                        }
-                                    }
-                                    else
-                                    {
-                                        //Не проходит на почту действетульную
-                                        await DisplayAlert("Уведомление", "Ввели не почту!", "ОK");
-
-                                    }                                    
-                                } 
-                            }
-                        }
-                    }
-                }
-            }
+            await DisplayAlert("Уведомление", "Пароль на подтверждение не заполнен!", "ОK");
+        }
+        else if (Password == null || Password == "")
+        {
+            await DisplayAlert("Уведомление", "Пароль не заполнен!", "ОK");
+        }
+        else if (User_Name == null || User_Name == "")
+        {
+            await DisplayAlert("Уведомление", "Имя не заполнено", "ОK");
+        }
+        else if (Rechte == null)
+        {
+            await DisplayAlert("Уведомление", "Не заполнено разрешение!", "ОK");
+        }
+        else if (Mail == null || Mail == "")
+        {
+            await DisplayAlert("Уведомление", "Почта не заполнена!", "ОK");
+        }
+        else if (!Regex.IsMatch(Mail, "@."))
+        {
+            await DisplayAlert("Уведомление", "Некорректный адрес электронной почты!", "ОK");
         }
         else
         {
-           
-          
-         //Выводим что пароль и подтверждающий пароль не одинаковый
-         await DisplayAlert("Уведомление", "Пароль и пароль  подтверждения не одинаковые!", "ОK");
-
-            
-            //Обрабатываем если пароль не одинаковый
+            using (MemoryStream Reg_user_Dispons = new MemoryStream())
+            {
+                CommandCL command = new CommandCL();
+                string FileFS = "";
+                using (MemoryStream fs = new MemoryStream())
+                {
+                    Regis_users tom = new Regis_users(0, User_Name, Password, Convert.ToInt32(Rechte), Mail);
+                    JsonSerializer.Serialize<Regis_users>(fs, tom);
+                    FileFS = Encoding.Default.GetString(fs.ToArray());
+                }
+                Task.Run(async () => await command.Reg_User(Ip_adress.Ip_adresss, FileFS, "002")).Wait();
+                var Message = CommandCL.Travel_Regis_users_message;
+                // Остальной код для фильтрации по имени
+            }
         }
+    }
+    /// <summary>
+    ///Регестрация и проверки 
+    /// </summary>
+    private  void Button_Clicked(object sender, EventArgs e)
+    {
+        Reg();
+        //Пароль сравниваем если пароли одинаковые то отправляем на сервер
+
+      
     }
 
     private void nameEntry1_TextChanged_1(object sender, TextChangedEventArgs e)
@@ -245,35 +173,48 @@ public partial class RegUser : ContentPage
     
     }
 
-    private async void languagePicker1_SelectedIndexChanged(object sender, EventArgs e)
+    //private async void languagePicker1_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+      
+    //}
+
+   public async void Picker()
     {
-        Task.Run(async () => await command.Get_Image(Ip_adress.Ip_adresss, "", "006")).Wait();
-        var Client = CommandCL.Roles_Accept_Client;
-        if (Client.Test.Count() == 1)
+        try
         {
-            await DisplayAlert("Уведомление", "Ролей нет!", "ОK");
+            Ip_adress ip_Adress = new Ip_adress();
+            ip_Adress.CheckOS();
+            Task.Run(async () => await command.Get_Image(ip_Adress.Ip_adressss, "", "006")).Wait();
+            var Client = CommandCL.Roles_Accept_Client;
+            if (Client.Test.Count() == 1)
+            {
+                await DisplayAlert("Уведомление", "Ролей нет!", "ОK");
+            }
+            else
+            {
+                string[] strings = new string[CommandCL.Roles_Accept_Client.Test.Count()];
+                for (int i = 0; i < strings.Length; i++)
+                {
+                    strings[i] = CommandCL.Roles_Accept_Client.Test[i].ToString();
+                }
+
+
+             
+                languagePicker1.Items.Add("Пользователь");
+
+
+         //       await DisplayAlert("Уведомление", "Роль есть", "ОK");
+            }
         }
-        else
+        catch(Exception ex)
         {
-            string[] strings = new string[CommandCL.Roles_Accept_Client.Test.Count()];
-            for (int i = 0; i < strings.Length; i++)
-            {
-                strings[i] = CommandCL.Roles_Accept_Client.Test[i].ToString();
-            }
-            for (int i = 0; i < strings.Length; i++)
-            {
+            await DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
 
-                languagePicker1.Items.Add(strings[i]);
-
-            }
-
-            await DisplayAlert("Уведомление", "Роль есть", "ОK");
         }
     }
-
     private void ContentPage_Loaded(System.Object sender, System.EventArgs e)
     {
-
+        Picker();
         //Application.Current.MainPage.Window.Width = 413.8d;
         //Application.Current.MainPage.Window.Height = 520.8d;
 
@@ -285,13 +226,19 @@ public partial class RegUser : ContentPage
 
     }
 
-    private void Button_Clicked_1(System.Object sender, System.EventArgs e)
+    private async void Button_Clicked_1(System.Object sender, System.EventArgs e)
     {
         // Создание NavigationPage с главной страницей
-        var mainPage = new MainPage();
-        var navigationPage = new NavigationPage(mainPage);
+        //var mainPage = new MainPage();
+        //var navigationPage = new NavigationPage(mainPage);
 
-        Application.Current.MainPage = navigationPage;
+        //Application.Current.MainPage = navigationPage;
+        await Navigation.PushAsync(new MainPage());
+
+    }
+
+    private void languagePicker1_SelectedIndexChanged(object sender, EventArgs e)
+    {
 
     }
 }

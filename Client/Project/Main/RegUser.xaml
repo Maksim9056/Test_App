@@ -1,122 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Client.Main.RegUser"
-             Title ="Регистрация" BackgroundColor="White" 
-             Loaded="ContentPage_Loaded">
-
-    <VerticalStackLayout
-     Padding="5">
-
-        <Grid >
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Client.Main.RegUser" Title="Регистрация" BackgroundColor="White" Loaded="ContentPage_Loaded">
+    <VerticalStackLayout Padding="5">
+        <Grid>
             <!--<Border Stroke="Gray" BackgroundColor="#e1e1e1" WidthRequest="400" HeightRequest="425">-->
-                
-                <StackLayout Padding="0" Margin="10" BackgroundColor="White" >
-                       
-                           <Entry x:Name="nameEntry3"
-                            FontSize="16"
-                            TextChanged="nameEntry1_TextChanged_2"
-                            Placeholder ="Введите имя"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center"
-                            HeightRequest="20"
-                            WidthRequest="310"
-                            Keyboard="Text"
-                            Margin="0, 20, 0,0"
+            <StackLayout Padding="0" Margin="10" BackgroundColor="White">
+                <Entry x:Name="nameEntry3" FontSize="16" TextChanged="nameEntry1_TextChanged_2" Placeholder="Введите имя" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="310" Keyboard="Text" Margin="0, 20, 0,0" />
 
-                           />
-                    
+                <Entry x:Name="nameEntry" FontSize="16" TextChanged="nameEntry_TextChanged" Placeholder="Введите электроную почту" Keyboard="Email" Margin="0, 20, 0,0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="310" />
 
-                         <Entry x:Name="nameEntry" FontSize="16"
-                          TextChanged="nameEntry_TextChanged"
-                          Placeholder ="Введите электроную почту"
-                          Keyboard="Email"
-                           Margin="0, 20, 0,0"
-                          VerticalOptions="Center"
-                          HorizontalOptions="Center"
-                          HeightRequest="20"
-                          WidthRequest="310"
-                          />
+                <Entry x:Name="nameEntry1" FontSize="16" Placeholder="Введите пароль" Margin="0, 20, 0,0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="310" TextChanged="nameEntry1_TextChanged" Keyboard="Text" />
 
-                          <Entry x:Name="nameEntry1" FontSize="16"
-                           Placeholder ="Введите пароль"
-                           Margin="0, 20, 0,0"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center"
-                           HeightRequest="20"
-                           WidthRequest="310"
-                           TextChanged="nameEntry1_TextChanged"
-                           Keyboard ="Text"
-                           />
+                <Entry x:Name="nameEntry2" FontSize="16" Placeholder="Введите пароль" Margin="0, 20, 0,0" TextChanged="nameEntry2_TextChanged" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="310" Keyboard="Text" />
 
-                          <Entry x:Name="nameEntry2" FontSize="16"
-                            Placeholder ="Введите пароль"
-                        Margin="0, 20, 0,0"
-                            TextChanged="nameEntry2_TextChanged"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center"
-                            HeightRequest="20"
-                            WidthRequest="310"
-                            Keyboard ="Text"
-                          />
-        
-                   <StackLayout Padding="10 " Margin="10" >
-            
-                       <Label x:Name="header"
-                        Text="Выберите Роль" 
-                              FontSize="16"
-                        VerticalOptions="Fill"
-                        HorizontalOptions="Fill"
-                        HeightRequest="20"
-                        WidthRequest="310"
-                        SizeChanged="header_SizeChanged"
-                        Margin="0, 0, 0,0"
-                       />
-                        <Picker x:Name="languagePicker1" 
-                       SelectedIndexChanged ="languagePicker1_SelectedIndexChanged"
-                       VerticalOptions="Fill"
-                       HorizontalOptions="Fill"
-                       HeightRequest="20"
-                       WidthRequest="310"
-                       FontSize="20"
-                      Margin="0,0,0,0"
-                       HandlerChanged="header_SizeChanged"
-                       ParentChanged="languagePicker_ParentChanged">
-                           <Picker.Items>
-                    
-                   
-                            </Picker.Items>
-                        </Picker>
-           
-                   </StackLayout>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                <StackLayout Padding="10 " Margin="10">
+                    <Label x:Name="header" Text="Выберите Роль" FontSize="16" VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="20" WidthRequest="310" SizeChanged="header_SizeChanged" Margin="0, 0, 0,0" />
 
-                        <Button
-                            Text="Предыдущую страницу"
-                            Clicked="Button_Clicked_1"
-                            VerticalOptions="FillAndExpand"
-                            HorizontalOptions="FillAndExpand"
-                            HeightRequest="40"
-                            Margin="10"
-                         />
-
-                        <Button
-                            Text="Зарегистроваться"
-                            Clicked="Button_Clicked"
-                            VerticalOptions="FillAndExpand"
-                            HorizontalOptions="FillAndExpand"
-                            HeightRequest="40"
-                            Margin="10"
-                            Grid.Column="1"
-                        />
-                    </Grid>
+                    <Picker x:Name="languagePicker1" SelectedIndexChanged="languagePicker1_SelectedIndexChanged" VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="20" WidthRequest="310" FontSize="20" Margin="0,0,0,0" HandlerChanged="header_SizeChanged" ParentChanged="languagePicker_ParentChanged">
+                        <Picker.Items>
+                        </Picker.Items>
+                    </Picker>
                 </StackLayout>
-            <!--</Border>-->
-         </Grid>
+            </StackLayout>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
 

@@ -342,19 +342,26 @@ namespace Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private   void CounterBtn_Clicked_1(object sender, EventArgs e)
+        private async  void CounterBtn_Clicked_1(object sender, EventArgs e)
         {
             try
             {
 
                 // Создание NavigationPage с главной страницей
-                var mainPage = new RegUser();
-                var navigationPage = new NavigationPage(mainPage);
-
-                Application.Current.MainPage = navigationPage;
-
-
-
+                //var mainPage = new ;
+                //var navigationPage = new NavigationPage(mainPage);
+                Ip_adress ip_Adress = new Ip_adress();
+                ip_Adress.CheckOS();
+                Ping pingSender = new Ping();
+                PingReply reply = pingSender.Send(ip_Adress.Ip_adressss, 500);
+                if (reply.Status == IPStatus.Success)
+                {
+                    RegUser(ip_Adress);
+                }
+                else
+                {
+                    RegUser(ip_Adress);
+                }
             }
             catch
             {
@@ -378,6 +385,30 @@ namespace Client
             //  вход_В_Учетную_Запись.DisplayAlert(Title,"Открывает","");
         }
 
+        public async void RegUser(Ip_adress ip_Address)
+        {
+            try
+            {
+                Галочка галочка = null;
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    Галочка галочка1 = new Галочка(1, $"{ip_Address.Ip_adressss}");
+                    var Result = checkPing.CheckPingIp(галочка1);
+                    галочка = Result;
+                }
+                if (галочка == null)
+                {
+                    await DisplayAlert("Уведомление", "Сервер выключен или недоступен!", "ОK");
+                    return;
+                }
+                await Navigation.PushAsync(new RegUser());
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
+
+            }
+        }
         private void nameEntry_TextChanged_1(object sender, TextChangedEventArgs e)
         {
         }

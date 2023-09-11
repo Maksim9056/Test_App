@@ -234,6 +234,16 @@ namespace Server_Test_Users
                     db.SaveChanges();
                 }
 
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // создаем два объекта User
+
+                    Roles user1 = new Roles { Name_roles = "Пользователь" };
+                    // добавляем их в бд
+                    db.Roles.AddRange(user1);
+                    db.SaveChanges();
+                }
+
                 string Email = "Admin@Admin.ru";
                 DateTime dateTime = DateTime.Now;
                 var data = $"{dateTime:F}";
@@ -669,8 +679,10 @@ namespace Server_Test_Users
             using (ApplicationContext db = new ApplicationContext())
             {
                 // получаем объекты из бд и выводим на консоль
-                var users = db.Roles.Count();
-                Count_roles = users;
+                var users = db.Roles.FirstOrDefault();
+
+          
+           //     Count_roles = users;
                 // Console.WriteLine("Users list:");
                 //foreach (int  u in users)
                 //{
@@ -699,7 +711,7 @@ namespace Server_Test_Users
                 }
             }
             Count_Roles = Count_roles;
-            return Count_Roles;
+            return Count_Roles = 0;
         }
 
         public void Check_Questin()
