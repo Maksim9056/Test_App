@@ -33,6 +33,7 @@ public partial class Users : ContentPage
 
         }
    ;
+        NameUser.Text = name.Name_Employee;
     }
 
     public void User_NAME(Regis_users name)

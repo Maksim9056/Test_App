@@ -44,16 +44,16 @@
 	  <PackageCertificateThumbprint>A34B4F10079DE25D745E5C1CA6D20F182A9CA5EF</PackageCertificateThumbprint>
 	  <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	</PropertyGroup>
-
+	
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android33.0|AnyCPU'">
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <DebugSymbols>False</DebugSymbols>
-	  <EnableLLVM>False</EnableLLVM>
-	  <TrimMode>copyused</TrimMode>
-	  <RunAOTCompilation>False</RunAOTCompilation>
-	  <PublishTrimmed>False</PublishTrimmed>
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
+		<DebugSymbols>False</DebugSymbols>
+		<EnableLLVM>False</EnableLLVM>
+		<TrimMode>copyused</TrimMode>
+		<RunAOTCompilation>False</RunAOTCompilation>
+		<PublishTrimmed>False</PublishTrimmed>
+		<IncrementalDeployment>true</IncrementalDeployment>
 	</PropertyGroup>
-
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android33.0|AnyCPU'">
 	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	  <EnableLLVM>False</EnableLLVM>

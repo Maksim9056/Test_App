@@ -201,8 +201,18 @@ public partial class DocTestsFromQuestions : ContentPage
         public Command DelCommand { get; set; }
     }
 
-    private void GoBack(object sender, EventArgs e)
+    private async void GoBack(object sender, EventArgs e)
     {
+        try
+        {
+
+            await Navigation.PopAsync();
+
+        }
+        catch
+        {
+
+        }
         //if (Application.Current.MainPage is NavigationPage navigationPage)
         //{
         //    navigationPage.Navigation.PopAsync();

@@ -1944,8 +1944,16 @@ namespace Server_Test_Users
                                 var userExams = db.Save_Results.FirstOrDefault(ue => ue.Exam_id == examsTests[j].Exams && ue.User_id == user1 &&
                                 ue.Name_Test == examsTests[j].Test && ue.Questions == TestQuestionListTest[l].IdQuestions);
 
-                                    Result = Result + userExams.Resukts_exam;
-                               }
+                                    if(userExams == null)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        Result = Result + userExams.Resukts_exam;
+
+                                    }
+                                }
 
                                 int Средний_балл = 0;
                                 if (Result == 0)

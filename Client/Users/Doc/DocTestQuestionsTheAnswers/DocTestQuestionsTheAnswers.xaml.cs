@@ -50,7 +50,7 @@ public partial class DocTestQuestionsTheAnswers : ContentPage
     //    await DisplayAlert("Выбранный вопрос", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
 
         // var selectedTestQuestion = (RefQuestionAnswer)e.SelectedItem;
-        await DisplayAlert("Выбранный ответ", selectedTestQuestion.TestQuestion.IdQuestions.AnswerTrue, "OK");
+        await DisplayAlert("Выбранный ответ", selectedTestQuestion.TestQuestion.IdQuestions.QuestionName, "OK");
       //  questions1.Add(selectedTestQuestion.TestQuestion.IdQuestions);
 
         if (!questions1.Any(q => q.QuestionName == selectedTestQuestion.TestQuestion.IdQuestions.QuestionName))

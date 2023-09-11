@@ -261,7 +261,8 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
         {
             DisplayAlert("Сохранен тест", "Завершен тест !", "Oк");
 
-            Navigation.PushAsync(new Doc.DocPersonalCabinet.DocPersonalCabinet(CurrrentUser, Test, Exams));
+            Regis_users regis_Users = new Regis_users() { Id = CurrrentUser.Id,Employee_Mail = CurrrentUser.Employee_Mail,Name_Employee = CurrrentUser.Name_Employee,Password = CurrrentUser.Password,Rechte =1 };
+            Navigation.PushAsync(new Client.Users.Users(regis_Users));
         }
         else
         {

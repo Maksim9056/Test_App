@@ -21,13 +21,17 @@ public partial class DocPersonalAchievement : ContentPage
 
         for(int i = 0; i < Result.Count(); i++)
         {
-            chartEntries[i] = new ChartEntry
-            {            
-                Text = Result[i].Exams.Name_exam,
-               Value = Result[i].Count,
-               Color  = Color.FromArgb("#6023FF"),
-                
-            };
+
+      
+
+                chartEntries[i] = new ChartEntry
+                {
+                    Text = Result[i].Exams.Name_exam,
+                    Value = Result[i].Count,
+                    Color = Color.FromArgb("#6023FF"),
+
+                };
+            
 
         }
         BindingContext = chartEntries;

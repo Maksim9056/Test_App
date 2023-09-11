@@ -12,8 +12,7 @@ public partial class Admin : ContentPage
     public Admin()
 	{
 		InitializeComponent();
-    
-
+        BindingContext = this;
     }
 
     /// <summary>
@@ -143,34 +142,166 @@ public partial class Admin : ContentPage
     //Для авторизации учетной записи
     private  async void GoBack(object sender, EventArgs e)
     {
+        try
+        {
+            //var flyoutItem = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("admin"));
+            //if (flyoutItem != null)
+            //{
+            //    flyoutItem.IsVisible = false;
+            //}
+            //var flyoutItemUser = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("User"));
+            //if (flyoutItemUser != null)
+            //{
+            //    flyoutItemUser.IsVisible = false;
+            //}
+            //var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_admin"));
+            //if (flyoutItemhelp != null)
+            //{
+            //    flyoutItemhelp.IsVisible = false;
+            //}
 
-        //var flyoutItem = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("admin"));
-        //if (flyoutItem != null)
-        //{
-        //    flyoutItem.IsVisible = false;
-        //}
-        //var flyoutItemUser = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("User"));
-        //if (flyoutItemUser != null)
-        //{
-        //    flyoutItemUser.IsVisible = false;
-        //}
-        //var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_admin"));
-        //if (flyoutItemhelp != null)
-        //{
-        //    flyoutItemhelp.IsVisible = false;
-        //}
+
+            // await Shell.Current.Navigation.PopAsync();
+
+            //  Navigation.PopAsync();
+
+          await   Navigation.PushAsync(new MainPage());
+
+          Shedow();
+
+      
+
+            // await Navigation.PopToRootAsync();
 
 
-        // await Shell.Current.Navigation.PopAsync();
+            //if (Application.Current.MainPage is NavigationPage navigationPage)
+            //{
+            //     Shell.Current.GoToAsync("//admin");
+            //    navigationPage.Navigation.PopAsync();
+            //}
+        }
+        catch(Exception ex) 
+        {
+        await    DisplayAlert("Ошибка", ex.Message, "Ок");
 
-        //  Navigation.PopAsync();
-        await Navigation.PushAsync(new MainPage());
+        }
 
-        //if (Application.Current.MainPage is NavigationPage navigationPage)
-        //{
-        //     Shell.Current.GoToAsync("//admin");
-        //    navigationPage.Navigation.PopAsync();
-        //}
+    }
+
+
+
+    //public  async void Shedow()
+    //{
+    //    try
+    //    {
+    //        var flyoutItemIMPL_admin = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_admin"));
+    //        if (flyoutItemIMPL_admin != null)
+    //        {
+    //            flyoutItemIMPL_admin.IsVisible = false;
+    //        }
+
+    //        var flyoutItemIMPL_user = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_user"));
+    //        if (flyoutItemIMPL_user != null)
+    //        {
+    //            flyoutItemIMPL_user.IsVisible = false;
+    //        }
+
+    //        var flyoutItemIMPL_test = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_test"));
+    //        if (flyoutItemIMPL_test != null)
+    //        {
+    //            flyoutItemIMPL_test.IsVisible = false;
+    //        }
+
+
+    //        var flyoutItemIMPL_Exams = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_Exams"));
+    //        if (flyoutItemIMPL_Exams != null)
+    //        {
+    //            flyoutItemIMPL_Exams.IsVisible = false;
+    //        }
+
+    //        var flyoutItemIMPL_Questions = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_Questions"));
+    //        if (flyoutItemIMPL_Questions != null)
+    //        {
+    //            flyoutItemIMPL_Questions.IsVisible = false;
+    //        }
+
+    //        var flyoutItemIMPL_Answer = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_Answer"));
+
+    //        if (flyoutItemIMPL_Answer != null)
+    //        {
+    //            flyoutItemIMPL_Answer.IsVisible = false;
+    //        }
+
+    //        var flyoutItemseting1 = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_seting"));
+    //        if (flyoutItemseting1 != null)
+    //        {
+    //            flyoutItemseting1.IsVisible = true;
+    //        }
+    //    }
+    //    catch( Exception ex)
+    //    {
+    //        await DisplayAlert("Ошибка", ex.Message, "Ок");
+
+    //    }
+    //}
+
+
+
+    public async void Shedow()
+    {
+        try
+        {  
+         
+            var flyoutItemIMPL_admin = Shell.Current?.Items.FirstOrDefault(item => item.Route.Equals("IMPL_admin"));
+            if (flyoutItemIMPL_admin != null)
+            {
+                flyoutItemIMPL_admin.IsVisible = false;
+            }
+
+            //var flyoutItemIMPL_user = Shell.Current?.Items.FirstOrDefault(item => item.Route.Equals("IMPL_userd"));
+            //if (flyoutItemIMPL_user != null)
+            //{
+            //    flyoutItemIMPL_user.IsVisible = false;
+            //}
+            var flyoutItemIMPL_test = Shell.Current?.Items.FirstOrDefault(item => item.Route.Equals("IMPL_test"));
+            if (flyoutItemIMPL_test != null)
+            {
+                flyoutItemIMPL_test.IsVisible = false;
+            }
+
+            var flyoutItemIMPL_Exams = Shell.Current?.Items.FirstOrDefault(item => item.Route.Equals("IMPL_Exams"));
+            if (flyoutItemIMPL_Exams != null)
+            {
+                flyoutItemIMPL_Exams.IsVisible = false;
+            }
+
+            var flyoutItemIMPL_Questions = Shell.Current?.Items.FirstOrDefault(item => item.Route.Equals("IMPL_Questions"));
+            if (flyoutItemIMPL_Questions != null)
+            {
+                flyoutItemIMPL_Questions.IsVisible = false;
+            }
+
+          
+            var flyoutItemIMPL_Answer = Shell.Current?.Items.FirstOrDefault(item => item.Route.Equals("IMPL_Answer"));
+            if (flyoutItemIMPL_Answer != null)
+            {
+                flyoutItemIMPL_Answer.IsVisible = false;
+            }
+
+      
+            //var flyoutItemseting1 = Shell.Current?.Items.FirstOrDefault(item => item.Route.Equals("IMPL_seting"));
+            //if (flyoutItemseting1 != null)
+            //{
+            //    flyoutItemseting1.IsVisible = true;
+            //}   
+            
+         
+
+        }
+        catch (Exception ex)
+        {
+            await Application.Current.MainPage.DisplayAlert("Ошибка", ex.Message, "Ок");
+        }
     }
 
     private async void CounterLogTest_Clicked(object sender, EventArgs e)
@@ -242,34 +373,34 @@ public partial class Admin : ContentPage
             Shell.Current.Items.Add(new ShellSection { Title = "Админская панель", Icon = "dotnet_bot.png", Route = "admin", Items = { main } });
 
             // Обработчик события при нажатии на пункт меню
-            main.PropertyChanged += async (sender, e) =>
-            {
-                if (e.PropertyName == nameof(ShellContent.IsEnabled) && !main.IsEnabled)
-                {
-                    // Переход обратно
-                    await Shell.Current.GoToAsync("//IMPL_user");
-                }
-            };
+            //main.PropertyChanged += async (sender, e) =>
+            //{
+            //    if (e.PropertyName == nameof(ShellContent.IsEnabled) && !main.IsEnabled)
+            //    {
+            //        // Переход обратно
+            //        await Shell.Current.GoToAsync("//IMPL_user");
+            //    }
+            //};
         }
 
-        var flyoutItemUser = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_user"));
+        var flyoutItemUser = Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("IMPL_userd"));
         if (flyoutItemUser == null)
         {
             // Создание пунктов меню класса
-            var main = new ShellContent { Content = new Project.RefUserListPage(), Route = "user" };
+            var main = new ShellContent { Content = new Project.RefUserListPage()};
 
             // Добавление пунктов меню в класс
-            Shell.Current.Items.Add(new ShellSection { Title = "Справочник пользователей", Icon = "dotnet_bot.png", Route = "user", Items = { main } });
+            Shell.Current.Items.Add(new ShellSection { Title = "Справочник пользователей", Icon = "dotnet_bot.png", Route = "userd", Items = { main } });
 
-            // Обработчик события при нажатии на пункт меню
-            main.PropertyChanged += async (sender, e) =>
-            {
-                if (e.PropertyName == nameof(ShellContent.IsEnabled) && !main.IsEnabled)
-                {
-                    // Переход обратно
-                    await Shell.Current.GoToAsync("//IMPL_user");
-                }
-            };
+            //// Обработчик события при нажатии на пункт меню
+            //main.PropertyChanged += async (sender, e) =>
+            //{
+            //    if (e.PropertyName == nameof(ShellContent.IsEnabled) && !main.IsEnabled)
+            //    {
+            //        // Переход обратно
+            //        await Shell.Current.GoToAsync("//IMPL_user");
+            //    }
+            //};
         }
 
 

@@ -41,9 +41,9 @@ namespace Client
                 Ip_adressss = settingsFromFile.Ip_adress;
 
                 // Доступ к данным
-                string ipAddress = settingsFromFile.Ip_adress;
-                int port = settingsFromFile.Port;
-                int typeSQL = settingsFromFile.TypeSQL;
+                //string ipAddress = settingsFromFile.Ip_adress;
+                //int port = settingsFromFile.Port;
+                //int typeSQL = settingsFromFile.TypeSQL;
 
             }
             else if (DeviceInfo.Platform == DevicePlatform.Android)
