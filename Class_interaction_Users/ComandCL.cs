@@ -90,6 +90,8 @@ namespace Class_interaction_Users
         /// </summary>
         public static Roles_Accept_Client Roles_Accept_Client { get; set; }
 
+        public static Roles roles_Accept_Client { get; set; }
+
 
         /// <summary>
         /// Класс авторизации и регистрации
@@ -303,10 +305,10 @@ namespace Class_interaction_Users
                     else
                     {
 
-                        Roles_Accept_Client roles_Accept = JsonSerializer.Deserialize<Roles_Accept_Client>(responseData);
+                        Roles roles_Accept = JsonSerializer.Deserialize<Roles>(responseData);
 
 
-                        Roles_Accept_Client = roles_Accept;
+                        roles_Accept_Client = roles_Accept;
                         ////Так обрабатываем картинки 
                         //JObject details = JObject.Parse(responseData);
                         //JToken Answe = details.SelectToken("Answe");

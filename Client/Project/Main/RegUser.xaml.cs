@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text;
 using TextChangedEventArgs = Microsoft.Maui.Controls.TextChangedEventArgs;
 using System.Text.RegularExpressions;
-
+using System.Security.Cryptography.X509Certificates;
 
 namespace Client.Main;
 
@@ -175,46 +175,57 @@ public partial class RegUser : ContentPage
 
     //private async void languagePicker1_SelectedIndexChanged(object sender, EventArgs e)
     //{
-      
+
     //}
 
-   public async void Picker()
+    private  List<RefExamsTest> Picker()
     {
         try
         {
+            List<RefExamsTest> refExamsTests = new List<RefExamsTest>();
             Ip_adress ip_Adress = new Ip_adress();
             ip_Adress.CheckOS();
             Task.Run(async () => await command.Get_Image(ip_Adress.Ip_adressss, "", "006")).Wait();
-            var Client = CommandCL.Roles_Accept_Client;
-            if (Client.Test.Count() == 1)
+            Roles Client = CommandCL.roles_Accept_Client;
+            //    
+         //   Client.
+            if (Client == null)
             {
-                await DisplayAlert("Уведомление", "Ролей нет!", "ОK");
+                 DisplayAlert("Уведомление", "Ролей нет!", "ОK");
             }
             else
             {
-                string[] strings = new string[CommandCL.Roles_Accept_Client.Test.Count()];
-                for (int i = 0; i < strings.Length; i++)
+                //string[] strings = new string[CommandCL.Roles_Accept_Client.Test.Count()];
+                //for (int i = 0; i < strings.Length; i++)
+                //{
+                //    strings[i] = CommandCL.Roles_Accept_Client.Test[i].ToString();
+                //}
+
+                for (int i = 0; i < 1; i++)
                 {
-                    strings[i] = CommandCL.Roles_Accept_Client.Test[i].ToString();
+                    var refExamsTest = new RefExamsTest { ExamsTest = Client};
+                    refExamsTests.Add(refExamsTest);
                 }
+                
+
+                
+             //   languagePicker1.Items.Add("");
 
 
-             
-                languagePicker1.Items.Add("Пользователь");
-
-
-         //       await DisplayAlert("Уведомление", "Роль есть", "ОK");
+                //       await DisplayAlert("Уведомление", "Роль есть", "ОK");
             }
+            return refExamsTests;
         }
         catch(Exception ex)
         {
-            await DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
+             DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
 
         }
+        return null;
     }
     private void ContentPage_Loaded(System.Object sender, System.EventArgs e)
     {
-        Picker();
+        TestList.ItemsSource  = Picker();
         //Application.Current.MainPage.Window.Width = 413.8d;
         //Application.Current.MainPage.Window.Height = 520.8d;
 
@@ -224,6 +235,15 @@ public partial class RegUser : ContentPage
         //Application.Current.MainPage.Window.MaximumWidth = 413.8d;
         //Application.Current.MainPage.Window.MaximumHeight = 520.8d;
 
+    }
+
+
+
+    public class RefExamsTest
+    {
+        public Class_interaction_Users.Roles ExamsTest { get; set; }
+        public Command EditCommand { get; set; }
+        public Command DelCommand { get; set; }
     }
 
     private async void Button_Clicked_1(System.Object sender, System.EventArgs e)
@@ -238,6 +258,11 @@ public partial class RegUser : ContentPage
     }
 
     private void languagePicker1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void TestList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
 
     }

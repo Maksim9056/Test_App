@@ -708,14 +708,14 @@ namespace Server_Test_Users
                 var Value = @class.Check_Roles();
 
 
-                if (Value == 1)
+                if (Value == null)
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        Roles[] roles = new Roles[] { };
+                       // Roles roles = new Roles();
 
-                        Roles_Travel roles_Travel = new Roles_Travel(roles);
-                        JsonSerializer.Serialize<Roles_Travel>(ms, roles_Travel);
+                        Roles roles_Travel = new Roles();
+                        JsonSerializer.Serialize<Roles>(ms, roles_Travel);
                         stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                     }
                 }
@@ -723,8 +723,8 @@ namespace Server_Test_Users
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        Tests test = new Tests(@class.Travels_test);
-                        JsonSerializer.Serialize<Tests>(ms, test);
+                       // Tests test = new Tests(@class.Travels_test);
+                        JsonSerializer.Serialize<Roles>(ms, Value);
                         stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                     }
                 }

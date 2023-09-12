@@ -342,7 +342,7 @@ namespace Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async  void CounterBtn_Clicked_1(object sender, EventArgs e)
+        private   void CounterBtn_Clicked_1(object sender, EventArgs e)
         {
             try
             {

@@ -15,10 +15,31 @@
                 <StackLayout Padding="10 " Margin="10">
                     <Label x:Name="header" Text="Выберите Роль" FontSize="16" VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="20" WidthRequest="310" SizeChanged="header_SizeChanged" Margin="0, 0, 0,0" />
 
-                    <Picker x:Name="languagePicker1" SelectedIndexChanged="languagePicker1_SelectedIndexChanged" VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="20" WidthRequest="310" FontSize="20" Margin="0,0,0,0" HandlerChanged="header_SizeChanged" ParentChanged="languagePicker_ParentChanged">
-                        <Picker.Items>
-                        </Picker.Items>
-                    </Picker>
+                    <ListView x:Name="TestList"
+                      ItemSelected="TestList_ItemSelected"
+                      ItemsSource="{Binding ExamsTest}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <!-- Ширина в 2/3 -->
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding   ExamsTest.Name_roles}" Grid.Column="0"
+                                        FontSize="16"
+                                        FontFamily="Arial"
+                                        FontAttributes="Bold"
+                                        TextColor="Red"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackLayout>
             </StackLayout>
         </Grid>

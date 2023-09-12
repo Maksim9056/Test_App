@@ -673,45 +673,48 @@ namespace Server_Test_Users
         }
 
         //Roles
-        public int Check_Roles()
+        public Roles Check_Roles()
         {
+
+
             int Count_roles = 0;
+            Roles roles = new Roles();
             using (ApplicationContext db = new ApplicationContext())
             {
                 // получаем объекты из бд и выводим на консоль
-                var users = db.Roles.FirstOrDefault();
+                var users = db.Roles.FirstOrDefault(ue =>ue.Name_roles == "Пользователь");
+                roles = users;
 
-          
            //     Count_roles = users;
-                // Console.WriteLine("Users list:");
-                //foreach (int  u in users)
-                //{
+           // Console.WriteLine("Users list:");
+           //foreach (int  u in users)
+           //{
 
                 //    //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
                 //}
             }
 
 
-            if (Count_roles == 1)
-            {
+            //if (Count_roles == 1)
+            //{
 
-            }
-            else
-            {
-                using (ApplicationContext db = new ApplicationContext())
-                {
-                    // получаем объекты из бд и выводим на консоль
-                    var users = db.Roles.ToList();
-                   // Console.WriteLine("Users list:");
-                    foreach (Roles u in users)
-                    {
+            //}
+            //else
+            //{
+            //    using (ApplicationContext db = new ApplicationContext())
+            //    {
+            //        // получаем объекты из бд и выводим на консоль
+            //        var users = db.Roles.ToList();
+            //       // Console.WriteLine("Users list:");
+            //        foreach (Roles u in users)
+            //        {
 
-                        //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
-                    }
-                }
-            }
+            //            //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+            //        }
+            //    }
+            //}
             Count_Roles = Count_roles;
-            return Count_Roles = 0;
+            return roles ;
         }
 
         public void Check_Questin()
