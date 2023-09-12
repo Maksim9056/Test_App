@@ -222,7 +222,19 @@ namespace Server_Test_Users
 
             }
             else
-            {
+            { 
+                
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // создаем два объекта User
+
+                    Roles user1 = new Roles { Name_roles = "Пользователь" };
+                    // добавляем их в бд
+                    db.Roles.AddRange(user1);
+                    db.SaveChanges();
+                }
+
+
                 // добавление данных
                 using (ApplicationContext db = new ApplicationContext())
                 {
@@ -234,15 +246,7 @@ namespace Server_Test_Users
                     db.SaveChanges();
                 }
 
-                using (ApplicationContext db = new ApplicationContext())
-                {
-                    // создаем два объекта User
-
-                    Roles user1 = new Roles { Name_roles = "Пользователь" };
-                    // добавляем их в бд
-                    db.Roles.AddRange(user1);
-                    db.SaveChanges();
-                }
+             
 
                 string Email = "Admin@Admin.ru";
                 DateTime dateTime = DateTime.Now;
@@ -254,7 +258,7 @@ namespace Server_Test_Users
                 {
                     // создаем два объекта User
 
-                    User user1 = new User { Name_Employee = "Admin", Password = "Admin", DataMess = data, Id_roles_users = roles.Id, Employee_Mail = Email };
+                    User user1 = new User { Name_Employee = "Admin", Password = "Admin", DataMess = data, Id_roles_users = 2, Employee_Mail = Email };
 
                     // добавляем их в бд
                     db.Users.AddRange(user1);
@@ -532,7 +536,7 @@ namespace Server_Test_Users
                 DateTime dateTime = DateTime.Now;
                 var data = $"{dateTime:F}";
 
-                Roles roles = new Roles { Id = regis_Users.Rechte };
+                Roles roles = new Roles { Id = regis_Users.Rechte.Id };
 
 
                 // добавление данных
@@ -572,7 +576,8 @@ namespace Server_Test_Users
                         foreach (User user in users)
                         {
                             Exists_User = true;
-                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, user.Id_roles_users, user.Employee_Mail);
+                            Roles roles1 = new Roles { Id = user.Id_roles_users };
+                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail);
 
                             Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
                         }
@@ -632,7 +637,8 @@ namespace Server_Test_Users
                     if (users != null)
                     {
                         Check = true;
-                        Travel = new Regis_users(users.Id, users.Name_Employee, users.Password, users.Id_roles_users, users.Employee_Mail);
+                        Roles roles = new Roles { Id = users.Id_roles_users };
+                        Travel = new Regis_users(users.Id, users.Name_Employee, users.Password, roles, users.Employee_Mail);
                         Console.WriteLine($"{users.Name_Employee} ({users.Employee_Mail})");
                     }
                 }
@@ -645,7 +651,8 @@ namespace Server_Test_Users
 
                         if (users != null)
                         {
-                            Travel = new Regis_users(0, "", "", 0, users.Employee_Mail);
+                            Roles roles = new Roles { Id = 0 };
+                            Travel = new Regis_users(0, "", "", roles, users.Employee_Mail);
                             Console.WriteLine($"{users.Name_Employee} ({users.Employee_Mail})");
                         }
                     }
@@ -868,8 +875,9 @@ namespace Server_Test_Users
 
                         foreach (User user in users)
                         {
+                            Roles roles = new Roles { Id = user.Id };
 
-                            regis_Users[i] = new Regis_users(user.Id, user.Name_Employee, user.Password, user.Id_roles_users, user.Employee_Mail);
+                            regis_Users[i] = new Regis_users(user.Id, user.Name_Employee, user.Password, roles, user.Employee_Mail);
                             i++;
                         }
                         Travels = regis_Users;

@@ -6,6 +6,7 @@ using System.Text;
 using TextChangedEventArgs = Microsoft.Maui.Controls.TextChangedEventArgs;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography.X509Certificates;
+using System.Net;
 
 namespace Client.Main;
 
@@ -52,6 +53,9 @@ public partial class RegUser : ContentPage
     public string Rechte { get; set; }
 
 
+    public CheckPing checkPing = new CheckPing();
+
+    public Roles Roles { get; set; }
     /// <summary>
     ///Пароль пользователя присываеваем значение
     /// </summary>
@@ -81,47 +85,85 @@ public partial class RegUser : ContentPage
 
     public async void Reg()
     {
-        if (Password1 == null || Password1 == "")
+        try
         {
-            await DisplayAlert("Уведомление", "Пароль на подтверждение не заполнен!", "ОK");
-        }
-        else if (Password == null || Password == "")
-        {
-            await DisplayAlert("Уведомление", "Пароль не заполнен!", "ОK");
-        }
-        else if (User_Name == null || User_Name == "")
-        {
-            await DisplayAlert("Уведомление", "Имя не заполнено", "ОK");
-        }
-        else if (Rechte == null)
-        {
-            await DisplayAlert("Уведомление", "Не заполнено разрешение!", "ОK");
-        }
-        else if (Mail == null || Mail == "")
-        {
-            await DisplayAlert("Уведомление", "Почта не заполнена!", "ОK");
-        }
-        else if (!Regex.IsMatch(Mail, "@."))
-        {
-            await DisplayAlert("Уведомление", "Некорректный адрес электронной почты!", "ОK");
-        }
-        else
-        {
-            using (MemoryStream Reg_user_Dispons = new MemoryStream())
+            Ip_adress ip_Adress = new Ip_adress();
+            ip_Adress.CheckOS();
+            Галочка галочка = null;
+            using (MemoryStream stream = new MemoryStream())
             {
-                CommandCL command = new CommandCL();
-                string FileFS = "";
-                using (MemoryStream fs = new MemoryStream())
+                Галочка галочка1 = new Галочка(1, $"{ip_Adress.Ip_adressss}");
+                var Result = checkPing.CheckPingIp(галочка1);
+                галочка = Result;
+            }
+            if (галочка == null)
+            {
+                await DisplayAlert("Уведомление", "Сервер выключен или недоступен!", "ОK");
+                return;
+            }
+            if (Password1 == null || Password1 == "")
+            {
+                await DisplayAlert("Уведомление", "Пароль на подтверждение не заполнен!", "ОK");
+            }
+            else if (Password == null || Password == "")
+            {
+                await DisplayAlert("Уведомление", "Пароль не заполнен!", "ОK");
+            }
+            else if (User_Name == null || User_Name == "")
+            {
+                await DisplayAlert("Уведомление", "Имя не заполнено", "ОK");
+            }
+            else if (Roles == null)
+            {
+                await DisplayAlert("Уведомление", "Не заполнено разрешение!", "ОK");
+            }
+            else if (Mail == null || Mail == "")
+            {
+                await DisplayAlert("Уведомление", "Почта не заполнена!", "ОK");
+            }
+            else if (!Regex.IsMatch(Mail, "@."))
+            {
+                await DisplayAlert("Уведомление", "Некорректный адрес электронной почты!", "ОK");
+            }
+            else
+            {
+                using (MemoryStream Reg_user_Dispons = new MemoryStream())
                 {
-                    Regis_users tom = new Regis_users(0, User_Name, Password, Convert.ToInt32(Rechte), Mail);
-                    JsonSerializer.Serialize<Regis_users>(fs, tom);
-                    FileFS = Encoding.Default.GetString(fs.ToArray());
+                    CommandCL command = new CommandCL();
+                    string FileFS = "";
+                    using (MemoryStream fs = new MemoryStream())
+                    {
+                        Regis_users tom = new Regis_users(0, User_Name, Password, Roles, Mail);
+                        JsonSerializer.Serialize<Regis_users>(fs, tom);
+                        FileFS = Encoding.Default.GetString(fs.ToArray());
+                    }
+                    Task.Run(async () => await command.Reg_User(ip_Adress.Ip_adressss, FileFS, "002")).Wait();
+                    var Message = CommandCL.Travel_Regis_users_message;
+                    // Остальной код для фильтрации по имени
+                    if (Message == null)
+                    {
+                        await DisplayAlert("Уведомление", "Вы не зарегистрировались!", "ОK");
+                    }
+                    else
+                    {
+                        await DisplayAlert("Уведомление", "Вы зарегистрировались!", "ОK");
+
+
+                    }
+                    nameEntry3.Text = null;
+                    nameEntry.Text = null;
+                    nameEntry1.Text = null;
+                    nameEntry2.Text = null;
+                    await Navigation.PopAsync();
                 }
-                Task.Run(async () => await command.Reg_User(Ip_adress.Ip_adresss, FileFS, "002")).Wait();
-                var Message = CommandCL.Travel_Regis_users_message;
-                // Остальной код для фильтрации по имени
             }
         }
+        catch(Exception ex)
+        {
+            await DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
+
+        }
+
     }
     /// <summary>
     ///Регестрация и проверки 
@@ -188,7 +230,8 @@ public partial class RegUser : ContentPage
             Task.Run(async () => await command.Get_Image(ip_Adress.Ip_adressss, "", "006")).Wait();
             Roles Client = CommandCL.roles_Accept_Client;
             //    
-         //   Client.
+            //   Client.
+  
             if (Client == null)
             {
                  DisplayAlert("Уведомление", "Ролей нет!", "ОK");
@@ -226,6 +269,9 @@ public partial class RegUser : ContentPage
     private void ContentPage_Loaded(System.Object sender, System.EventArgs e)
     {
         TestList.ItemsSource  = Picker();
+
+
+
         //Application.Current.MainPage.Window.Width = 413.8d;
         //Application.Current.MainPage.Window.Height = 520.8d;
 
@@ -262,9 +308,37 @@ public partial class RegUser : ContentPage
 
     }
 
-    private void TestList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private async void TestList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
+        try
+        {
 
+
+            if (e.SelectedItem == null)
+                return;
+
+            var selectedExamsTest = (RefExamsTest)e.SelectedItem;
+            await DisplayAlert("Выбранная роль:", selectedExamsTest.ExamsTest.Name_roles, "OK");
+            ((ListView)sender).SelectedItem = null;
+            Roles = selectedExamsTest.ExamsTest;
+
+        } 
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
+
+        }
+    }
+
+    private async void GoBack(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+
+    }
+
+    private void SaveButtonClick(object sender, EventArgs e)
+    {
+        Reg();
     }
 }
 

@@ -26,9 +26,8 @@ public partial class Users : ContentPage
             Password = name.Password,
             Name_Employee = name.Name_Employee
               ,
-            Employee_Mail = name.Employee_Mail
-              ,
-            Id_roles_users = name.Rechte
+            Employee_Mail = name.Employee_Mail ,
+            Id_roles_users = name.Rechte.Id
 
 
         }

@@ -40,6 +40,7 @@ namespace Class_interaction_Users
         /// <summary>
         /// id роли 
         /// </summary>
+        
         public int Id_roles_users { get; set; }
         /// <summary>
         /// Почта
@@ -204,10 +205,10 @@ namespace Class_interaction_Users
         public   string Name_Employee { get; set; }
         public string Password { get; set; }
 
-        public int  Rechte { get; set; }
+        public Roles  Rechte { get; set; }
         public string Employee_Mail { get; set; }
                    
-        public Regis_users(int id, string name_Employee, string password,int rechte,string @Mail)
+        public Regis_users(int id, string name_Employee, string password, Roles rechte,string @Mail)
         {
             Id = id; 
             Name_Employee = name_Employee;

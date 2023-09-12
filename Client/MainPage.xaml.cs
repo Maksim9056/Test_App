@@ -161,8 +161,8 @@ namespace Client
                                                     await DisplayAlert("Уведомление", "Пароль введен не верно!", "ОK");}
                                                 else
                                                 {   var regis_Users = command.Travel_logout;
-                                                    switch (regis_Users.Rechte) {
-                                                        case 0:
+                                                    switch (regis_Users.Rechte.Id) {
+                                                        case 1:
                                                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
                                                             await Navigation.PushAsync(new Client.Users.Users(regis_Users));
                                                             var flyoutItemhelp1 = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("login"));
@@ -173,7 +173,7 @@ namespace Client
                                                                 flyoutItemseting1.IsVisible = false; }
                                                             //await Shell.Current.GoToAsync("user"); // Используйте URI для перехода к пользовательской странице
                                                             break;
-                                                        case 1:
+                                                        case 2:
                                                             await Navigation.PushAsync(new Admin());
                                                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
                                                             //Admin admin = new Admin();
@@ -257,9 +257,9 @@ namespace Client
                 else
                 {
                     var regis_Users = command.Travel_logout;
-                    switch (regis_Users.Rechte)
+                    switch (regis_Users.Rechte.Id)
                     {
-                        case 0:
+                        case 1:
                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Пользователь Авторизовался!", "ОK");
                             await Navigation.PushAsync(new Client.Users.Users(regis_Users));
                             var flyoutItemhelp1 = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("login"));
@@ -273,7 +273,7 @@ namespace Client
                                 flyoutItemseting1.IsVisible = false;
                             }
                             break;
-                        case 1:
+                        case 2:
                             await Navigation.PushAsync(new Admin());
                             await Application.Current.MainPage.DisplayAlert("Уведомление", "Администратор Авторизовался!", "ОK");
                             var flyoutItemhelp = (FlyoutItem)Shell.Current.Items.FirstOrDefault(item => item.Route.Equals("login"));

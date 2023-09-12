@@ -261,7 +261,9 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
         {
             DisplayAlert("Сохранен тест", "Завершен тест !", "Oк");
 
-            Regis_users regis_Users = new Regis_users() { Id = CurrrentUser.Id,Employee_Mail = CurrrentUser.Employee_Mail,Name_Employee = CurrrentUser.Name_Employee,Password = CurrrentUser.Password,Rechte =1 };
+            Roles roles = new Roles { Id = CurrrentUser.Id_roles_users};
+            Regis_users regis_Users = new Regis_users()
+            { Id = CurrrentUser.Id,Employee_Mail = CurrrentUser.Employee_Mail,Name_Employee = CurrrentUser.Name_Employee,Password = CurrrentUser.Password,Rechte = roles };
             Navigation.PushAsync(new Client.Users.Users(regis_Users));
         }
         else

@@ -1,49 +1,89 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Client.Main.RegUser" Title="Регистрация" BackgroundColor="White" Loaded="ContentPage_Loaded">
-    <VerticalStackLayout Padding="5">
-        <Grid>
-            <!--<Border Stroke="Gray" BackgroundColor="#e1e1e1" WidthRequest="400" HeightRequest="425">-->
-            <StackLayout Padding="0" Margin="10" BackgroundColor="White">
-                <Entry x:Name="nameEntry3" FontSize="16" TextChanged="nameEntry1_TextChanged_2" Placeholder="Введите имя" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="310" Keyboard="Text" Margin="0, 20, 0,0" />
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.Main.RegUser"
+             Title="Регистрация"
+             BackgroundColor="White"
+             Loaded="ContentPage_Loaded">
 
-                <Entry x:Name="nameEntry" FontSize="16" TextChanged="nameEntry_TextChanged" Placeholder="Введите электроную почту" Keyboard="Email" Margin="0, 20, 0,0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="310" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-                <Entry x:Name="nameEntry1" FontSize="16" Placeholder="Введите пароль" Margin="0, 20, 0,0" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="310" TextChanged="nameEntry1_TextChanged" Keyboard="Text" />
+        <ScrollView Grid.Row="0">
+            <StackLayout Padding="10" BackgroundColor="White" VerticalOptions="CenterAndExpand">
+                <Entry x:Name="nameEntry3"
+                       FontSize="16"
+                       TextChanged="nameEntry1_TextChanged_2"
+                       Placeholder="Введите имя"
+                       Keyboard="Text"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="250"
+                       Margin="0, 20, 0,0" />
 
-                <Entry x:Name="nameEntry2" FontSize="16" Placeholder="Введите пароль" Margin="0, 20, 0,0" TextChanged="nameEntry2_TextChanged" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="310" Keyboard="Text" />
+                <Entry x:Name="nameEntry"
+                       FontSize="16"
+                       TextChanged="nameEntry_TextChanged"
+                       Placeholder="Введите электроную почту"
+                       Keyboard="Email"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="250"
+                       Margin="0, 20, 0,0" />
 
-                <StackLayout Padding="10 " Margin="10">
-                    <Label x:Name="header" Text="Выберите Роль" FontSize="16" VerticalOptions="Fill" HorizontalOptions="Fill" HeightRequest="20" WidthRequest="310" SizeChanged="header_SizeChanged" Margin="0, 0, 0,0" />
+                <Entry x:Name="nameEntry1"
+                       FontSize="16"
+                       Placeholder="Введите пароль"
+                       TextChanged="nameEntry1_TextChanged"
+                       Keyboard="Text"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="250"
+                       Margin="0, 20, 0,0" />
 
-                    <ListView x:Name="TestList"
-                      ItemSelected="TestList_ItemSelected"
-                      ItemsSource="{Binding ExamsTest}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*" />
-                                            <!-- Ширина в 2/3 -->
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Label Text="{Binding   ExamsTest.Name_roles}" Grid.Column="0"
-                                        FontSize="16"
-                                        FontFamily="Arial"
-                                        FontAttributes="Bold"
-                                        TextColor="Red"
-                                        HorizontalTextAlignment="Center"
-                                        VerticalTextAlignment="Center" />
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
+                <Entry x:Name="nameEntry2"
+                       FontSize="16"
+                       Placeholder="Введите пароль"
+                       TextChanged="nameEntry2_TextChanged"
+                       Keyboard="Text"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="250"
+                       Margin="0, 20, 0,0" />
+
+                <Label x:Name="header" Text="Выберите Роль"
+                       FontSize="16"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="250"
+                       Margin="0, 20, 0,0" />
+
+                <ListView x:Name="TestList"
+                          ItemSelected="TestList_ItemSelected"
+                          ItemsSource="{Binding ExamsTest}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Label Text="{Binding ExamsTest.Name_roles}" Grid.Column="0"
+                                           FontSize="16"
+                                           FontFamily="Arial"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
                         </ListView.ItemTemplate>
-                    </ListView>
-                </StackLayout>
+                </ListView>
             </StackLayout>
-        </Grid>
-    </VerticalStackLayout>
-</ContentPage>
+        </ScrollView>
 
-    
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="10">
+            <Button Text="Сохранить" Clicked="SaveButtonClick" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Назад" Clicked="GoBack" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

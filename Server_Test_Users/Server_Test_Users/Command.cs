@@ -73,7 +73,8 @@ namespace Server_Test_Users
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        Regis_users regis_Users = new Regis_users(0, "", "", 0, "");
+                        Roles roles = new Roles { Id =0};
+                        Regis_users regis_Users = new Regis_users(0, "", "", roles, "");
 
                         JsonSerializer.Serialize<Regis_users>(ms, regis_Users);
                         //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
