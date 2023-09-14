@@ -8,10 +8,9 @@ using static Class_interaction_Users.CheckMail_and_Password;
 
 namespace Server_Test_Users
 {
+
     internal class Command
     {
-
-
         public void CheckMail_and_Passwords(byte[] arg1, GlobalClass @class, NetworkStream stream)
         {
 
@@ -29,7 +28,7 @@ namespace Server_Test_Users
 #pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
                     JsonSerializer.Serialize<Regis_users>(ms, @class.Travel);
 #pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-                    //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                 }
             }
@@ -77,7 +76,6 @@ namespace Server_Test_Users
                         Regis_users regis_Users = new Regis_users(0, "", "", roles, "");
 
                         JsonSerializer.Serialize<Regis_users>(ms, regis_Users);
-                        //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
 
                         stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                     }
@@ -90,7 +88,7 @@ namespace Server_Test_Users
                     using (MemoryStream ms = new MemoryStream())
                     {
                         JsonSerializer.Serialize<Regis_users>(ms, @class.Travel);
-                        //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+
                         stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                     }
                 }
@@ -162,8 +160,6 @@ namespace Server_Test_Users
                 stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
             }
 
-            /// person3;
-           // @class.Regis_user(person3);
         }
 
         public void Search_Image_Friends(byte[] arg1, GlobalClass @class, NetworkStream stream)
@@ -178,10 +174,9 @@ namespace Server_Test_Users
                 using (MemoryStream ms = new MemoryStream())
                 {
                     Regis_users[] regis_Users = new Regis_users[] { };
-                    //            Regis_users regis_Users = new Regis_users(0, "", "", 0, "2");
                     Regis_users_test regis_Users_Test = new Regis_users_test { regis = regis_Users };
                     JsonSerializer.Serialize<Regis_users_test>(ms, regis_Users_Test);
-                    //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+               
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                 }
             }
@@ -192,7 +187,7 @@ namespace Server_Test_Users
                 {
                     Regis_users_test regis_Users_Test = new Regis_users_test { regis = @class.Travels };
                     JsonSerializer.Serialize<Regis_users_test>(ms, regis_Users_Test);
-                    //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
+      
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                 }
             }
@@ -208,10 +203,8 @@ namespace Server_Test_Users
                 using (MemoryStream ms = new MemoryStream())
                 {
                     Regis_users[] regis_Users = new Regis_users[] { };
-                    //            Regis_users regis_Users = new Regis_users(0, "", "", 0, "2");
                     Regis_users_test regis_Users_Test = new Regis_users_test { regis = regis_Users };
                     JsonSerializer.Serialize<Regis_users_test>(ms, regis_Users_Test);
-                    //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                 }
             }
@@ -222,7 +215,6 @@ namespace Server_Test_Users
                     UserList regis_Users_Test = new UserList { };
                     regis_Users_Test.ListUser = @class.UserListTest;
                     JsonSerializer.Serialize<UserList>(ms, regis_Users_Test);
-                    //  byte[] msgAnswe = System.Text.Encoding.Default.GetBytes();
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                 }
             }
@@ -290,13 +282,6 @@ namespace Server_Test_Users
             @class.Check_Test_ds();
             if (@class.TestListTest == null)
             {
-                //using (MemoryStream ms = new MemoryStream())
-                //{
-                //    Regis_users[] regis_Users = new Regis_users[] { };
-                //    Regis_users_test regis_Users_Test = new Regis_users_test { regis = regis_Users };
-                //    JsonSerializer.Serialize<Regis_users_test>(ms, regis_Users_Test);
-                //    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
-                //}
             }
             else
             {
@@ -713,7 +698,6 @@ namespace Server_Test_Users
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
-                       // Roles roles = new Roles();
 
                         Roles roles_Travel = new Roles();
                         JsonSerializer.Serialize<Roles>(ms, roles_Travel);
@@ -724,7 +708,6 @@ namespace Server_Test_Users
                 {
                     using (MemoryStream ms = new MemoryStream())
                     {
-                       // Tests test = new Tests(@class.Travels_test);
                         JsonSerializer.Serialize<Roles>(ms, Value);
                         stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                     }
@@ -761,9 +744,7 @@ namespace Server_Test_Users
                 JsonSerializer.Serialize<Exams_Check>(ms, exams_Check);
                 stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
             }
-            // @class.CheckUserExams_ds(CrTest);
-            //CheckExam checkExam = new CheckExam(UserExams);
-            //JsonSerializer.Serialize<CheckExam>(memoryStream, checkExam);
+
         }
 
 
@@ -794,10 +775,6 @@ namespace Server_Test_Users
                 JsonSerializer.Serialize<Exams_Check>(ms, exams_Check);
                 stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
             }
-
-            // @class.CheckUserExams_ds(CrTest);
-            //CheckExam checkExam = new CheckExam(UserExams);
-            //JsonSerializer.Serialize<CheckExam>(memoryStream, checkExam);
         }
 
 
@@ -815,7 +792,6 @@ namespace Server_Test_Users
                 JsonSerializer.Serialize<Statick>(ms, statick);
                 stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
             }
-            //@class.CheckExamsTest_ds(CrTest);
 
         }
 

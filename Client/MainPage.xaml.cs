@@ -363,9 +363,9 @@ namespace Client
                     RegUser(ip_Adress);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-
+                DisplayAlert("Ошибка", ex.Message, "OK");
             }
             //// Создание NavigationPage с главной страницей
             //var mainPage = new MainPage();

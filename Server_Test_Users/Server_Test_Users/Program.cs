@@ -43,15 +43,6 @@ namespace Server_Test_Users
                 SaveOpen();
 
                 globalClass.TestSQL();
-
-                globalClass.Create_Database();
-               
-                globalClass.CreateTable_Test();
-               
-                globalClass.CreateTable_Users();
-                
-                globalClass.CreateTable_Test_Questions();
-
                 TcpListener server;
 
                 int MaxThreadsCount = Environment.ProcessorCount;
@@ -290,36 +281,3 @@ namespace Server_Test_Users
         }
     }
 }
-
-//Console.WriteLine(Environment.MachineName);
-//Console.WriteLine(Environment.WorkingSet);
-/*   //  Console.WriteLine(Environment.WorkingSet);
- */
-/* IPHostEntry ipEntry = Dns.GetHostByName(Dns.GetHostName());
-foreach (var a in ipEntry.AddressList) {
-Console.WriteLine(a);
-
-}*/
-/*   //string Host = System.Net.Dns.GetHostName();
-   //string Ip_adres=      System.Net.Dns.Resolve();
-   Console.WriteLine($"Ip-адрес: {localAddr}");            
-   //127.0.0.1 System.Net.Sockets.AddressFamily family   */
-//Console.WriteLine("\nСервер запушен")
-/*
-                        //byte[] bytes = new byte[99999999];
-                       //    string data;
-                       // StringBuilder data;
-                       // /*
-                        //int i;
-                        //while ((i = await stream.ReadAsync(bytes, 0, bytes.Length)) != 0)
-                        //{
-                        //    data = Encoding.Default.GetString(bytes, 0, i);
-                        //    string comand = data.Substring(0, 3);
-                        //    string json = data.Substring(3, data.Length - 3);
-                        //    byte[] msg = Encoding.Default.GetBytes(json);
-
-                        //    //Заменяет работу switch (comand)
-                        //    HandleCommand(comand, msg, globalClass, stream);
-
-
-                        //}                */

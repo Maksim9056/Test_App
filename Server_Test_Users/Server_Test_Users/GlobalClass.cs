@@ -121,25 +121,7 @@ namespace Server_Test_Users
         public List<Save_results> Test_Results { get; set; }
 #pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       public  List<Statictics> StatickUsers { get; set; }
-
-
 
 
         /// <summary>
@@ -210,11 +192,7 @@ namespace Server_Test_Users
                 // получаем объекты из бд и выводим на консоль
                 var users = db.Roles.Count();
                 Count_roles = users;
-                // Console.WriteLine("Users list:");
-                //foreach (int  u in users)
-                //{
-                //    //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
-                //}
+              
 
             }
             if (Count_roles == 1)
@@ -222,280 +200,72 @@ namespace Server_Test_Users
 
             }
             else
-            { 
-                
-                using (ApplicationContext db = new ApplicationContext())
-                {
-                    // создаем два объекта User
-
-                    Roles user1 = new Roles { Name_roles = "Пользователь" };
-                    // добавляем их в бд
-                    db.Roles.AddRange(user1);
-                    db.SaveChanges();
-                }
-
-
-                // добавление данных
-                using (ApplicationContext db = new ApplicationContext())
-                {
-                    // создаем два объекта User
-
-                    Roles user1 = new Roles { Name_roles = "Admin" };
-                    // добавляем их в бд
-                    db.Roles.AddRange(user1);
-                    db.SaveChanges();
-                }
-
-             
-
-                string Email = "Admin@Admin.ru";
-                DateTime dateTime = DateTime.Now;
-                var data = $"{dateTime:F}";
-                Roles roles = new Roles { Id = 1 };
-
-                // добавление данных
-                using (ApplicationContext db = new ApplicationContext())
-                {
-                    // создаем два объекта User
-
-                    User user1 = new User { Name_Employee = "Admin", Password = "Admin", DataMess = data, Id_roles_users = 2, Employee_Mail = Email };
-
-                    // добавляем их в бд
-                    db.Users.AddRange(user1);
-                    db.SaveChanges();
-                }
-            }
-
-            // получение данных
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    // получаем объекты из бд и выводим на консоль
-            //    var users = db.Users.ToList();
-            //    Console.WriteLine("Users list:");
-            //    foreach (User u in users)
-            //    {
-            //   //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
-            //    }
-            //}
-            //// добавление данных
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    // создаем два объекта User
-            //    Questions Q1 = new Questions { Name = "Tom1", Answers = "33" };
-            //    Questions Q2 = new Questions { Name = "Alice1", Answers = "26" };
-
-            //    // добавляем их в бд
-            //    db.Questions.AddRange(Q1, Q2);
-            //    db.SaveChanges();
-            //}
-            //// получение данных
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    // получаем объекты из бд и выводим на консоль
-            //    var Qu = db.Questions.ToList();
-            //    Console.WriteLine("Questions list:");
-            //    foreach (Questions u in Qu)
-            //    {
-            //        Console.WriteLine($"{u.Id}.{u.Name} - {u.Answers}");
-            //    }
-            //}
-
-        }
-
-
-        /// <summary>
-        /// Создает  базу данных 
-        /// </summary>
-        /// 
-        public void Create_Database()
-        {
-            try
             {
-                switch (TypeSQL)
+                // Console.WriteLine("Users list:");
+                //foreach (int  u in users)
+                //{
+                //    //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                //}
+                int D = 0;
+                using(ApplicationContext context = new ApplicationContext())
                 {
-                    //Postgres
-                    //IF NOT EXISTS
-                    case 1:
-
-
-                        string sql = "SELECT datname FROM pg_catalog.pg_database WHERE datname = 'test'";
-                        bool Create_DATABASE = false;
-
-                        using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(_connectionStringPostGreSQl))
-                        {
-
-                            npgsqlConnection.Open();
-                            NpgsqlCommand command = new NpgsqlCommand();
-                            command.Connection = npgsqlConnection;
-                            command.CommandText = sql;
-                            command.ExecuteNonQuery();
-                            //   NpgsqlCommand command = new NpgsqlCommand(sqlExpressiol, connection);
-                            //var n = command.ExecuteReader();
-
-                            //NpgsqlCommand commandS = new NpgsqlCommand(sqlExpressiol, connection);
-                            NpgsqlDataReader sqReader = command.ExecuteReader();
-
-                            if (sqReader.HasRows == true)
-                            {
-                                Create_DATABASE = true;
-                                // Always call Read before accessing data.
-                                while (sqReader.Read())
-                                {
-                                }
-                            }
-                        }
-
-                        string Sql = "CREATE DATABASE  Test;";
-                        if (Create_DATABASE == false)
-                        {
-                            using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(_connectionStringPostGreSQl))
-                            {
-                                npgsqlConnection.Open();
-                                NpgsqlCommand command = new NpgsqlCommand();
-                                command.Connection = npgsqlConnection;
-                                command.CommandText = sql;
-                                command.ExecuteNonQuery();
-
-                                command.CommandText = Sql;
-                                command.ExecuteNonQuery();
-                            }
-                        }
-                        break;
-                    case 2:
-
-
-
-
-
-                        break;
-                    case 3:
-                        break;
+                 D=   context.Roles.Count();
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+
+                if (D == 0)
+                {
+                   using (ApplicationContext db = new ApplicationContext())
+                    {
+                        // создаем два объекта User
+
+                        Roles user1 = new Roles { Name_roles = "Пользователь" };
+                        // добавляем их в бд
+                        db.Roles.AddRange(user1);
+                        db.SaveChanges();
+                    }
+
+
+                    // добавление данных
+                    using (ApplicationContext db = new ApplicationContext())
+                    {
+                        // создаем два объекта User
+
+                        Roles user1 = new Roles { Name_roles = "Admin" };
+                        // добавляем их в бд
+                        db.Roles.AddRange(user1);
+                        db.SaveChanges();
+                    }
+
+
+
+                    string Email = "Admin@Admin.ru";
+                    DateTime dateTime = DateTime.Now;
+                    var data = $"{dateTime:F}";
+                    Roles roles = new Roles { Id = 1 };
+
+                    // добавление данных
+                    using (ApplicationContext db = new ApplicationContext())
+                    {
+                        // создаем два объекта User
+
+                        User user1 = new User { Name_Employee = "Admin", Password = "Admin", DataMess = data, Id_roles_users = 2, Employee_Mail = Email };
+
+                        // добавляем их в бд
+                        db.Users.AddRange(user1);
+                        db.SaveChanges();
+                    }
+                }
+                else
+                {
+
+
+                    
+                }
             }
         }
 
 
-        /// <summary>
-        /// Создает табличку в базе данных Test
-        /// </summary>
-        public void CreateTable_Test()
-        {
-            try
-            {
-                switch (TypeSQL)
-                {
-                    //Postgres
-                    case 1:
-                        string Sql = "Create table IF NOT EXISTS  Test (Id_test Serial not null CONSTRAINT PK_Id_Test PRIMARY KEY," +
-                            "Name_Test  varchar," +
-                            "test_id Serial );";
-                        using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionStringPostGreSQL))
-                        {
-                            npgsqlConnection.Open();
-                            NpgsqlCommand command = new NpgsqlCommand();
-                            command.Connection = npgsqlConnection;
-
-                            command.CommandText = Sql;
-                            command.ExecuteNonQuery();
-                        }
-                        break;
-
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        /// <summary>
-        /// Создает табличку в базе данных Test_Questions
-        /// </summary>
-        public void CreateTable_Test_Questions()
-        {
-            try
-            {
-                switch (TypeSQL)
-                {
-                    //Postgres
-                    case 1:
-                        string Sql = "Create table IF NOT EXISTS  Test_Questions" +
-                            "(Id_Questions Serial not null CONSTRAINT PK_Id_Questions PRIMARY KEY," +
-                            "Name_Test  varchar not null," +
-                            "Questions varchar not null," +
-                            "Answers varchar not null);";
-                        using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionStringPostGreSQL))
-                        {
-                            npgsqlConnection.Open();
-                            NpgsqlCommand command = new NpgsqlCommand();
-                            command.Connection = npgsqlConnection;
-                            command.CommandText = Sql;
-                            command.ExecuteNonQuery();
-
-                        }
-
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        /// <summary>
-        /// Создает табличку в базе данных пользователями 
-        /// </summary>
-        public void CreateTable_Users()
-        {
-            try
-            {
-                switch (TypeSQL)
-                {
-                    //Postgres
-                    case 1:
-                        string Sql = "Create table IF NOT EXISTS  Users(Id Serial not null CONSTRAINT PK_Id PRIMARY KEY," +
-                            "Name_Employee Varchar not null," +
-                            "Passwords Varchar not null," +
-                            "Rechte Serial not null," +
-                            "DataMess TIMESTAMP  null DEFAULT(CURRENT_TIMESTAMP)," +
-                            "Employee_Mail VARCHAR not null CONSTRAINT CH_Employee_Mail CHECK(Employee_Mail like '%@%.%'));";
-
-                        using (NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionStringPostGreSQL))
-                        {
-                            npgsqlConnection.Open();
-                            NpgsqlCommand command = new NpgsqlCommand();
-                            command.Connection = npgsqlConnection;
-
-                            command.CommandText = Sql;
-                            command.ExecuteNonQuery();
-                        }
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-
+    
 
         /// <summary>
         /// Добавляеет пользователя и проверяет его по имени если есть такой пользователь то не создовать
@@ -507,11 +277,6 @@ namespace Server_Test_Users
 #pragma warning disable CS0219 // Переменная назначена, но ее значение не используется
                 bool Exists_User = false;
 #pragma warning restore CS0219 // Переменная назначена, но ее значение не используется
-
-                //    string Check_User = $"Select from User Where Name_Employee and Name_Employee ={regis_Users.Employee_Mail}";
-
-
-
 
                 using (ApplicationContext db = new ApplicationContext())
                 {
@@ -543,26 +308,15 @@ namespace Server_Test_Users
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     // создаем два объекта User
-                    User user1 = new User { Name_Employee = regis_Users.Name_Employee, Password = regis_Users.Password, DataMess = data, Id_roles_users = roles.Id, Employee_Mail = regis_Users.Employee_Mail };
-                    //  User user2 = new User { Name = "Alice", Age = 26 };
-
-
+                    User user1 = new User { Name_Employee = regis_Users.Name_Employee, 
+                        Password = regis_Users.Password,
+                        DataMess = data,
+                        Id_roles_users = roles.Id,
+                        Employee_Mail = regis_Users.Employee_Mail };
                     // добавляем их в бд
                     db.Users.AddRange(user1);
                     db.SaveChanges();
                 }
-
-                //using (ApplicationContext db = new ApplicationContext())
-                //{
-                //    // получаем объекты из бд и выводим на консоль
-                //    var users = db.Users.ToList();
-                //    Console.WriteLine("Users list:");
-                //    foreach (User u in users)
-                //    {
-                //        //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
-                //    }
-                //}
-
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     var users = db.Users.ToList();
@@ -583,35 +337,7 @@ namespace Server_Test_Users
                         }
                     }
                 }
-                /*
-                //if (Exists_User == false)
-                //{
-                //    string sql = $"INSERT INTO Users (Name_Employee,passwords,rechte, employee_mail) VALUES ('{regis_Users.Name_Employee}','{regis_Users.Password}',{regis_Users.Rechte},'{regis_Users.Employee_Mail}');";
-                //    using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
-                //    {
-                //        connection.Open();
-                //        NpgsqlCommand command = new NpgsqlCommand(sql, connection);
-                //        command.CommandText = sql;
-                //        command.ExecuteNonQuery();
-                //        string sq = "SELECT id, name_employee, passwords, rechte, datamess, employee_mail\r\n\tFROM public.users;";
-                //        command.CommandText = sq;
-                //        command.ExecuteNonQuery();
-                //        NpgsqlDataReader sqReader = command.ExecuteReader();
-
-                //        while (sqReader.Read())
-                //        {
-                //            Travel = new Regis_users(Convert.ToInt32(sqReader["id"]), sqReader["Name_Employee"].ToString(), sqReader["passwords"].ToString(), Convert.ToInt32(sqReader["Rechte"]), sqReader["employee_mail"].ToString());
-                //        }
-                //        sqReader.Close();
-
-                //    }
-                //}
-                //else
-                //{
-                //    //   Travel = new Regis_users(0,"False" ,"",1,"");
-                //}*/
-
-                //return Travel;
+             
 
             }
             catch (Exception E)
@@ -692,34 +418,8 @@ namespace Server_Test_Users
                 var users = db.Roles.FirstOrDefault(ue =>ue.Name_roles == "Пользователь");
                 roles = users;
 
-           //     Count_roles = users;
-           // Console.WriteLine("Users list:");
-           //foreach (int  u in users)
-           //{
-
-                //    //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
-                //}
+        
             }
-
-
-            //if (Count_roles == 1)
-            //{
-
-            //}
-            //else
-            //{
-            //    using (ApplicationContext db = new ApplicationContext())
-            //    {
-            //        // получаем объекты из бд и выводим на консоль
-            //        var users = db.Roles.ToList();
-            //       // Console.WriteLine("Users list:");
-            //        foreach (Roles u in users)
-            //        {
-
-            //            //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
-            //        }
-            //    }
-            //}
             Count_Roles = Count_roles;
             return roles ;
         }
@@ -750,13 +450,12 @@ namespace Server_Test_Users
                     {
                         // получаем объекты из бд и выводим на консоль
                         var users = db.Questions.ToList();
-                    //    Console.WriteLine("Users list:");
                         int i = 0;
                         foreach (Questions u in users)
                         {
 
                             questions[i] = new Questions { Id = u.Id, QuestionName = u.QuestionName, AnswerTrue = u.AnswerTrue };
-                            i++;  //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
+                            i++;  
                         }
                     }
                     questionss = questions;
@@ -794,7 +493,6 @@ namespace Server_Test_Users
                     questionss = questions;
 
                 }
-
             }
             if (Вопрос == false)
             {
@@ -1743,160 +1441,8 @@ namespace Server_Test_Users
                     save_Results.Add(save_ResultsS);
                 }
 
-                // var eXAMS = Test ? examsTests : new List<ExamsTest>();
+               
             }
-
-
-
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    bool CheckSave = false;
-
-            //    Exams exam = db.Exams.FirstOrDefault(e => e.Id == CheckExams.Exams.Exams.Id);
-
-            //    User user = db.Users.FirstOrDefault(e => e.Id == CheckExams.CurrrentUser.Id);
-
-            //    var examsTests = db.ExamsTest.FirstOrDefault(et => et.Exams.Id == exam.Id);
-
-            //    Test tests = db.Test.FirstOrDefault(ue => ue.Id == examsTests.Test.Id);
-
-            //    List<Save_results> userExams = db.Save_Results
-            //        .Where(ue => ue.Exam_id.Id == exam.Id && ue.User_id.Id == user.Id && ue.Name_Test.Name_Test == tests.Name_Test)
-            //        .ToList();
-
-            //    int userPassedTests = userExams.Count; // Количество пройденных пользователем тестов
-            //    int totalTests = db.Test.Count(ue => ue.Name_Test == tests.Name_Test); // Общее количество тестов по данному экзамену
-            //    decimal progress = (decimal)userPassedTests / totalTests * 100; // Прогресс пользователя в процентах
-
-            //    var Result = ""; // Переменная для сохранения результата
-
-            //    if (userExams.Count > 0)
-            //    {
-            //        Result = userExams[0].Result; // Получение результата пользователя
-            //    }
-
-            //    Test_Results = new List<Save_results>();
-            //    Test_Results = userExams;
-            //}
-
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    bool CheckSave = false;
-
-            //    Exams exam = db.Exams.FirstOrDefault(e => e.Id == CheckExams.Exams.Exams.Id);
-
-            //    User user = db.Users.FirstOrDefault(e => e.Id == CheckExams.CurrrentUser.Id);
-
-            //    var examsTests = db.ExamsTest.FirstOrDefault(et => et.Exams.Id == exam.Id);
-
-            //    Test tests = db.Test.FirstOrDefault(ue => ue.Id == examsTests.Test.Id);
-
-            //    List<Save_results> userExams = db.Save_Results.Where(ue => ue.Exam_id.Id == exam.Id && ue.User_id.Id == user.Id && ue.Name_Test.Name_Test == tests.Name_Test).ToList();
-
-            //    var Result = ""; // Переменная для сохранения результата
-
-            //    if (userExams.Count > 0)
-            //    {
-            //    }
-
-            //    Test_Results = new List<Save_results>();
-            //    Test_Results = userExams;
-            //}
-            //   Result = userExams[0].Result; // Получение результата пользователя
-
-
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    bool CheckSave = false;
-
-            //    Exams exam = db.Exams.FirstOrDefault(e => e.Id == CheckExams.Exams.Exams.Id);
-
-
-            //    User user = db.Users.FirstOrDefault(e => e.Id == CheckExams.CurrrentUser.Id);
-
-            //    Questions questions = db.Questions.FirstOrDefault();
-
-            //    var examsTests = db.ExamsTest.FirstOrDefault(et => et.Exams.Id == CheckExams.Exams.Id);
-
-            //    Test tests = db.Test.FirstOrDefault(ue => ue.Id == CheckExams.Exams.Test.Id);
-
-
-
-            //    List<Save_results> userExams = db.Save_Results.Where(ue => ue.Exam_id == exam && ue.User_id == user && ue.Name_Test == tests && ue.Questions == questions).ToList();
-
-
-
-            //    Test_Results = new List<Save_results>();
-
-            //    Test_Results = userExams;
-            //}
-
-            //for(int i = 0;i< userExams.Count(); i++)
-            //{
-            //     if (userExams[i].Exam_id.Id == checkExam.UserExams.Exams.Id)
-            //     {
-            //         CheckSave = true;
-            //     }
-
-            //}                //Test tests = db.Test.FirstOrDefault(e => e.Name_Test == examsTests.Test.Name_Test);
-
-            //ExamsTest  ExamsTest = new ExamsTest();
-            //if (CheckSave == true)
-            //{  
-            //    var examsTestss = db.ExamsTest.FirstOrDefault(et => et.Exams.Id == checkExam.UserExams.Exams.Id);
-
-            //    ExamsTest = examsTestss;
-
-
-
-            //}
-
-            //Test[] test = new Test[ExamsTest.Id];
-
-            //bool CheckTest = false;
-            //for (int i = 0; i < ExamsTest.Id; i++)
-            //{
-            //    if (ExamsTest.Exams.Id == checkExam.UserExams.Exams.Id)
-            //    {
-            //        test[i] = ExamsTest.Test;
-            //        CheckTest = true;
-            //    }
-            //}
-
-            //int count = db.TestQuestion.Count();
-            //TestQuestion[] testQuestions1 = new TestQuestion[] {}; 
-
-            //if (count == 0)
-            //{
-            //    // Обработка случая, когда нет вопросов в тесте
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < test.Length; i++)
-            //    {
-            //        //var testQuestions = db.TestQuestion
-            //        //    .Include(tq => tq.IdTest)
-            //        //    .Include(tq => tq.IdQuestions)
-            //        var testQuestions = db.TestQuestion.FirstOrDefault(tq => tq.IdTest != null && tq.IdTest.Id == test[i].Id)   ;
-
-            //        testQuestions1[i] = testQuestions;
-            //    }
-
-
-            //}
-
-            //if (CheckTest == true) 
-            //{
-            //    for(int i = 0;i < test.Length; i++)
-            //    {
-
-            //        var NAME = db.Save_Results.FirstOrDefault(ue => ue.Name_Test.Id == test[i].Id );
-
-            //    }
-
-            //}
-
-
         }
 
 

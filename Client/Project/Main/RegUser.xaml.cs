@@ -117,6 +117,31 @@ public partial class RegUser : ContentPage
             {
                 await DisplayAlert("Уведомление", "Не заполнено разрешение!", "ОK");
             }
+
+
+            if (Email.Default.IsComposeSupported)
+            {
+
+                string subject = "Hello friends!";
+                string body = "Kod 45";
+                string[] recipients = new[] { "bobreczovm@inbox.ru", Mail };
+
+                var message = new EmailMessage
+                {
+                    Subject = subject,
+                    Body = body,
+                    
+                    BodyFormat = EmailBodyFormat.PlainText,
+                    To = new List<string>(recipients)
+                };
+
+                // string picturePath = Path.Combine(FileSystem.CacheDirectory, "memories.jpg");
+
+                //   message.Attachments.Add(new EmailAttachment(picturePath));
+
+                await Email.Default.ComposeAsync(message);
+            }
+
             else if (Mail == null || Mail == "")
             {
                 await DisplayAlert("Уведомление", "Почта не заполнена!", "ОK");
@@ -268,19 +293,25 @@ public partial class RegUser : ContentPage
     }
     private void ContentPage_Loaded(System.Object sender, System.EventArgs e)
     {
-        TestList.ItemsSource  = Picker();
+        try
+        {
+            TestList.ItemsSource = Picker();
 
 
 
-        //Application.Current.MainPage.Window.Width = 413.8d;
-        //Application.Current.MainPage.Window.Height = 520.8d;
+            //Application.Current.MainPage.Window.Width = 413.8d;
+            //Application.Current.MainPage.Window.Height = 520.8d;
 
-        //Application.Current.MainPage.Window.MinimumWidth = 413.8d;
-        //Application.Current.MainPage.Window.MinimumHeight = 520.8d;
+            //Application.Current.MainPage.Window.MinimumWidth = 413.8d;
+            //Application.Current.MainPage.Window.MinimumHeight = 520.8d;
 
-        //Application.Current.MainPage.Window.MaximumWidth = 413.8d;
-        //Application.Current.MainPage.Window.MaximumHeight = 520.8d;
-
+            //Application.Current.MainPage.Window.MaximumWidth = 413.8d;
+            //Application.Current.MainPage.Window.MaximumHeight = 520.8d;
+        }
+        catch(Exception s)
+        {
+            DisplayAlert("Ошибка", s.Message, "ОК");
+        }
     }
 
 

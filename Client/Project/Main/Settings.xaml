@@ -7,18 +7,22 @@
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
                 <StackLayout VerticalOptions="CenterAndExpand" Margin="0,0,0,20">
-                    <Label Text="Адрес:" FontSize="18" FontAttributes="Bold" />
-                    <Entry x:Name="AddressEntry" Placeholder="Введите адрес"  Keyboard="Text"     TextChanged ="AddressEntry_TextChanged"/>
+
+                    <Label Text="Адрес:" FontSize="25" FontAttributes="Bold" WidthRequest="280" />
+                    <Entry x:Name="AddressEntry" Placeholder="Введите адрес" WidthRequest="280"
+                           Keyboard="Text" TextChanged="AddressEntry_TextChanged"/>
                 </StackLayout>
 
-                <StackLayout VerticalOptions="CenterAndExpand" Margin="0,-190,0,20">
-                    <Label Text="Порт:" FontSize="18" FontAttributes="Bold" />
-                    <Entry x:Name="PortEntry" Placeholder="Введите порт" Keyboard="Text"     TextChanged="PortEntry_TextChanged" />
+                <StackLayout VerticalOptions="CenterAndExpand" Margin="0,0,0,20">
+                    <Label Text="Порт:" FontSize="25" FontAttributes="Bold" WidthRequest="280" />
+                    <Entry x:Name="PortEntry"  Placeholder="Введите порт" Keyboard="Text" 
+                           TextChanged="PortEntry_TextChanged" WidthRequest="280" />
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <Button Text="Отмена" Clicked="CancelButtonClicked" />
-                    <Button Text="Сохранить" Clicked="SaveButtonClicked" />
+                <StackLayout  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="End">
+                    <Button Text="Отмена" FontSize="22" Clicked="CancelButtonClicked" Margin="0,0,0,0" WidthRequest="190"/>
+
+                    <Button Text="Сохранить"  Clicked="SaveButtonClicked" Margin="10,0,0,0" FontSize="22" WidthRequest="190" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>
