@@ -363,9 +363,9 @@ namespace Client
                     RegUser(ip_Adress);
                 }
             }
-            catch(Exception ex)
+            catch
             {
-                DisplayAlert("Ошибка", ex.Message, "OK");
+
             }
             //// Создание NavigationPage с главной страницей
             //var mainPage = new MainPage();
@@ -444,7 +444,7 @@ namespace Client
                 {
                     nameEntry9.Text = "Admin@Admin.ru";
                     nameEntry1.Text = "Admin";
-                    //nameEntry9.Text = "maks_nt@list.ru";
+                    //nameEntry9.Text = "+";
                     //nameEntry1.Text = "1";
                 }
                 else if (Shell.Current.CurrentState.Location.OriginalString.Contains("sell=user"))
