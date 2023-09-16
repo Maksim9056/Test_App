@@ -73,7 +73,7 @@ namespace Server_Test_Users
                     using (MemoryStream ms = new MemoryStream())
                     {
                         Roles roles = new Roles { Id =0};
-                        Regis_users regis_Users = new Regis_users(0, "", "", roles, "");
+                        Regis_users regis_Users = new Regis_users(0, "", "", roles, "", 0);
 
                         JsonSerializer.Serialize<Regis_users>(ms, regis_Users);
 
@@ -835,6 +835,31 @@ namespace Server_Test_Users
 
                  //   stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                     
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+        }
+
+
+        public void SelectFromFilles(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            try
+            {
+
+                Filles CrTest = JsonSerializer.Deserialize<Filles>(arg1);
+
+                Filles filles = @class.SelectFromFilles(CrTest);
+                using (MemoryStream ms = new MemoryStream())
+                {
+
+                    // JsonSerializer.Serialize<Filles>(stream, filles);
+                    JsonSerializer.Serialize<Filles>(ms, filles);
+
+                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+
                 }
             }
             catch (Exception ex)

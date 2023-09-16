@@ -77,7 +77,7 @@ public partial class RegUser : ContentPage
     public  int Id_Filles { get; set; }
 
 
-    public void Connect()
+    async public   void Connect()
     {
         try
         {
@@ -103,7 +103,7 @@ public partial class RegUser : ContentPage
         }
         catch(Exception ex) 
         {
-          DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
+           await DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
 
         }
       

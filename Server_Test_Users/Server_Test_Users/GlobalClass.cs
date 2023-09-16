@@ -15,6 +15,7 @@ using System.Text.Json;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Runtime.Serialization.Formatters;
+using System.Linq;
 
 namespace Server_Test_Users
 {
@@ -290,29 +291,39 @@ namespace Server_Test_Users
                 }
 
 
-
-                DateTime dateTime = DateTime.Now;
-                var data = $"{dateTime:F}";
-
-                Roles roles = new Roles { Id = regis_Users.Rechte.Id };
-
-
-                // добавление данных
+// добавление данных
                 using (ApplicationContext db = new ApplicationContext())
                 {
+
+
+
+                   
+                   DateTime dateTime = DateTime.Now;
+                   var data = $"{dateTime:F}";
+
+                  Roles roles = new Roles { Id = regis_Users.Rechte.Id };
+
+                   Filles filles =  db.Filles.FirstOrDefault( ue =>ue.Id == regis_Users.Filles );
+
                     // создаем два объекта User
-                    User user1 = new User { Name_Employee = regis_Users.Name_Employee, 
+                    User user1 = new User { Name_Employee = regis_Users.Name_Employee,
                         Password = regis_Users.Password,
                         DataMess = data,
                         Id_roles_users = roles.Id,
-                        Employee_Mail = regis_Users.Employee_Mail };
+                        Employee_Mail = regis_Users.Employee_Mail,
+                        Id_Email = filles
+
+
+                    };
+                    
                     // добавляем их в бд
                     db.Users.AddRange(user1);
                     db.SaveChanges();
                 }
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    var users = db.Users.ToList();
+                    Filles filles = db.Filles.FirstOrDefault(ue => ue.Id == regis_Users.Filles);
+                    var users = db.Users.ToList(  );
                     if (users == null)
                     {
 
@@ -324,7 +335,7 @@ namespace Server_Test_Users
                         {
                             Exists_User = true;
                             Roles roles1 = new Roles { Id = user.Id_roles_users };
-                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail);
+                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Id_Email.Id);
 
                             Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
                         }
@@ -351,13 +362,15 @@ namespace Server_Test_Users
                 // int Current_User;
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    var users = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password);
+
+                    var dbs = db.Filles.FirstOrDefault();
+                    var users = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password && p.Id_Email == dbs);
 
                     if (users != null)
                     {
                         Check = true;
                         Roles roles = new Roles { Id = users.Id_roles_users };
-                        Travel = new Regis_users(users.Id, users.Name_Employee, users.Password, roles, users.Employee_Mail);
+                        Travel = new Regis_users(users.Id, users.Name_Employee, users.Password, roles, users.Employee_Mail, users.Id_Email.Id);
                         Console.WriteLine($"{users.Name_Employee} ({users.Employee_Mail})");
                     }
                 }
@@ -371,7 +384,7 @@ namespace Server_Test_Users
                         if (users != null)
                         {
                             Roles roles = new Roles { Id = 0 };
-                            Travel = new Regis_users(0, "", "", roles, users.Employee_Mail);
+                            Travel = new Regis_users(0, "", "", roles, users.Employee_Mail,0);
                             Console.WriteLine($"{users.Name_Employee} ({users.Employee_Mail})");
                         }
                     }
@@ -568,7 +581,7 @@ namespace Server_Test_Users
                         {
                             Roles roles = new Roles { Id = user.Id };
 
-                            regis_Users[i] = new Regis_users(user.Id, user.Name_Employee, user.Password, roles, user.Employee_Mail);
+                            regis_Users[i] = new Regis_users(user.Id, user.Name_Employee, user.Password, roles, user.Employee_Mail, user.Id_Email.Id);
                             i++;
                         }
                         Travels = regis_Users;
@@ -1570,6 +1583,29 @@ namespace Server_Test_Users
                 return filles;
             }
             catch(Exception ex) 
+            {
+                Console.WriteLine(ex.Message.ToString());
+
+            }
+            return null;
+        }
+
+
+        public Filles SelectFromFilles(Filles filless)
+        {
+            try
+            {
+
+                Filles filles = null;
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // создаем два объекта User
+
+                    filles = db.Filles.FirstOrDefault(ue => ue.Id == filless.Id);
+                }
+                return filles;
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message.ToString());
 

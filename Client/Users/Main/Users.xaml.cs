@@ -1,7 +1,9 @@
 using Class_interaction_Users;
+using Client.Main;
 using Client.Users.Doc.DocPersonalAchievement;
-//using HealthKit;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
+using Microsoft.Maui.Storage;
+using System.Net.NetworkInformation;
 using System.Windows.Input;
 
 namespace Client.Users;
@@ -14,28 +16,170 @@ public partial class Users : ContentPage
     public Regis_users regis_Users { get; set; }
     public ICommand TapCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
+    public Filles_Work filles_Work = new Filles_Work();
 
-    public Users(Regis_users name )
+    public Filles files { get; set; }
+
+
+     public string Connect()
     {
-        InitializeComponent();
-
-        regis_Users = name;
-        user = new User
+        try
         {
-            Id = name.Id,
-            Password = name.Password,
-            Name_Employee = name.Name_Employee
-              ,
-            Employee_Mail = name.Employee_Mail ,
-            Id_roles_users = name.Rechte.Id
+            Ip_adress ip_Adress = new Ip_adress();
+            ip_Adress.CheckOS();
 
+            Ping pingSender = new Ping();
+            PingReply reply = pingSender.Send(ip_Adress.Ip_adressss, 500);
+            //  string FileFS = "";
+            if (reply.Status == IPStatus.Success)
+            {
+                //  Start(FileFS, ip_Adress);
+               Class_interaction_Users.Ip_adress.Ip_adresss = ip_Adress.Ip_adressss;
+
+               
+            }
+            else
+            {
+                //   FileFS = "";
+                //   Start(FileFS, ip_Adress);
+
+            }
+            return ip_Adress.Ip_adressss;
+        }
+        catch (Exception ex)
+        {
+             DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
 
         }
-   ;
-        NameUser.Text = name.Name_Employee;
+        return null;
+    }
+    
+    public Users(Regis_users name )
+    {
+        try
+        {
+            InitializeComponent();
+
+            regis_Users = name;
+            Filles filles = new Filles { Id = name.Filles };
+            user = new User
+            {
+                Id = name.Id,
+                Password = name.Password,
+                Name_Employee = name.Name_Employee
+                  ,
+                Employee_Mail = name.Employee_Mail,
+                Id_roles_users = name.Rechte.Id,
+                Id_Email = filles
+
+            };
+        
+
+            NameUser.Text = name.Name_Employee;
+             string IPAdress =        Connect();
+            var file = filles_Work.SelectFromFilles(IPAdress, filles);
+
+            if (file == null)
+            {
+                ImageUser.Source = "dotnet_bot.png";
+            }
+            else
+            {
+                files = file;
+
+                Image();
+            }
+        }
+        catch(Exception)
+        {
+
+        }
+        //ImageUser.Source 
     }
 
-    public void User_NAME(Regis_users name)
+
+
+    public void Image()
+    {
+        try
+        {
+
+
+
+            string path = System.AppContext.BaseDirectory + "\\путь_к_файлу.jpg";
+
+
+            // Создание потока на основе массива байт изображения
+
+            if (DeviceInfo.Platform == DevicePlatform.iOS)
+            {
+
+                string paths = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "путь_к_файлу.jpg");
+
+
+                if (System.IO.File.Exists(paths))
+                {
+                    // Удаление файла
+                    System.IO.File.Delete(paths);
+                }
+
+                File.WriteAllText(paths, files.Name.ToString());
+                ImageUser.Source = File.ReadAllText(paths);
+
+            }
+            else if (DeviceInfo.Platform == DevicePlatform.Android)
+            {
+                string paths = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "путь_к_файлу.jpg");
+
+
+                if (System.IO.File.Exists(paths))
+                {
+                    // Удаление файла
+                    System.IO.File.Delete(paths);
+                }
+
+                File.WriteAllText(paths, files.Name.ToString());
+             var sd   = File.ReadAllText(paths);
+                ImageUser.Source = sd;
+
+            }
+            else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            {
+
+                using (MemoryStream memoryStream = new MemoryStream(files.Name))
+                {
+                    // Сохранение изображения на диск
+
+
+                    if (System.IO.File.Exists(path))
+                    {
+                        // Удаление файла
+                        System.IO.File.Delete(path);
+                    }
+
+                    using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate))
+                    {
+                        memoryStream.CopyTo(fileStream);
+                    }
+                    ImageUser.Source = path;
+                }
+
+
+
+
+            }
+            else if (DeviceInfo.Platform == DevicePlatform.macOS)
+            {
+
+            }
+        }
+        catch(Exception ex) 
+        {
+            DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.Data, "Ок");
+        }
+    }
+
+        public void User_NAME(Regis_users name)
     {
 
    

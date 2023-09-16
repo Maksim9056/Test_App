@@ -13,6 +13,7 @@ using System.Windows.Data;
 using static Class_interaction_Users.CommandCL;
 using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Net.WebRequestMethods;
 
 
 namespace Class_interaction_Users
@@ -1146,9 +1147,9 @@ namespace Class_interaction_Users
     public class Filles_Work
     {
 
-        Filles_Work_ checkPing = new Filles_Work_();
-
-        public Filles FillesSave( Filles user)
+        Filles_Work_ Filles_Work_ = new Filles_Work_();
+      
+        public Filles FillesSave(Filles user)
         {
             try
             {
@@ -1156,12 +1157,12 @@ namespace Class_interaction_Users
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
                     JsonSerializer.Serialize<Filles>(memoryStream, user);
-                    Task.Run(async () => await checkPing.FillesSavess(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "057")).Wait();
+                    Task.Run(async () => await Filles_Work_.FillesSavess(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "057")).Wait();
 
 
                 }
 
-                if (checkPing.Filles == null)
+                if (Filles_Work_.Filles == null)
                 {
                     //  Statisk = null;
 
@@ -1171,7 +1172,7 @@ namespace Class_interaction_Users
                     //   command.statictics
 
                 }
-                return checkPing.Filles;
+                return Filles_Work_.Filles;
             }
             catch
             {
@@ -1180,23 +1181,47 @@ namespace Class_interaction_Users
             return null;
         }
 
-      
-    }
-    public class BooleanToStringConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+
+        public Filles SelectFromFilles(string Ip_adresss, Filles user)
         {
-            if (value is bool boolValue)
+            try
             {
-                return boolValue ? "Да" : "Нет";
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+
+                    Filles files = null;
+                    JsonSerializer.Serialize<Filles>(memoryStream, user);
+
+                    Task.Run(async () => await Filles_Work_.SelectFromFilles(Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "058")).Wait();
+
+                    files = Filles_Work_.Filles;
+                    return files;
+                }
+
+          
+            }
+            catch (Exception)
+            {
+
+            }
+            return null;
+        }
+        public class BooleanToStringConverter : IValueConverter
+        {
+            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                if (value is bool boolValue)
+                {
+                    return boolValue ? "Да" : "Нет";
+                }
+
+                return string.Empty;
             }
 
-            return string.Empty;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
