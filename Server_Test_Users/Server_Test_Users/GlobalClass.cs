@@ -131,47 +131,40 @@ namespace Server_Test_Users
         {
             public DbSet<Roles> Roles { get; set; } = null!;
             public DbSet<User_roles> User_Roles { get; set; } = null!;
-
             public DbSet<User> Users { get; set; } = null!;
-
             public DbSet<Questions> Questions { get; set; } = null!;
-
             public DbSet<TestQuestion> TestQuestion { get; set; } = null!;
-
             public DbSet<QuestionAnswer> QuestionAnswer { get; set; } = null!;
             public DbSet<ExamsTest> ExamsTest { get; set; } = null!;
             public DbSet<UserExams> UserExams { get; set; } = null!;
-
             public DbSet<Answer> Answer { get; set; } = null!;
             public DbSet<Options> Options { get; set; } = null!;
-
             public DbSet<Test> Test { get; set; } = null!;
             public DbSet<Exam> Exam { get; set; } = null!;
             public DbSet<Exams> Exams { get; set; } = null!;
             public DbSet<Save_results> Save_Results { get; set; } = null!;
+            public DbSet<Filles> Filles { get; set; } = null!;
 
-            public  ApplicationContext()
+            public ApplicationContext()
             {
-                // Database.EnsureDeleted(); // гарантируем, что бд удалена
-                Database.EnsureCreated(); // гарантируем, что бд будет созд
+                 // Database.EnsureDeleted(); // гарантируем, что бд удалена
+                 Database.EnsureCreated(); // гарантируем, что бд будет созд
                // Database.Migrate();  // миграция
-                 // Database.MigrateAsync(); // асинхронный метод для миграции
+              // Database.MigrateAsync(); // асинхронный метод для миграции
             }
+
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
                 switch (TypeSQL)
                 {
-                    //Postgres
-                    //IF NOT EXISTS
-                    case 1:
+                    case 1: // Postgres
                         optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Testdb;Username=postgres;Password=1");
                         break;
-                    case 2:
+                    case 2: // SQLite
                         optionsBuilder.UseSqlite("Data Source=helloapp.db");
                         break;
-                    case 3:
-                    //    optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
-
+                    case 3: // SQL Server
+                        optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
                         break;
                 }
             }
@@ -1555,6 +1548,33 @@ namespace Server_Test_Users
             }
                
             StatickUsers = statictics1;
+        }
+
+        public Filles SaveUsersImage(Filles filless)
+        {
+            try
+            {
+
+                Filles filles = null;
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // создаем два объекта User
+
+
+
+                    db.Filles.AddRange(filless);
+                    db.SaveChanges();
+
+                    filles = db.Filles.FirstOrDefault(ue =>ue.Name == filless.Name);
+                }
+                return filles;
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine(ex.Message.ToString());
+
+            }
+            return null;
         }
     }
 }

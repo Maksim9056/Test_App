@@ -5,7 +5,6 @@
              Title="Регистрация"
              BackgroundColor="White"
              Loaded="ContentPage_Loaded">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -50,6 +49,9 @@
                        WidthRequest="250"
                        Margin="0, 20, 0,0" />
 
+
+                <Image x:Name="Images" Loaded="Image_Loaded" Aspect="AspectFit" />
+
                 <Label x:Name="header" Text="Выберите Роль"
                        FontSize="16"
                        HorizontalOptions="CenterAndExpand"
@@ -66,7 +68,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    
+
                                     <Label Text="{Binding ExamsTest.Name_roles}" Grid.Column="0"
                                            FontSize="16"
                                            FontFamily="Arial"
@@ -76,11 +78,10 @@
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
-                        </ListView.ItemTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
         </ScrollView>
-
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="10">
             <Button Text="Сохранить" Clicked="SaveButtonClick" HorizontalOptions="FillAndExpand"/>
             <Button Text="Назад" Clicked="GoBack" HorizontalOptions="FillAndExpand"/>

@@ -11,100 +11,103 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
 using static Class_interaction_Users.CommandCL;
+using System.Drawing;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Class_interaction_Users
 {
 
     public class UserEditorViewModel : INotifyPropertyChanged
+    {
+        public CommandCL command = new CommandCL();
+
+        public ObservableCollection<User> Users { get; set; }
+
+        private int id;
+        private string name_Employee;
+        private string password;
+        private string dataMess;
+        private int id_roles_users;
+        private string employee_Mail;
+
+        public int Id
         {
-            public CommandCL command = new CommandCL();
-
-            public ObservableCollection<User> Users { get; set; }
-
-            private int id;
-            private string name_Employee;
-            private string password;
-            private string dataMess;
-            private int id_roles_users;
-            private string employee_Mail;
-
-            public int Id
+            get { return id; }
+            set
             {
-                get { return id; }
-                set
+                if (id != value)
                 {
-                    if (id != value)
-                    {
-                        id = value;
-                        OnPropertyChanged();
-                    }
+                    id = value;
+                    OnPropertyChanged();
                 }
             }
+        }
 
-            public string Name_Employee
+        public string Name_Employee
+        {
+            get { return name_Employee; }
+            set
             {
-                get { return name_Employee; }
-                set
+                if (name_Employee != value)
                 {
-                    if (name_Employee != value)
-                    {
-                        name_Employee = value;
-                        OnPropertyChanged();
-                    }
+                    name_Employee = value;
+                    OnPropertyChanged();
                 }
             }
+        }
 
-            public string Password
+        public string Password
+        {
+            get { return password; }
+            set
             {
-                get { return password; }
-                set
+                if (password != value)
                 {
-                    if (password != value)
-                    {
-                        password = value;
-                        OnPropertyChanged();
-                    }
+                    password = value;
+                    OnPropertyChanged();
                 }
             }
+        }
 
-            public string DataMess
+        public string DataMess
+        {
+            get { return dataMess; }
+            set
             {
-                get { return dataMess; }
-                set
+                if (dataMess != value)
                 {
-                    if (dataMess != value)
-                    {
-                        dataMess = value;
-                        OnPropertyChanged();
-                    }
+                    dataMess = value;
+                    OnPropertyChanged();
                 }
             }
+        }
 
-            public int Id_roles_users
+        public int Id_roles_users
+        {
+            get { return id_roles_users; }
+            set
             {
-                get { return id_roles_users; }
-                set
+                if (id_roles_users != value)
                 {
-                    if (id_roles_users != value)
-                    {
-                        id_roles_users = value;
-                        OnPropertyChanged();
-                    }
+                    id_roles_users = value;
+                    OnPropertyChanged();
                 }
             }
+        }
 
-            public string Employee_Mail
+        public string Employee_Mail
+        {
+            get { return employee_Mail; }
+            set
             {
-                get { return employee_Mail; }
-                set
+                if (employee_Mail != value)
                 {
-                    if (employee_Mail != value)
-                    {
-                        employee_Mail = value;
-                        OnPropertyChanged();
-                    }
+                    employee_Mail = value;
+                    OnPropertyChanged();
                 }
             }
+        }
 
         private PropertyChangedEventHandler propertyChanged;
 
@@ -121,14 +124,14 @@ namespace Class_interaction_Users
 
 
         public void CreateUserData(User user)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    JsonSerializer.Serialize<User>(memoryStream, user);
-                    Task.Run(async () => await command.CreateUser(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "018")).Wait();
-                }
-
+                JsonSerializer.Serialize<User>(memoryStream, user);
+                Task.Run(async () => await command.CreateUser(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "018")).Wait();
             }
+
+        }
 
         public void UpDateUserData(User user)
         {
@@ -632,7 +635,7 @@ namespace Class_interaction_Users
         }
     }
 
-    public class TestQuestionEditorViewModel 
+    public class TestQuestionEditorViewModel
     {
         private int id;
         private Test test;
@@ -1018,7 +1021,7 @@ namespace Class_interaction_Users
         }
 
     }
-    
+
     public class Test_Save
     {
         private CommandCL.SaveTest command = new CommandCL.SaveTest();
@@ -1041,7 +1044,7 @@ namespace Class_interaction_Users
         private CommandCL.Check command = new CommandCL.Check();
 
 
-        public Exams_Check CheckExams( Class_interaction_Users.UserExams UserExams )
+        public Exams_Check CheckExams(Class_interaction_Users.UserExams UserExams)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -1050,7 +1053,7 @@ namespace Class_interaction_Users
                 JsonSerializer.Serialize<CheckExam>(memoryStream, checkExam);
 
 
-            Task.Run(async () => await command.CheckClass(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "053")).Wait();
+                Task.Run(async () => await command.CheckClass(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "053")).Wait();
 
 
                 return command.exams_Check1;
@@ -1063,7 +1066,7 @@ namespace Class_interaction_Users
             using (MemoryStream memoryStream = new MemoryStream())
             {
 
-              //  CheckExam checkExam = new CheckExam(userExams);
+                //  CheckExam checkExam = new CheckExam(userExams);
                 JsonSerializer.Serialize<CheckUserTest>(memoryStream, userExams);
 
 
@@ -1127,7 +1130,7 @@ namespace Class_interaction_Users
             if (checkPing.statictics == null)
             {
                 //  Statisk = null;
-              
+
             }
             else
             {
@@ -1136,6 +1139,48 @@ namespace Class_interaction_Users
             }
             return галочка;
         }
+    }
+
+
+
+    public class Filles_Work
+    {
+
+        Filles_Work_ checkPing = new Filles_Work_();
+
+        public Filles FillesSave( Filles user)
+        {
+            try
+            {
+                //List<UserExams> userExamsList = new List<UserExams>();
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    JsonSerializer.Serialize<Filles>(memoryStream, user);
+                    Task.Run(async () => await checkPing.FillesSavess(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "057")).Wait();
+
+
+                }
+
+                if (checkPing.Filles == null)
+                {
+                    //  Statisk = null;
+
+                }
+                else
+                {
+                    //   command.statictics
+
+                }
+                return checkPing.Filles;
+            }
+            catch
+            {
+
+            }
+            return null;
+        }
+
+      
     }
     public class BooleanToStringConverter : IValueConverter
     {

@@ -1948,6 +1948,42 @@ namespace Class_interaction_Users
                 return string.Empty;
             }
         }
+
+        public class Filles_Work_
+        {
+            public Filles Filles { get; set; }
+            public async Task<string> FillesSavess(string server, string fs, string command)
+            {
+
+                try
+                {
+                    CommandCL ClassInstance = new CommandCL();
+
+                    string responseDat = await ClassInstance.SendClass(server, fs, command);
+                    if (string.IsNullOrEmpty(responseDat))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+
+                        Filles exams_Check = JsonSerializer.Deserialize<Filles>(responseDat);
+
+                        Filles = exams_Check;
+                    }
+                }
+                catch (SocketException e)
+                {
+                    Console.WriteLine($"SocketException: {e.Message}");
+
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine($"Exception: {e.Message}");
+                }
+                return string.Empty;
+            }
+        }
     }
 }
 

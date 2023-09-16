@@ -5,17 +5,28 @@ using System.Text.Json;
 using System.Text;
 using TextChangedEventArgs = Microsoft.Maui.Controls.TextChangedEventArgs;
 using System.Text.RegularExpressions;
-using System.Security.Cryptography.X509Certificates;
 using System.Net;
+using System.IO;
+using System.IO.Pipes;
+using static Class_interaction_Users.CommandCL;
+using System.Collections;
+using Microsoft.Maui.Controls.Shapes;
+using static System.Net.WebRequestMethods;
+using System.Net.NetworkInformation;
 
 namespace Client.Main;
 
 public partial class RegUser : ContentPage
 {
+    Filles_Work filles_Work = new Filles_Work();
+    
     public RegUser()
     {
         InitializeComponent();
     }
+
+
+    public Filles Filles { get; set; }
 
     /// <summary>
     /// Экземпляр класса CommandCL
@@ -56,6 +67,47 @@ public partial class RegUser : ContentPage
     public CheckPing checkPing = new CheckPing();
 
     public Roles Roles { get; set; }
+
+
+
+
+    /// <summary>
+    /// Id картинки пользователя
+    /// </summary>
+    public  int Id_Filles { get; set; }
+
+
+    public void Connect()
+    {
+        try
+        {
+            Ip_adress ip_Adress = new Ip_adress();
+            ip_Adress.CheckOS();
+
+            Class_interaction_Users.Ip_adress.Ip_adresss = ip_Adress.Ip_adressss;
+            Ping pingSender = new Ping();
+            PingReply reply = pingSender.Send(ip_Adress.Ip_adressss, 500);
+          //  string FileFS = "";
+            if (reply.Status == IPStatus.Success)
+            {
+                //  Start(FileFS, ip_Adress);
+
+                
+            }
+            else
+            {
+             //   FileFS = "";
+                //   Start(FileFS, ip_Adress);
+              
+            }
+        }
+        catch(Exception ex) 
+        {
+          DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
+
+        }
+      
+    }
     /// <summary>
     ///Пароль пользователя присываеваем значение
     /// </summary>
@@ -83,7 +135,7 @@ public partial class RegUser : ContentPage
         Password1 = nameEntry2.Text;
     }
 
-    public async void Reg()
+    public async void Reg(object sender, EventArgs e)
     {
         try
         {
@@ -119,28 +171,28 @@ public partial class RegUser : ContentPage
             }
 
 
-            if (Email.Default.IsComposeSupported)
-            {
+            //if (Email.Default.IsComposeSupported)
+            //{
 
-                string subject = "Hello friends!";
-                string body = "Kod 45";
-                string[] recipients = new[] { "bobreczovm@inbox.ru", Mail };
+            //    string subject = "Hello friends!";
+            //    string body = "Kod 45";
+            //    string[] recipients = new[] { "bobreczovm@inbox.ru", Mail };
 
-                var message = new EmailMessage
-                {
-                    Subject = subject,
-                    Body = body,
-                    
-                    BodyFormat = EmailBodyFormat.PlainText,
-                    To = new List<string>(recipients)
-                };
+            //    var message = new EmailMessage
+            //    {
+            //        Subject = subject,
+            //        Body = body,
 
-                // string picturePath = Path.Combine(FileSystem.CacheDirectory, "memories.jpg");
+            //        BodyFormat = EmailBodyFormat.PlainText,
+            //        To = new List<string>(recipients)
+            //    };
 
-                //   message.Attachments.Add(new EmailAttachment(picturePath));
+            //    // string picturePath = Path.Combine(FileSystem.CacheDirectory, "memories.jpg");
 
-                await Email.Default.ComposeAsync(message);
-            }
+            //    //   message.Attachments.Add(new EmailAttachment(picturePath));
+
+            //    await Email.Default.ComposeAsync(message);
+            //}
 
             else if (Mail == null || Mail == "")
             {
@@ -152,34 +204,45 @@ public partial class RegUser : ContentPage
             }
             else
             {
-                using (MemoryStream Reg_user_Dispons = new MemoryStream())
+
+                if (Filles == null)
                 {
-                    CommandCL command = new CommandCL();
-                    string FileFS = "";
-                    using (MemoryStream fs = new MemoryStream())
-                    {
-                        Regis_users tom = new Regis_users(0, User_Name, Password, Roles, Mail);
-                        JsonSerializer.Serialize<Regis_users>(fs, tom);
-                        FileFS = Encoding.Default.GetString(fs.ToArray());
-                    }
-                    Task.Run(async () => await command.Reg_User(ip_Adress.Ip_adressss, FileFS, "002")).Wait();
-                    var Message = CommandCL.Travel_Regis_users_message;
-                    // Остальной код для фильтрации по имени
-                    if (Message == null)
-                    {
-                        await DisplayAlert("Уведомление", "Вы не зарегистрировались!", "ОK");
-                    }
-                    else
-                    {
-                        await DisplayAlert("Уведомление", "Вы зарегистрировались!", "ОK");
+                    Image_Loaded(sender,e);
+                }
+                else
+                {
 
 
+                    using (MemoryStream Reg_user_Dispons = new MemoryStream())
+                    {
+                        CommandCL command = new CommandCL();
+                        string FileFS = "";
+                        using (MemoryStream fs = new MemoryStream())
+                        {
+
+                            Regis_users tom = new Regis_users(0, User_Name, Password, Roles, Mail, Filles.Id);
+                            JsonSerializer.Serialize<Regis_users>(fs, tom);
+                            FileFS = Encoding.Default.GetString(fs.ToArray());
+                        }
+                        Task.Run(async () => await command.Reg_User(ip_Adress.Ip_adressss, FileFS, "002")).Wait();
+                        var Message = CommandCL.Travel_Regis_users_message;
+                        // Остальной код для фильтрации по имени
+                        if (Message == null)
+                        {
+                            await DisplayAlert("Уведомление", "Вы не зарегистрировались!", "ОK");
+                        }
+                        else
+                        {
+                            await DisplayAlert("Уведомление", "Вы зарегистрировались!", "ОK");
+
+
+                        }
+                        nameEntry3.Text = null;
+                        nameEntry.Text = null;
+                        nameEntry1.Text = null;
+                        nameEntry2.Text = null;
+                        await Navigation.PopAsync();
                     }
-                    nameEntry3.Text = null;
-                    nameEntry.Text = null;
-                    nameEntry1.Text = null;
-                    nameEntry2.Text = null;
-                    await Navigation.PopAsync();
                 }
             }
         }
@@ -195,7 +258,7 @@ public partial class RegUser : ContentPage
     /// </summary>
     private  void Button_Clicked(object sender, EventArgs e)
     {
-        Reg();
+        Reg(sender, e);
         //Пароль сравниваем если пароли одинаковые то отправляем на сервер
 
       
@@ -350,6 +413,7 @@ public partial class RegUser : ContentPage
 
             var selectedExamsTest = (RefExamsTest)e.SelectedItem;
             await DisplayAlert("Выбранная роль:", selectedExamsTest.ExamsTest.Name_roles, "OK");
+
             ((ListView)sender).SelectedItem = null;
             Roles = selectedExamsTest.ExamsTest;
 
@@ -369,7 +433,91 @@ public partial class RegUser : ContentPage
 
     private void SaveButtonClick(object sender, EventArgs e)
     {
-        Reg();
+        Reg(sender,e);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private async void Image_Loaded(object sender, EventArgs e)
+    {
+        try { 
+        if (MediaPicker.Default.IsCaptureSupported)
+        {
+            FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+
+                if (photo != null)
+                {
+                    // save the file into local storage
+                    byte[] imageBytes = System.IO.File.ReadAllBytes(photo.FullPath);
+
+                    string localFilePath = System.IO.Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+
+                    using Stream sourceStream = await photo.OpenReadAsync();
+
+                    Filles filles = new Filles
+                    {
+                        Name = imageBytes
+                    };
+                    Filles = filles_Work.FillesSave(filles);
+
+                    using FileStream localFileStream = System.IO.File.OpenWrite(localFilePath);
+
+                    await sourceStream.CopyToAsync(localFileStream);
+                    Images.Source = localFileStream.Name;
+                }
+                else
+                {
+                    photo = await MediaPicker.Default.PickPhotoAsync();
+                    byte[] imageBytes = System.IO.File.ReadAllBytes(photo.FullPath);
+                    using (MemoryStream memoryStreams = new MemoryStream())
+                    {
+                        Filles filles = new Filles
+                        {
+                            Name = imageBytes
+                        };
+                        Connect();
+                        Filles = filles_Work.FillesSave(filles);
+                        if(Filles == null)
+                        {
+                            Image_Loaded(sender, e);
+                        }
+                        string path = System.AppContext.BaseDirectory + "\\путь_к_файлу.jpg";
+
+
+                        if (System.IO.File.Exists(path))
+                        {
+                            // Удаление файла
+                            System.IO.File.Delete(path);
+                        }
+                        // Создание потока на основе массива байт изображения
+                        using (MemoryStream memoryStream = new MemoryStream(Filles.Name))
+                        {
+                            // Сохранение изображения на диск
+                            using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate))
+                            {
+                                memoryStream.CopyTo(fileStream);
+                            }
+                        }
+                        Images.Source = path;
+                     }
+                }
+                photo = null;
+            }
+        }
+        catch(Exception ex) 
+        {
+            await DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.Data, "Ок");
+            Image_Loaded(sender, e);
+        }
+    }
+
+
+
+    
+
+
 }
 

@@ -154,6 +154,8 @@ namespace Server_Test_Users
                 FDictCommands.Add("054", new Action<byte[], GlobalClass, NetworkStream>(command.CheckTestUsers));//Проверяет Екзамен 
                 FDictCommands.Add("055", new Action<byte[], GlobalClass, NetworkStream>(command.CheckStatickUserResult));
                 FDictCommands.Add("056", new Action<byte[], GlobalClass, NetworkStream>(command.CheckPingIpAdress));
+                FDictCommands.Add("057", new Action<byte[], GlobalClass, NetworkStream>(command.SaveUserImage));
+
 
 
 

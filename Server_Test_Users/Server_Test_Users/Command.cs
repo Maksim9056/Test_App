@@ -815,5 +815,32 @@ namespace Server_Test_Users
                 Console.WriteLine(ex.Message.ToString());
             }
         }
+
+
+
+
+        public void SaveUserImage(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            try
+            {
+
+                Filles CrTest = JsonSerializer.Deserialize<Filles>(arg1);
+
+                Filles filles = @class.SaveUsersImage(CrTest);
+                using (MemoryStream ms = new MemoryStream())
+                {
+
+                  //  JsonSerializer.Serialize<Filles>(ms, filles);
+                    JsonSerializer.Serialize<Filles>(stream, filles);
+
+                 //   stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
+        }
     }
 }

@@ -9,6 +9,17 @@ using System.Threading.Tasks;
 
 namespace Class_interaction_Users
 {
+    [Serializable]
+
+    public class Filles
+    {
+        /// <summary>
+        /// Id Filles
+        /// </summary>
+        public int Id { get; set; }
+
+        public byte[] Name { get; set; }
+    }
 
     public class Ip_adress
     {
@@ -41,6 +52,7 @@ namespace Class_interaction_Users
         /// id роли 
         /// </summary>
         
+        public Filles Id_Email { get; set; }
         public int Id_roles_users { get; set; }
         /// <summary>
         /// Почта
@@ -207,14 +219,17 @@ namespace Class_interaction_Users
 
         public Roles  Rechte { get; set; }
         public string Employee_Mail { get; set; }
+
+        public int Filles { get; set; }
                    
-        public Regis_users(int id, string name_Employee, string password, Roles rechte,string @Mail)
+        public Regis_users(int id, string name_Employee, string password, Roles rechte,string @Mail,int files)
         {
             Id = id; 
             Name_Employee = name_Employee;
             Password = password;
             Rechte = rechte;
             Employee_Mail = @Mail;
+            Filles = files;
         }
     }
 

@@ -3,5 +3,11 @@
 	<application android:allowBackup="true" android:supportsRtl="true" android:label="Экзаменатор" android:icon="@mipmap/appicon2"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+	<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+	<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 	<uses-sdk android:minSdkVersion="21" />
 </manifest>
