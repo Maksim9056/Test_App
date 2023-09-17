@@ -851,12 +851,13 @@ namespace Server_Test_Users
 
                 Filles CrTest = JsonSerializer.Deserialize<Filles>(arg1);
 
-                Filles filles = @class.SelectFromFilles(CrTest);
+                Filles filless = @class.SelectFromFilles(CrTest);
+
                 using (MemoryStream ms = new MemoryStream())
                 {
 
                     // JsonSerializer.Serialize<Filles>(stream, filles);
-                    JsonSerializer.Serialize<Filles>(ms, filles);
+                    JsonSerializer.Serialize<Filles>(ms, filless);
 
                      stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
 

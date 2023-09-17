@@ -1601,9 +1601,10 @@ namespace Server_Test_Users
                 {
                     // создаем два объекта User
 
-                    filles = db.Filles.FirstOrDefault(ue => ue.Id == filless.Id);
+
+                    return filles = db.Filles.FirstOrDefault(ue => ue.Id == filless.Id); 
                 }
-                return filles;
+                 ;
             }
             catch (Exception ex)
             {

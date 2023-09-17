@@ -1193,8 +1193,16 @@ namespace Class_interaction_Users
                     JsonSerializer.Serialize<Filles>(memoryStream, user);
 
                     Task.Run(async () => await Filles_Work_.SelectFromFilles(Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "058")).Wait();
+                 
+                    
+                    if(Filles_Work_.Filles == null)
+                    {
+                    SelectFromFilles(Ip_adresss, user);
 
+                    }
                     files = Filles_Work_.Filles;
+
+
                     return files;
                 }
 

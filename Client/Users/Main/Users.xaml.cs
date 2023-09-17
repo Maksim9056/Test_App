@@ -3,8 +3,13 @@ using Client.Main;
 using Client.Users.Doc.DocPersonalAchievement;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using Microsoft.Maui.Storage;
+using SkiaSharp;
+using System.Collections;
+using System.Drawing;
 using System.Net.NetworkInformation;
 using System.Windows.Input;
+using System.Xml.Linq;
+using Image = Microsoft.Maui.Controls.Image;
 
 namespace Client.Users;
 
@@ -54,6 +59,24 @@ public partial class Users : ContentPage
         return null;
     }
     
+    public void Images(Regis_users name, Filles filles)
+    {
+        NameUser.Text = name.Name_Employee;
+        string IPAdress = Connect();
+        var file = filles_Work.SelectFromFilles(IPAdress, filles);
+
+        if (file == null)
+        {
+            Images(name, filles);
+        }
+        else
+        {
+            files = file;
+            Image();
+
+
+        }
+    }
     public Users(Regis_users name )
     {
         try
@@ -73,22 +96,10 @@ public partial class Users : ContentPage
                 Id_Email = filles
 
             };
-        
 
-            NameUser.Text = name.Name_Employee;
-             string IPAdress =        Connect();
-            var file = filles_Work.SelectFromFilles(IPAdress, filles);
+            Images(name,filles);
 
-            if (file == null)
-            {
-                ImageUser.Source = "dotnet_bot.png";
-            }
-            else
-            {
-                files = file;
 
-                Image();
-            }
         }
         catch(Exception)
         {
@@ -129,19 +140,44 @@ public partial class Users : ContentPage
             }
             else if (DeviceInfo.Platform == DevicePlatform.Android)
             {
-                string paths = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "путь_к_файлу.jpg");
-
-
-                if (System.IO.File.Exists(paths))
+                string paths = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "путь_к_файлу.png");
+                string filePath = Path.Combine(Path.GetTempPath(), "путь_к_файлу.png");
+                using (MemoryStream stream = new MemoryStream(files.Name))
                 {
-                    // Удаление файла
-                    System.IO.File.Delete(paths);
+                    using (SKBitmap bitmap = SKBitmap.Decode(stream))
+                    {
+
+                        {
+                            using (SKImage images = SKImage.FromBitmap(bitmap))
+                            {
+                                using (SKData data = images.Encode(SKEncodedImageFormat.Png, 100))
+                                {
+                                    using (FileStream fileStream = File.OpenWrite(filePath))
+                                    {
+                                        data.SaveTo(fileStream);
+                                    }
+                                }
+                            }
+                        }
+                        // Вывод image в ImageUser.Source
+
+                    }
+                    var image = new Image();
+                    image.Source = ImageSource.FromFile(filePath);
+
+
+
+                    if (System.IO.File.Exists(paths))
+                    {
+                        // Удаление файла
+                        System.IO.File.Delete(paths);
+                    }
+
+                    //   File.WriteAllText(paths, files.Name.ToString());
+                    //var sd   = File.ReadAllText(paths);
+                    //   ImageUser.Source = sd;
+
                 }
-
-                File.WriteAllText(paths, files.Name.ToString());
-             var sd   = File.ReadAllText(paths);
-                ImageUser.Source = sd;
-
             }
             else if (DeviceInfo.Platform == DevicePlatform.WinUI)
             {
