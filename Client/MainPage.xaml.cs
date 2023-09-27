@@ -29,10 +29,17 @@ namespace Client
         CheckPing checkPing = new CheckPing();
         public MainPage()
         {
-          
+            try
+            {
+
                 InitializeComponent();
                 BindingContext = this;
                 AddSettings();
+            }
+            catch
+            {
+
+            }
         }
 
 
@@ -315,7 +322,7 @@ namespace Client
                 ip_Adress.CheckOS();
                 Class_interaction_Users.Ip_adress.Ip_adresss = ip_Adress.Ip_adressss;
                 Ping pingSender = new Ping();
-                PingReply reply = pingSender.Send(ip_Adress.Ip_adressss, 500);
+                PingReply reply = pingSender.Send(ip_Adress.Ip_adressss, 50);
                 string FileFS = "";
                 if (reply.Status == IPStatus.Success)
                 {

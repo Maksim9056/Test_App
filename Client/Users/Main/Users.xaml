@@ -8,7 +8,7 @@
         <AbsoluteLayout BackgroundColor="{DynamicResource PageBackground}">
             <Image 
                 x:Name="ImageUser"
-                Source="dotnet_bot.png"
+             
                    AbsoluteLayout.LayoutFlags="PositionProportional"
                    AbsoluteLayout.LayoutBounds="1, 0, 50, 50" />
 

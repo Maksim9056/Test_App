@@ -14,66 +14,73 @@ namespace Client.Controls
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
-            if (_chart.Entries == null)
+            try
             {
-                return;
+                if (_chart.Entries == null)
+                {
+                    return;
+                }
+
+                var maxValue = _chart.MaxValue >= 0 ?
+                    _chart.MaxValue :
+                    _chart.Entries.Max(x => x.Value);
+
+                var center = dirtyRect.Center;
+
+                var spacing = (float)_chart.BarSpacing;
+                var radius = (float)_chart.InnerRadius;
+                var fontSize = (float)_chart.FontSize;
+                var barThickness = (float)_chart.BarThickness;
+
+                canvas.StrokeSize = barThickness;
+                canvas.FontColor = _chart.TextColor;
+                canvas.FontSize = fontSize;
+                canvas.StrokeLineCap = _chart.RoundedCaps ? LineCap.Round : LineCap.Butt;
+
+                var startingAngle = 90;
+                var angleSpan = _chart.ShowLabels ? 270 : 360;
+                var isFullCircle = angleSpan == 360;
+
+                foreach (var entry in _chart.Entries.Reverse())
+                {
+                    // Draw bar background
+                    canvas.StrokeColor =
+                        _chart.BarBackgroundColor ??
+                        ToBackgroundColor(entry.Color);
+
+                    if (isFullCircle)
+                    {
+                        canvas.DrawCircle(center.X, center.Y, radius);
+                    }
+                    else
+                    {
+                        DrawArc(canvas, center, radius, startingAngle, startingAngle - angleSpan);
+                    }
+
+                    // Draw bar
+                    canvas.StrokeColor = entry.Color;
+
+                    if (entry.Value == maxValue && isFullCircle)
+                    {
+                        canvas.DrawCircle(center.X, center.Y, radius);
+                    }
+                    else
+                    {
+                        DrawArc(canvas, center, radius, startingAngle, startingAngle - (float)(entry.Value * angleSpan / maxValue));
+                    }
+
+                    if (_chart.ShowLabels)
+                    {
+                        // Draw label
+                        DrawLabel(canvas, center, spacing, radius, fontSize, entry);
+                    }
+
+                    radius += spacing;
+                }
             }
-
-            var maxValue = _chart.MaxValue >= 0 ?
-                _chart.MaxValue :
-                _chart.Entries.Max(x => x.Value);
-
-            var center = dirtyRect.Center;
-
-            var spacing = (float)_chart.BarSpacing;
-            var radius = (float)_chart.InnerRadius;
-            var fontSize = (float)_chart.FontSize;
-            var barThickness = (float)_chart.BarThickness;
-
-            canvas.StrokeSize = barThickness;
-            canvas.FontColor = _chart.TextColor;
-            canvas.FontSize = fontSize;
-            canvas.StrokeLineCap = _chart.RoundedCaps ? LineCap.Round : LineCap.Butt;
-
-            var startingAngle = 90;
-            var angleSpan = _chart.ShowLabels ? 270 : 360;
-            var isFullCircle = angleSpan == 360;
-
-            foreach (var entry in _chart.Entries.Reverse())
+            catch
             {
-                // Draw bar background
-                canvas.StrokeColor =
-                    _chart.BarBackgroundColor ??
-                    ToBackgroundColor(entry.Color);
 
-                if (isFullCircle)
-                {
-                    canvas.DrawCircle(center.X, center.Y, radius);
-                }
-                else
-                {
-                    DrawArc(canvas, center, radius, startingAngle, startingAngle - angleSpan);
-                }
-
-                // Draw bar
-                canvas.StrokeColor = entry.Color;
-
-                if (entry.Value == maxValue && isFullCircle)
-                {
-                    canvas.DrawCircle(center.X, center.Y, radius);
-                }
-                else
-                {
-                    DrawArc(canvas, center, radius, startingAngle, startingAngle - (float)(entry.Value * angleSpan / maxValue));
-                }
-
-                if (_chart.ShowLabels)
-                {
-                    // Draw label
-                    DrawLabel(canvas, center, spacing, radius, fontSize, entry);
-                }
-
-                radius += spacing;
             }
         }
 

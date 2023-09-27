@@ -2,10 +2,12 @@ using Class_interaction_Users;
 using Client.Main;
 using Client.Users.Doc.DocPersonalAchievement;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
+//using Microsoft.Maui.Graphics.Platform;
 using Microsoft.Maui.Storage;
 using SkiaSharp;
 using System.Collections;
 using System.Drawing;
+using System.IO;
 using System.Net.NetworkInformation;
 using System.Windows.Input;
 using System.Xml.Linq;
@@ -34,7 +36,7 @@ public partial class Users : ContentPage
             ip_Adress.CheckOS();
 
             Ping pingSender = new Ping();
-            PingReply reply = pingSender.Send(ip_Adress.Ip_adressss, 500);
+            PingReply reply = pingSender.Send(ip_Adress.Ip_adressss, 50);
             //  string FileFS = "";
             if (reply.Status == IPStatus.Success)
             {
@@ -92,7 +94,7 @@ public partial class Users : ContentPage
                 Name_Employee = name.Name_Employee ,
                 Employee_Mail = name.Employee_Mail,
                 Id_roles_users = name.Rechte.Id,
-                Id_Email = filles
+                Email = filles
 
             };
 
@@ -140,29 +142,30 @@ public partial class Users : ContentPage
             else if (DeviceInfo.Platform == DevicePlatform.Android)
             {
                 string paths = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "путь_к_файлу.png");
-                string filePath = Path.Combine(Path.GetTempPath(), "путь_к_файлу.png");
+                string filePath = Path.Combine(Path.GetTempPath(), "путь_к_файлу.");
+
+               // Создание объекта Bitmap из MemoryStream
+
+         //       Bitmap bitmap;
+     
+
+                // Преобразование в объект Bitmap
+
+                string filePaths = Path.Combine(Path.GetTempPath(), "image.jpg"); // 
+              
+
                 using (MemoryStream stream = new MemoryStream(files.Name))
                 {
-                    using (SKBitmap bitmap = SKBitmap.Decode(stream))
-                    {
 
-                        {
-                            using (SKImage images = SKImage.FromBitmap(bitmap))
-                            {
-                                using (SKData data = images.Encode(SKEncodedImageFormat.Png, 100))
-                                {
-                                    using (FileStream fileStream = File.OpenWrite(filePath))
-                                    {
-                                        data.SaveTo(fileStream);
-                                    }
-                                }
-                            }
-                        }
-                        // Вывод image в ImageUser.Source
 
-                    }
-                    var image = new Image();
-                    image.Source = ImageSource.FromFile(filePath);
+                    // image = Microsoft.Maui.Graphics.Platform.PlatformImage.FromStream(stream);
+
+                    System.IO.File.WriteAllBytes(path, files.Name); 
+                    ImageUser.Source  = path;
+                    //     bitmap = BitmapFactory.DecodeByteArray(ms.GetByteArray(), 0, ms.GetByteArray().Length); // Исправленное создание объекта Bitmap из массива байтов
+
+                    //var image = new Image();
+                    //image.Source = ImageSource.FromFile(filePath);
 
 
 
@@ -214,7 +217,7 @@ public partial class Users : ContentPage
         }
     }
 
-        public void User_NAME(Regis_users name)
+   public void User_NAME(Regis_users name)
     {
 
    

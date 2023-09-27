@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Runtime.Serialization.Formatters;
 using System.Linq;
+using Microsoft.Data.SqlClient;
 
 namespace Server_Test_Users
 {
@@ -186,11 +187,52 @@ namespace Server_Test_Users
                 // получаем объекты из бд и выводим на консоль
                 var users = db.Roles.Count();
                 Count_roles = users;
-              
+
 
             }
-            if (Count_roles == 1)
+
+         
+            string sqlCommand = @"BACKUP DATABASE [{0}] TO  DISK = N'{1}' WITH NOFORMAT, NOINIT,  NAME = N'MyAir-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
+
+            if (Count_roles > 0)
             {
+
+                //var backupFilePath = Environment.CurrentDirectory.ToString(); // Замените на путь, где вы хотите сохранить резервную копию
+                //                                                              // Создание подключения к базе данных PostgreSQL
+                //using (var connection = new NpgsqlConnection(GlobalClass.connectionStringPostGreSQL))
+                //{
+                //    var NAME = Environment.MachineName;
+                //    connection.Open();
+                //    string backupPath = $"{backupFilePath} \\Backup.bak";
+                //    string backupQuery = $"BACKUP DATABASE Testdb TO DISK = '{backupPath}'";
+                
+                //    NpgsqlCommand command = new NpgsqlCommand(backupQuery, connection);
+              
+                  
+                //    command.ExecuteNonQuery();
+                // }
+                    //     var connectionString = "Host=localhost;Port=5432;Database=Testdb;Username=postgres;Password=1"; // Замените на свою строку подключения         
+
+                    //      string connectionSмtring = "YourConnectionString";
+
+
+
+
+
+
+
+                    // db.Database.SqlQueryRaw(sqlCommand,);
+                    // Создание SQL-команды для выполнения резервного копирования
+
+                    //using (var command = new NpgsqlCommand($"pg_dump -U <username> -Fc -f {backupFilePath} <database_name>", connection))
+                    //{
+                    //    // Замените "<username>" на имя пользователя для подключения к PostgreSQL
+                    //    // Замените "<database_name>" на имя базы данных, которую вы хотите скопировать
+
+                    //    // Выполнение команды резервного копирования
+                    //    command.ExecuteNonQuery();
+                    //}
+               
 
             }
             else
@@ -201,14 +243,14 @@ namespace Server_Test_Users
                 //    //     Console.WriteLine($"{u.Id}.{u.Name} - {u.Age}");
                 //}
                 int D = 0;
-                using(ApplicationContext context = new ApplicationContext())
+                using (ApplicationContext context = new ApplicationContext())
                 {
-                 D=   context.Roles.Count();
+                    D = context.Roles.Count();
                 }
 
                 if (D == 0)
                 {
-                   using (ApplicationContext db = new ApplicationContext())
+                    using (ApplicationContext db = new ApplicationContext())
                     {
                         // создаем два объекта User
 
@@ -241,8 +283,8 @@ namespace Server_Test_Users
                     using (ApplicationContext db = new ApplicationContext())
                     {
                         // создаем два объекта User
-
-                        User user1 = new User { Name_Employee = "Admin", Password = "Admin", DataMess = data, Id_roles_users = 2, Employee_Mail = Email };
+                        Filles filles = new Filles() { Id = 0};
+                        User user1 = new User { Name_Employee = "Admin", Password = "Admin", DataMess = data, Id_roles_users = 2, Employee_Mail = Email,Email = filles };
 
                         // добавляем их в бд
                         db.Users.AddRange(user1);
@@ -253,7 +295,7 @@ namespace Server_Test_Users
                 {
 
 
-                    
+
                 }
             }
         }
@@ -311,7 +353,7 @@ namespace Server_Test_Users
                         DataMess = data,
                         Id_roles_users = roles.Id,
                         Employee_Mail = regis_Users.Employee_Mail,
-                        Id_Email = filles
+                        Email = filles
 
 
                     };
@@ -320,10 +362,12 @@ namespace Server_Test_Users
                     db.Users.AddRange(user1);
                     db.SaveChanges();
                 }
+
+      
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     Filles filles = db.Filles.FirstOrDefault(ue => ue.Id == regis_Users.Filles);
-                    var users = db.Users.ToList(  );
+                    var users = db.Users.FirstOrDefault(ue => ue.Name_Employee == regis_Users.Name_Employee && ue.Employee_Mail == regis_Users.Employee_Mail && ue.Email == filles);
                     if (users == null)
                     {
 
@@ -331,14 +375,16 @@ namespace Server_Test_Users
                     else
                     {
 
-                        foreach (User user in users)
-                        {
+
+                            User user = users;
+
                             Exists_User = true;
                             Roles roles1 = new Roles { Id = user.Id_roles_users };
-                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Id_Email.Id);
+
+                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Email.Id);
 
                             Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
-                        }
+                        
                     }
                 }
              
@@ -358,20 +404,159 @@ namespace Server_Test_Users
         {
             try
             {
+                bool d = false;
                 bool Check = false;
                 // int Current_User;
+                Roles roles1 = null;
                 using (ApplicationContext db = new ApplicationContext())
                 {
-
-                    var dbs = db.Filles.FirstOrDefault();
-                    var users = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password && p.Id_Email == dbs);
-
-                    if (users != null)
+                    var use = db.Filles.ToList();
+                 
+                    var user = db.Users.FirstOrDefault (p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password  && p.Email == use[0]);
+                  
+                    if (user != null)
                     {
                         Check = true;
-                        Roles roles = new Roles { Id = users.Id_roles_users };
-                        Travel = new Regis_users(users.Id, users.Name_Employee, users.Password, roles, users.Employee_Mail, users.Id_Email.Id);
-                        Console.WriteLine($"{users.Name_Employee} ({users.Employee_Mail})");
+
+                        bool Game = true;
+                        if(user == null)
+                        {
+
+                        }
+                        else
+                        {
+                         Roles roles = new Roles { Id = user.Id_roles_users };
+                            roles1 = roles;
+                        }
+
+                        if(user.Email == null)
+                        {
+                            Game = false;
+
+                            do
+                            {
+                                for (int i = 0; i < use.Count(); i++)
+                                {
+                                    var n = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password && p.Email == use[i]);
+
+                                    if (n == null)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        Roles roles = new Roles { Id = user.Id_roles_users };
+                                        roles1 = roles;
+                                    }
+                                 
+
+                                    if (n.Email == null)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        Travel = new Regis_users(n.Id, n.Name_Employee, n.Password, roles1, n.Employee_Mail, n.Email.Id);
+                                        d = true;
+                                        break;
+                                    }
+
+                                }
+
+
+
+                            } while (d == true);  
+                            Console.WriteLine($"{user.Name_Employee} ({user.Employee_Mail})");
+
+                            
+                        }
+
+                        if(Game == true)
+                        {
+                         Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Email.Id);
+
+                        }
+
+                    }
+                    else
+                    {
+                        Check = true;
+
+                        bool Game = true;
+                        if (user == null)
+                        {
+
+                        }
+                        else
+                        {
+                            Roles roles = new Roles { Id = user.Id_roles_users };
+                            roles1 = roles;
+                        }
+                        
+                        if (user == null)
+                        {
+                            Game = false;
+
+                            do
+                            {
+                                for (int i = 0; i < use.Count(); i++)
+                                {
+                                    var n = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password && p.Email == use[i]);
+
+                                    if (n == null)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        Roles roles = new Roles { Id = n.Id_roles_users };
+                                        roles1 = roles;
+                                    }
+
+                                    if(n == null)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                    if (n.Email == null)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        Travel = new Regis_users(n.Id, n.Name_Employee, n.Password, roles1, n.Employee_Mail, n.Email.Id);
+                                        d = false;
+                                        break;
+                                    }
+                                    }
+
+                                 
+
+                                }
+
+
+
+                            } while (d == true);
+
+                            if(user == null)
+                            {
+
+                            }
+                            else
+                            {
+                             Console.WriteLine($"{user.Name_Employee} ({user.Employee_Mail})");
+
+                            }
+
+
+                        }
+
+                        if (Game == true)
+                        {
+                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Email.Id);
+
+                        }
                     }
                 }
 
@@ -581,7 +766,7 @@ namespace Server_Test_Users
                         {
                             Roles roles = new Roles { Id = user.Id };
 
-                            regis_Users[i] = new Regis_users(user.Id, user.Name_Employee, user.Password, roles, user.Employee_Mail, user.Id_Email.Id);
+                            regis_Users[i] = new Regis_users(user.Id, user.Name_Employee, user.Password, roles, user.Employee_Mail, user.Email.Id);
                             i++;
                         }
                         Travels = regis_Users;

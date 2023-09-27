@@ -250,7 +250,7 @@ namespace Server_Test_Users
                 {
                     using (FileStream fileStream = new FileStream("Server.json", FileMode.OpenOrCreate))
                     {
-                        Seting connect_Server_ = new Seting(IPAddress.Loopback.ToString(), 9595, 1);
+                        Seting connect_Server_ = new Seting(IPAddress.Loopback.ToString(), 9595, 2);
                         JsonSerializer.Serialize<Seting>(fileStream, connect_Server_);
 
                     }

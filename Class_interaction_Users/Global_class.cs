@@ -19,6 +19,7 @@ namespace Class_interaction_Users
         public int Id { get; set; }
 
         public byte[] Name { get; set; }
+
     }
 
     public class Ip_adress
@@ -52,7 +53,7 @@ namespace Class_interaction_Users
         /// id роли 
         /// </summary>
         
-        public Filles Id_Email { get; set; }
+        public Filles Email { get; set; }
         public int Id_roles_users { get; set; }
         /// <summary>
         /// Почта

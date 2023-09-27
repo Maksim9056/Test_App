@@ -26,7 +26,7 @@ namespace Client
                 //Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 Console.WriteLine("Операционная система: iOS");
                 // Создание экземпляра класса Seting
-                Seting setting = new Seting("192.168.0.1", 8080, 1);
+                Seting setting = new Seting("192.168.1.171", 9595, 1);
 
                 // Преобразование объекта Seting в JSON строку
                 string json = JsonConvert.SerializeObject(setting);
@@ -50,7 +50,7 @@ namespace Client
             {
                 Console.WriteLine("Операционная система: Android");
                 //Path = FileSystem.AppDataDirectory;
-                Seting seting = new Seting("192.168.0.112", 9595, 1);
+                Seting seting = new Seting("192.168.1.171", 9595, 1);
                 // Преобразование в JSON-строку
                 string json = JsonConvert.SerializeObject(seting, Formatting.Indented);
 
@@ -104,7 +104,7 @@ namespace Client
                 {
                     using (FileStream fileStream = new FileStream(appDirectory +"\\Client.json", FileMode.OpenOrCreate))
                     {
-                     Seting connect_Server_ = new Seting("192.168.0.112", 9595, 1);
+                     Seting connect_Server_ = new Seting("192.168.1.171", 9595, 1);
                      System.Text.Json.JsonSerializer.Serialize<Seting>(fileStream, connect_Server_);
                     }
 

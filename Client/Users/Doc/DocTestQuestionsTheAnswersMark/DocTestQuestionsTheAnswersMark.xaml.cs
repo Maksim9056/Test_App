@@ -264,7 +264,7 @@ public partial class DocTestQuestionsTheAnswersMark : ContentPage
             Roles roles = new Roles { Id = CurrrentUser.Id_roles_users};
             Regis_users regis_Users = new Regis_users()
             { Id = CurrrentUser.Id, Employee_Mail = CurrrentUser.Employee_Mail, Name_Employee = CurrrentUser.Name_Employee, Password = CurrrentUser.Password, Rechte = roles,
-                Filles = CurrrentUser.Id_Email.Id
+                Filles = CurrrentUser.Email.Id
             };
             Navigation.PushAsync(new Client.Users.Users(regis_Users));
         }

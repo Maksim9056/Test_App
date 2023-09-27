@@ -436,6 +436,13 @@ public partial class RegUser : ContentPage
         Reg(sender,e);
     }
 
+
+
+
+
+
+
+
     /// <summary>
     /// 
     /// </summary>
@@ -444,6 +451,7 @@ public partial class RegUser : ContentPage
     private async void Image_Loaded(object sender, EventArgs e)
     {
         try { 
+
         if (MediaPicker.Default.IsCaptureSupported)
         {
             FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
@@ -452,7 +460,7 @@ public partial class RegUser : ContentPage
                 {
                     // save the file into local storage
                     byte[] imageBytes = System.IO.File.ReadAllBytes(photo.FullPath);
-
+                    
                     string localFilePath = System.IO.Path.Combine(FileSystem.CacheDirectory, photo.FileName);
 
                     using Stream sourceStream = await photo.OpenReadAsync();
@@ -460,6 +468,7 @@ public partial class RegUser : ContentPage
                     Filles filles = new Filles
                     {
                         Name = imageBytes
+                      
                     };
                     Filles = filles_Work.FillesSave(filles);
 
