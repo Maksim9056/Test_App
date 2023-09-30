@@ -43,18 +43,29 @@ public partial class Settings : ContentPage
         {
             Console.WriteLine("Операционная система: Android");
             //Path = FileSystem.AppDataDirectory;
-            Seting seting = new Seting("127.0.0.1", 9595, 1);
+            //Seting seting = new Seting("127.0.0.1", 9595, 1);
             // Преобразование в JSON-строку
-            string json = JsonConvert.SerializeObject(seting, Formatting.Indented);
+
+        
+            //string json = JsonConvert.SerializeObject(seting, Formatting.Indented);
 
             // Создание и запись в JSON-файл
             string fileName = "Client.json";
             string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fileName);
-            File.WriteAllText(path, json);
+            //File.WriteAllText(path, json);
 
             // Чтение JSON-файла
-            string jsonFromFile = File.ReadAllText(path);
+            bool fileExists = File.Exists(path);
 
+            if (!fileExists)
+            {
+                //"File Existence", "The file does not exist.
+                Seting settings = new Seting("экзаменатор.москва", 9595, 1);
+                string json = JsonConvert.SerializeObject(settings, Formatting.Indented);
+                File.WriteAllText(path, json);
+            }
+
+            string jsonFromFile = File.ReadAllText(path);
             // Преобразование JSON-строки в объект Seting
             Seting setingFromFile = JsonConvert.DeserializeObject<Seting>(jsonFromFile);
 
@@ -176,6 +187,10 @@ public partial class Settings : ContentPage
                 // Создание и запись в JSON-файл
                 string fileName = "Client.json";
                 string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fileName);
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
                 File.WriteAllText(path, json);
 
                 // Чтение JSON-файла
@@ -216,9 +231,9 @@ public partial class Settings : ContentPage
                 // Если есть то загружаем настройки сервера если нет то создают
                 if (fileInfo.Exists)
                 {
+                    File.Delete(appDirectory + "\\Client.json");
                     using (FileStream fs = new FileStream(appDirectory + "\\Client.json", FileMode.OpenOrCreate))
                     {
-
                         Seting seting = new Seting(AddressEntrys, PortEntrys, 1);
                         System.Text.Json.JsonSerializer.Serialize<Seting>(fs, seting);
                         //      Ip_adressss = _aFile.Ip_adress;

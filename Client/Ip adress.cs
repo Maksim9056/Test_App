@@ -25,22 +25,22 @@ namespace Client
                 string Path = "";
                 if (DeviceInfo.Platform == DevicePlatform.iOS)
                 {
-                    //Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    Console.WriteLine("Операционная система: iOS");
-                    // Создание экземпляра класса Seting
-                    Seting setting = new Seting("192.168.1.171", 9595, 1);
+                    ////Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    //Console.WriteLine("Операционная система: iOS");
+                    //// Создание экземпляра класса Seting
+                    //Seting setting = new Seting("192.168.1.170", 9595, 1);
 
-                    // Преобразование объекта Seting в JSON строку
-                    string json = JsonConvert.SerializeObject(setting);
+                    //// Преобразование объекта Seting в JSON строку
+                    //string json = JsonConvert.SerializeObject(setting);
 
-                    // Запись JSON строки в файл
-                    File.WriteAllText("Client.json", json);
+                    //// Запись JSON строки в файл
+                    //File.WriteAllText("Client.json", json);
 
-                    // Чтение файла и преобразование JSON строки в объект Seting
-                    string jsonFromFile = File.ReadAllText("Client.json");
-                    Seting settingsFromFile = JsonConvert.DeserializeObject<Seting>(jsonFromFile);
+                    //// Чтение файла и преобразование JSON строки в объект Seting
+                    //string jsonFromFile = File.ReadAllText("Client.json");
+                    //Seting settingsFromFile = JsonConvert.DeserializeObject<Seting>(jsonFromFile);
 
-                    Ip_adressss = settingsFromFile.Ip_adress;
+                 //   Ip_adressss = settingsFromFile.Ip_adress;
 
                     // Доступ к данным
                     //string ipAddress = settingsFromFile.Ip_adress;
@@ -52,15 +52,31 @@ namespace Client
                 {
                     Console.WriteLine("Операционная система: Android");
                     //Path = FileSystem.AppDataDirectory;
-                    Seting seting = new Seting("192.168.1.171", 9595, 1);
+                
                     // Преобразование в JSON-строку
-                    string json = JsonConvert.SerializeObject(seting, Formatting.Indented);
+   
 
                     // Создание и запись в JSON-файл
                     string fileName = "Client.json";
                     string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fileName);
-                    File.WriteAllText(path, json);
+                  
 
+                    bool fileExists = File.Exists(path);
+
+                    if (fileExists)
+                    {
+                  
+                        //"File Existence", "The file exists"
+
+                    }
+                    else
+                    {
+                       //"File Existence", "The file does not exist.
+                        Seting seting = new Seting("192.168.1.170", 9595, 1);
+                        string json = JsonConvert.SerializeObject(seting, Formatting.Indented);
+                        File.WriteAllText(path, json);
+                       
+                    }
                     // Чтение JSON-файла
                     string jsonFromFile = File.ReadAllText(path);
 
@@ -128,9 +144,6 @@ namespace Client
 
 
                 }
-
-
-
             }
             catch(Exception)
             {
