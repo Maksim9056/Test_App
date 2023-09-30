@@ -125,7 +125,7 @@ public partial class Settings : ContentPage
                     Seting aFile = System.Text.Json.JsonSerializer.Deserialize<Seting>(fileStream);
 
                     AddressEntry.Text =aFile.Ip_adress.ToString();
-                PortEntry.Text = aFile.Port.ToString();
+                    PortEntry.Text = aFile.Port.ToString();
          //           Ip_adresss = aFile.Ip_adress;
          //      Ip_adressss = Ip_adresss.ToString();
                 }
