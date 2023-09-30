@@ -17,6 +17,8 @@ using System.IO;
 using System.Net.Mail;
 using static System.Net.WebRequestMethods;
 using System.Security.Cryptography.X509Certificates;
+using System.Net.Sockets;
+using static Client.MainPage;
 
 //using Microsoft.AspNetCore.Components.Navigation;
 
@@ -309,6 +311,8 @@ namespace Client
             Password = nameEntry1.Text;
         }
 
+
+ 
         /// <summary>
         /// Вход  в учетную запись команда 003
         /// </summary>
@@ -322,11 +326,78 @@ namespace Client
                 ip_Adress.CheckOS();
                 Class_interaction_Users.Ip_adress.Ip_adresss = ip_Adress.Ip_adressss;
                 Ping pingSender = new Ping();
+
+                //IPHostEntry hostEntry = System.Net.Dns.GetHostEntry(ip_Adress.Ip_adressss);
+                //foreach (System.Net.IPAddress address in hostEntry.AddressList)
+                //{
+                //    ip_Adress.Ip_adressss = address.ToString();
+                //    break;
+                //}
+
+                //IPAddress[] addresses = Dns.GetHostAddresses(ip_Adress.Ip_adressss);
+
+                //foreach (IPAddress address in addresses)
+                //{
+                //    //Console.WriteLine("IP Address: " + address.ToString());
+                //    ip_Adress.Ip_adressss = address.ToString();
+                //    break;
+                //}
+                //string localIP;
+                //using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
+                //{
+                //    socket.Connect(ip_Adress.Ip_adressss, 9595);
+                //    IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;
+                //    localIP = endPoint.Address.ToString();
+                //}
+
+                //string interfaceDescription = string.Empty;
+                //var result = new List<IPAddress>();
+                //var upAndNotLoopbackNetworkInterfaces = NetworkInterface.GetAllNetworkInterfaces().Where(n => n.NetworkInterfaceType != NetworkInterfaceType.Loopback
+                //                                                                                              && n.OperationalStatus == OperationalStatus.Up);
+
+                //foreach (var networkInterface in upAndNotLoopbackNetworkInterfaces)
+                //{
+                //    var iPInterfaceProperties = networkInterface.GetIPProperties();
+
+                //    var unicastIpAddressInformation = iPInterfaceProperties.UnicastAddresses.FirstOrDefault(u => u.Address.AddressFamily == AddressFamily.InterNetwork);
+                //    if (unicastIpAddressInformation == null) continue;
+
+                //    result.Add(unicastIpAddressInformation.Address);
+
+                //    interfaceDescription += networkInterface.Description + "---";
+                //}
+
+                //var address = NetworkInterface.GetAllNetworkInterfaces().Where(_ => _.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 &&
+                //                                                            _.OperationalStatus == OperationalStatus.Up)
+                //.SelectMany(_ => _.GetIPProperties().UnicastAddresses).ToList();
+
+                //[assembly: Dependency(typeof(YourAppNamespace.Android.Android.DependencyServices.IPAddressManager))]
+
+                //IPAddress[] addresses = Dns.GetHostAddresses(ip_Adress.Ip_adressss);
+
+                //foreach (IPAddress address in addresses)
+                //{
+                //    if (address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                //    {
+                //        Console.WriteLine("IP Address: " + address.ToString());
+                //    }
+                //}
+                //string FileFS = "";
+
+                //Ping(FileFS, ip_Adress);
+
+
                 PingReply reply = pingSender.Send(ip_Adress.Ip_adressss, 50);
                 string FileFS = "";
                 if (reply.Status == IPStatus.Success)
                 {
                     //  Start(FileFS, ip_Adress);
+                    //IPHostEntry hostEntry = Dns.GetHostEntry(ip_Adress.Ip_adressss);
+                    //foreach (IPAddress address in hostEntry.AddressList)
+                    //{
+                    //    ip_Adress.Ip_adressss = address.ToString();
+                    //    break;
+                    //}
                     Ping(FileFS, ip_Adress);
 
                 }
