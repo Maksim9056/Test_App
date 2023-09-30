@@ -63,19 +63,28 @@ public partial class Users : ContentPage
     
     public void Images(Regis_users name, Filles filles)
     {
-        NameUser.Text = name.Name_Employee;
-        string IPAdress = Connect();
-        var file = filles_Work.SelectFromFilles(IPAdress, filles);
-
-        if (file == null)
+        try
         {
-            Images(name, filles);
+            NameUser.Text = name.Name_Employee;
+            string IPAdress = Connect();
+            var file = filles_Work.SelectFromFilles(IPAdress, filles);
+
+            if (filles_Work.Filles == null)
+            {
+                Images(name, filles);
+            }
+            else
+            {
+
+
+                files = filles_Work.Filles;
+                Image();
+
+
+            }
         }
-        else
+        catch(Exception)
         {
-            files = file;
-            Image();
-
 
         }
     }

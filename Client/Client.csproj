@@ -40,7 +40,7 @@
 	  <AppInstallerUri>C:\Development\1</AppInstallerUri>
 	  <HoursBetweenUpdateChecks>24</HoursBetweenUpdateChecks>
 	  <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-	  <PackageCertificateThumbprint>DD3F79B754D9586422068F0F62C060FBE99BD336</PackageCertificateThumbprint>
+	  <PackageCertificateThumbprint>73F0C96A735FEFB67A0E7DD3824532EFCC0DD88A</PackageCertificateThumbprint>
 	  <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	</PropertyGroup>
 	
@@ -52,19 +52,19 @@
 		<RunAOTCompilation>False</RunAOTCompilation>
 		<PublishTrimmed>False</PublishTrimmed>
 		<IncrementalDeployment>true</IncrementalDeployment>
-		<AndroidUseAapt2>True</AndroidUseAapt2>
+		<AndroidUseAapt2>true</AndroidUseAapt2>
 		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-		<AndroidKeyStore>True</AndroidKeyStore>
+		<AndroidKeyStore>False</AndroidKeyStore>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android33.0|AnyCPU'">
 	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	  <EnableLLVM>False</EnableLLVM>
 	  <TrimMode>copyused</TrimMode>
 	  <RunAOTCompilation>False</RunAOTCompilation>
-	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidUseAapt2>true</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidKeyStore>False</AndroidKeyStore>
 	</PropertyGroup>
 
 

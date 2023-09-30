@@ -295,7 +295,6 @@ namespace Server_Test_Users
                 {
 
 
-
                 }
             }
         }
@@ -333,7 +332,7 @@ namespace Server_Test_Users
                 }
 
 
-// добавление данных
+                // добавление данных Максим@Максим.ru
                 using (ApplicationContext db = new ApplicationContext())
                 {
 

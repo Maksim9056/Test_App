@@ -43,7 +43,7 @@ public partial class Settings : ContentPage
         {
             Console.WriteLine("Операционная система: Android");
             //Path = FileSystem.AppDataDirectory;
-            Seting seting = new Seting("192.168.0.112", 9595, 1);
+            Seting seting = new Seting("127.0.0.1", 9595, 1);
             // Преобразование в JSON-строку
             string json = JsonConvert.SerializeObject(seting, Formatting.Indented);
 

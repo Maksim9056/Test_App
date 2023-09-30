@@ -1147,8 +1147,9 @@ namespace Class_interaction_Users
     public class Filles_Work
     {
 
-        Filles_Work_ Filles_Work_ = new Filles_Work_();
-      
+      public  Filles_Work_ Filles_Work_ = new Filles_Work_();
+        public Filles Filles { get; set; }
+
         public Filles FillesSave(Filles user)
         {
             try
@@ -1197,13 +1198,13 @@ namespace Class_interaction_Users
                     
                     if(Filles_Work_.Filles == null)
                     {
-                     SelectFromFilles(Ip_adresss, user);
+                      SelectFromFilles(Ip_adresss, user);
 
                     }
-                    files = Filles_Work_.Filles;
+                    Filles = Filles_Work_.Filles;
 
-
-                    return files;
+                    files = Filles;
+                   // return files;
                 }
 
           
@@ -1212,7 +1213,7 @@ namespace Class_interaction_Users
             {
 
             }
-            return null;
+            return Filles_Work_.Filles;
         }
         public class BooleanToStringConverter : IValueConverter
         {
