@@ -35,6 +35,7 @@ namespace Client.Project
 
             DateTime dateTime = DateTime.Now;
             var data = $"{dateTime:F}";
+            Filles filles = new Filles() { Id = 0 };
 
             // Create a new User instance or update the existing User instance with the retrieved values
             User user = new User
@@ -44,7 +45,8 @@ namespace Client.Project
                 Password = password,
                 DataMess = data,
                 Id_roles_users = id_roles_users,
-                Employee_Mail = employee_Mail
+                Employee_Mail = employee_Mail,
+                Email = filles
             };
 
             // Call the appropriate method to save the user data

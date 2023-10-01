@@ -58,6 +58,7 @@ namespace Server_Test_Users
                 ;
                 int counter = 0;
                 RegisterCommands();
+                globalClass.DBackup();
                 server.Start();
                 Console.WriteLine("\nСервер запушен");
                 while (true)

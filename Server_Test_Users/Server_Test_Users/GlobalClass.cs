@@ -17,6 +17,8 @@ using System.Security.Claims;
 using System.Runtime.Serialization.Formatters;
 using System.Linq;
 using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Server_Test_Users
 {
@@ -149,10 +151,10 @@ namespace Server_Test_Users
 
             public ApplicationContext()
             {
-                 // Database.EnsureDeleted(); // гарантируем, что бд удалена
-                 Database.EnsureCreated(); // гарантируем, что бд будет созд
-               // Database.Migrate();  // миграция
-              // Database.MigrateAsync(); // асинхронный метод для миграции
+                // Database.EnsureDeleted(); // гарантируем, что бд удалена
+                Database.EnsureCreated(); // гарантируем, что бд будет созд
+                                          // Database.Migrate();  // миграция
+                                          // Database.MigrateAsync(); // асинхронный метод для миграции
             }
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -170,8 +172,157 @@ namespace Server_Test_Users
                         break;
                 }
             }
+            public void BackupDatabaseMSSQL(string backupFilePath)
+            {
+                using (var connection = Database.GetDbConnection() as SqlConnection)
+                {
+                    var query = $"BACKUP DATABASE Testdb TO DISK = '{backupFilePath}'";
+                    connection.Open();
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            //public void BackupDatabasePosgree(string backupFilePath)
+            //{
+            //    using (var connection = Database.GetDbConnection() as NpgsqlConnection)
+            //    {
+            //        var query = $"pg_dump -Fc -f {backupFilePath} Testdb";
+            //        connection.Open();
+
+            //        using (var command = new NpgsqlCommand(query, connection))
+            //        {
+            //            command.ExecuteNonQuery();
+            //        }
+            //    }
+            //}
+            //public void BackupDatabasePostgreSQL(string backupFilePath, string databaseName)
+            //{
+            //    // Строка подключения к базе данных PostgreSQL
+            //    string connectionString = "Host=localhost;Port=5432;Database=Testdb;Username=postgres;Password=1";
+
+            //    // Создаем подключение к базе данных PostgreSQL
+            //    using (var connection = new NpgsqlConnection(connectionString))
+            //    {
+            //        connection.Open();
+
+            //        // Создаем команду для выполнения pg_dump
+            //        using (var command = new NpgsqlCommand())
+            //        {
+            //            command.Connection = connection;
+            //            command.CommandText = $"pg_dump -Fc -f {backupFilePath} {databaseName}";
+
+            //            // Запускаем pg_dump
+            //            command.ExecuteNonQuery();
+            //        }
+            //    }
+            //}
+            public void BackupDatabasePostgreSQL(string backupFilePath, string databaseName)
+            {
+                // Команда для выполнения pg_dump
+                string pg_dumpCommand = $"-U postgres -h localhost -p 5432 -Ft -f \"{backupFilePath}\" {databaseName}";
+
+                // Создаем новый процесс для выполнения команды
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "pg_dump";
+                startInfo.Arguments = pg_dumpCommand;
+                // Задаем пароль
+                startInfo.EnvironmentVariables.Add("PGPASSWORD", "1");
+
+                // Запускаем процесс и ожидаем его завершения
+                using (Process process = Process.Start(startInfo))
+                {
+                    process.WaitForExit();
+
+                    // Проверяем код возврата процесса
+                    if (process.ExitCode != 0)
+                    {
+                        Console.WriteLine("Ошибка при выполнении pg_dump");
+                    }
+                }
+            }
+
+            public void RestoreDatabasePostgreSQL(string backupFilePath, string databaseName, string password)
+            {
+                // Команда для выполнения pg_restore
+                string pg_restoreCommand = $"-U postgres -h localhost -p 5432 -c -d {databaseName} \"{backupFilePath}\"";
+
+                // Создаем новый процесс для выполнения команды
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "pg_restore";
+                startInfo.Arguments = pg_restoreCommand;
+
+                // Задаем пароль
+                startInfo.EnvironmentVariables.Add("PGPASSWORD", password);
+
+                // Запускаем процесс и ожидаем его завершения
+                using (Process process = Process.Start(startInfo))
+                {
+                    process.WaitForExit();
+
+                    // Проверяем код возврата процесса
+                    if (process.ExitCode != 0)
+                    {
+                        Console.WriteLine("Ошибка при выполнении pg_restore");
+                    }
+                }
+            }
+
+
+            public void BackupDatabaseSQLite(string backupFilePath)
+            {
+                using (var connection = new SqliteConnection("Data Source=helloapp.db"))
+                {
+                    connection.Open();
+
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = $"ATTACH DATABASE '{backupFilePath}' AS backup";
+                        command.ExecuteNonQuery();
+
+                        command.CommandText = "SELECT sql FROM sqlite_master WHERE sql NOT NULL AND type = 'table'";
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var createTableSql = reader.GetString(0);
+                                command.CommandText = createTableSql.Replace("CREATE TABLE", "CREATE TABLE backup.");
+                                command.ExecuteNonQuery();
+                            }
+                        }
+
+                        command.CommandText = "DETACH DATABASE backup";
+                        command.ExecuteNonQuery();
+                    }
+
+                    connection.Close();
+                }
+
+                Console.WriteLine("Резервная копия успешно создана.");
+                Console.WriteLine($"Путь к резервной копии: {backupFilePath}");
+                //using (var backup = new SqliteConnection("Data Source=helloapp.db"))
+                //{
+
+
+                //    // Create a full backup of the database
+
+                //    backup.BackupDatabase(backup, backupFilePath,"Sqlite_путь_к_файлу_резервной_копии.bak");
+                //}
+            }
         }
 
+        public void DBackup()
+        {
+            using (var context = new ApplicationContext())
+            {
+                //context. BackupDatabaseSQLite("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak");
+                //context.BackupDatabasePostgreSQL("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak", "Testdb");
+                //context.RestoreDatabasePostgreSQL("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak", "Testdb","1");
+            }
+        }
 
         public void TestSQL()
         {
@@ -835,7 +986,8 @@ namespace Server_Test_Users
                     Password = newUser.Password,
                     DataMess = newUser.DataMess,
                     Id_roles_users = newUser.Id_roles_users,
-                    Employee_Mail = newUser.Employee_Mail
+                    Employee_Mail = newUser.Employee_Mail,
+                    Email = newUser.Email
                 };
 
                 db.Users.Add(user);

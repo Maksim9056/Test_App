@@ -220,6 +220,12 @@
 	  <MauiXaml Update="Project\Doc\DocUserExams\DocUserExamsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Project\Main\Backup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Project\Main\Services.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefAnswer\AnswerCreate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
