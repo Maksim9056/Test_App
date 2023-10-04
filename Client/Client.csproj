@@ -51,17 +51,19 @@
 		<TrimMode>copyused</TrimMode>
 		<RunAOTCompilation>False</RunAOTCompilation>
 		<PublishTrimmed>False</PublishTrimmed>
-		<IncrementalDeployment>true</IncrementalDeployment>
-		<AndroidUseAapt2>true</AndroidUseAapt2>
+		<IncrementalDeployment>True</IncrementalDeployment>
+		<AndroidUseAapt2>True</AndroidUseAapt2>
 		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 		<AndroidKeyStore>False</AndroidKeyStore>
 	</PropertyGroup>
+	
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android33.0|AnyCPU'">
 	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	  <EnableLLVM>False</EnableLLVM>
 	  <TrimMode>copyused</TrimMode>
 	  <RunAOTCompilation>False</RunAOTCompilation>
-	  <AndroidUseAapt2>true</AndroidUseAapt2>
+		<IncrementalDeployment>True</IncrementalDeployment>
+		<AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <AndroidKeyStore>False</AndroidKeyStore>
@@ -224,6 +226,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Main\Services.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Project\Main\Type_of_resverve_copy.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Project\Ref\RefAnswer\AnswerCreate.xaml">

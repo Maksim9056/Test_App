@@ -462,7 +462,13 @@ public partial class Admin : ContentPage
 
     }
 
+ 
 
+    private async void Backups(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Client.Project.Main.Backup());
+
+    }
 }
 
 

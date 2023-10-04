@@ -24,61 +24,82 @@
         <StackLayout Grid.Row="0">
 
             <Grid x:Name="Табличка" WidthRequest="800" HeightRequest="1000">
-                <Button 
-                    x:Name="CounterLog4" 
-                    Text="Справочник пользователей" 
-                    SemanticProperties.Hint="Counts the number of times you click" 
-                    Clicked="CounterLog4_Clicked" 
-                    VerticalOptions="Start" 
-                    HorizontalOptions="CenterAndExpand" 
-                    HeightRequest="50" 
-                    WidthRequest="320" 
-                    Margin="0,140,0,0" 
+
+                <!-- Добавленная кнопка -->
+                <Button  
+                    x:Name="НастройкиBackups"  
+                    Text="Настройки"  
+                    SemanticProperties.Hint="This is a new button"  
+                    Clicked="Backups"  
+                    VerticalOptions="Start"  
+                    HorizontalOptions="CenterAndExpand"  
+                    HeightRequest="50"  
+                    WidthRequest="320"  
+                    Margin="0,20,0,0"  
                     Padding="10" />
 
-                <Button 
-                    x:Name="CounterLogTest" 
-                    Text="Справочник тестов" 
-                    SemanticProperties.Hint="Counts the number of times you click" 
-                    Clicked="CounterLogTest_Clicked" 
-                    VerticalOptions="Start" 
-                    HorizontalOptions="CenterAndExpand" 
-                    HeightRequest="50" 
-                    WidthRequest="320" 
-                    Margin="0,260,0,0" 
+
+
+
+
+                <Button  
+                    x:Name="CounterLog4"  
+                    Text="Справочник пользователей"  
+                    SemanticProperties.Hint="Counts the number of times you click"  
+                    Clicked="CounterLog4_Clicked"  
+                    VerticalOptions="Start"  
+                    HorizontalOptions="CenterAndExpand"  
+                    HeightRequest="50"  
+                    WidthRequest="320"  
+                    Margin="0,100,0,0"  
                     Padding="10" />
-                <Button 
-                    x:Name="CounterLogExams" 
-                    Text="Справочник экзаменов" 
-                    SemanticProperties.Hint="Counts the number of times you click" 
-                    Clicked="CounterLogExamsClicked" 
-                    VerticalOptions="Start" 
-                    HorizontalOptions="CenterAndExpand" 
-                    HeightRequest="50" 
-                    WidthRequest="320" 
-                    Margin="0,200,0,0" 
+
+                <Button  
+                    x:Name="CounterLogTest"  
+                    Text="Справочник тестов"  
+                    SemanticProperties.Hint="Counts the number of times you click"  
+                    Clicked="CounterLogTest_Clicked"  
+                    VerticalOptions="Start"  
+                    HorizontalOptions="CenterAndExpand"  
+                    HeightRequest="50"  
+                    WidthRequest="320"  
+                    Margin="0,180,0,0"  
                     Padding="10" />
-                <Button 
-                    x:Name="CounterLogQuestions" 
-                    Text="Справочник вопросов" 
-                    SemanticProperties.Hint="Counts the number of times you click" 
-                    Clicked="CounterLogQuestionsClicked" 
-                    VerticalOptions="Start" 
-                    HorizontalOptions="CenterAndExpand" 
-                    HeightRequest="50" 
-                    WidthRequest="320" 
-                    Margin="0,320,0,0" 
+
+                <Button  
+                    x:Name="CounterLogExams"  
+                    Text="Справочник экзаменов"  
+                    SemanticProperties.Hint="Counts the number of times you click"  
+                    Clicked="CounterLogExamsClicked"  
+                    VerticalOptions="Start"  
+                    HorizontalOptions="CenterAndExpand"  
+                    HeightRequest="50"  
+                    WidthRequest="320"  
+                    Margin="0,260,0,0"  
                     Padding="10" />
-                <Button 
-                    x:Name="CounterLogAnswer" 
-                    Text="Справочник ответов" 
-                    SemanticProperties.Hint="Counts the number of times you click" 
-                    Clicked="CounterLogAnswerClicked" 
-                    VerticalOptions="Start" 
-                    HorizontalOptions="CenterAndExpand" 
-                    HeightRequest="50" 
-                    WidthRequest="320" 
-                    Margin="0,380,0,0" 
+
+                <Button  
+                    x:Name="CounterLogQuestions"  
+                    Text="Справочник вопросов"  
+                    SemanticProperties.Hint="Counts the number of times you click"  
+                    Clicked="CounterLogQuestionsClicked"  
+                    VerticalOptions="Start"  
+                    HorizontalOptions="CenterAndExpand"  
+                    HeightRequest="50"  
+                    WidthRequest="320"  
+                    Margin="0,340,0,0"  
+                    Padding="10" />
+
+                <Button  
+                    x:Name="CounterLogAnswer"  
+                    Text="Справочник ответов"  
+                    SemanticProperties.Hint="Counts the number of times you click"  
+                    Clicked="CounterLogAnswerClicked"  
+                    VerticalOptions="Start"  
+                    HorizontalOptions="CenterAndExpand"  
+                    HeightRequest="50"  
+                    WidthRequest="320"  
+                    Margin="0,420,0,0"  
                     Padding="10" />
             </Grid>
         </StackLayout>
