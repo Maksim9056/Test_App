@@ -19,6 +19,8 @@ using System.Linq;
 using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.IO;
+//using Microsoft.Extensions.Options;
 
 namespace Server_Test_Users
 {
@@ -127,6 +129,7 @@ namespace Server_Test_Users
 
       public  List<Statictics> StatickUsers { get; set; }
 
+    public  string path = Environment.CurrentDirectory.ToString();
 
         /// <summary>
         /// https://metanit.com/sharp/efcore/1.2.php
@@ -142,7 +145,7 @@ namespace Server_Test_Users
             public DbSet<ExamsTest> ExamsTest { get; set; } = null!;
             public DbSet<UserExams> UserExams { get; set; } = null!;
             public DbSet<Answer> Answer { get; set; } = null!;
-            public DbSet<Options> Options { get; set; } = null!;
+            public DbSet<Class_interaction_Users.Options> Options { get; set; } = null!;
             public DbSet<Test> Test { get; set; } = null!;
             public DbSet<Exam> Exam { get; set; } = null!;
             public DbSet<Exams> Exams { get; set; } = null!;
@@ -242,6 +245,8 @@ namespace Server_Test_Users
                     {
                         Console.WriteLine("Ошибка при выполнении pg_dump");
                     }
+                    Console.WriteLine("Резервная копия успешно создана.");
+
                 }
             }
 
@@ -301,7 +306,7 @@ namespace Server_Test_Users
                     connection.Close();
                 }
 
-                Console.WriteLine("Резервная копия успешно создана.");
+            //    Console.WriteLine("Резервная копия успешно создана.");
                 Console.WriteLine($"Путь к резервной копии: {backupFilePath}");
                 //using (var backup = new SqliteConnection("Data Source=helloapp.db"))
                 //{
@@ -318,11 +323,197 @@ namespace Server_Test_Users
         {
             using (var context = new ApplicationContext())
             {
-                //context. BackupDatabaseSQLite("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak");
-                //context.BackupDatabasePostgreSQL("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak", "Testdb");
-                //context.RestoreDatabasePostgreSQL("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak", "Testdb","1");
+               // string path = Environment.CurrentDirectory.ToString();
+
+
+                List<string> list = new List<string>();
+                DateTime dateTime = DateTime.Now;
+
+                string DATE ="";
+                var date = dateTime.ToString();
+                var dates = date.Replace('.','_');
+
+                var DA = dates.Replace(':', '_');
+                for (int i = 0; i < DA.Length; i++)
+                {
+                    if (DA[i].ToString() == "13")
+                    {
+                        DATE += "_";
+                    }
+                    else
+                    {
+                        list.Add(DA[i].ToString());
+                    
+
+
+                    }
+                }
+                DATE = "";
+                list.RemoveAt(10);
+                list.Insert(10, "_");
+                for (int i = 0; i < list.Count(); i++)
+                {
+                    if (list[i] == "")
+                    {
+                      
+                    }
+                    else
+                    {
+
+
+                        DATE += list[i].ToString();  
+
+                    }
+                }
+
+                switch (TypeSQL)
+                {
+                    case 1: // Postgres
+                        context.BackupDatabasePostgreSQL(path + $"\\Postgres"+ $"\\Cоздания_резервной_копии дата_{DATE}"+".bak", "Testdb");
+                        break;
+                    case 2: // SQLite
+
+
+                        context. BackupDatabaseSQLite(path + "\\Sqlite" + $"\\Cоздания_резервной_копии дата_{DATE}"+".bak");
+                        break;
+                    case 3: // SQL Server
+
+                  
+                    break;
+                        //context.BackupDatabasePostgreSQL("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak", "Testdb");
+                        //context.RestoreDatabasePostgreSQL("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak", "Testdb","1");
+                }
+
+
+
+
+
+
+
+
             }
         }
+
+
+        public string [] CatalogView()
+        {
+          //  string path = Environment.CurrentDirectory.ToString();
+          string[] list = null;
+            switch (TypeSQL)
+            {
+                case 1: // Postgres
+               
+
+
+                    // Проверяем, существует ли заданная папка
+                    if (Directory.Exists(path +"\\Postgres"))
+                    {
+                        // Получаем список файлов в папке
+                        string[] fileList = Directory.GetFiles(path + "\\Postgres");
+
+                        if (fileList.Length == 0)
+                        {
+
+                        }
+                        else
+                        {
+
+
+                            string[] fileLists = new string[fileList.Length];
+
+                            for (int i = 0; i < fileList.Length; i++)
+                            {
+                                fileLists[i] = Path.GetFileName(fileList[i]);
+                            }
+                            // Выводим названия файлов
+                            list = fileLists;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Указанная папка не существует.");
+                    }
+                    break;
+                case 2: // SQLite
+
+
+         
+                    //// Проверяем, существует ли заданная папка
+                    //if (Directory.Exists(path + "\\Sqlite"))
+                    //{
+                    //    // Получаем список файлов в папке
+                    //    string[] fileList = Directory.GetFiles(path + "\\Sqlite");
+
+                    //    // Выводим названия файлов
+                    //    foreach (string filePath in fileList)
+                    //    {
+                    //        string fileName = Path.GetFileName(filePath);
+                    //        Console.WriteLine(fileName);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("Указанная папка не существует.");
+                    //}
+                    break;
+                case 3: // SQL Server
+
+
+                    break;
+                    //context.BackupDatabasePostgreSQL("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak", "Testdb");
+                    //context.RestoreDatabasePostgreSQL("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak", "Testdb","1");
+            }
+            return list;
+        }
+        public void Restoring_a_backup(string File)
+        {
+
+
+            switch (TypeSQL)
+            {     
+                case 1: // Postgres
+                    using (ApplicationContext db = new ApplicationContext())
+                    {
+                     
+                        db.RestoreDatabasePostgreSQL(path + "\\Postgres\\"+ File , "Testdb","1");
+
+                    }   
+                   
+             
+                    break;
+                case 2: // SQLite
+
+
+
+                    //// Проверяем, существует ли заданная папка
+                    //if (Directory.Exists(path + "\\Sqlite"))
+                    //{
+                    //    // Получаем список файлов в папке
+                    //    string[] fileList = Directory.GetFiles(path + "\\Sqlite");
+
+                    //    // Выводим названия файлов
+                    //    foreach (string filePath in fileList)
+                    //    {
+                    //        string fileName = Path.GetFileName(filePath);
+                    //        Console.WriteLine(fileName);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("Указанная папка не существует.");
+                    //}
+                    break;
+                case 3: // SQL Server
+
+
+                break;
+                    //context.BackupDatabasePostgreSQL("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak", "Testdb");
+                    //context.RestoreDatabasePostgreSQL("C:\\Development\\2\\путь_к_файлу_резервной_копии.bak", "Testdb","1");
+            }
+
+        }
+
+
 
         public void TestSQL()
         {
@@ -343,7 +534,7 @@ namespace Server_Test_Users
             }
 
          
-            string sqlCommand = @"BACKUP DATABASE [{0}] TO  DISK = N'{1}' WITH NOFORMAT, NOINIT,  NAME = N'MyAir-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
+          //  string sqlCommand = @"BACKUP DATABASE [{0}] TO  DISK = N'{1}' WITH NOFORMAT, NOINIT,  NAME = N'MyAir-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
 
             if (Count_roles > 0)
             {
@@ -1948,6 +2139,46 @@ namespace Server_Test_Users
 
             }
             return null;
+        }
+
+
+
+
+
+        public void Catalog_Add()
+        {
+            string path = Environment.CurrentDirectory.ToString();
+
+            if (!Directory.Exists(path + "\\Postgres"))
+            {
+                Directory.CreateDirectory(path + "\\Postgres");
+                Console.WriteLine($"Папка успешно создана! {path + "\\Postgres"}");
+            }
+            else
+            {
+                Console.WriteLine($"Папка с указанным путем уже существует: {path + "\\Postgres"}");
+            }
+
+
+            if (!Directory.Exists(path+"\\Sqlite"))
+            {
+                Directory.CreateDirectory(path + "\\Sqlite");
+                Console.WriteLine($"Папка успешно создана!{path + "\\Sqlite"}");
+            }
+            else
+            {
+                Console.WriteLine($"Папка с указанным путем уже существует: {path + "\\Sqlite"}");
+            }
+
+            if (!Directory.Exists(path + "\\MSSql"))
+            {
+                Directory.CreateDirectory(path + "\\MSSql");
+                Console.WriteLine($"Папка успешно создана!{path + "\\MSSql"}");
+            }
+            else
+            {
+                Console.WriteLine($"Папка с указанным путем уже существует: {path + "\\MSSql"}");
+            }
         }
     }
 }

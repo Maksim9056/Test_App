@@ -3,66 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Client.Project.Main.Type_of_resverve_copy"
              Title="Выбор резевной копии">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ListView x:Name="UserList"
+                      ItemSelected="OnItemSelected"
+                      ItemsSource="{Binding Users}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <!-- Ширина в 2/3 -->
+                                    <ColumnDefinition Width="*" />
+                                    <!--<ColumnDefinition Width="*" />-->
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding User}" Grid.Column="0"
+                                        FontSize="16"
+                                        FontFamily="Arial"
+                                        FontAttributes="Bold"
+                                        TextColor="Red"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center" />
+                                <Button Text="Востановить"
+                                        Command="{Binding EditCommand}"
+                                        CommandParameter="{Binding .}" Grid.Column="1" />
+                                <!--<Button Text="Удалить"
+                                        Command="{Binding DelCommand}"
+                                        CommandParameter="{Binding .}" Grid.Column="2"
+                                        IsVisible="True" />-->
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Создать"
+                    Clicked="CreateButtonClicked" Grid.Row="1" />
+            <Button Text="Назад"
+                    Clicked="GoBack" Grid.Row="2" />
+        </Grid>
+    </ContentPage.Content>
 
-        <StackLayout Grid.Row="0">
-
-            <Grid x:Name="Табличка" WidthRequest="800" HeightRequest="1000">
-
-                <!-- Добавленная кнопка -->
-                <Button  
-                    x:Name="НастройкиBackups"  
-                    Text="Postgres"  
-                    SemanticProperties.Hint="This is a new button"  
-                    Clicked="PostgresBackups"  
-                    VerticalOptions="Start"  
-                    HorizontalOptions="CenterAndExpand"  
-                    HeightRequest="50"  
-                    WidthRequest="320"  
-                    Margin="0,20,0,0"  
-                    Padding="10" />
-
-                <Button  
-                    x:Name="CounterLog4"  
-                    Text="Sqlite"  
-                    SemanticProperties.Hint="Counts the number of times you click"  
-                    Clicked="CounterLog4_Clicked"  
-                    VerticalOptions="Start"  
-                    HorizontalOptions="CenterAndExpand"  
-                    HeightRequest="50"  
-                    WidthRequest="320"  
-                    Margin="0,100,0,0"  
-                    Padding="10" />
-
-                <Button  
-                    x:Name="CounterLogTest"  
-                    Text="SQL Server Express"  
-                    SemanticProperties.Hint="Counts the number of times you click"  
-                    Clicked="CounterLogTest_Clicked"  
-                    VerticalOptions="Start"  
-                    HorizontalOptions="CenterAndExpand"  
-                    HeightRequest="50"  
-                    WidthRequest="320"  
-                    Margin="0,180,0,0"  
-                    Padding="10" />
-
-         
-
-             
-            </Grid>
-        </StackLayout>
-
-        <Button 
-            Grid.Row="1" 
-            Text="Назад" 
-            Clicked="GoBack" 
-            VerticalOptions="End" 
-            HorizontalOptions="FillAndExpand" 
-            HeightRequest="50" 
-            Padding="10" />
-    </Grid>
 </ContentPage>

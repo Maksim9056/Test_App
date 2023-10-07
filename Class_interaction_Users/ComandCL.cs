@@ -6,9 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Linq;
 //using Class_chat;
 //using Newtonsoft.Json.Linq;
@@ -2017,6 +2019,72 @@ namespace Class_interaction_Users
                 }
                 return string.Empty;
             }
+        }
+
+
+
+        public class Working_with_a_backup_
+        {
+
+            CommandCL ClassInstance = new CommandCL();
+
+            public Backap Backap { get; set; }
+
+            public  async Task DBackups(string server, string fs, string command)
+            {
+
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                if (string.IsNullOrEmpty(responseDat))
+                {
+                   // return null;
+                }
+                else
+                {
+
+                    //Filles exams_Check = JsonSerializer.Deserialize<Filles>(responseDat);
+
+                    //Filles = exams_Check;
+                }
+            }
+        
+
+        public async Task   Restoring_a_backups(string server, string fs, string command)
+        {
+
+
+            string responseDat = await ClassInstance.SendClass(server, fs, command);
+            if (string.IsNullOrEmpty(responseDat))
+            {
+                // return null;
+            }
+            else
+            {
+               Backap backap = JsonSerializer.Deserialize<Backap>(responseDat);
+                Backap = backap;
+            }
+        }
+
+
+
+        public  async Task CatalogViews(string server, string fs, string command)
+        {
+
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+                if (string.IsNullOrEmpty(responseDat))
+                {
+                    // return null;
+                }
+                else
+                {
+
+                    //Filles exams_Check = JsonSerializer.Deserialize<Filles>(responseDat);
+                    Backap backap = JsonSerializer.Deserialize<Backap>(responseDat);
+                    Backap = backap;
+                }
+
+
+                //return Catalog;
+        }
         }
     }
 }

@@ -9,6 +9,20 @@ using System.Threading.Tasks;
 
 namespace Class_interaction_Users
 {
+   
+    
+    
+    public class Backap
+    {
+      public  string[] Strings {  get; set; }
+
+        public  Backap(string[] strings)
+        {
+            Strings = strings;
+        }
+    }
+    
+    
     [Serializable]
 
     public class Filles

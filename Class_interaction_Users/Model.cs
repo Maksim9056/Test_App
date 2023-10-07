@@ -1147,7 +1147,7 @@ namespace Class_interaction_Users
     public class Filles_Work
     {
 
-      public  Filles_Work_ Filles_Work_ = new Filles_Work_();
+        public Filles_Work_ Filles_Work_ = new Filles_Work_();
         public Filles Filles { get; set; }
 
         public Filles FillesSave(Filles user)
@@ -1194,20 +1194,20 @@ namespace Class_interaction_Users
                     JsonSerializer.Serialize<Filles>(memoryStream, user);
 
                     Task.Run(async () => await Filles_Work_.SelectFromFilles(Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "058")).Wait();
-                 
-                    
-                    if(Filles_Work_.Filles == null)
+
+
+                    if (Filles_Work_.Filles == null)
                     {
-                      SelectFromFilles(Ip_adresss, user);
+                        SelectFromFilles(Ip_adresss, user);
 
                     }
                     Filles = Filles_Work_.Filles;
 
                     files = Filles;
-                   // return files;
+                    // return files;
                 }
 
-          
+
             }
             catch (Exception)
             {
@@ -1215,7 +1215,82 @@ namespace Class_interaction_Users
             }
             return Filles_Work_.Filles;
         }
-        public class BooleanToStringConverter : IValueConverter
+    }
+
+
+    public class Working_with_a_backup
+    {
+
+
+        Working_with_a_backup_ working_With_A_Backup_ = new Working_with_a_backup_();
+        //РАБОТА С РЕЗЕРВНОЙ КОПИЕЙ
+        //FDictCommands.Add("059", new Action<byte[], GlobalClass, NetworkStream>(command.DBackup));//Создают резервную копию
+        //        FDictCommands.Add("060", new Action<byte[], GlobalClass, NetworkStream>(command.Restoring_a_backup)); //Востановить из резервной копии
+        //        FDictCommands.Add("061", new Action<byte[], GlobalClass, NetworkStream>(command.CatalogView)); //Просмотр резервной копии которая существует
+
+        public  void DBackup()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+             
+           
+
+                Task.Run(async () => await working_With_A_Backup_.DBackups(Ip_adress.Ip_adresss, "", "059")).Wait();
+
+                // return files;
+            }
+        }
+
+        public void   Restoring_a_backup(Backap backap)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+
+                //Backap backap = new Backap();
+                JsonSerializer.Serialize<Backap>(memoryStream, backap);
+
+               Task.Run(async () => await working_With_A_Backup_.Restoring_a_backups(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "060")).Wait();
+                // return files;
+            }
+        }
+
+
+
+        public string [] CatalogView()
+        {
+            string[] Catalog = null;
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+
+                //Backap backap = new Backap();
+
+                Task.Run(async () => await working_With_A_Backup_.Restoring_a_backups(Ip_adress.Ip_adresss, "", "061")).Wait();
+                // return files;
+                if (working_With_A_Backup_.Backap == null)
+                {
+
+                }
+                else
+                {
+                    if (working_With_A_Backup_.Backap.Strings == null)
+                    {
+
+                    }
+                    else
+                    {
+                        Catalog = working_With_A_Backup_.Backap.Strings;
+
+                    }
+                }
+
+            }
+            return Catalog;
+        }
+    }
+
+
+    public class BooleanToStringConverter : IValueConverter
         {
             public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
             {
@@ -1232,5 +1307,5 @@ namespace Class_interaction_Users
                 throw new NotImplementedException();
             }
         }
-    }
+    
 }

@@ -55,10 +55,14 @@ namespace Server_Test_Users
                 Console.WriteLine("Пользователь:" + Environment.UserName.ToString());
                 Console.WriteLine("IP-адрес :" + Ip_Adress.ToString());
                 Console.WriteLine("Путь:" + Environment.CurrentDirectory.ToString());
-                ;
+                
                 int counter = 0;
                 RegisterCommands();
-                globalClass.DBackup();
+                globalClass.Catalog_Add();
+
+                //globalClass.DBackup();
+
+                //globalClass.CatalogView();
                 server.Start();
                 Console.WriteLine("\nСервер запушен");
                 while (true)
@@ -157,6 +161,10 @@ namespace Server_Test_Users
                 FDictCommands.Add("056", new Action<byte[], GlobalClass, NetworkStream>(command.CheckPingIpAdress));
                 FDictCommands.Add("057", new Action<byte[], GlobalClass, NetworkStream>(command.SaveUserImage));
                 FDictCommands.Add("058", new Action<byte[], GlobalClass, NetworkStream>(command.SelectFromFilles));
+                //РАБОТА С РЕЗЕРВНОЙ КОПИЕЙ
+                FDictCommands.Add("059", new Action<byte[], GlobalClass, NetworkStream>(command.DBackup));//Создают резервную копию
+                FDictCommands.Add("060", new Action<byte[], GlobalClass, NetworkStream>(command.Restoring_a_backup)); //Востановить из резервной копии
+                FDictCommands.Add("061", new Action<byte[], GlobalClass, NetworkStream>(command.CatalogView)); //Просмотр резервной копии которая существует
 
 
 

@@ -868,5 +868,106 @@ namespace Server_Test_Users
                 Console.WriteLine(ex.Message.ToString());
             }
         }
+
+
+        /// <summary>
+        /// Просмотр резервной копии которая существует
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="class"></param>
+        /// <param name="stream"></param>
+        public void CatalogView(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+
+            var strings = @class.CatalogView();
+            if (strings == null)
+            {
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    string[] Backap = new string[] { };
+                    Backap backap = new Backap(Backap);
+                    JsonSerializer.Serialize<Backap>(stream, backap);
+                    // stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+            }
+            else
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    Backap backap = new Backap(strings);
+                    JsonSerializer.Serialize<Backap>(stream, backap);
+                    // stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+
+            }
+        }
+
+
+        /// <summary>
+        /// //Создают резервную копию
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="class"></param>
+        /// <param name="stream"></param>
+        public void DBackup(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            @class.DBackup();
+        }
+
+
+
+
+        /// <summary>
+        ///  Востановить из резервной копии
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="class"></param>
+        /// <param name="stream"></param>
+        public void Restoring_a_backup(byte[] arg1, GlobalClass @class, NetworkStream stream)
+        {
+            Backap CrTest = JsonSerializer.Deserialize<Backap>(arg1);
+
+            if (CrTest == null)
+            {
+
+            }
+            else
+            {
+                string File = "";
+                for (int i = 0; i < CrTest.Strings.Length; i++)
+                {
+                    File = CrTest.Strings[i];
+                }
+
+                @class.Restoring_a_backup(File);
+            }
+
+        }
+
+
+
+           // if(strings == null)
+            //{
+                
+            //        using (MemoryStream ms = new MemoryStream())
+            //        {
+            //            string[] Backap = new string[] { };
+            //            Backap backap = new Backap(Backap);
+            //            JsonSerializer.Serialize<Backap>(stream, backap);
+            //            // stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+            //        }
+            //}
+            //else
+            //{
+            //    using (MemoryStream ms = new MemoryStream())
+            //    {
+            //        Backap backap = new Backap(strings);
+            //        JsonSerializer.Serialize<Backap>(stream, backap);
+            //      // stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+            //    }
+
+            //}
+        
     }
 }
