@@ -6,7 +6,7 @@
              Loaded="ContentPage_Loaded"  
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-    <ScrollView>
+    <ScrollView >
         <Grid Padding="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

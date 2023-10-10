@@ -505,6 +505,7 @@ namespace Client
 
                 //  Application.Current.MainPage.SetValue(NavigationPage.HasNavigationBarProperty, false);
                 //    Application.Current.MainPage.SetValue(NavigationPage.HasBackButtonProperty, false);
+
                 Application.Current.MainPage.Window.Width = 530.8d;
                 Application.Current.MainPage.Window.Height = 650.8d;
 
