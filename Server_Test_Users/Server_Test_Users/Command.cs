@@ -35,7 +35,21 @@ namespace Server_Test_Users
 
                     stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
                 }
-                logging.Insert("", StatusType.Success, Действия.CheckMail_and_Passwords, "");
+
+                if (@class.Travel == null)
+                {
+                    logging.Insert("Пользователя не нашли", StatusType.Success, Действия.CheckMail_and_Passwords, "");
+
+                }
+                else if (@class.Travel.Id == 0)
+                {
+                    logging.Insert($"Пользователь ввел пароль не верный с почтой :{@class.Travel.Employee_Mail} ", StatusType.Success, Действия.CheckMail_and_Passwords, "");
+
+                }
+                else
+                {
+                    logging.Insert($"{@class.Travel.Name_Employee}", StatusType.Success, Действия.CheckMail_and_Passwords, "");
+                }
 
             }
             catch (Exception ex)

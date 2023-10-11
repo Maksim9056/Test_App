@@ -800,6 +800,8 @@ namespace Server_Test_Users
                                     {
                                         Travel = new Regis_users(n.Id, n.Name_Employee, n.Password, roles1, n.Employee_Mail, n.Email.Id);
                                         d = true;
+                                        Check = true;
+
                                         break;
                                     }
 
@@ -822,7 +824,7 @@ namespace Server_Test_Users
                     }
                     else
                     {
-                        Check = true;
+                        Check = false;
 
                         bool Game = true;
                         if (user == null)
@@ -869,7 +871,9 @@ namespace Server_Test_Users
                                     {
                                         Travel = new Regis_users(n.Id, n.Name_Employee, n.Password, roles1, n.Employee_Mail, n.Email.Id);
                                         d = false;
-                                        break;
+                                            Check = true;
+
+                                            break;
                                     }
                                     }
 
