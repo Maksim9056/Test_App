@@ -222,7 +222,7 @@ public partial class Users : ContentPage
         }
         catch(Exception ex) 
         {
-            DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.Data, "Ок");
+           // DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.Data, "Ок");
         }
     }
 
