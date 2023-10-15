@@ -69,6 +69,7 @@ namespace Server_Test_Users
                         Console.WriteLine("\nОжидание соединения...");
                         ThreadPool.UnsafeQueueUserWorkItem(ClientProcessing, server.AcceptTcpClient());
                         counter++;
+                   
                         Console.Write("\nСоединие№" + counter.ToString() + "!");
 
                     }
