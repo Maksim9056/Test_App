@@ -1,12 +1,8 @@
-﻿using Class_interaction_Users;
+﻿using System.Collections.Generic;
+using System.IO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Server_Test_Users.Logging;
 
-namespace Server_Test_Users
+namespace Servis
 {
     /// <summary>
     /// Создать класс Логирования сделать в нем атрибуты  :  Время ,Пользователь,Действие,Cтатус,Ошибка.
@@ -20,12 +16,11 @@ namespace Server_Test_Users
     public class Logging
     {
 
-
-        public   Logging()
+        public Logging()
         {
 
         }
-        public  enum StatusType
+        public enum StatusType
         {
             Success,
             Error
@@ -94,7 +89,7 @@ namespace Server_Test_Users
             Restoring_a_backup = 52,
             Search_Image = 53,
 
-            
+
         }
 
 
@@ -156,7 +151,7 @@ namespace Server_Test_Users
         };
 
 
-        public DateTime DateTime { get; set; } 
+        public DateTime DateTime { get; set; }
 
         public string Name { get; set; }
 
@@ -166,11 +161,11 @@ namespace Server_Test_Users
         public string Cтатус { get; set; }
 
 
-        public string Ошибка {  get; set; }
+        public string Ошибка { get; set; }
 
 
 
-        public Logging(DateTime dateTime,string name ,string действие , string cтатус,string oшибка)
+        public Logging(DateTime dateTime, string name, string действие, string cтатус, string oшибка)
         {
             DateTime = dateTime;
             Name = name;
@@ -189,18 +184,18 @@ namespace Server_Test_Users
             if (Статус.TryGetValue(action, out string actionName))
             {
                 value = actionName;
-               // Console.WriteLine($"Действие: {actionName}");
+                // Console.WriteLine($"Действие: {actionName}");
 
             }
             else
             {
-              //  Console.WriteLine("Действие не найдено в словаре.");
+                //  Console.WriteLine("Действие не найдено в словаре.");
             }
 
             return value;
         }
-       public string  SearhComand(Действия действия)
-       {
+        public string SearhComand(Действия действия)
+        {
 
             string Value = string.Empty;
             // Пример вывода значения по ключу
@@ -208,19 +203,19 @@ namespace Server_Test_Users
             if (ДействияКоманд.TryGetValue(action, out string actionName))
             {
                 Value = actionName;
-         //       Console.WriteLine($"Действие: {actionName}");
-                
+                //       Console.WriteLine($"Действие: {actionName}");
+
             }
             else
             {
-           //     Console.WriteLine("Действие не найдено в словаре.");
+                //     Console.WriteLine("Действие не найдено в словаре.");
             }
             return Value;
-       }
+        }
 
 
 
-        public async void Insert(string user, StatusType statusType, Действия действия,string Ошибка)
+        public async void Insert(string user, StatusType statusType, Действия действия, string Ошибка)
         {
 
             var Comand = SearhComand(действия);
@@ -238,7 +233,7 @@ namespace Server_Test_Users
 
 
                 // Запиши данные в файл
-               await writer.WriteLineAsync($"{logging.DateTime}, {logging.Name}, {logging.Действие}, {logging.Cтатус}, {logging.Ошибка}");
+                await writer.WriteLineAsync($"{logging.DateTime}, {logging.Name}, {logging.Действие}, {logging.Cтатус}, {logging.Ошибка}");
                 // Или использовать writer.Write(), если нужно записать данные в файл без переноса строки
 
                 // Закрой StreamWriter
@@ -247,6 +242,5 @@ namespace Server_Test_Users
             }
 
         }
-
     }
 }

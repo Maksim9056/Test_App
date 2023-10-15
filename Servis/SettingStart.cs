@@ -1,78 +1,75 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
+using System.Net;
 using System.Text;
 using System.Threading;
-using Class_interaction_Users;
+using System.Threading.Tasks;
 using System.IO;
+using Class_interaction_Users;
 using System.Text.Json;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
-using System.ServiceProcess;
 
-namespace Server_Test_Users
+namespace Servis
 {
-    public class Program
+    public class SettingStart
     {
         public bool Users = false;
-#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         /// <summary>
         /// Ip адрес
         /// </summary>
         static public string Ip_Adress { get; set; }
-#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         /// <summary>
         /// Порт
         /// </summary>
         static public Int32 port { get; set; }
-#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
         /// <summary>
         /// Данные
         /// </summary>
         public static string data_ { get; set; }
-#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Возможно, стоит объявить поле как допускающее значения NULL.
 
 
         Logging logging = new Logging();
 
-         static void Main(string[] args)
-         {
-
+        public void Starting()
+        {
             try
             {
-                   GlobalClass globalClass = new GlobalClass();
-                    SaveOpen();
+                GlobalClass globalClass = new GlobalClass();
+                SaveOpen();
 
-                    globalClass.TestSQL();
-                    TcpListener server;
+                globalClass.TestSQL();
+                TcpListener server;
 
-                    int MaxThreadsCount = Environment.ProcessorCount;
-                    ThreadPool.SetMaxThreads(MaxThreadsCount, MaxThreadsCount);
+                int MaxThreadsCount = Environment.ProcessorCount;
+                ThreadPool.SetMaxThreads(MaxThreadsCount, MaxThreadsCount);
 
-                    IPAddress localAddr = IPAddress.Parse(Ip_Adress);
-                    Console.WriteLine();
-                    server = new TcpListener(localAddr, port);
-                    Console.WriteLine("Конфигурация многопоточного сервера:" + MaxThreadsCount.ToString());
-                    Console.WriteLine("Пользователь:" + Environment.UserName.ToString());
-                    Console.WriteLine("IP-адрес :" + Ip_Adress.ToString());
-                    Console.WriteLine("Путь:" + Environment.CurrentDirectory.ToString());
+                IPAddress localAddr = IPAddress.Parse(Ip_Adress);
+                Console.WriteLine();
+                server = new TcpListener(localAddr, port);
+                Console.WriteLine("Конфигурация многопоточного сервера:" + MaxThreadsCount.ToString());
+                Console.WriteLine("Пользователь:" + Environment.UserName.ToString());
+                Console.WriteLine("IP-адрес :" + Ip_Adress.ToString());
+                Console.WriteLine("Путь:" + Environment.CurrentDirectory.ToString());
 
-                    int counter = 0;
-                    RegisterCommands();
-                    globalClass.Catalog_Add();
+                int counter = 0;
+                RegisterCommands();
+                globalClass.Catalog_Add();
 
-                    //globalClass.DBackup();
+                //globalClass.DBackup();
 
-                    //globalClass.CatalogView();
-                    server.Start();
-                    Console.WriteLine("\nСервер запушен");
-                    while (true)
-                    {
-                        Console.WriteLine("\nОжидание соединения...");
-                        ThreadPool.UnsafeQueueUserWorkItem(ClientProcessing, server.AcceptTcpClient());
-                        counter++;
-                        Console.Write("\nСоединие№" + counter.ToString() + "!");
+                //globalClass.CatalogView();
+                server.Start();
+                Console.WriteLine("\nСервер запушен");
+                while (true)
+                {
+                    Console.WriteLine("\nОжидание соединения...");
+                    ThreadPool.UnsafeQueueUserWorkItem(ClientProcessing, server.AcceptTcpClient());
+                    counter++;
+                    Console.Write("\nСоединие№" + counter.ToString() + "!");
 
-                    }
-                
+                }
+
             }
             catch (SocketException e)
             {
@@ -80,14 +77,10 @@ namespace Server_Test_Users
             }
             Console.WriteLine("\nНажмите Enter");
             Console.Read();
-
         }
-
-
-
         static Dictionary<string, Action<byte[], GlobalClass, NetworkStream, Logging>> FDictCommands = new Dictionary<string, Action<byte[], GlobalClass, NetworkStream, Logging>>();
 
-        public   static void RegisterCommands()
+        public static void RegisterCommands()
         {
             try
             {
@@ -97,7 +90,7 @@ namespace Server_Test_Users
                 FDictCommands.Add("003", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.CheckMail_and_Passwords));
                 FDictCommands.Add("004", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Check_test));
                 FDictCommands.Add("005", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Check_test));
-                FDictCommands.Add("006", new Action<byte[], GlobalClass, NetworkStream ,Logging>(command.Select_job_title));
+                FDictCommands.Add("006", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Select_job_title));
                 FDictCommands.Add("007", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Search_Image));
                 FDictCommands.Add("008", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Searh_Friends));
                 FDictCommands.Add("009", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Insert_Message));
@@ -113,8 +106,8 @@ namespace Server_Test_Users
                 FDictCommands.Add("018", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Create_Users)); // Создать данные User
                 FDictCommands.Add("019", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Del_Users));    // Удалить данные User 
 
-                FDictCommands.Add("020", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Create_Test));  
-                FDictCommands.Add("021", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Update_Test));  
+                FDictCommands.Add("020", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Create_Test));
+                FDictCommands.Add("021", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Update_Test));
                 FDictCommands.Add("022", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Del_Test));
                 FDictCommands.Add("023", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Get_TestList));
 
@@ -175,12 +168,10 @@ namespace Server_Test_Users
             }
         }
 
-        static  void HandleCommand(string aCommand, byte[] data, GlobalClass cls, NetworkStream ns, Logging logging)
+        static void HandleCommand(string aCommand, byte[] data, GlobalClass cls, NetworkStream ns, Logging logging)
         {
             Action<byte[], GlobalClass, NetworkStream, Logging> actionCommand;
-#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             if (FDictCommands.TryGetValue(aCommand, out actionCommand)) actionCommand(data, cls, ns, logging);
-#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             else
             {
                 // Если не нашли, то обрабатываем это }
@@ -191,17 +182,14 @@ namespace Server_Test_Users
         {
             try
             {
-#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 using (TcpClient client = client_obj as TcpClient)
                 {
 
 
                     GlobalClass globalClass = new GlobalClass();
-#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
                     NetworkStream stream = client.GetStream();
-#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
                     Command command = new Command();
-                    Logging logging  = new Logging();
+                    Logging logging = new Logging();
                     String responseData = String.Empty;
                     Byte[] readingData = new Byte[256];
                     StringBuilder completeMessage = new StringBuilder();
@@ -219,7 +207,6 @@ namespace Server_Test_Users
                     byte[] msg = Encoding.Default.GetBytes(json);
                     HandleCommand(comand, msg, globalClass, stream, logging);
                 }
-#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             }
             catch (Exception e)
             {
@@ -243,15 +230,11 @@ namespace Server_Test_Users
                 {
                     using (FileStream fs = new FileStream("Server.json", FileMode.Open))
                     {
-#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                         Seting _aFile = JsonSerializer.Deserialize<Seting>(fs);
-#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
-#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
                         Ip_Adress = _aFile.Ip_adress;
-#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
                         port = _aFile.Port;
                         GlobalClass.TypeSQL = _aFile.TypeSQL;
-                   
+
                     }
                 }
                 else
@@ -265,13 +248,9 @@ namespace Server_Test_Users
 
                     using (FileStream fileStream = new FileStream("Server.json", FileMode.OpenOrCreate))
                     {
-#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                         Seting aFile = JsonSerializer.Deserialize<Seting>(fileStream);
-#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
 
-#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
                         Ip_Adress = aFile.Ip_adress;
-#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
                         port = aFile.Port;
                         GlobalClass.TypeSQL = aFile.TypeSQL;
 
@@ -284,15 +263,6 @@ namespace Server_Test_Users
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
-
-        public int Add(int a, int b)
-        {
-            return a + b;
-        }
-
-        
-
     }
 }
