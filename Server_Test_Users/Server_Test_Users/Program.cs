@@ -92,6 +92,7 @@ namespace Server_Test_Users
         {
             try
             {
+                
                 Command command = new Command();
                 FDictCommands.Add("001", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Registration_users));
                 FDictCommands.Add("002", new Action<byte[], GlobalClass, NetworkStream, Logging>(command.Registration_users));

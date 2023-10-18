@@ -617,7 +617,7 @@ namespace Server_Test_Users
 
 
 
-                    string Email = "Admin@Admin.ru";
+                    string Email = "info@экзаменатор.москва";
                     DateTime dateTime = DateTime.Now;
                     var data = $"{dateTime:F}";
                     Roles roles = new Roles { Id = 1 };
