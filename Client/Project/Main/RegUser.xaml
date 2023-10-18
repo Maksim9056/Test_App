@@ -30,7 +30,14 @@
                        HorizontalOptions="CenterAndExpand"
                        WidthRequest="250"
                        Margin="0, 20, 0,0" />
-
+                <Entry x:Name="nameEntry9"
+                   FontSize="16"
+           Placeholder="Подс"
+           TextChanged="nameEntry9_TextChanged"
+                      Keyboard="Text"
+                      HorizontalOptions="CenterAndExpand"
+                      WidthRequest="250"
+                      Margin="0, 20, 0,0" />
                 <Entry x:Name="nameEntry1"
                        FontSize="16"
                        Placeholder="Введите пароль"
@@ -49,6 +56,7 @@
                        WidthRequest="250"
                        Margin="0, 20, 0,0" />
 
+                
 
                 <Image x:Name="Images" Loaded="Image_Loaded" Aspect="AspectFit" />
 

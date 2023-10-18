@@ -2086,6 +2086,34 @@ namespace Class_interaction_Users
                 //return Catalog;
         }
         }
+
+        public  class MailTravels
+        {
+            public User User { get; set; }
+
+            CommandCL ClassInstance = new CommandCL();
+
+            
+            public async Task RegUser(string server, string fs, string command)
+            {
+                string responseDat = await ClassInstance.SendClass(server, fs, command);
+
+                if (string.IsNullOrEmpty(responseDat))
+                {
+                    // return null;
+                }
+                else
+                {
+
+                    //Filles exams_Check = JsonSerializer.Deserialize<Filles>(responseDat);
+                    User user = JsonSerializer.Deserialize<User>(responseDat);
+                    User = user;
+                }
+
+            }
+
+
+        }
     }
 }
 

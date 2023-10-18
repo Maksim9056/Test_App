@@ -46,6 +46,8 @@ public partial class RegUser : ContentPage
     public string User_Name { get; set; }
 
 
+    public string CodMail { get; set; }
+
     /// <summary>
     ///Пароль пользователя
     /// </summary>
@@ -68,7 +70,7 @@ public partial class RegUser : ContentPage
 
     public Roles Roles { get; set; }
 
-
+  public  Mail Mails = new Mail();
 
 
     /// <summary>
@@ -196,6 +198,7 @@ public partial class RegUser : ContentPage
 
             else if (Mail == null || Mail == "")
             {
+
                 await DisplayAlert("Уведомление", "Почта не заполнена!", "ОK");
             }
             else if (!Regex.IsMatch(Mail, "@."))
@@ -205,47 +208,68 @@ public partial class RegUser : ContentPage
             else
             {
 
-                if (Filles == null)
+                User user = new User() { Employee_Mail = Mail, Name_Employee = User_Name };
+
+                var users = Mails.RegUserMail(user);
+
+
+
+
+                if (users.Employee_Mail == CodMail)
                 {
-                    Image_Loaded(sender,e);
+
+
+
+
+                    if (Filles == null)
+                    {
+                        Image_Loaded(sender, e);
+                    }
+                    else
+                    {
+
+
+                        using (MemoryStream Reg_user_Dispons = new MemoryStream())
+                        {
+                            CommandCL command = new CommandCL();
+                            string FileFS = "";
+                            using (MemoryStream fs = new MemoryStream())
+                            {
+
+                                Regis_users tom = new Regis_users(0, User_Name, Password, Roles, Mail, Filles.Id);
+                                JsonSerializer.Serialize<Regis_users>(fs, tom);
+                                FileFS = Encoding.Default.GetString(fs.ToArray());
+                            }
+                            Task.Run(async () => await command.Reg_User(ip_Adress.Ip_adressss, FileFS, "002")).Wait();
+                            var Message = CommandCL.Travel_Regis_users_message;
+                            // Остальной код для фильтрации по имени
+                            if (Message == null)
+                            {
+                                await DisplayAlert("Уведомление", "Вы не зарегистрировались!", "ОK");
+                            }
+                            else
+                            {
+                                await DisplayAlert("Уведомление", "Вы зарегистрировались!", "ОK");
+
+
+                            }
+                            nameEntry3.Text = null;
+                            nameEntry.Text = null;
+                            nameEntry1.Text = null;
+                            nameEntry2.Text = null;
+                            await Navigation.PopAsync();
+                        }
+                    }
                 }
                 else
                 {
+                    await DisplayAlert("Ошибка", "0", "Ок");
 
-
-                    using (MemoryStream Reg_user_Dispons = new MemoryStream())
-                    {
-                        CommandCL command = new CommandCL();
-                        string FileFS = "";
-                        using (MemoryStream fs = new MemoryStream())
-                        {
-
-                            Regis_users tom = new Regis_users(0, User_Name, Password, Roles, Mail, Filles.Id);
-                            JsonSerializer.Serialize<Regis_users>(fs, tom);
-                            FileFS = Encoding.Default.GetString(fs.ToArray());
-                        }
-                        Task.Run(async () => await command.Reg_User(ip_Adress.Ip_adressss, FileFS, "002")).Wait();
-                        var Message = CommandCL.Travel_Regis_users_message;
-                        // Остальной код для фильтрации по имени
-                        if (Message == null)
-                        {
-                            await DisplayAlert("Уведомление", "Вы не зарегистрировались!", "ОK");
-                        }
-                        else
-                        {
-                            await DisplayAlert("Уведомление", "Вы зарегистрировались!", "ОK");
-
-
-                        }
-                        nameEntry3.Text = null;
-                        nameEntry.Text = null;
-                        nameEntry1.Text = null;
-                        nameEntry2.Text = null;
-                        await Navigation.PopAsync();
-                    }
                 }
             }
         }
+           
+        
         catch(Exception ex)
         {
             await DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.HelpLink, "Ок");
@@ -523,10 +547,9 @@ public partial class RegUser : ContentPage
         }
     }
 
-
-
-    
-
-
+    private void nameEntry9_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        CodMail = nameEntry9.Text;
+    }
 }
 

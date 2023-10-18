@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Class_interaction_Users;
 
 namespace Server_Test_Users
 {
@@ -15,8 +16,9 @@ namespace Server_Test_Users
         /// </summary>
         /// <param name="User"></param>
         /// <param name="mailUser"></param>
-        public void RegUserMail(string User,string mailUser)
+        public User RegUserMail(string User,string mailUser)
         {
+            User user = new User();
             SmtpClient smtpClient = new SmtpClient("46.39.245.154");//Адрес сервиса
                                                                     //smtpClient.EnableSsl = true;
             smtpClient.Credentials = new NetworkCredential("info@экзаменатор.москва", "951951Ss!");
@@ -37,9 +39,10 @@ namespace Server_Test_Users
             {
                 Console.WriteLine("Произошла ошибка при отправке письма: " + e.Message);
                 Console.Read();
+                user = new User() { Name_Employee = "1"};
             }
 
-      
+            return user;
         }
     }
 }

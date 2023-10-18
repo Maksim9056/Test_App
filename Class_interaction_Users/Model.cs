@@ -1265,7 +1265,7 @@ namespace Class_interaction_Users
 
                 //Backap backap = new Backap();
 
-                Task.Run(async () => await working_With_A_Backup_.Restoring_a_backups(Ip_adress.Ip_adresss, "", "061")).Wait();
+                Task.Run(async () => await working_With_A_Backup_.CatalogViews(Ip_adress.Ip_adresss, "", "061")).Wait();
                 // return files;
                 if (working_With_A_Backup_.Backap == null)
                 {
@@ -1286,6 +1286,30 @@ namespace Class_interaction_Users
 
             }
             return Catalog;
+        }
+    }
+    
+
+    public class Mail
+    {
+
+      public MailTravels MailTravels = new MailTravels();
+
+
+        public User RegUserMail(User user)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+
+                //Backap backap = new Backap();
+                JsonSerializer.Serialize<User>(memoryStream, user);
+
+                Task.Run(async () => await MailTravels.RegUser(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "062")).Wait();
+
+
+                user = MailTravels.User;
+                return user;
+            }
         }
     }
 
