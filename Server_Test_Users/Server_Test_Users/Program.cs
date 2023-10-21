@@ -42,14 +42,12 @@ namespace Server_Test_Users
                     SaveOpen();
 
                     globalClass.TestSQL();
-                    TcpListener server;
 
                     int MaxThreadsCount = Environment.ProcessorCount;
                     ThreadPool.SetMaxThreads(MaxThreadsCount, MaxThreadsCount);
 
                     IPAddress localAddr = IPAddress.Parse(Ip_Adress);
                     Console.WriteLine();
-                    server = new TcpListener(localAddr, port);
                     Console.WriteLine("Конфигурация многопоточного сервера:" + MaxThreadsCount.ToString());
                     Console.WriteLine("Пользователь:" + Environment.UserName.ToString());
                     Console.WriteLine("IP-адрес :" + Ip_Adress.ToString());
@@ -59,21 +57,24 @@ namespace Server_Test_Users
                     RegisterCommands();
                     globalClass.Catalog_Add();
 
-                    //globalClass.DBackup();
+                //globalClass.DBackup();
 
-                    //globalClass.CatalogView();
-                    server.Start();
+                //globalClass.CatalogView();
+                TcpListener server;
+                server = new TcpListener(localAddr, port);
+
+                server.Start();
                     Console.WriteLine("\nСервер запушен");
                     while (true)
                     {
                         Console.WriteLine("\nОжидание соединения...");
-                        ThreadPool.UnsafeQueueUserWorkItem(ClientProcessing, server.AcceptTcpClient());
+                  //  ThreadPool.QueueUserWorkItem(ClientProcessing, client);
+                    ThreadPool.QueueUserWorkItem(ClientProcessing, server.AcceptTcpClient());
                         counter++;
                    
                         Console.Write("\nСоединие№" + counter.ToString() + "!");
 
                     }
-                
             }
             catch (SocketException e)
             {
