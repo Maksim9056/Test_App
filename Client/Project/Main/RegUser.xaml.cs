@@ -70,7 +70,7 @@ public partial class RegUser : ContentPage
 
     public Roles Roles { get; set; }
 
-  public  Mail Mails = new Mail();
+    public Class_interaction_Users.Mail Mails = new Mail();
 
 
     /// <summary>
@@ -551,5 +551,7 @@ public partial class RegUser : ContentPage
     {
         CodMail = nameEntry9.Text;
     }
+
+
 }
 
