@@ -723,9 +723,10 @@ namespace Server_Test_Users
                             Exists_User = true;
                             Roles roles1 = new Roles { Id = user.Id_roles_users };
 
-                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Email.Id);
+                        //Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Email.Id);
+                        Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, 0);
 
-                            Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
+                        Console.WriteLine($"{user.Name_Employee} ({user.Name_Employee})");
                         
                     }
                 }

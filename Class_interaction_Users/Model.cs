@@ -1150,7 +1150,7 @@ namespace Class_interaction_Users
         public Filles_Work_ Filles_Work_ = new Filles_Work_();
         public Filles Filles { get; set; }
 
-        public Filles FillesSave(Filles user)
+        public Filles FillesSave(Filles user,string IP)
         {
             try
             {
@@ -1158,7 +1158,7 @@ namespace Class_interaction_Users
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
                     JsonSerializer.Serialize<Filles>(memoryStream, user);
-                    Task.Run(async () => await Filles_Work_.FillesSavess(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "057")).Wait();
+                    Task.Run(async () => await Filles_Work_.FillesSavess(IP, Encoding.Default.GetString(memoryStream.ToArray()), "057")).Wait();
 
 
                 }
@@ -1296,7 +1296,7 @@ namespace Class_interaction_Users
       public MailTravels MailTravels = new MailTravels();
 
 
-        public User RegUserMail(User user)
+        public User RegUserMail(Class_interaction_Users.User user,string ip_Adress)
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -1304,7 +1304,7 @@ namespace Class_interaction_Users
                 //Backap backap = new Backap();
                 JsonSerializer.Serialize<User>(memoryStream, user);
 
-                Task.Run(async () => await MailTravels.RegUser(Ip_adress.Ip_adresss, Encoding.Default.GetString(memoryStream.ToArray()), "062")).Wait();
+                Task.Run(async () => await MailTravels.RegUser(ip_Adress, Encoding.Default.GetString(memoryStream.ToArray()), "062")).Wait();
 
 
                 user = MailTravels.User;

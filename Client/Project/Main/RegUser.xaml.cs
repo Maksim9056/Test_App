@@ -70,7 +70,7 @@ public partial class RegUser : ContentPage
 
     public Roles Roles { get; set; }
 
-    public Class_interaction_Users.Mail Mails = new Mail();
+    public Class_interaction_Users.Mail Mails = new Class_interaction_Users.Mail();
 
 
     /// <summary>
@@ -208,35 +208,54 @@ public partial class RegUser : ContentPage
             else
             {
 
-                User user = new User() { Employee_Mail = Mail, Name_Employee = User_Name };
+                Class_interaction_Users.User user = new Class_interaction_Users.User() { Employee_Mail = Mail, Name_Employee = User_Name };
 
-                var users = Mails.RegUserMail(user);
+                User users = Mails.RegUserMail(user, ip_Adress.Ip_adressss);
+                //User users;
+
+                //using (MemoryStream memoryStream = new MemoryStream())
+                //{
+
+                //    //Backap backap = new Backap();
+                //    JsonSerializer.Serialize<User>(memoryStream, user);
+
+                //    Task.Run(async () => await Mails.MailTravels.RegUser("192.168.1.170", Encoding.Default.GetString(memoryStream.ToArray()), "062")).Wait();
+
+
+                //    users = Mails.MailTravels.User;
+                //}
 
 
 
 
-                if (users.Employee_Mail == CodMail)
-                {
-
-
-
-
-                    if (Filles == null)
+                //if (users.Employee_Mail == CodMail)
+                    if (true)
                     {
-                        Image_Loaded(sender, e);
-                    }
-                    else
-                    {
 
 
-                        using (MemoryStream Reg_user_Dispons = new MemoryStream())
+
+
+                    //if (Filles == null)
+                        if (true)
+                        {
+                            ////Image_Loaded(sender, e);
+                            //}
+                            //else
+                            //{
+
+
+                            using (MemoryStream Reg_user_Dispons = new MemoryStream())
                         {
                             CommandCL command = new CommandCL();
                             string FileFS = "";
                             using (MemoryStream fs = new MemoryStream())
                             {
-
-                                Regis_users tom = new Regis_users(0, User_Name, Password, Roles, Mail, Filles.Id);
+                                int Fi = 0;
+                                if (Filles != null)
+                                {
+                                    Fi = Filles.Id;
+                                }
+                                Regis_users tom = new Regis_users(0, User_Name, Password, Roles, Mail, Fi);
                                 JsonSerializer.Serialize<Regis_users>(fs, tom);
                                 FileFS = Encoding.Default.GetString(fs.ToArray());
                             }
@@ -474,9 +493,11 @@ public partial class RegUser : ContentPage
     /// <param name="e"></param>
     private async void Image_Loaded(object sender, EventArgs e)
     {
-        try { 
+        try {
+            Ip_adress ip_Adress = new Ip_adress();
+            ip_Adress.CheckOS();
 
-        if (MediaPicker.Default.IsCaptureSupported)
+            if (MediaPicker.Default.IsCaptureSupported)
         {
             FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
 
@@ -494,7 +515,8 @@ public partial class RegUser : ContentPage
                         Name = imageBytes
                       
                     };
-                    Filles = filles_Work.FillesSave(filles);
+
+                    Filles = filles_Work.FillesSave(filles, ip_Adress.Ip_adressss);
 
                     using FileStream localFileStream = System.IO.File.OpenWrite(localFilePath);
 
@@ -512,29 +534,32 @@ public partial class RegUser : ContentPage
                             Name = imageBytes
                         };
                         Connect();
-                        Filles = filles_Work.FillesSave(filles);
-                        if(Filles == null)
+                        Filles = filles_Work.FillesSave(filles, ip_Adress.Ip_adressss);
+                        if (Filles == null)
                         {
                             Image_Loaded(sender, e);
                         }
-                        string path = System.AppContext.BaseDirectory + "\\путь_к_файлу.jpg";
+                        else
+                        {
+                            string path = System.AppContext.BaseDirectory + "\\путь_к_файлу.jpg";
 
 
-                        if (System.IO.File.Exists(path))
-                        {
-                            // Удаление файла
-                            System.IO.File.Delete(path);
-                        }
-                        // Создание потока на основе массива байт изображения
-                        using (MemoryStream memoryStream = new MemoryStream(Filles.Name))
-                        {
-                            // Сохранение изображения на диск
-                            using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate))
+                            if (System.IO.File.Exists(path))
                             {
-                                memoryStream.CopyTo(fileStream);
+                                // Удаление файла
+                                System.IO.File.Delete(path);
                             }
+                            // Создание потока на основе массива байт изображения
+                            using (MemoryStream memoryStream = new MemoryStream(Filles.Name))
+                            {
+                                // Сохранение изображения на диск
+                                using (FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate))
+                                {
+                                    memoryStream.CopyTo(fileStream);
+                                }
+                            }
+                            Images.Source = path;
                         }
-                        Images.Source = path;
                      }
                 }
                 photo = null;

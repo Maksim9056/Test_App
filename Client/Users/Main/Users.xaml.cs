@@ -71,7 +71,7 @@ public partial class Users : ContentPage
 
             if (filles_Work.Filles == null)
             {
-                Images(name, filles);
+                //Images(name, filles);
             }
             else
             {
