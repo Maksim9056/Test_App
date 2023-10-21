@@ -30,14 +30,17 @@
                        HorizontalOptions="CenterAndExpand"
                        WidthRequest="250"
                        Margin="0, 20, 0,0" />
-                <Entry x:Name="nameEntry9"
-                   FontSize="16"
-           Placeholder="Код почты"
-           TextChanged="nameEntry9_TextChanged"
+                
+                   <Entry x:Name="nameEntry9"
+                     FontSize="16"
+                     Placeholder="Код почты"
+                     TextChanged="nameEntry9_TextChanged"
                       Keyboard="Text"
                       HorizontalOptions="CenterAndExpand"
                       WidthRequest="250"
                       Margin="0, 20, 0,0" />
+                
+                
                 <Entry x:Name="nameEntry1"
                        FontSize="16"
                        Placeholder="Введите пароль"
