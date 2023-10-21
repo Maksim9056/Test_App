@@ -744,191 +744,225 @@ namespace Server_Test_Users
         /// Проверка  почты пароля  авторизация  и проверяет по почте есть ли пользователь  
         /// </summary>
         public void Check_login_amail(CheckMail_and_Password checkMail_And_Password)
-        {
-            try
-            {
-                bool d = false;
-                bool Check = false;
-                // int Current_User;
-                Roles roles1 = null;
+        {try
+            { bool d = false;  bool Check = false; Roles roles1 = null;
                 using (ApplicationContext db = new ApplicationContext())
                 {
                     var use = db.Filles.ToList();
-                 
-                    var user = db.Users.FirstOrDefault (p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password  && p.Email == use[0]);
-                  
+                    var user = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password && p.Email == use[0]);
                     if (user != null)
-                    {
-                        Check = true;
-
-                        bool Game = true;
-                        if(user == null)
-                        {
-
-                        }
-                        else
-                        {
-                         Roles roles = new Roles { Id = user.Id_roles_users };
-                            roles1 = roles;
-                        }
-
-                        if(user.Email == null)
-                        {
-                            Game = false;
-
-                            do
-                            {
-                                for (int i = 0; i < use.Count(); i++)
-                                {
-                                    var n = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password && p.Email == use[i]);
-
-                                    if (n == null)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        Roles roles = new Roles { Id = user.Id_roles_users };
-                                        roles1 = roles;
-                                    }
-                                 
-
-                                    if (n.Email == null)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        Travel = new Regis_users(n.Id, n.Name_Employee, n.Password, roles1, n.Employee_Mail, n.Email.Id);
-                                        d = true;
-                                        Check = true;
-
-                                        break;
-                                    }
-
-                                }
-
-
-
-                            } while (d == true);  
-                            Console.WriteLine($"{user.Name_Employee} ({user.Employee_Mail})");
-
-                            
-                        }
-
-                        if(Game == true)
-                        {
-                         Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Email.Id);
-
-                        }
-
-                    }
-                    else
-                    {
-                        Check = false;
-
+                    {   Check = true;
                         bool Game = true;
                         if (user == null)
-                        {
-
-                        }
+                        { }
                         else
                         {
                             Roles roles = new Roles { Id = user.Id_roles_users };
                             roles1 = roles;
                         }
-                        
-                        if (user == null)
+                        if (user.Email == null)
                         {
                             Game = false;
-
                             do
                             {
                                 for (int i = 0; i < use.Count(); i++)
                                 {
                                     var n = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password && p.Email == use[i]);
 
-                                    if (n == null)
-                                    {
-
-                                    }
+                                    if (n == null) {   }
                                     else
+                                    {
+                                        Roles roles = new Roles { Id = user.Id_roles_users };
+                                        roles1 = roles;
+                                    }
+                                    if (n.Email == null) {  }
+                                    else
+                                    {
+                                        Travel = new Regis_users(n.Id, n.Name_Employee, n.Password, roles1, n.Employee_Mail, n.Email.Id);
+                                        d = true;
+                                        Check = true;
+                                        break; }}
+                            } while (d == true);
+                            Console.WriteLine($"{user.Name_Employee} ({user.Employee_Mail})");  }
+                        if (Game == true)
+                        {
+                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Email.Id);
+                        } }
+                    else
+                    { Check = false;
+                        bool Game = true;
+                        if (user == null)
+                        {
+                        }
+                        else
+                        { Roles roles = new Roles { Id = user.Id_roles_users }; roles1 = roles; }
+                        if (user == null)
+                        { Game = false;
+                            do
+                            { for (int i = 0; i < use.Count(); i++)
+                                {
+                                    var n = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password && p.Email == use[i]);
+                                    if (n == null){ }   else  {Roles roles = new Roles { Id = n.Id_roles_users };  roles1 = roles;
+                                    }
+                                    if (n == null)  {}
+                                    else
+                                    {if (n.Email == null){}
+                                        else
+                                        {
+                                            Travel = new Regis_users(n.Id, n.Name_Employee, n.Password, roles1, n.Employee_Mail, n.Email.Id);
+                                            d = false;
+                                            Check = true;
+                                            break;
+                                        }} }} while (d == true);
+                            if (user == null)    {  }   else {   Console.WriteLine($"{user.Name_Employee} ({user.Employee_Mail})");  } }
+                        if (Game == true)
+                        {
+                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Email.Id);
+                        } }}
+                if (Check == false)
+                {  using (ApplicationContext db = new ApplicationContext())
+                    {
+                        var roles = db.Roles.ToList();
+                        User n =null;
+                        for (int i = 0; i < roles.Count(); i++)
+                        { n = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail && p.Password == checkMail_And_Password.Password && p.Id_roles_users == roles[i].Id);
+                            if (n == null)  {  }
+                            else    {
+                                Console.WriteLine($"Нашел пользлвателя {n.Name_Employee}");
+                                Roles ds = new Roles() { Id = n.Id_roles_users };
+                                Travel = new Regis_users(n.Id, n.Name_Employee, n.Password,ds, n.Employee_Mail, 0);
+                                break;
+                            }}
+                        if (n == null)
+                        {
+                            var users = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail);
+                            if (users != null)
+                            {
+                                Roles ds = new Roles() { Id =0};
+                                Travel = new Regis_users(0, "", "", ds, users.Employee_Mail, 0);
+                                Console.WriteLine($"{users.Name_Employee} ({users.Employee_Mail}) Не нашел ");
+                            }  }}  } }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);} }
+
+
+
+
+
+
+        /// <summary>
+        /// Проверка почты и пароля для авторизации и проверки, существует ли пользователь с такой почтой.
+        /// </summary>
+        public void CheckLoginEmail(CheckMail_and_Password checkMailAndPassword)
+        {
+            try
+            {
+                bool d = false;
+                bool check = false;
+                Roles roles1 = null;
+
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    var use = db.Filles.ToList();
+
+                    var user = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMailAndPassword.Employee_Mail && p.Password == checkMailAndPassword.Password && p.Email == use[0]);
+
+                    if (user != null)
+                    {
+                        check = true;
+                        bool game = true;
+
+                        if (user.Email == null)
+                        {
+                            game = false;
+
+                            do
+                            {
+                                for (int i = 0; i < use.Count(); i++)
+                                {
+                                    var n = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMailAndPassword.Employee_Mail && p.Password == checkMailAndPassword.Password && p.Email == use[i]);
+
+                                    if (n != null && n.Email != null)
+                                    {
+                                        Roles roles = new Roles { Id = n.Id_roles_users };
+                                        roles1 = roles;
+
+                                        Travel = new Regis_users(n.Id, n.Name_Employee, n.Password, roles1, n.Employee_Mail, n.Email.Id);
+                                        d = true;
+                                        check = true;
+
+                                        break;
+                                    }
+                                }
+                            } while (d == true);
+
+                            Console.WriteLine($"{user.Name_Employee} ({user.Employee_Mail})");
+                        }
+
+                        if (game == true)
+                        {
+                            Roles roles = new Roles { Id = user.Id_roles_users };
+                            roles1 = roles;
+
+                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Email.Id);
+                        }
+                    }
+                    else
+                    {
+                        check = false;
+                        bool game = true;
+
+                        if (user == null)
+                        {
+                        }
+
+                        else
+                        {
+                            Roles roles = new Roles { Id = user.Id_roles_users };
+                            roles1 = roles;
+                        }
+
+                        if (user == null)
+                        {
+                            game = false;
+
+                            do
+                            {
+                                for (int i = 0; i < use.Count(); i++)
+                                {
+                                    var n = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMailAndPassword.Employee_Mail && p.Password == checkMailAndPassword.Password && p.Email == use[i]);
+
+                                    if (n != null)
                                     {
                                         Roles roles = new Roles { Id = n.Id_roles_users };
                                         roles1 = roles;
                                     }
 
-                                    if(n == null)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                    if (n.Email == null)
-                                    {
-
-                                    }
-                                    else
+                                    if (n.Email != null)
                                     {
                                         Travel = new Regis_users(n.Id, n.Name_Employee, n.Password, roles1, n.Employee_Mail, n.Email.Id);
                                         d = false;
-                                            Check = true;
+                                        check = true;
 
-                                            break;
+                                        break;
                                     }
-                                    }
-
-                                 
-
                                 }
-
-
-
                             } while (d == true);
 
-                            if(user == null)
-                            {
-
-                            }
-                            else
-                            {
-                             Console.WriteLine($"{user.Name_Employee} ({user.Employee_Mail})");
-
-                            }
-
-
-                        }
-
-                        if (Game == true)
-                        {
-                            Travel = new Regis_users(user.Id, user.Name_Employee, user.Password, roles1, user.Employee_Mail, user.Email.Id);
-
-                        }
-                    }
-                }
-
-                if (Check == false)
-                {
-                    using (ApplicationContext db = new ApplicationContext())
+                    if (user != null)
                     {
-                        var users = db.Users.FirstOrDefault(p => p.Employee_Mail == checkMail_And_Password.Employee_Mail);
-
-                        if (users != null)
-                        {
-                            Roles roles = new Roles { Id = 0 };
-                            Travel = new Regis_users(0, "", "", roles, users.Employee_Mail,0);
-                            Console.WriteLine($"{users.Name_Employee} ({users.Employee_Mail})");
-                        }
                     }
+                    else{}
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
             }
         }
-
-
+    }
+    catch (Exception ex)
+    {
+    Console.WriteLine(ex.Message); // обработка исключения (вывод сообщения об ошибке)
+       }
+     }
         public void Check_Tests()
         {
             try

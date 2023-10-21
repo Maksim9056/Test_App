@@ -56,7 +56,7 @@ namespace Server_Test_Users
 
             }
         }
-
+        
         public void Delete_Message(byte[] arg1, GlobalClass @class, NetworkStream stream, Logging logging, Mail mail)
         {
         }
