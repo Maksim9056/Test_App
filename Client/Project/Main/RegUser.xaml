@@ -32,7 +32,7 @@
                        Margin="0, 20, 0,0" />
                 <Entry x:Name="nameEntry9"
                    FontSize="16"
-           Placeholder="Подс"
+           Placeholder="Код почты"
            TextChanged="nameEntry9_TextChanged"
                       Keyboard="Text"
                       HorizontalOptions="CenterAndExpand"
