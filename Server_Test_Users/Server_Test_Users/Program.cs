@@ -7,6 +7,7 @@ using System.IO;
 using System.Text.Json;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using System.ServiceProcess;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Server_Test_Users
 {
@@ -182,56 +183,75 @@ namespace Server_Test_Users
         static  void HandleCommand(string aCommand, byte[] data, GlobalClass cls, NetworkStream ns, Logging logging ,Mail mail)
         {
             Action<byte[], GlobalClass, NetworkStream, Logging,Mail> actionCommand;
-#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             if (FDictCommands.TryGetValue(aCommand, out actionCommand)) actionCommand(data, cls, ns, logging, mail);
-#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             else
             {
                 // Если не нашли, то обрабатываем это }
             }
         }
 
-        public static void ClientProcessing(object client_obj)
+        public static  void ClientProcessing(object client_obj)
         {
             try
             {
-#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                 using (TcpClient client = client_obj as TcpClient)
                 {
-
-
                     GlobalClass globalClass = new GlobalClass();
 
                     Mail mail = new Mail();
-#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
                     NetworkStream stream = client.GetStream();
-#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
                     Command command = new Command();
                     Logging logging  = new Logging();
-                    String responseData = String.Empty;
+                    string responseData = string.Empty;
                     Byte[] readingData = new Byte[256];
                     StringBuilder completeMessage = new StringBuilder();
                     int numberOfBytesRead = 0;
                     do
                     {
                         numberOfBytesRead = stream.Read(readingData, 0, readingData.Length);
-                        completeMessage.AppendFormat("{0}", Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
+                        completeMessage.AppendFormat("{0}", Encoding.UTF8.GetString(readingData, 0, numberOfBytesRead));
+                        //completeMessage.Append(Encoding.UTF8.GetString(readingData, 0, numberOfBytesRead));
                     }
                     while (stream.DataAvailable);
                     responseData = completeMessage.ToString();
+                    //Способ есть но пробовать надо
+                    //responseData = await Task<string>.Run(() =>
+                    //{
+                    //    return Func_Read(stream, readingData.Length, client);
+                    //});
                     string comand = responseData.Substring(0, 3);
                     string json = responseData.Substring(3, responseData.Length - 3);
                     data_ = json;
-                    byte[] msg = Encoding.Default.GetBytes(json);
+                    byte[] msg = Encoding.UTF8.GetBytes(json);
 
                     HandleCommand(comand, msg, globalClass, stream, logging, mail);
                 }
-#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+        }
+
+
+
+        //Функция считывания байт из потока и формирование единой строки
+        public static string Func_Read(Stream str, int length, TcpClient client)
+        {
+            string Result = string.Empty;
+            using (MemoryStream ms = new MemoryStream())  
+            {
+                int cnt = 0;
+                Byte[] locbuffer = new byte[length];
+                do
+                {
+                    cnt = str.Read(locbuffer, 0, locbuffer.Length);
+                    ms.Write(locbuffer, 0, cnt);
+                }
+                while (client.Available > 0);
+                Result = Encoding.Default.GetString(ms.ToArray());
+            }
+            return Result;
         }
 
         /// <summary>

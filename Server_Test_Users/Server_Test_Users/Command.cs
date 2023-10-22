@@ -976,16 +976,17 @@ namespace Server_Test_Users
             {
 
                 Filles CrTest = JsonSerializer.Deserialize<Filles>(arg1);
-
+                //Filles[] CrTest = JsonSerializer.Deserialize<Filles[]>(arg1);
+                //Filles filless = new Filles(CrTest[0].Id, CrTest[0].Name);
                 Filles filles = @class.SaveUsersImage(CrTest);
                 using (MemoryStream ms = new MemoryStream())
                 {
 
-                  //  JsonSerializer.Serialize<Filles>(ms, filles);
+                    //  JsonSerializer.Serialize<Filles>(ms, filles);
                     JsonSerializer.Serialize<Filles>(stream, filles);
 
-                 //   stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
-                    
+                    //   stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+
                 }
                 logging.Insert("", StatusType.Success, Действия.SaveUserImage, "");
 

@@ -1729,7 +1729,7 @@ namespace Class_interaction_Users
                 using (TcpClient client = new TcpClient(server, 9595))
                 using (NetworkStream stream = client.GetStream())
                 {
-                    byte[] data = System.Text.Encoding.Default.GetBytes(command + fs);
+                    byte[] data = System.Text.Encoding.UTF8.GetBytes(command + fs);
                     await stream.WriteAsync(data, 0, data.Length);
 
                     StringBuilder completeMessage = new StringBuilder();
@@ -1739,7 +1739,7 @@ namespace Class_interaction_Users
                     do
                     {
                         numberOfBytesRead = await stream.ReadAsync(readingData, 0, readingData.Length);
-                        completeMessage.Append(Encoding.Default.GetString(readingData, 0, numberOfBytesRead));
+                        completeMessage.Append(Encoding.UTF8.GetString(readingData, 0, numberOfBytesRead));
                     }
                     while (stream.DataAvailable);
 
@@ -1962,6 +1962,8 @@ namespace Class_interaction_Users
                 try
                 {
                     CommandCL ClassInstance = new CommandCL();
+
+                    Console.WriteLine(fs);
 
                     string responseDat = await ClassInstance.SendClass(server, fs, command);
                     if (string.IsNullOrEmpty(responseDat))

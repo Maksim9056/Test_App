@@ -1150,14 +1150,14 @@ namespace Class_interaction_Users
         public Filles_Work_ Filles_Work_ = new Filles_Work_();
         public Filles Filles { get; set; }
 
-        public Filles FillesSave(Filles user,string IP)
+        public Filles FillesSave(Filles filles,string IP)
         {
             try
             {
                 //List<UserExams> userExamsList = new List<UserExams>();
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    JsonSerializer.Serialize<Filles>(memoryStream, user);
+                    JsonSerializer.Serialize<Filles>(memoryStream, filles);
                     Task.Run(async () => await Filles_Work_.FillesSavess(IP, Encoding.Default.GetString(memoryStream.ToArray()), "057")).Wait();
 
 

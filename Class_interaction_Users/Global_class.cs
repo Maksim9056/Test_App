@@ -27,14 +27,31 @@ namespace Class_interaction_Users
 
     public class Filles
     {
+        public Filles() { }
         /// <summary>
         /// Id Filles
         /// </summary>
         public int Id { get; set; }
 
         public byte[] Name { get; set; }
-
+        public Filles(int id, byte[] name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
+
+    [Serializable]
+
+    // класс для приема Filles
+    public class Filles_OutPut
+    {
+        public int Id { get; set; }
+        public List<Filles> Name { get; set; } = new List<Filles>();
+    }
+
+
+    [Serializable]
 
     public class Ip_adress
     {

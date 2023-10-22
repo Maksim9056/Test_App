@@ -13,13 +13,18 @@ using System.Collections;
 using Microsoft.Maui.Controls.Shapes;
 using static System.Net.WebRequestMethods;
 using System.Net.NetworkInformation;
+using SkiaSharp;
+using System.Net.Sockets;
+using Microsoft.Maui.Controls;
+using System.Buffers.Text;
 
 namespace Client.Main;
 
 public partial class RegUser : ContentPage
 {
     Filles_Work filles_Work = new Filles_Work();
-    
+    Filles_Work_ filles_Work_ = new Filles_Work_();
+
     public RegUser()
     {
         InitializeComponent();
@@ -481,7 +486,89 @@ public partial class RegUser : ContentPage
 
 
 
+    public async Task<byte[]> ResizePhotoAsync()
+    {
+        // Захват фотографии
+        var photo = await MediaPicker.CapturePhotoAsync();
 
+        using (var inputStream = await photo.OpenReadAsync())
+        using (var outputStream = new MemoryStream())
+        {
+            // Загрузка изображения с использованием библиотеки SkiaSharp
+            var skBitmap = SKBitmap.Decode(inputStream);
+
+            // Установка новых размеров
+            var newWidth = 800; // Новая ширина фотографии
+            var newHeight = 600; // Новая высота фотографии
+
+            // Изменение размера изображения
+            var resizedBitmap = skBitmap.Resize(new SKImageInfo(newWidth, newHeight), SKFilterQuality.Low);
+
+            // Сохранение измененного изображения в поток
+            using (var skOutputStream = new SKManagedWStream(outputStream))
+            {
+                resizedBitmap.Encode(skOutputStream, SKEncodedImageFormat.Png, 80);
+            }
+
+            // Возвращение измененной фотографии в виде массива байтов
+            return outputStream.ToArray();
+        }
+    }
+
+    private const int BufferSize = 8192; // Размер буфера для чтения фотографии
+
+    public  void Main23(string pFile)
+    {
+        // Создаем экземпляр TcpClient и подключаемся к серверу
+        using (TcpClient client = new TcpClient("192.168.1.170", 9595)) // Замени IP-адрес и порт на свои значения
+        {
+            try
+            {
+                // Получаем сетевой поток для отправки и чтения данных
+                NetworkStream stream = client.GetStream();
+
+                // Запускаем поток, в котором будет производиться захват фотографии и ее отправка
+                Thread captureThread = new Thread(() =>
+                {
+                    // Захватываем фотографию с помощью камеры
+                    byte[] photoBytes = CapturePhoto(pFile);
+
+                    // Отправляем фотографию на сервер
+                    SendPhoto(stream, photoBytes);
+
+                    client.Close();
+                });
+
+                captureThread.Start();
+                captureThread.Join();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+    }
+
+    private static byte[] CapturePhoto(string pFile)
+    {
+        // Здесь необходимо использовать библиотеки для работы с камерой
+        // и получение фотографии в виде массива байтов
+        // В данном примере мы просто считываем фотографию из файла "photo.jpg"
+
+        //string photoPath = "photo.jpg"; // Путь к файлу с фотографией
+
+        return System.IO.File.ReadAllBytes(pFile);
+    }
+
+    private static void SendPhoto(NetworkStream stream, byte[] photoBytes)
+    {
+        // Отправляем размер фотографии на сервер
+        byte[] sizeBytes = BitConverter.GetBytes(photoBytes.Length);
+        stream.Write(sizeBytes, 0, sizeBytes.Length);
+
+        // Отправляем фотографию на сервер
+        stream.Write(photoBytes, 0, photoBytes.Length);
+    }
 
 
 
@@ -493,35 +580,86 @@ public partial class RegUser : ContentPage
     /// <param name="e"></param>
     private async void Image_Loaded(object sender, EventArgs e)
     {
-        try {
+        try
+        {
             Ip_adress ip_Adress = new Ip_adress();
             ip_Adress.CheckOS();
 
             if (MediaPicker.Default.IsCaptureSupported)
-        {
-            FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+            {
+                FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
 
                 if (photo != null)
                 {
                     // save the file into local storage
                     byte[] imageBytes = System.IO.File.ReadAllBytes(photo.FullPath);
-                    
-                    string localFilePath = System.IO.Path.Combine(FileSystem.CacheDirectory, photo.FileName);
 
-                    using Stream sourceStream = await photo.OpenReadAsync();
 
-                    Filles filles = new Filles
+                    // рабочий
+                    //byte[] imageBytes = await ResizePhotoAsync();
+
+                    var utf8String = Convert.ToBase64String(imageBytes);
+
+                    imageBytes = Convert.FromBase64String(utf8String);
+
+                    Filles filles = new Filles(0, imageBytes);
+
+                    using (MemoryStream memoryStream = new MemoryStream())
                     {
-                        Name = imageBytes
-                      
-                    };
+                        Filles[] json_List_Friends = new Filles[1] ;
+                        json_List_Friends[0] = filles;
 
-                    Filles = filles_Work.FillesSave(filles, ip_Adress.Ip_adressss);
+                        JsonSerializer.Serialize<Filles[]>(memoryStream, json_List_Friends);
+                        memoryStream.Position = 0; // Сбросить позицию потока перед чтением данных
+                        using (StreamReader reader = new StreamReader(memoryStream, Encoding.UTF8))
+                        {
+                            string st = reader.ReadToEnd();
+                            using (TcpClient client = new TcpClient(ip_Adress.Ip_adressss, 9595))
+                            {
+                                client.SendTimeout = 10000;
+                                client.SendBufferSize = 100000;
+                                using (NetworkStream stream = client.GetStream())
+                                {
+                                    byte[] data = Encoding.UTF8.GetBytes("057" + st);
+                                    await stream.WriteAsync(data, 0, data.Length);
 
-                    using FileStream localFileStream = System.IO.File.OpenWrite(localFilePath);
 
-                    await sourceStream.CopyToAsync(localFileStream);
-                    Images.Source = localFileStream.Name;
+                                    StringBuilder completeMessage = new StringBuilder();
+                                    byte[] readingData = new byte[256];
+                                    int numberOfBytesRead = 0;
+                                    do
+                                    {
+                                        numberOfBytesRead = await stream.ReadAsync(readingData, 0, readingData.Length);
+                                        completeMessage.Append(Encoding.UTF8.GetString(readingData, 0, numberOfBytesRead));
+                                    }
+                                    while (stream.DataAvailable);
+
+                                    string responseDat = completeMessage.ToString();
+
+                                    Filles exams_Check = JsonSerializer.Deserialize<Filles>(responseDat);
+
+                                    Filles = exams_Check;
+
+                                }
+
+                            }
+                        }
+                    }
+
+
+                    //*/
+
+                    //Main23(photo.FullPath);
+
+                    //Filles = filles_Work.FillesSave(filles, ip_Adress.Ip_adressss);
+
+
+                    //string localFilePath = System.IO.Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+                    //using FileStream localFileStream = System.IO.File.OpenWrite(localFilePath);
+                    //using Stream sourceStream = await photo.OpenReadAsync();
+                    //await sourceStream.CopyToAsync(localFileStream);
+                    //Images.Source = localFileStream.Name;
+                    Images.Source = photo.FullPath; 
                 }
                 else
                 {
@@ -529,10 +667,8 @@ public partial class RegUser : ContentPage
                     byte[] imageBytes = System.IO.File.ReadAllBytes(photo.FullPath);
                     using (MemoryStream memoryStreams = new MemoryStream())
                     {
-                        Filles filles = new Filles
-                        {
-                            Name = imageBytes
-                        };
+                        Filles filles = new Filles(0,imageBytes);
+
                         Connect();
                         Filles = filles_Work.FillesSave(filles, ip_Adress.Ip_adressss);
                         if (Filles == null)
@@ -560,15 +696,15 @@ public partial class RegUser : ContentPage
                             }
                             Images.Source = path;
                         }
-                     }
+                    }
                 }
                 photo = null;
             }
         }
-        catch(Exception ex) 
+        catch (Exception ex)
         {
             await DisplayAlert("Ошибка", "Сообщение" + ex.Message + "\n" + "Помощь:" + ex.Data, "Ок");
-            Image_Loaded(sender, e);
+            //Image_Loaded(sender, e);
         }
     }
 

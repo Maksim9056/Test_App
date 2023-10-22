@@ -36,6 +36,7 @@
 
     </FlyoutItem>
 
+
     <!--<FlyoutItem Title="Настройки"
                 
                 FlyoutIcon="dotnet_bot.png">
@@ -43,7 +44,7 @@
 
         
     </FlyoutItem>-->
-        
+    
     <!--<FlyoutItem Title="Администрирование"
                 Route="admin"
                 FlyoutIcon="dotnet_bot.png">
@@ -63,6 +64,11 @@
     </FlyoutItem>-->
 
     <!--<MenuItem Text="Help"
+              IconImageSource="help.png"
+              Command="{Binding HelpCommand}"
+              CommandParameter="https://docs.microsoft.com/dotnet/maui/fundamentals/shell" />-->
+    
+    <!--<MenuItem Text="Выход"
               IconImageSource="help.png"
               Command="{Binding HelpCommand}"
               CommandParameter="https://docs.microsoft.com/dotnet/maui/fundamentals/shell" />-->
