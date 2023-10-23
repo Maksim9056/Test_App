@@ -13,6 +13,7 @@
 
         <ScrollView Grid.Row="0">
             <StackLayout Padding="10" BackgroundColor="White" VerticalOptions="CenterAndExpand">
+              
                 <Entry x:Name="nameEntry3"
                        FontSize="16"
                        TextChanged="nameEntry1_TextChanged_2"
@@ -20,7 +21,8 @@
                        Keyboard="Text"
                        HorizontalOptions="CenterAndExpand"
                        WidthRequest="250"
-                       Margin="0, 20, 0,0" />
+                       Margin="0, 20, 0,0" 
+                 />
 
                 <Entry x:Name="nameEntry"
                        FontSize="16"
@@ -29,7 +31,8 @@
                        Keyboard="Email"
                        HorizontalOptions="CenterAndExpand"
                        WidthRequest="250"
-                       Margin="0, 20, 0,0" />
+                       Margin="0, 20, 0,0" 
+                 />
                 
                    <Entry x:Name="nameEntry9"
                      FontSize="16"
@@ -38,7 +41,8 @@
                       Keyboard="Text"
                       HorizontalOptions="CenterAndExpand"
                       WidthRequest="250"
-                      Margin="0, 20, 0,0" />
+                      Margin="0, 20, 0,0" 
+                    />
                 
                 
                 <Entry x:Name="nameEntry1"
@@ -48,7 +52,8 @@
                        Keyboard="Text"
                        HorizontalOptions="CenterAndExpand"
                        WidthRequest="250"
-                       Margin="0, 20, 0,0" />
+                       Margin="0, 20, 0,0"
+                />
 
                 <Entry x:Name="nameEntry2"
                        FontSize="16"
@@ -57,7 +62,8 @@
                        Keyboard="Text"
                        HorizontalOptions="CenterAndExpand"
                        WidthRequest="250"
-                       Margin="0, 20, 0,0" />
+                       Margin="0, 20, 0,0" 
+                />
 
                 
 
@@ -67,7 +73,8 @@
                        FontSize="16"
                        HorizontalOptions="CenterAndExpand"
                        WidthRequest="250"
-                       Margin="0, 20, 0,0" />
+                       Margin="0, 20, 0,0" 
+                />
 
                 <ListView x:Name="TestList"
                           ItemSelected="TestList_ItemSelected"
@@ -85,7 +92,9 @@
                                            FontFamily="Arial"
                                            FontAttributes="Bold"
                                            HorizontalTextAlignment="Center"
-                                           VerticalTextAlignment="Center" />
+                                           VerticalTextAlignment="Center" 
+                                    />
+                                    
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
