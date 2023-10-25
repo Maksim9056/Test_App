@@ -306,7 +306,6 @@ namespace Servis
 
 
             @class.Create_Test_ds(CrTest);
-#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             logging.Insert("", StatusType.Success, Действия.Create_Test, "");
 
         }
@@ -319,7 +318,6 @@ namespace Servis
 
 
             @class.Update_Test_ds(UpTest);
-#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
 
 
             logging.Insert("", StatusType.Success, Действия.Update_Test, "");

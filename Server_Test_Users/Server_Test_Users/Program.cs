@@ -270,12 +270,8 @@ namespace Server_Test_Users
                 {
                     using (FileStream fs = new FileStream("Server.json", FileMode.Open))
                     {
-#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                         Seting _aFile = JsonSerializer.Deserialize<Seting>(fs);
-#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
-#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
                         Ip_Adress = _aFile.Ip_adress;
-#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
                         port = _aFile.Port;
                         GlobalClass.TypeSQL = _aFile.TypeSQL;
                    
@@ -292,13 +288,9 @@ namespace Server_Test_Users
 
                     using (FileStream fileStream = new FileStream("Server.json", FileMode.OpenOrCreate))
                     {
-#pragma warning disable CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
                         Seting aFile = JsonSerializer.Deserialize<Seting>(fileStream);
-#pragma warning restore CS8600 // Преобразование литерала, допускающего значение NULL или возможного значения NULL в тип, не допускающий значение NULL.
 
-#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
                         Ip_Adress = aFile.Ip_adress;
-#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
                         port = aFile.Port;
                         GlobalClass.TypeSQL = aFile.TypeSQL;
 

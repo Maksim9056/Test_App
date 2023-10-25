@@ -164,15 +164,15 @@ public partial class RegUser : ContentPage
             {
                 await DisplayAlert("Уведомление", "Пароль на подтверждение не заполнен!", "ОK");
             }
-            else if (Password == null || Password == "")
+            if (Password == null || Password == "")
             {
                 await DisplayAlert("Уведомление", "Пароль не заполнен!", "ОK");
             }
-            else if (User_Name == null || User_Name == "")
+            if (User_Name == null || User_Name == "")
             {
                 await DisplayAlert("Уведомление", "Имя не заполнено", "ОK");
             }
-            else if (Roles == null)
+            if (Roles == null)
             {
                 await DisplayAlert("Уведомление", "Не заполнено разрешение!", "ОK");
             }
@@ -201,12 +201,12 @@ public partial class RegUser : ContentPage
             //    await Email.Default.ComposeAsync(message);
             //}
 
-            else if (Mail == null || Mail == "")
+             if (Mail == null || Mail == "")
             {
 
                 await DisplayAlert("Уведомление", "Почта не заполнена!", "ОK");
             }
-            else if (!Regex.IsMatch(Mail, "@."))
+             if (!Regex.IsMatch(Mail, "@."))
             {
                 await DisplayAlert("Уведомление", "Некорректный адрес электронной почты!", "ОK");
             }

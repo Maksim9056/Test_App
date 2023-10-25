@@ -40,9 +40,11 @@
             // 
             // serviceInstaller1
             // 
+            this.serviceInstaller1.DelayedAutoStart = true;
             this.serviceInstaller1.Description = "Служба для приложения Экзаменатор";
             this.serviceInstaller1.DisplayName = "Служба экзаменатора";
             this.serviceInstaller1.ServiceName = "Экзаменатор";
+            this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
             // 
@@ -53,8 +55,7 @@
         }
 
         #endregion
-
-        private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
-        private System.ServiceProcess.ServiceInstaller serviceInstaller1;
+        public System.ServiceProcess.ServiceInstaller serviceInstaller1;
+        public System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
     }
 }

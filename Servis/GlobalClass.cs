@@ -155,7 +155,7 @@ namespace Servis
                         optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Testdb;Username=postgres;Password=1");
                         break;
                     case 2: // SQLite
-                        optionsBuilder.UseSqlite("Data Source=helloapp.db");
+                       optionsBuilder.UseSqlite("Data Source=helloapp.db");
                         break;
                     case 3: // SQL Server
                        // optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
